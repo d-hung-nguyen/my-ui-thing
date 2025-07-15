@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <UiTabs default-value="Projects">
+    <UiTabs default-value="Projects" class="items-center">
       <UiTabsList
         class="flex h-auto justify-center rounded-none border-b border-border bg-transparent p-0"
       >
@@ -15,7 +15,7 @@
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>

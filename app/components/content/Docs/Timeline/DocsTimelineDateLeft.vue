@@ -5,12 +5,12 @@
         v-for="item in items"
         :key="item.id"
         :step="item.id"
-        class="sm:group-data-[orientation=vertical]/timeline:ms-32"
+        class="group-data-[orientation=vertical]/timeline:sm:ms-32"
       >
         <UiTimelineHeader>
           <UiTimelineSeparator />
           <UiTimelineDate
-            class="sm:group-data-[orientation=vertical]/timeline:absolute sm:group-data-[orientation=vertical]/timeline:-left-32 sm:group-data-[orientation=vertical]/timeline:w-20 sm:group-data-[orientation=vertical]/timeline:text-right"
+            class="group-data-[orientation=vertical]/timeline:sm:absolute group-data-[orientation=vertical]/timeline:sm:-left-32 group-data-[orientation=vertical]/timeline:sm:w-20 group-data-[orientation=vertical]/timeline:sm:text-right"
           >
             {{ item.date }}
           </UiTimelineDate>

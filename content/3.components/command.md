@@ -1,12 +1,12 @@
 ---
 title: Command
-description: A command menu component composed of the Combobox primitives from Radix-Vue.
+description: A command menu component composed of the Combobox primitives from Reka UI.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/combobox.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/combobox.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/combobox.html#api-reference
+    href: https://reka-ui.com/docs/components/combobox.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -22,18 +22,20 @@ npx ui-thing@latest add command
 
 ## Usage
 
+### Basic
+
 ::ShowCase
 
 :DocsCommand
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/DocsCommand.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Command/DocsCommand.vue" code lang="vue" -->
 
 ```vue [DocsCommand.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <UiCommand class="max-w-[450px] rounded-lg border shadow-md">
+    <UiCommand class="w-full max-w-sm rounded-lg border shadow-md">
       <UiCommandInput placeholder="Type a command or search..." />
       <UiCommandList>
         <UiCommandEmpty>No results found.</UiCommandEmpty>
@@ -45,6 +47,7 @@ npx ui-thing@latest add command
               :text="child.label"
               :icon="child.icon"
               :value="child.label"
+              :disabled="child.disabled"
               :shortcut="child.shortcut"
               @select="
                 child.perform?.();
@@ -60,7 +63,15 @@ npx ui-thing@latest add command
 </template>
 
 <script lang="ts" setup>
-  const items = {
+  type CommandItem = {
+    label: string;
+    icon: string;
+    perform: () => string | number;
+    disabled?: boolean;
+    shortcut?: string;
+  };
+
+  const items: Record<string, CommandItem[]> = {
     Suggestions: [
       {
         label: "Calendar",
@@ -75,6 +86,7 @@ npx ui-thing@latest add command
       {
         label: "Calculator",
         icon: "lucide:calculator",
+        disabled: true,
         perform: () => useSonner("Now performing the action: Calculator"),
       },
     ],
@@ -99,6 +111,360 @@ npx ui-thing@latest add command
       },
     ],
   };
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Dialog
+
+::ShowCase
+
+:DocsCommandShortcut
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Command/DocsCommandShortcut.vue" code lang="vue" -->
+
+```vue [DocsCommandShortcut.vue]
+<template>
+  <div class="flex flex-col items-center justify-center">
+    <p class="text-sm text-muted-foreground">
+      Press
+      <kbd
+        class="pointer-events-none inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 select-none"
+      >
+        <span class="text-xs">⌘</span>J
+      </kbd>
+    </p>
+    <UiCommandDialog v-model:open="open">
+      <UiCommandInput placeholder="Type a command or search..." />
+      <UiCommandList>
+        <UiCommandEmpty>No results found.</UiCommandEmpty>
+        <UiCommandGroup heading="Suggestions">
+          <UiCommandItem value="calendar" text="Calendar" icon="lucide:calendar-days" />
+          <UiCommandItem value="search-emoji" text="Emoji" icon="lucide:smile-plus" />
+          <UiCommandItem value="calculator" disabled text="Calculator" icon="lucide:calculator" />
+        </UiCommandGroup>
+        <UiCommandSeparator />
+        <UiCommandGroup heading="Settings">
+          <UiCommandItem value="profile"> Profile </UiCommandItem>
+          <UiCommandItem value="billing"> Billing </UiCommandItem>
+          <UiCommandItem value="settings"> Settings </UiCommandItem>
+        </UiCommandGroup>
+      </UiCommandList>
+    </UiCommandDialog>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { useMagicKeys } from "@vueuse/core";
+
+  const open = ref(false);
+
+  const { Meta_J, Ctrl_J } = useMagicKeys({
+    passive: false,
+    onEventFired(e) {
+      if (e.key === "j" && (e.metaKey || e.ctrlKey)) e.preventDefault();
+    },
+  });
+
+  watch([Meta_J, Ctrl_J], (v) => {
+    if (v[0] || v[1]) open.value = !open.value;
+  });
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Popover
+
+::ShowCase
+
+:DocsCommandPopover
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Command/DocsCommandPopover.vue" code lang="vue" -->
+
+```vue [DocsCommandPopover.vue]
+<template>
+  <div class="flex items-center justify-center space-x-4">
+    <p class="text-sm text-muted-foreground">Status</p>
+    <UiPopover v-model:open="open">
+      <UiPopoverTrigger as-child>
+        <UiButton variant="outline" size="sm" class="w-[150px] justify-start">
+          <template v-if="selectedStatus">
+            {{ selectedStatus?.label }}
+          </template>
+          <template v-else> + Set status </template>
+        </UiButton>
+      </UiPopoverTrigger>
+      <UiPopoverContent class="max-w-[200px] p-0" side="right" align="start">
+        <UiCommand>
+          <UiCommandInput placeholder="Change status..." />
+          <UiCommandList>
+            <UiCommandEmpty>No results found.</UiCommandEmpty>
+            <UiCommandGroup>
+              <UiCommandItem
+                v-for="status in statuses"
+                :key="status.value"
+                :value="status.value"
+                @select="
+                  () => {
+                    selectedStatus = status;
+                    open = false;
+                  }
+                "
+              >
+                {{ status.label }}
+              </UiCommandItem>
+            </UiCommandGroup>
+          </UiCommandList>
+        </UiCommand>
+      </UiPopoverContent>
+    </UiPopover>
+  </div>
+</template>
+
+<script setup lang="ts">
+  interface Status {
+    value: string;
+    label: string;
+  }
+
+  const statuses: Status[] = [
+    {
+      value: "backlog",
+      label: "Backlog",
+    },
+    {
+      value: "todo",
+      label: "Todo",
+    },
+    {
+      value: "in progress",
+      label: "In Progress",
+    },
+    {
+      value: "done",
+      label: "Done",
+    },
+    {
+      value: "canceled",
+      label: "Canceled",
+    },
+  ];
+
+  const open = ref(false);
+  const selectedStatus = ref<Status>();
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Dropdown Menu
+
+::ShowCase
+
+:DocsCommandDropdown
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Command/DocsCommandDropdown.vue" code lang="vue" -->
+
+```vue [DocsCommandDropdown.vue]
+<template>
+  <div class="flex items-center justify-center">
+    <div
+      class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center"
+    >
+      <p class="text-sm leading-none font-medium">
+        <span class="mr-2 rounded-lg bg-primary px-2 py-1 text-xs text-primary-foreground">
+          {{ labelRef }}
+        </span>
+        <span class="text-muted-foreground">Create a new project</span>
+      </p>
+      <UiDropdownMenu v-model:open="open">
+        <UiDropdownMenuTrigger as-child>
+          <UiButton variant="ghost" size="icon-sm">
+            <Icon name="lucide:more-horizontal" />
+          </UiButton>
+        </UiDropdownMenuTrigger>
+        <UiDropdownMenuContent align="end" class="w-[200px]">
+          <UiDropdownMenuLabel>Actions</UiDropdownMenuLabel>
+          <UiDropdownMenuGroup>
+            <UiDropdownMenuItem> Assign to... </UiDropdownMenuItem>
+            <UiDropdownMenuItem> Set due date... </UiDropdownMenuItem>
+            <UiDropdownMenuSeparator />
+            <UiDropdownMenuSub>
+              <UiDropdownMenuSubTrigger> Apply label </UiDropdownMenuSubTrigger>
+              <UiDropdownMenuSubContent class="p-0">
+                <UiCommand>
+                  <UiCommandInput placeholder="Filter label..." auto-focus />
+                  <UiCommandList>
+                    <UiCommandEmpty>No label found.</UiCommandEmpty>
+                    <UiCommandGroup>
+                      <UiCommandItem
+                        v-for="label in labels"
+                        :key="label"
+                        :value="label"
+                        @select="
+                          (ev) => {
+                            labelRef = ev.detail.value as string;
+                            open = false;
+                          }
+                        "
+                      >
+                        {{ label }}
+                      </UiCommandItem>
+                    </UiCommandGroup>
+                  </UiCommandList>
+                </UiCommand>
+              </UiDropdownMenuSubContent>
+            </UiDropdownMenuSub>
+            <UiDropdownMenuSeparator />
+            <UiDropdownMenuItem class="text-red-600">
+              Delete
+              <UiDropdownMenuShortcut>⌘⌫</UiDropdownMenuShortcut>
+            </UiDropdownMenuItem>
+          </UiDropdownMenuGroup>
+        </UiDropdownMenuContent>
+      </UiDropdownMenu>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+  const labels = [
+    "feature",
+    "bug",
+    "enhancement",
+    "documentation",
+    "design",
+    "question",
+    "maintenance",
+  ];
+
+  const labelRef = ref("feature");
+  const open = ref(false);
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Responsive
+
+You can create a responsive combobox by using the `<Popover />` on desktop and the `<Drawer />` components on mobile.
+
+::ShowCase
+
+:DocsCommandResponsive
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Command/DocsCommandResponsive.vue" code lang="vue" -->
+
+```vue [DocsCommandResponsive.vue]
+<template>
+  <div class="flex items-center justify-center">
+    <UseTemplate>
+      <UiCommand class="rounded-none">
+        <UiCommandInput placeholder="Filter status..." />
+        <UiCommandList>
+          <UiCommandEmpty>No results found.</UiCommandEmpty>
+          <UiCommandGroup>
+            <UiCommandItem
+              v-for="status of statuses"
+              :key="status.value"
+              :value="status.value"
+              @select="onStatusSelect(status)"
+            >
+              {{ status.label }}
+            </UiCommandItem>
+          </UiCommandGroup>
+        </UiCommandList>
+      </UiCommand>
+    </UseTemplate>
+
+    <UiPopover v-if="isDesktop" v-model:open="isOpen">
+      <UiPopoverTrigger as-child>
+        <UiButton variant="outline" class="w-[150px] justify-start">
+          {{ selectedStatus ? selectedStatus.label : "+ Set status" }}
+        </UiButton>
+      </UiPopoverTrigger>
+      <UiPopoverContent class="w-[200px] p-0" align="start">
+        <StatusList />
+      </UiPopoverContent>
+    </UiPopover>
+
+    <UiDrawer v-else v-model:open="isOpen" should-scale-background>
+      <UiDrawerTrigger as-child>
+        <UiButton variant="outline" class="w-[150px] justify-start">
+          {{ selectedStatus ? selectedStatus.label : "+ Set status" }}
+        </UiButton>
+      </UiDrawerTrigger>
+      <UiDrawerContent>
+        <UiDrawerTitle class="sr-only">Set Status</UiDrawerTitle>
+        <UiDrawerDescription class="sr-only"> Select a status for the task. </UiDrawerDescription>
+        <div class="mt-4 border-t">
+          <StatusList />
+        </div>
+      </UiDrawerContent>
+    </UiDrawer>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import { createReusableTemplate, useMediaQuery } from "@vueuse/core";
+  import { ref } from "vue";
+
+  interface Status {
+    value: string;
+    label: string;
+  }
+
+  const statuses: Status[] = [
+    {
+      value: "backlog",
+      label: "Backlog",
+    },
+    {
+      value: "todo",
+      label: "Todo",
+    },
+    {
+      value: "in progress",
+      label: "In Progress",
+    },
+    {
+      value: "done",
+      label: "Done",
+    },
+    {
+      value: "canceled",
+      label: "Canceled",
+    },
+  ];
+
+  const [UseTemplate, StatusList] = createReusableTemplate();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const isOpen = ref(false);
+  const selectedStatus = ref<Status | null>(null);
+
+  function onStatusSelect(status: Status) {
+    selectedStatus.value = status;
+    isOpen.value = false;
+  }
 </script>
 ```
 

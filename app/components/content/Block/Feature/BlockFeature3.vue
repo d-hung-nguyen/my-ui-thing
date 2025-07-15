@@ -12,11 +12,11 @@
         />
       </div>
       <h3
-        class="mt-4 text-balance text-center text-lg font-semibold lg:mt-5 lg:text-xl"
+        class="mt-4 text-center text-lg font-semibold text-balance lg:mt-5 lg:text-xl"
         v-html="f.title"
       />
       <p
-        class="mt-1 max-w-[400px] text-balance text-center text-muted-foreground lg:mt-2 lg:max-w-none"
+        class="mt-1 max-w-[400px] text-center text-balance text-muted-foreground lg:mt-2 lg:max-w-none"
         v-html="f.description"
       />
     </div>

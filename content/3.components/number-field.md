@@ -2,11 +2,11 @@
 title: Number Field
 description: A number field allows a user to enter a number and increment or decrement the value using stepper buttons.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/number-field
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/number-field
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/number-field#api-reference
+    href: https://reka-ui.com/docs/components/number-field#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -35,7 +35,7 @@ npx --yes ui-thing@latest add number-field && npm add @internationalized/number
 ```vue [DocsNumberField.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <div class="max-w-[150px]">
+    <div class="max-w-[120px]">
       <UiNumberField />
     </div>
   </div>
@@ -59,7 +59,7 @@ npx --yes ui-thing@latest add number-field && npm add @internationalized/number
 ```vue [DocsNumberFieldDisabled.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <div class="max-w-[150px]">
+    <div class="max-w-[120px]">
       <UiNumberField disabled />
     </div>
   </div>
@@ -146,10 +146,11 @@ npx --yes ui-thing@latest add number-field && npm add @internationalized/number
 ```vue [DocsNumberFieldCurrency.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <div class="max-w-[250px]">
+    <div class="max-w-[200px]">
       <UiNumberField
-        :default-value="20000"
+        :default-value="20_000"
         :min="0"
+        :max="30_000"
         :format-options="{
           style: 'currency',
           currency: 'JMD',

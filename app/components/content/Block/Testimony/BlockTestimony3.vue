@@ -11,10 +11,10 @@
         <div>
           <div>
             <template v-for="s in 5" :key="s">
-              <Icon name="material-symbols:kid-star" class="h-5 w-5 text-yellow-400" />
+              <Icon name="material-symbols:kid-star" class="inline h-5 w-5 text-yellow-400" />
             </template>
           </div>
-          <h3 class="mb-8 mt-6 max-w-[760px] text-2xl font-semibold lg:text-4xl">
+          <h3 class="mt-6 mb-8 max-w-[760px] text-2xl font-semibold lg:text-4xl">
             Love the simplicity of the service and the prompt customer support. We can't imagine
             working without it.
           </h3>

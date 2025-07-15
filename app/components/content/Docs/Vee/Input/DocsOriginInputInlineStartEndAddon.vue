@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with inline start and end add-on"
-      class="peer pe-16 ps-7"
+      class="peer pr-16"
       placeholder="0.00"
       type="text"
     >

@@ -1,49 +1,80 @@
 <template>
-  <span v-for="(s, i) in meteorStyles" :key="i" :class="localStyles().wrapper()" :style="s">
+  <span
+    v-for="(s, i) in meteorStyles"
+    :key="i"
+    :class="localStyles().wrapper({ class: props.class })"
+    :style="s"
+  >
     <div :class="localStyles().tail()" />
   </span>
 </template>
 
 <script lang="ts" setup>
-  import type { CSSProperties } from "vue";
+  import type { CSSProperties, HTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<{
-      number?: number;
-      class?: any;
-    }>(),
-    {
-      number: 20,
-    }
-  );
+  interface MeteorsProps {
+    number?: number;
+    minDelay?: number;
+    maxDelay?: number;
+    minDuration?: number;
+    maxDuration?: number;
+    angle?: number;
+    class?: HTMLAttributes["class"];
+  }
+
+  const props = withDefaults(defineProps<MeteorsProps>(), {
+    number: 20,
+    minDelay: 0.2,
+    maxDelay: 1.2,
+    minDuration: 2,
+    maxDuration: 10,
+    angle: 215,
+  });
+
   const meteorStyles = ref<CSSProperties[]>(
     [...Array.from({ length: props.number })].map(() => ({
-      top: -5,
-      left: Math.floor(Math.random() * window.innerWidth) + "px",
-      animationDelay: Math.random() * 1 + 0.2 + "s",
-      animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
+      "--angle": -props.angle + "deg",
+      top: "-5%",
+      left: `calc(0% + ${Math.floor(Math.random() * window.innerWidth)}px)`,
+      animationDelay: Math.random() * (props.maxDelay - props.minDelay) + props.minDelay + "s",
+      animationDuration:
+        Math.floor(Math.random() * (props.maxDuration - props.minDuration) + props.minDuration) +
+        "s",
     }))
   );
 
   const setStyles = () => {
     const styles = [...new Array(props.number)].map(() => ({
-      top: -5,
-      left: Math.floor(Math.random() * window.innerWidth) + "px",
-      animationDelay: Math.random() * 1 + 0.2 + "s",
-      animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
+      "--angle": -props.angle + "deg",
+      top: "-5%",
+      left: `calc(0% + ${Math.floor(Math.random() * window.innerWidth)}px)`,
+      animationDelay: Math.random() * (props.maxDelay - props.minDelay) + props.minDelay + "s",
+      animationDuration:
+        Math.floor(Math.random() * (props.maxDuration - props.minDuration) + props.minDuration) +
+        "s",
     }));
     meteorStyles.value = styles;
   };
 
   setStyles();
 
-  watch(() => props.number, setStyles, { immediate: true });
+  watch(
+    () => [
+      props.number,
+      props.minDelay,
+      props.maxDelay,
+      props.minDuration,
+      props.maxDuration,
+      props.angle,
+    ],
+    setStyles
+  );
 
   const localStyles = tv({
     slots: {
       wrapper:
-        "pointer-events-none absolute left-1/2 top-1/2 h-0.5 w-0.5 rotate-[215deg] animate-meteor rounded-[9999px] bg-muted-foreground shadow-[0_0_0_1px_#ffffff10]",
-      tail: "pointer-events-none absolute top-1/2 -z-10 h-[1px] w-[50px] -translate-y-1/2 bg-gradient-to-r from-muted-foreground to-transparent",
+        "pointer-events-none absolute size-0.5 rotate-[var(--angle)] animate-meteor rounded-full bg-zinc-500 shadow-[0_0_0_1px_#ffffff10]",
+      tail: "pointer-events-none absolute top-1/2 -z-10 h-px w-[50px] -translate-y-1/2 bg-gradient-to-r from-zinc-500 to-transparent",
     },
   });
 </script>

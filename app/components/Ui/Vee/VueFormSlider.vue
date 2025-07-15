@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import Slider from "@vueform/slider";
-  import { useForwardPropsEmits } from "radix-vue";
+  import { useForwardPropsEmits } from "reka-ui";
 
   export type SliderFormatObject = {
     /**
@@ -259,34 +259,38 @@
 
 <style>
   :root {
-    --slider-bg: theme(colors.muted.DEFAULT);
-    --slider-connect-bg: theme(colors.primary.DEFAULT);
-    --slider-connect-bg-disabled: theme(colors.primary.DEFAULT/45%);
-    --slider-height: 8px;
+    --slider-bg: var(--color-muted);
+    --slider-connect-bg: var(--color-primary);
+    --slider-connect-bg-disabled: --alpha(var(--color-primary) / 45%);
+    --slider-height: 6px;
     --slider-vertical-height: 300px;
     --slider-radius: 999999px;
 
-    --slider-handle-bg: #ffffff;
-    --slider-handle-border: 0;
-    --slider-handle-width: 20px;
-    --slider-handle-height: 20px;
+    --slider-handle-bg: var(--color-background);
+    --slider-handle-border: 1px solid var(--color-primary);
+    --slider-handle-width: 16px;
+    --slider-handle-height: 16px;
     --slider-handle-radius: 99999px;
     --slider-handle-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
     --slider-handle-shadow-active: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.42);
     --slider-handle-ring-width: 3px;
-    --slider-handle-ring-color: theme(colors.primary.DEFAULT/20%);
+    --slider-handle-ring-color: --alpha(var(--color-ring) / 50%);
 
-    --slider-tooltip-font-size: 0.875rem;
-    --slider-tooltip-line-height: 1.25rem;
-    --slider-tooltip-font-weight: 600;
-    --slider-tooltip-min-width: 24px;
-    --slider-tooltip-bg: theme(colors.primary.DEFAULT);
-    --slider-tooltip-bg-disabled: theme(colors.primary.DEFAULT/90%);
-    --slider-tooltip-color: theme(colors.primary.foreground);
-    --slider-tooltip-radius: theme(borderRadius.sm);
+    --slider-tooltip-font-size: 12px;
+    --slider-tooltip-line-height: 1.33rem;
+    --slider-tooltip-font-weight: 500;
+    --slider-tooltip-min-width: fit-content;
+    --slider-tooltip-bg: var(--color-popover);
+    --slider-tooltip-bg-disabled: --alpha(var(--color-popover) / 90%);
+    --slider-tooltip-color: var(--color-popover-foreground);
+    --slider-tooltip-radius: var(--radius-md);
     --slider-tooltip-py: 2px;
-    --slider-tooltip-px: 6px;
-    --slider-tooltip-arrow-size: 5px;
+    --slider-tooltip-px: 8px;
+    --slider-tooltip-arrow-size: 0px;
     --slider-tooltip-distance: 4px;
+  }
+
+  .slider-tooltip {
+    border: 1px solid var(--color-border);
   }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <NumberFieldDecrement v-bind="forwarded" :class="styles({ class: props.class })">
+  <NumberFieldDecrement
+    data-slot="number-field-decrement"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       <Icon :name="props.icon" />
     </slot>
@@ -7,13 +11,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { NumberFieldDecrement, useForwardProps } from "radix-vue";
-  import type { NumberFieldDecrementProps } from "radix-vue";
+  import { NumberFieldDecrement, useForwardProps } from "reka-ui";
+  import type { NumberFieldDecrementProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       NumberFieldDecrementProps & {
-        class?: any;
+        class?: HTMLAttributes["class"];
         icon?: string;
       }
     >(),

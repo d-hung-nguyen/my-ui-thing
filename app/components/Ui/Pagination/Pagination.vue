@@ -1,5 +1,11 @@
 <template>
-  <PaginationRoot v-bind="forwarded">
+  <PaginationRoot
+    role="navigation"
+    aria-label="pagination"
+    data-slot="pagination"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       <UiPaginationList v-slot="{ items }">
         <slot name="first"><UiPaginationFirst as-child :icon="firstIcon" /> </slot>
@@ -23,8 +29,9 @@
 
 <script lang="ts" setup>
   import { reactiveOmit } from "@vueuse/core";
-  import { PaginationRoot, useForwardPropsEmits } from "radix-vue";
-  import type { PaginationRootEmits, PaginationRootProps } from "radix-vue";
+  import { PaginationRoot, useForwardPropsEmits } from "reka-ui";
+  import type { PaginationRootEmits, PaginationRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
@@ -34,6 +41,7 @@
         lastIcon?: string;
         nextIcon?: string;
         prevIcon?: string;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {
@@ -42,7 +50,7 @@
       itemsPerPage: 10,
       siblingCount: 3,
       showEdges: true,
-      ellipsisIcon: "lucide:more-horizontal",
+      ellipsisIcon: "lucide:ellipsis",
       firstIcon: "lucide:chevrons-left",
       lastIcon: "lucide:chevrons-right",
       nextIcon: "lucide:chevron-right",
@@ -55,4 +63,6 @@
     reactiveOmit(props, "ellipsisIcon", "firstIcon", "lastIcon", "nextIcon", "prevIcon"),
     emits
   );
+
+  const styles = tv({ base: "mx-auto flex w-full justify-center" });
 </script>

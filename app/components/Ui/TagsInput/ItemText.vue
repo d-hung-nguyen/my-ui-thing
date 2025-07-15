@@ -1,16 +1,21 @@
 <template>
-  <TagsInputItemText v-bind="forwarded" :class="styles({ class: props.class })">
+  <TagsInputItemText
+    data-slot="tags-input-item-text"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot />
   </TagsInputItemText>
 </template>
 
 <script lang="ts" setup>
-  import { TagsInputItemText } from "radix-vue";
-  import type { TagsInputItemTextProps } from "radix-vue";
+  import { TagsInputItemText } from "reka-ui";
+  import type { TagsInputItemTextProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-  const props = defineProps<TagsInputItemTextProps & { class?: any }>();
+  const props = defineProps<TagsInputItemTextProps & { class?: HTMLAttributes["class"] }>();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "leading-none sm:text-sm",
+    base: "",
   });
 </script>

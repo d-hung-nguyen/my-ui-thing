@@ -1,17 +1,22 @@
 <template>
-  <DialogDescription :class="styles({ class: props.class })" v-bind="forwarded">
+  <DialogDescription
+    data-slot="sheet-description"
+    :class="styles({ class: props.class })"
+    v-bind="forwarded"
+  >
     <slot>{{ description }}</slot>
   </DialogDescription>
 </template>
 
 <script lang="ts" setup>
-  import { DialogDescription } from "radix-vue";
-  import type { DialogDescriptionProps } from "radix-vue";
+  import { DialogDescription } from "reka-ui";
+  import type { DialogDescriptionProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     DialogDescriptionProps & {
       /** Custom class(es) to add to parent element */
-      class?: any;
+      class?: HTMLAttributes["class"];
       /** Description text */
       description?: string;
     }

@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { label: "Home", link: "/" },
     { slot: "dots" },
     { label: "Components", link: "/components/accordion" },

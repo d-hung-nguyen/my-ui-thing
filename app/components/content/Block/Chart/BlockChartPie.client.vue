@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { _muted, _violet } from "#tailwind-config/theme/colors";
   import type { ApexOptions } from "apexcharts";
 
   const series: ApexOptions["series"] = [70, 30, 60];
@@ -26,7 +25,7 @@
       show: true,
       position: "bottom",
       labels: {
-        colors: _muted.foreground,
+        colors: "var(--color-muted-foreground)",
       },
     },
     stroke: {
@@ -34,7 +33,7 @@
       colors: ["transparent"],
       width: 2,
     },
-    colors: [_violet["400"], _violet["700"], _violet["900"]],
+    colors: ["var(--color-violet-400)", "var(--color-violet-700)", "var(--color-violet-900)"],
     chart: {
       toolbar: {
         show: window.innerWidth > 768,
@@ -45,6 +44,8 @@
 </script>
 
 <style>
+  @reference "~/assets/css/tailwind.css";
+
   .apexcharts-menu {
     @apply border-border bg-background text-foreground;
     .apexcharts-menu-item {

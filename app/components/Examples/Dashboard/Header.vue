@@ -4,7 +4,7 @@
       <UiButton variant="outline" class="w-[200px] justify-between">
         <UiAvatar class="mr-2 h-5 w-5" src="https://avatar.vercel.sh/mary" />
         Mary Davis
-        <Icon name="lucide:chevrons-up-down" class="ml-auto h-4 w-4 shrink-0 opacity-50" />
+        <Icon name="lucide:chevrons-up-down" class="ml-auto size-4 shrink-0 opacity-50" />
       </UiButton>
 
       <nav class="mx-6 flex items-center space-x-4 lg:space-x-6">
@@ -44,7 +44,7 @@
           <UiDropdownMenuContent class="w-56" align="end">
             <UiDropdownMenuLabel class="font-normal">
               <div class="flex flex-col space-y-1">
-                <p class="text-sm font-medium leading-none">shadcn</p>
+                <p class="text-sm leading-none font-medium">shadcn</p>
                 <p class="text-xs leading-none text-muted-foreground">m@example.com</p>
               </div>
             </UiDropdownMenuLabel>

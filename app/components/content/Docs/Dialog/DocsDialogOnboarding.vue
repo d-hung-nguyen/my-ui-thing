@@ -20,7 +20,7 @@
             />
           </TransitionFade>
         </div>
-        <div class="space-y-6 overflow-x-hidden px-6 pb-6 pt-3">
+        <div class="space-y-6 overflow-x-hidden px-6 pt-3 pb-6">
           <TransitionFade mode="out-in">
             <UiDialogHeader v-if="showImage">
               <UiDialogTitle>{{ stepContent[step - 1].title }}</UiDialogTitle>
@@ -54,7 +54,7 @@
                 Next
                 <Icon
                   name="lucide:arrow-right"
-                  class="-me-1 ms-2 size-4 opacity-60 transition-transform group-hover:translate-x-0.5"
+                  class="ms-2 -me-1 size-4 opacity-60 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </UiButton>

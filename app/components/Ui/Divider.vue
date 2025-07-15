@@ -23,14 +23,35 @@
 </template>
 
 <script lang="ts" setup>
-  import { Primitive, Separator } from "radix-vue";
+  import { Primitive, Separator } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<{
-    class?: any;
+    /**
+     * Custom class for the divider
+     */
+    class?: HTMLAttributes["class"];
+    /**
+     * The type of the divider
+     * @default "solid"
+     */
     type?: VariantProps<typeof style>["type"];
+    /**
+     * The orientation of the divider
+     * @default "horizontal"
+     */
     orientation?: VariantProps<typeof style>["orientation"];
+    /**
+     * The icon to display in the divider
+     */
     icon?: string;
+    /**
+     * The label to display in the divider
+     */
     label?: string;
+    /**
+     * The avatar to display in the divider
+     */
     avatar?: string;
   }>();
 

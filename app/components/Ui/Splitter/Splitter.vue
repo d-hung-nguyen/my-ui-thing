@@ -9,14 +9,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { SplitterGroup, useForwardPropsEmits } from "radix-vue";
-  import type { SplitterGroupEmits, SplitterGroupProps } from "radix-vue";
+  import { SplitterGroup, useForwardPropsEmits } from "reka-ui";
+  import type { SplitterGroupEmits, SplitterGroupProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       SplitterGroupProps & {
         direction?: "horizontal" | "vertical";
-        class?: any;
+        /** Custom class(es) to add to parent element */
+        class?: HTMLAttributes["class"];
       }
     >(),
     {

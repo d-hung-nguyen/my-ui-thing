@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="mb-10 mt-16 lg:hidden">
+    <div class="mt-16 mb-10 lg:hidden">
       <NuxtLink :to="link">
         <!-- eslint-disable-next-line vue/html-self-closing -->
         <img

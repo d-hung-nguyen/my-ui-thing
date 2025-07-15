@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col">
     <Mainnav />
-    <main class="container grid grid-cols-1 lg:grid-cols-[290px_minmax(0,1fr)] lg:gap-10">
+    <main class="grid w-full grid-cols-1 px-6 lg:grid-cols-[290px_minmax(0,1fr)] lg:gap-10">
       <!-- Left sidebar with page links -->
       <div class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-r lg:block">
-        <UiScrollArea class="h-[calc(100dvh-57px)] px-2 py-5 pr-6">
+        <UiScrollArea class="h-[calc(100dvh-57px)] py-5 pr-6">
           <DocsNav :links="navigation" />
         </UiScrollArea>
       </div>

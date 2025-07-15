@@ -2,7 +2,7 @@
   <UiContainer
     class="relative flex flex-col items-center justify-center gap-10 gap-y-12 py-10 lg:h-[720px] lg:flex-row"
   >
-    <div class="absolute bottom-5 right-[50%] hidden lg:block">
+    <div class="absolute right-[50%] bottom-5 hidden lg:block">
       <div class="h-[300px] w-[300px]">
         <svg viewBox="0 0 360 342" class="fill-primary" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -43,7 +43,7 @@
             <p class="text-2xl font-semibold lg:text-3xl">{{ item.user.name }}</p>
             <div>
               <template v-for="s in item.rating" :key="s">
-                <Icon name="material-symbols:kid-star" class="h-5 w-5 text-white" />
+                <Icon name="material-symbols:kid-star" class="inline h-5 w-5 text-white" />
               </template>
             </div>
           </div>

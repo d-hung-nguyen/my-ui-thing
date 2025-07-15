@@ -1,5 +1,9 @@
 <template>
-  <ScrollAreaRoot v-bind="forwarded" :class="styles({ class: props.class })">
+  <ScrollAreaRoot
+    data-slot="scroll-area"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <UiScrollAreaViewport>
       <slot />
     </UiScrollAreaViewport>
@@ -9,8 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { ScrollAreaRoot } from "radix-vue";
-  import type { ScrollAreaRootProps } from "radix-vue";
+  import { ScrollAreaRoot } from "reka-ui";
+  import type { ScrollAreaRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
@@ -18,7 +23,7 @@
         /** Orientation for scrolling */
         orientation?: "vertical" | "horizontal";
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {
@@ -27,6 +32,6 @@
   );
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "relative overflow-hidden",
+    base: "relative",
   });
 </script>

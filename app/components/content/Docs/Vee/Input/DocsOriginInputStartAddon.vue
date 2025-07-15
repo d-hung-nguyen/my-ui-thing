@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with start add-on"
-      class="peer ps-20"
+      class="peer pl-20"
       placeholder="google.com"
       type="text"
     >

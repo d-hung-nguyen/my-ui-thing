@@ -1,10 +1,10 @@
 <template>
-  <form class="flex w-full justify-center" @submit="onSubmit">
-    <div class="w-full">
-      <Field v-slot="{ handleChange, value }" name="mode">
+  <form @submit="onSubmit">
+    <div class="mx-auto grid w-full max-w-xs">
+      <Field v-slot="{ value, handleChange }" name="mode">
         <UiFormItem class="flex flex-col">
           <div class="flex items-center gap-3">
-            <UiSwitch :checked="value" @update:checked="handleChange" />
+            <UiSwitch :model-value="value" @update:model-value="handleChange" />
             <UiFormLabel class="w-auto"> Airplane mode </UiFormLabel>
           </div>
         </UiFormItem>
@@ -16,16 +16,12 @@
   </form>
 </template>
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { boolean, object } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        mode: z.literal(true, {
-          errorMap: (_, __) => {
-            return { message: "Please turn on airplane mode" };
-          },
-        }),
+      object({
+        mode: boolean().label("Airplane Mode"),
       })
     ),
   });

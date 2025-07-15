@@ -66,7 +66,7 @@
       <!-- Navbar -->
       <UiNavbar sticky class="flex h-14 shrink-0 items-center gap-2 border-b-0 px-4">
         <UiSidebarTrigger class="-ml-1" />
-        <UiSeparator orientation="vertical" class="mr-2 h-4" />
+        <UiDivider orientation="vertical" class="mr-2 h-4 w-px" />
         <UiBreadcrumbs :items="breadcrumbItems" />
       </UiNavbar>
       <div class="grid auto-rows-min gap-4 p-4 md:grid-cols-3">

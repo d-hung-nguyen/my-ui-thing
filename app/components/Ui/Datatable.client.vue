@@ -13,9 +13,27 @@
   </DataTable>
 </template>
 
-<script lang="ts" setup generic="T extends Record<string, any>">
-  import type DataTableRef from "datatables.net";
-  import type { Config } from "datatables.net";
+<script lang="ts">
+  import DataTablesCore from "datatables.net";
+  import DataTable from "datatables.net-vue3";
+  import JSZip from "jszip";
+
+  import "datatables.net-buttons-dt";
+  import "datatables.net-buttons/js/buttons.colVis.mjs";
+  import "datatables.net-buttons/js/buttons.html5.mjs";
+  import "datatables.net-buttons/js/buttons.print.mjs";
+  import "datatables.net-responsive-dt";
+  import "datatables.net-searchbuilder-dt";
+  import "datatables.net-select-dt";
+  import "datatables.net-fixedcolumns-dt";
+  import "datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css";
+  import "datatables.net-fixedheader-dt";
+  import "datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css";
+  import "datatables.net-colreorder-dt";
+  import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
+
+  import type { Api, Config } from "datatables.net";
+  import type { HTMLAttributes } from "vue";
 
   export type DataTablesNamedSlotProps<T> = {
     /** The data to show in the cell (from the `columns.data` configuration) */
@@ -30,14 +48,43 @@
     type: string;
   };
 
-  const table = shallowRef<{ dt: InstanceType<typeof DataTableRef<T[]>> } | null>(null);
+  // @ts-expect-error - We are not creating a declaration file for this library
+  window.JSZip = JSZip;
+</script>
+
+<script lang="ts" setup generic="T extends Record<string, any>">
+  DataTable.use(DataTablesCore);
+
+  const table = shallowRef<{ dt: InstanceType<typeof DataTablesCore<T[]>> } | null>(null);
 
   const props = withDefaults(
     defineProps<{
+      /**
+       * The data to display in the table
+       */
       data?: Config["data"];
-      class?: any;
+      /**
+       * The CSS class to apply to the table
+       *
+       * @default "nowrap hover order-column row-border stripe display"
+       * @see https://datatables.net/manual/styling/classes
+       */
+      class?: HTMLAttributes["class"];
+      /**
+       * The columns to display in the table
+       */
       columns?: Config["columns"];
+      /**
+       * Load data for the table's content from an Ajax source.
+       *
+       * @see https://datatables.net/manual/ajax#Ajax-configuration
+       */
       ajax?: Config["ajax"];
+      /**
+       * Additional options for the DataTable
+       *
+       * @see https://datatables.net/manual/options
+       */
       options?: Config;
     }>(),
     {
@@ -47,18 +94,29 @@
     }
   );
 
-  const emits = defineEmits<{
-    ready: [any];
-  }>();
+  const emits = defineEmits<{ ready: [Api<T[]> | undefined] }>();
 
   onMounted(() => {
     nextTick(() => {
       emits("ready", table.value?.dt);
     });
   });
+
+  defineExpose({
+    /**
+     * The DataTable instance
+     */
+    table,
+    /**
+     * The DataTable instance's DataTables API
+     */
+    dt: computed(() => table.value?.dt),
+  });
 </script>
 
 <style>
+  @reference "~/assets/css/tailwind.css";
+
   :root {
     --dt-row-selected: 262.1, 83.3%, 57.8%;
     --dt-row-selected-text: 210, 20%, 98%;
@@ -157,7 +215,7 @@
   table.dataTable thead > tr > th.dt-orderable-desc:before,
   table.dataTable thead > tr > td.dt-orderable-asc:before,
   table.dataTable thead > tr > td.dt-orderable-desc:before {
-    @apply bottom-[43%] size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-up.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-up.svg?color=white')];
+    @apply bottom-[43%] size-[14px] shrink-0 [background-image:url('https://api.iconify.design/lucide:chevron-up.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:[background-image:url('https://api.iconify.design/lucide:chevron-up.svg?color=white')];
   }
   table.dataTable thead > tr > th.sorting:after,
   table.dataTable thead > tr > th.sorting_asc:after,
@@ -358,7 +416,7 @@
   }
 
   table.dataTable > thead > tr > th {
-    @apply border-b border-t-0 px-6 py-3;
+    @apply border-t-0 border-b px-6 py-3;
   }
   table.dataTable > thead > tr > td {
     @apply border-b px-6 py-3 text-sm;
@@ -402,7 +460,7 @@
   }
   table.dataTable.cell-border > tbody > tr > th,
   table.dataTable.cell-border > tbody > tr > td {
-    @apply border-r border-t;
+    @apply border-t border-r;
   }
   table.dataTable.cell-border > tbody > tr > th:first-child,
   table.dataTable.cell-border > tbody > tr > td:first-child {
@@ -542,19 +600,12 @@
     @apply w-full overflow-x-auto;
   }
 
-  /* Export button styles - v1 of datatables */
-  .dataTables_wrapper .dt-buttons {
-    @apply inline-flex flex-wrap items-center gap-2;
-    button {
-      @apply inline-flex h-9 items-center gap-2 whitespace-nowrap rounded-md border bg-background px-3 text-sm text-muted-foreground hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-    }
-  }
   /* V2 of datatables button styles. 
   */
   .dt-buttons {
     @apply inline-flex flex-wrap items-center gap-2;
     button {
-      @apply inline-flex h-9 items-center gap-2 whitespace-nowrap rounded-md border bg-background px-3 text-sm text-muted-foreground hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+      @apply inline-flex h-9 items-center justify-center gap-2 rounded-md border bg-background px-3 text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none hover:bg-accent hover:text-accent-foreground focus:outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 dark:border-input dark:bg-input/30 dark:hover:bg-input/50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
     }
   }
 
@@ -568,7 +619,7 @@
     label {
       @apply inline-flex items-center gap-2 text-sm font-normal text-muted-foreground;
       select {
-        @apply h-9 w-[70px] cursor-pointer rounded-md border border-border bg-background px-2 py-1 transition focus:border-primary focus:outline-none focus-visible:border-input focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-sm;
+        @apply h-9 w-[70px] cursor-pointer rounded-md border bg-background px-2 py-1 transition focus:border-primary focus:outline-none focus-visible:border-input focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-sm;
       }
     }
   }
@@ -579,8 +630,13 @@
       @apply text-sm font-normal text-muted-foreground;
     }
     select {
-      @apply h-9 w-[70px] cursor-pointer rounded-md border border-border bg-background px-2 py-1 transition focus:border-primary focus:outline-none focus-visible:border-input focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-sm;
+      @apply flex h-9 w-[70px] min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40;
     }
+  }
+
+  /* Checkbox styles - Used when select is enabled */
+  .dt-select-checkbox {
+    @apply form-checkbox size-4 cursor-pointer rounded border-border bg-background text-primary checked:bg-primary checked:text-primary indeterminate:bg-primary/80 hover:indeterminate:bg-primary focus:ring-ring/50 focus:ring-offset-0 focus:outline-none checked:focus:bg-primary dark:bg-input/30 dark:checked:bg-primary dark:indeterminate:bg-primary/80;
   }
 
   /* Search box at the top styles - v1 of datatables */
@@ -588,7 +644,7 @@
     label {
       @apply inline-flex w-full cursor-pointer items-center gap-2 text-sm font-normal text-muted-foreground;
       input {
-        @apply h-9 w-full rounded-md border border-border bg-background px-2 py-1 transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus-visible:border-input sm:text-sm;
+        @apply h-9 w-full rounded-md border border-border bg-background px-2 py-1 transition focus:border-primary focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus:outline-none focus-visible:border-input sm:text-sm;
       }
     }
   }
@@ -597,10 +653,10 @@
   .dt-search {
     @apply flex items-center gap-3;
     label {
-      @apply inline-flex cursor-pointer items-center gap-2 text-sm font-normal text-muted-foreground;
+      @apply inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground;
     }
     input {
-      @apply h-9 w-full rounded-md border border-border bg-background px-2 py-1 transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus-visible:border-input sm:text-sm md:w-[50%] lg:w-[250px];
+      @apply flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:w-[250px] md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40;
     }
   }
 
@@ -608,6 +664,10 @@
   .dataTables_wrapper .dataTables_info,
   .dt-info {
     @apply flex items-center gap-3 text-sm !text-muted-foreground;
+  }
+
+  .dt-paging nav {
+    @apply flex items-center gap-1;
   }
 
   /* Pagination button styles - v1 datatables */
@@ -618,7 +678,7 @@
   }
   /* Pagination button - v2 */
   .dt-paging-button {
-    @apply ml-1 box-border inline-flex h-9 min-w-[36px] cursor-pointer items-center justify-center rounded bg-transparent px-3 py-2 text-center text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply inline-flex h-8 min-w-8 items-center justify-center gap-2 rounded-md border bg-background px-3 text-sm whitespace-nowrap shadow-xs transition-all outline-none hover:bg-accent hover:text-accent-foreground focus:outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 dark:border-input dark:bg-input/30 dark:hover:bg-input/50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
     &.current,
     &:hover {
       @apply bg-muted;
@@ -627,6 +687,12 @@
     &.disabled:hover,
     &.disabled:active {
       @apply pointer-events-none opacity-50;
+    }
+    &.previous,
+    &.next,
+    &.first,
+    &.last {
+      @apply text-base;
     }
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.current,
@@ -799,10 +865,10 @@
   }
   /* Responsive modal */
   div.dtr-modal {
-    @apply fixed left-0 top-0 z-[1000] box-border size-full;
+    @apply fixed top-0 left-0 z-[1000] box-border size-full;
   }
   div.dtr-modal div.dtr-modal-display {
-    @apply absolute left-1/2 top-1/2 z-[102] max-h-[80%] w-full max-w-screen-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border bg-background p-4 md:px-7 md:py-4 lg:max-h-[90%];
+    @apply absolute top-1/2 left-1/2 z-[102] max-h-[80%] w-full max-w-screen-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border bg-background p-4 md:px-7 md:py-4 lg:max-h-[90%];
   }
   div.dtr-modal div.dtr-modal-content {
     @apply relative flex flex-col p-0 text-[15px];
@@ -814,7 +880,7 @@
     }
   }
   div.dtr-modal div.dtr-modal-close {
-    @apply absolute right-2 top-2 z-[10] inline-flex size-6 cursor-pointer items-center justify-center rounded-md bg-muted/10 hover:bg-muted;
+    @apply absolute top-2 right-2 z-[10] inline-flex size-6 cursor-pointer items-center justify-center rounded-md bg-muted/10 hover:bg-muted;
   }
   div.dtr-modal div.dtr-modal-background {
     @apply fixed inset-0 z-[101] bg-background/20 backdrop-blur;
@@ -822,21 +888,19 @@
 
   /* Search Builder Styles */
   div.dt-button-collection {
-    overflow: visible !important;
-    z-index: 2002 !important;
+    @apply z-2002! overflow-visible!;
   }
   div.dt-button-collection div.dtsb-searchBuilder {
-    padding-left: 1em !important;
-    padding-right: 1em !important;
+    @apply p-4!;
   }
   div.dt-button-collection.dtb-collection-closeable div.dtsb-titleRow {
-    padding-right: 40px;
+    @apply pr-10;
   }
   .dtsb-greyscale {
     @apply !border;
   }
   div.dtsb-logicContainer .dtsb-greyscale {
-    border: none !important;
+    @apply border-none!;
   }
   div.dtsb-searchBuilder {
     @apply mb-4 cursor-default justify-evenly text-left;
@@ -852,33 +916,24 @@
     @apply inline-block text-sm font-normal;
   }
   div.dtsb-searchBuilder div.dtsb-titleRow div.dtsb-title:empty {
-    display: inline;
+    @apply inline;
   }
   div.dtsb-searchBuilder div.dtsb-vertical .dtsb-value,
   div.dtsb-searchBuilder div.dtsb-vertical .dtsb-data,
   div.dtsb-searchBuilder div.dtsb-vertical .dtsb-condition {
-    display: block;
+    @apply block;
   }
   div.dtsb-searchBuilder div.dtsb-group {
     @apply relative clear-both mb-4;
   }
   div.dtsb-searchBuilder div.dtsb-group button.dtsb-search {
-    float: right;
+    @apply float-right;
   }
   div.dtsb-searchBuilder div.dtsb-group button.dtsb-clearGroup {
-    margin: 2px;
-    text-align: center;
-    padding: 0;
+    @apply m-0.5 p-0 text-center;
   }
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-logicContainer {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    position: absolute;
-    margin-top: 0.8em;
-    margin-right: 0.8em;
+    @apply absolute mt-3.5 mr-3.5 rotate-90;
   }
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria {
     margin-bottom: 0.8em;
@@ -1001,19 +1056,19 @@
   div.dtsb-searchBuilder button,
   div.dtsb-searchBuilder select.dtsb-dropDown,
   div.dtsb-searchBuilder input {
-    @apply bg-background;
+    @apply bg-background dark:bg-input/30 dark:hover:bg-input/50;
   }
   div.dtsb-searchBuilder button.dtsb-button {
-    @apply relative box-border inline-flex h-9 cursor-pointer select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-md border bg-background px-3 py-2 text-sm font-normal text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply inline-flex h-9 items-center justify-center gap-2 rounded-md border bg-background px-3 text-sm whitespace-nowrap shadow-xs transition-all outline-none hover:bg-accent hover:text-accent-foreground focus:outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 dark:border-input dark:bg-input/30 dark:hover:bg-input/50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
   }
   div.dtsb-searchBuilder button.dtsb-button:hover {
-    @apply cursor-pointer bg-muted;
+    @apply cursor-pointer bg-accent text-accent-foreground dark:hover:bg-input/50;
   }
   div.dtsb-searchBuilder div.dtsb-logicContainer {
     @apply overflow-hidden rounded-none border;
   }
   div.dtsb-searchBuilder div.dtsb-logicContainer button {
-    @apply rounded-md border-transparent bg-transparent;
+    @apply rounded-md border-transparent;
   }
   div.dtsb-searchBuilder button.dtsb-clearGroup {
     min-width: 2em;
@@ -1043,11 +1098,11 @@
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-condition,
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data,
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-value {
-    @apply rounded-md border border-input bg-background text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus-visible:border-input;
+    @apply flex h-9 min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40;
   }
 
   div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria input.dtsb-value {
-    @apply rounded-md border border-input bg-background text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus-visible:border-input;
+    @apply h-9 min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40;
   }
 
   /* Col vis styles */
@@ -1060,12 +1115,12 @@
   .dt-button-collection {
     @apply relative;
     [role="menu"] {
-      @apply absolute -left-20 top-7 flex min-w-[200px] flex-col rounded-md border bg-background py-2 shadow before:mx-2 before:mb-2 before:text-xs before:text-muted-foreground/70 before:content-['Select_columns'];
+      @apply absolute top-7 -left-20 flex min-w-[200px] flex-col gap-1 rounded-lg border bg-background p-2 shadow-lg before:mx-2 before:mb-2 before:text-xs before:text-muted-foreground/70 before:content-['Select_columns'];
       button {
-        @apply h-8 rounded-none border-none px-4 text-xs;
+        @apply h-8 justify-between rounded-sm border-none bg-transparent px-4 text-xs hover:bg-accent/30;
       }
       .dt-button.buttons-columnVisibility.dt-button-active {
-        @apply text-foreground after:ml-auto after:content-['✓'];
+        @apply bg-accent text-accent-foreground after:ml-auto after:content-['✓'] dark:bg-accent/50;
       }
     }
   }

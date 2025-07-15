@@ -33,34 +33,42 @@ In the form below, we are using the `useForm` composition function provided by V
 
 ```vue [DocsVeeSelect.vue]
 <template>
-  <form class="mx-auto max-w-md" @submit="onSubmit">
-    <fieldset :disabled="isSubmitting" class="space-y-5">
+  <form class="mx-auto max-w-xs" @submit="onSubmit">
+    <fieldset :disabled="isSubmitting" class="grid gap-5">
       <UiVeeSelect label="Country" name="country" hint="Pick the country you want to visit">
         <option disabled value="">Select a country</option>
         <option v-for="country in countries" :key="country" :value="country">
           {{ country }}
         </option>
       </UiVeeSelect>
-      <TransitionSlide>
-        <UiVeeSelect
+      <AnimatePresence>
+        <Motion
           v-if="values.country"
-          label="Attraction"
-          name="attraction"
-          hint="Pick the attraction you want to visit"
+          :initial="{ opacity: 0, y: -10 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :exit="{ opacity: 0, y: -10 }"
+          :transition="{ type: 'keyframes' }"
         >
-          <option disabled value="">Select an attraction</option>
-          <option v-for="spot in spots" :key="spot" :value="spot">
-            {{ spot }}
-          </option>
-        </UiVeeSelect>
-      </TransitionSlide>
-      <UiButton type="submit"> Book now </UiButton>
+          <UiVeeSelect
+            label="Attraction"
+            name="attraction"
+            hint="Pick the attraction you want to visit"
+          >
+            <option disabled value="">Select an attraction</option>
+            <option v-for="spot in spots" :key="spot" :value="spot">
+              {{ spot }}
+            </option>
+          </UiVeeSelect>
+        </Motion>
+      </AnimatePresence>
+      <UiButton :loading="isSubmitting" type="submit"> Book now </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { object, string } from "yup";
 
   const places = [
     { country: "Jamaica", spots: ["Dunn's River Falls", "Doctor's Cave Beach", "Blue Lagoon"] },
@@ -89,22 +97,24 @@ In the form below, we are using the `useForm` composition function provided by V
     () => places.find((place) => place.country === values.country)?.spots || []
   );
 
-  const schema = z.object({
-    country: z.string({ required_error: "Required" }).refine((value) => countries.includes(value)),
-    attraction: z.string({ required_error: "Required" }),
+  const schema = object({
+    country: string().label("Country").required().oneOf(countries, "Invalid country selected"),
+    attraction: string().label("Attraction").required(),
   });
 
   const { handleSubmit, isSubmitting, values } = useForm({
     validationSchema: toTypedSchema(schema),
   });
 
-  const onSubmit = handleSubmit(async (values) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Booking your trip...",
-      success: (_) => `You are going to ${values.attraction} in ${values.country}!`,
-      error: (_) => "Error! Your information could not be sent to our servers!",
+  const onSubmit = handleSubmit(async (values, ctx) => {
+    const id = useSonner.loading("Booking your trip...");
+    await promiseTimeout(2000); // Simulate a network request
+    useSonner.dismiss(id);
+    await nextTick();
+    useSonner.success(`Trip to ${values.country} booked!`, {
+      description: `You will visit ${values.attraction}. Enjoy your trip!`,
     });
+    ctx.resetForm();
   });
 </script>
 ```

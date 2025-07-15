@@ -1,16 +1,21 @@
 <template>
-  <DropdownMenuArrow v-bind="forwarded" :class="styles({ class: props.class })" />
+  <DropdownMenuArrow
+    data-slot="dropdown-menu-arrow"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  />
 </template>
 
 <script lang="ts" setup>
-  import { DropdownMenuArrow } from "radix-vue";
-  import type { DropdownMenuArrowProps } from "radix-vue";
+  import { DropdownMenuArrow } from "reka-ui";
+  import type { DropdownMenuArrowProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       DropdownMenuArrowProps & {
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {

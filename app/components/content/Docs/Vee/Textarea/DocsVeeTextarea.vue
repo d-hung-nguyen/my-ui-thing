@@ -13,29 +13,22 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { object, string } from "yup";
 
-  const schema = z.object({
-    firstLove: z
-      .string()
-      .min(3, "Too short!")
-      .max(50, "Too long!")
-      .transform((v) => v?.trim()),
-    firstHeartbreak: z.string().min(3, "Too short!").max(50, "Too long!"),
+  const schema = object({
+    firstLove: string().label("First Love").required().min(3).max(50).trim(),
+    firstHeartbreak: string().label("First Heartbreak").required().min(3).max(50).trim(),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: toTypedSchema(schema),
   });
 
-  const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
-
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Storing your secrets...",
-      success: (_) => "Your secrets are safe with us!",
-      error: (_) => "Error! Your information could not be sent to our servers!",
+  const onSubmit = handleSubmit(async () => {
+    await promiseTimeout(2000); // Simulate a network request
+    useSonner("Secrets Saved", {
+      description: "Your secrets have been saved successfully.",
     });
   });
 </script>

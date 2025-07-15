@@ -8,10 +8,10 @@
             v-slot="{ isSelected }"
             v-bind="item.bind"
             :style="{ 'padding-left': item.level > 1 ? `${item.level * 8}px` : '0px' }"
-            class="group rounded px-2 py-1 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-border"
+            class="group rounded px-2 py-1 text-sm focus-visible:ring-1 focus-visible:ring-border focus-visible:outline-none"
           >
             <div
-              class="line-clamp-1 flex w-full cursor-pointer select-none items-center gap-2 px-2"
+              class="line-clamp-1 flex w-full cursor-pointer items-center gap-2 px-2 select-none"
             >
               <UiAvatar class="size-6" :src="item.value.picture.thumbnail" />
               {{ item.value.name?.first }} {{ item.value.name?.last }}
@@ -19,7 +19,7 @@
             <TransitionExpand>
               <div
                 v-if="isSelected"
-                class="ml-[18px] mt-1 flex flex-col gap-1 border-l p-2 pl-2 text-xs"
+                class="mt-1 ml-[18px] flex flex-col gap-1 border-l p-2 pl-2 text-xs"
               >
                 <p class="flex items-center gap-3">
                   <span>Email</span>

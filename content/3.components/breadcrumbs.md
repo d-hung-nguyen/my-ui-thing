@@ -33,9 +33,9 @@ npx ui-thing@latest add breadcrumbs
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const crumbs: Crumbs[] = [
+  const crumbs: BreadcrumbItem[] = [
     {
       label: "Home",
       click: () => {
@@ -95,9 +95,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { label: "Home", link: "/" },
     { slot: "dots" },
     { label: "Components", link: "/components/accordion" },
@@ -148,10 +148,10 @@ To use these examples you will have to copy the code and adjust it for your own 
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
   const open = ref(false);
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { label: "Home", link: "/" },
     { slot: "folder" },
     { label: "Breadcrumb" },
@@ -185,9 +185,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { label: "Home", link: "/", icon: "lucide:home" },
     { label: "Components", link: "/", icon: "lucide:component" },
     { label: "Breadcrumb" },
@@ -218,9 +218,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { icon: "lucide:home" },
     { label: "Components", link: "/" },
     { label: "Breadcrumb" },
@@ -246,14 +246,14 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <UiBreadcrumbs
     :items="items"
-    class="mx-auto w-fit rounded-lg border border-border bg-background px-3 py-2 shadow-sm shadow-black/5"
+    class="mx-auto w-fit rounded-lg border border-border bg-background px-3 py-2 shadow-xs shadow-black/5"
   />
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { icon: "lucide:home" },
     { label: "Components", link: "/" },
     { label: "Breadcrumb" },
@@ -292,9 +292,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [{ label: "Databases" }, { slot: "select" }];
+  const items: BreadcrumbItem[] = [{ label: "Databases" }, { slot: "select" }];
 </script>
 ```
 

@@ -1,18 +1,19 @@
 <template>
-  <MenubarRoot v-bind="forwarded" :class="styles({ class: props.class })">
+  <MenubarRoot data-slot="menubar" v-bind="forwarded" :class="styles({ class: props.class })">
     <slot />
   </MenubarRoot>
 </template>
 
 <script lang="ts" setup>
-  import { MenubarRoot, useForwardPropsEmits } from "radix-vue";
-  import type { MenubarRootEmits, MenubarRootProps } from "radix-vue";
+  import { MenubarRoot, useForwardPropsEmits } from "reka-ui";
+  import type { MenubarRootEmits, MenubarRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       MenubarRootProps & {
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {
@@ -24,6 +25,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);
 
   const styles = tv({
-    base: "inline-flex h-10 items-center space-x-1 rounded-md border bg-background p-1",
+    base: "flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs",
   });
 </script>

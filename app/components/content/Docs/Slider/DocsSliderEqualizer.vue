@@ -8,21 +8,11 @@
             v-model="v1"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="60 Hz"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v1.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v1[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">60</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -30,21 +20,11 @@
             v-model="v2"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="250 Hz"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v2.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v2[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">250</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -52,21 +32,11 @@
             v-model="v3"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="1k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v3.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v3[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">1k</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -74,21 +44,11 @@
             v-model="v4"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="4k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v4.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v4[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">4k</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -96,21 +56,11 @@
             v-model="v5"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="16k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v5.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v5[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">16K</UiLabel>
         </div>
       </div>

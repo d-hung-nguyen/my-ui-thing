@@ -2,7 +2,7 @@
   <div>
     <UiListbox>
       <UiListboxContent>
-        <UiListboxVirtualizer v-slot="{ option }" :options="people">
+        <UiListboxVirtualizer v-slot="{ option }" :estimate-size="36" :options="people">
           <UiListboxItem :value="option">
             <span>{{ option }}</span>
           </UiListboxItem>

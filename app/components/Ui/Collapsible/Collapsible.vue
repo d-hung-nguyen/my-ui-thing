@@ -1,12 +1,12 @@
 <template>
-  <CollapsibleRoot v-slot="slotProps" v-bind="forwarded">
+  <CollapsibleRoot v-slot="slotProps" data-slot="collapsible" v-bind="forwarded">
     <slot v-bind="slotProps" />
   </CollapsibleRoot>
 </template>
 
 <script lang="ts" setup>
-  import { CollapsibleRoot, useForwardPropsEmits } from "radix-vue";
-  import type { CollapsibleRootEmits, CollapsibleRootProps } from "radix-vue";
+  import { CollapsibleRoot, useForwardPropsEmits } from "reka-ui";
+  import type { CollapsibleRootEmits, CollapsibleRootProps } from "reka-ui";
 
   const props = defineProps<CollapsibleRootProps>();
 

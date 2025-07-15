@@ -2,17 +2,46 @@
 title: Accordion
 description: A vertically stacked set of interactive headings that each reveal an associated section of content.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/accordion
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/accordion
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/accordion#api-reference
+    href: https://reka-ui.com/docs/components/accordion#api-reference
     icon: "icon-park-solid:api"
 ---
 
 ## Source code
 
 Click :SourceCodeLink{component="Accordion"} to see the source code for this component on GitHub. Feel free to copy it and adjust it for your own use.
+
+## Anatomy
+
+Pass a list of `items` to the component.
+
+```vue
+<template>
+  <UiAccordion :items />
+</template>
+
+<script lang="ts" setup>
+  const items = [];
+</script>
+```
+
+Or use each part individually
+
+```vue
+<template>
+  <UiAccordion>
+    <UiAccordionItem>
+      <UiAccordionHeader>
+        <UiAccordionTrigger />
+      </UiAccordionHeader>
+      <UiAccordionContent />
+    </UiAccordionItem>
+  </UiAccordion>
+</template>
+```
 
 ## Installation
 
@@ -36,7 +65,9 @@ The most common way to use the accordion is by just passing an array of items to
 
 ```vue [DocsAccordion.vue]
 <template>
-  <UiAccordion type="single" default-value="item-2" :items="accordionItems" />
+  <div class="mx-auto max-w-lg">
+    <UiAccordion type="single" default-value="item-2" :items="accordionItems" />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -78,22 +109,28 @@ If you want to change the way that the items look, you can do so by using the di
 
 ```vue [DocsAccordionVariant.vue]
 <template>
-  <UiAccordion :default-value="[accordionItems[1].value]" type="multiple" :items="accordionItems">
-    <template v-for="(i, k) in accordionItems" :key="k">
-      <UiAccordionItem v-slot="{ open }" class="border-b-0" :value="i.value">
-        <UiAccordionHeader>
-          <UiAccordionTrigger
-            :class="[open ? 'bg-muted underline hover:!underline' : 'bg-muted/50 no-underline']"
-            class="mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:bg-muted hover:no-underline"
-            >{{ i.title }}</UiAccordionTrigger
-          >
-        </UiAccordionHeader>
-        <UiAccordionContent>
-          <div class="px-3 py-2 leading-8" v-html="i.content" />
-        </UiAccordionContent>
-      </UiAccordionItem>
-    </template>
-  </UiAccordion>
+  <div class="mx-auto max-w-lg">
+    <UiAccordion
+      :default-value="[accordionItems[1]!.value]"
+      type="multiple"
+      :items="accordionItems"
+    >
+      <template v-for="(i, k) in accordionItems" :key="k">
+        <UiAccordionItem v-slot="{ open }" class="border-b-0" :value="i.value">
+          <UiAccordionHeader>
+            <UiAccordionTrigger
+              :class="[open ? 'bg-muted underline hover:!underline' : 'bg-muted/50 no-underline']"
+              class="mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:bg-muted hover:no-underline"
+              >{{ i.title }}</UiAccordionTrigger
+            >
+          </UiAccordionHeader>
+          <UiAccordionContent>
+            <div class="px-3 py-2 leading-8" v-html="i.content" />
+          </UiAccordionContent>
+        </UiAccordionItem>
+      </template>
+    </UiAccordion>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -106,9 +143,9 @@ If you want to change the way that the items look, you can do so by using the di
     },
     {
       value: "item-2",
-      title: "Is it easy to create a design system with Radix-Vue?",
+      title: "Is it easy to create a design system with Reka UI?",
       content:
-        "Yes! Radix-Vue is a collection of low-level UI components that you can use to create a design system.",
+        "Yes! Reka UI is a collection of low-level UI components that you can use to create a design system.",
     },
     {
       value: "item-3",
@@ -138,20 +175,22 @@ You can change the `icon` that is displayed based on the open state of an item. 
 
 ```vue [DocsAccordionIcon.vue]
 <template>
-  <UiAccordion type="single" default-value="item-2" :items="accordionItems">
-    <template #trigger="{ open, item }">
-      <UiAccordionTrigger
-        class="text-left text-sm"
-        :class="[open && 'underline underline-offset-2']"
-        :title="item.title"
-      >
-        <template #icon>
-          <Icon v-if="!open" name="lucide:plus" class="size-4 shrink-0" />
-          <Icon v-else name="lucide:minus" class="size-4 shrink-0" />
-        </template>
-      </UiAccordionTrigger>
-    </template>
-  </UiAccordion>
+  <div class="mx-auto max-w-lg">
+    <UiAccordion type="single" default-value="item-2" :items="accordionItems">
+      <template #trigger="{ open, item }">
+        <UiAccordionTrigger
+          class="text-left text-sm"
+          :class="[open && 'underline underline-offset-2']"
+          :title="item.title"
+        >
+          <template #icon>
+            <Icon v-if="!open" name="lucide:plus" class="size-4 shrink-0" />
+            <Icon v-else name="lucide:minus" class="size-4 shrink-0" />
+          </template>
+        </UiAccordionTrigger>
+      </template>
+    </UiAccordion>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -592,13 +631,13 @@ To use these examples you will have to copy the code and adjust it for your own 
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg">
+  <div class="mx-auto max-w-lg p-2">
     <UiAccordion :items type="single" collapsible class="w-full space-y-2" default-value="3">
       <UiAccordionItem
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="rounded-lg border bg-background px-4 py-1"
+        class="rounded-lg border bg-background px-4 py-1 last:border-b"
       >
         <UiAccordionTrigger class="w-full py-2 text-[15px] leading-6 hover:no-underline">
           {{ item.title }}
@@ -667,7 +706,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="rounded-lg border bg-background px-4"
+        class="rounded-lg border bg-background px-4 last:border-b"
       >
         <UiAccordionTrigger
           :icon="''"
@@ -740,7 +779,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg"
+        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger class="w-full py-2 text-[15px] leading-6 hover:no-underline">
           {{ item.title }}
@@ -809,7 +848,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg"
+        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger
           :icon="''"
@@ -915,7 +954,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.id"
-        class="overflow-hidden border bg-background first:rounded-t-lg last:rounded-b-lg"
+        class="overflow-hidden border bg-background first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger
           :title="item.title"
@@ -929,7 +968,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             :default-open="collapsible.open"
           >
             <UiCollapsibleTrigger
-              class="flex gap-2 text-[15px] font-semibold leading-6 [&[data-state=open]>svg]:rotate-180"
+              class="flex gap-2 text-[15px] leading-6 font-semibold [&[data-state=open]>svg]:rotate-180"
             >
               <Icon
                 name="lucide:chevron-down"
@@ -941,7 +980,7 @@ To use these examples you will have to copy the code and adjust it for your own 
               {{ collapsible.title }}
             </UiCollapsibleTrigger>
             <UiCollapsibleContent
-              class="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden ps-6 text-sm text-muted-foreground transition-all"
+              class="overflow-hidden ps-6 text-sm text-muted-foreground transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
             >
               {{ collapsible.content }}
             </UiCollapsibleContent>

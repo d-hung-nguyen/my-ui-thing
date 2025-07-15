@@ -5,24 +5,23 @@
 </template>
 
 <script lang="ts" setup>
-  import { _border, _gray, _muted, _violet } from "#tailwind-config/theme/colors";
   import type { ApexOptions } from "apexcharts";
 
   const series: ApexOptions["series"] = [
     {
       name: "Series 1",
       data: [500, 1200, 250, 750, 900, 1800, 350, 650, 2100, 300, 800, 1600],
-      color: _violet["400"], // Example color
+      color: "var(--color-violet-400)", // Example color
     },
     {
       name: "Series 2",
       data: [50, 25, 70, 10, 2000, 100, 5, 150, 180, 3000, 120, 800],
-      color: _violet["700"], // Example color
+      color: "var(--color-violet-700)", // Example color
     },
     {
       name: "Series 3",
       data: [3000, 150, 2500, 50, 800, 200, 400, 1000, 1200, 10, 5000, 300],
-      color: _violet["900"], // Example color
+      color: "var(--color-violet-900)", // Example color
     },
   ];
 
@@ -37,11 +36,11 @@
       fontWeight: 500,
       offsetY: 5,
       labels: {
-        colors: _muted.foreground,
+        colors: "var(--color-muted-foreground)",
       },
     },
     grid: {
-      borderColor: _border,
+      borderColor: "var(--color-border)",
     },
     chart: {
       toolbar: {
@@ -55,13 +54,13 @@
         style: {
           fontWeight: 600,
           fontSize: "13px",
-          color: _muted.foreground,
+          color: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
       labels: {
         style: {
-          colors: _muted.foreground,
+          colors: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
@@ -73,13 +72,13 @@
         style: {
           fontWeight: 600,
           fontSize: "13px",
-          color: _muted.foreground,
+          color: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
       labels: {
         style: {
-          colors: _muted.foreground,
+          colors: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
@@ -103,6 +102,8 @@
 </script>
 
 <style>
+  @reference "~/assets/css/tailwind.css";
+
   .apexcharts-menu {
     @apply border-border bg-background text-foreground;
     .apexcharts-menu-item {
@@ -111,16 +112,16 @@
   }
 
   .apexcharts-tooltip {
-    background: theme("colors.background") !important;
-    color: theme("colors.foreground") !important;
-    border: 1px solid theme("colors.border") !important;
-    box-shadow: theme("boxShadow.DEFAULT") !important;
+    background: var(--color-background) !important;
+    color: var(--color-foreground) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: var(--shadow) !important;
 
     .apexcharts-tooltip-title {
-      color: theme("colors.foreground") !important;
-      background-color: theme("colors.muted.DEFAULT") !important;
-      font-family: theme("fontFamily.sans") !important;
-      border-bottom: 1px solid theme("colors.border") !important;
+      color: var(--color-foreground) !important;
+      background-color: var(--color-muted) !important;
+      font-family: var(--font-sans) !important;
+      border-bottom: 1px solid var(--color-border) !important;
     }
   }
 </style>

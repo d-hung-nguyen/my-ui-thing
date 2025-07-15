@@ -234,9 +234,7 @@ Here are the different sizes that are available for the buttons.
 ```vue [DocsButtonSizes.vue]
 <template>
   <div class="flex items-center justify-center gap-2">
-    <UiButton v-for="s in sizes" :key="s" :size="s" variant="outline" class="capitalize"
-      >Size {{ s }}</UiButton
-    >
+    <UiButton v-for="s in sizes" :key="s" :size="s" variant="outline">Button</UiButton>
   </div>
 </template>
 
@@ -294,7 +292,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonExpandIconRight.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right"
+    <UiButton effect="expandIcon" icon-placement="right" icon="lucide:arrow-right"
       >Right Icon</UiButton
     >
   </div>
@@ -318,7 +316,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonExpandIconLeft.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="expandIcon" icon-placement="left" icon="lucide:arrow-left"
+    <UiButton effect="expandIcon" icon-placement="left" icon="lucide:arrow-left"
       >Left Icon</UiButton
     >
   </div>
@@ -342,7 +340,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonGooeyLeft.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="gooeyLeft">Gooey Left</UiButton>
+    <UiButton effect="gooeyLeft">Gooey Left</UiButton>
   </div>
 </template>
 ```
@@ -364,7 +362,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonGooeyRight.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="gooeyRight">Gooey Right</UiButton>
+    <UiButton effect="gooeyRight">Gooey Right</UiButton>
   </div>
 </template>
 ```
@@ -386,7 +384,51 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonShine.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="shine">Shining ✨</UiButton>
+    <UiButton effect="shine">Shining ✨</UiButton>
+  </div>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Shine on Hover
+
+::ShowCase
+
+:DocsButtonShineHover
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Button/DocsButtonShineHover.vue" code lang="vue" -->
+
+```vue [DocsButtonShineHover.vue]
+<template>
+  <div class="text-center">
+    <UiButton effect="shineHover">Shine on Hover</UiButton>
+  </div>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Gradient Slideshow
+
+::ShowCase
+
+:DocsButtonGradientFlow
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Button/DocsButtonGradientFlow.vue" code lang="vue" -->
+
+```vue [DocsButtonGradientFlow.vue]
+<template>
+  <div class="text-center">
+    <UiButton effect="gradientSlideShow">Gradient Slideshow</UiButton>
   </div>
 </template>
 ```
@@ -408,7 +450,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonRingHover.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="ringHover">Ring Hover</UiButton>
+    <UiButton effect="ringHover">Ring Hover</UiButton>
   </div>
 </template>
 ```
@@ -430,7 +472,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonLinkHover1.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="linkHover1">Link Hover 1</UiButton>
+    <UiButton variant="link" effect="underline">Link Underline</UiButton>
   </div>
 </template>
 ```
@@ -452,7 +494,7 @@ These are some buttons that I found today over here [Enhanced Buttons](https://e
 ```vue [DocsButtonLinkHover2.vue]
 <template>
   <div class="text-center">
-    <UiButton variant="linkHover2">Link Hover 2</UiButton>
+    <UiButton variant="link" effect="hoverUnderline">Link Hover Underline</UiButton>
   </div>
 </template>
 ```
@@ -577,7 +619,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsButtonGroupOutlineCounter.vue]
 <template>
   <div class="text-center">
-    <div class="inline-flex -space-x-px rounded-lg shadow-sm shadow-black/5 rtl:space-x-reverse">
+    <div class="inline-flex -space-x-px rounded-lg shadow-xs shadow-black/5 rtl:space-x-reverse">
       <UiButton
         class="rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg focus-visible:z-10"
         variant="outline"

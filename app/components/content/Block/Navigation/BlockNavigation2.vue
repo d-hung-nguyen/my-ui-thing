@@ -24,17 +24,17 @@
               <UiNavigationMenuItem>
                 <UiNavigationMenuTrigger class="h-9 px-3 text-sm capitalize" :title="link" />
                 <UiNavigationMenuContent>
-                  <div class="bg-background ring-1 ring-muted lg:w-[750px] xl:w-[1000px]">
+                  <div class="lg:w-[750px] xl:w-[1000px]">
                     <template v-for="(item, cat, index) in data" :key="`${cat}-${index}`">
-                      <ul class="grid w-full grid-cols-2 flex-col gap-2 px-4 py-5 xl:grid-cols-3">
+                      <ul class="grid w-full grid-cols-2 flex-col gap-2 xl:grid-cols-3">
                         <li v-for="(child, k) in item" :key="k">
                           <UiNavigationMenuLink class="data-[active]:bg-muted/80" as-child>
                             <NuxtLink
                               :to="child.href"
-                              class="flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:hover:bg-muted/20"
+                              class="flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                             >
                               <div
-                                class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-sm"
+                                class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-xs"
                               >
                                 <Icon
                                   :name="child.icon"
@@ -95,7 +95,7 @@
                             class="w-full justify-start text-base capitalize *:data-[state=open]:-rotate-180"
                             to="#"
                             >{{ link }}
-                            <Icon name="lucide:chevron-down" class="ml-auto h-4 w-4 transition"
+                            <Icon name="lucide:chevron-down" class="ml-auto size-4 transition"
                           /></UiButton>
                         </UiCollapsibleTrigger>
                         <UiCollapsibleContent
@@ -110,10 +110,10 @@
                               <li v-for="(child, k) in item" :key="k">
                                 <NuxtLink
                                   :to="child.href"
-                                  class="flex gap-4 rounded-md py-3 transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                                  class="flex gap-4 rounded-md py-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
                                 >
                                   <div
-                                    class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-sm"
+                                    class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-xs"
                                   >
                                     <Icon
                                       :name="child.icon"

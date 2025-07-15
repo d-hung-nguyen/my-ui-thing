@@ -23,15 +23,15 @@
             <UiNavigationMenuItem>
               <UiNavigationMenuTrigger class="h-9 px-3 text-sm capitalize" title="Blogs" />
               <UiNavigationMenuContent>
-                <div class="bg-background ring-1 ring-muted lg:w-[750px] xl:w-[1000px]">
-                  <ul class="grid w-full grid-cols-3 flex-col gap-5 px-4 py-5 xl:grid-cols-3">
+                <div class="bg-background lg:w-[750px] xl:w-[1000px]">
+                  <ul class="grid w-full grid-cols-3 flex-col gap-5 p-4 xl:grid-cols-3">
                     <li v-for="b in 9" :key="b">
                       <UiNavigationMenuLink as-child>
                         <NuxtLink
                           to="#"
-                          class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:hover:bg-muted/20"
+                          class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                         >
-                          <div class="h-[80px] w-[800px] overflow-hidden rounded-lg shadow-sm">
+                          <div class="h-[80px] w-[800px] overflow-hidden rounded-lg shadow-xs">
                             <!-- eslint-disable-next-line vue/html-self-closing -->
                             <img
                               loading="lazy"
@@ -39,12 +39,12 @@
                               alt="Random blog image"
                               width="400"
                               height="90"
-                              class="h-full w-[400px] object-cover transition hover:scale-110 group-hover:scale-110"
+                              class="h-full w-[400px] object-cover transition group-hover:scale-110 hover:scale-110"
                             />
                           </div>
                           <div class="flex flex-col gap-1.5 leading-none">
                             <p class="text-sm font-semibold">Auto layout explained</p>
-                            <p class="line-clamp-2 overflow-ellipsis text-sm text-muted-foreground">
+                            <p class="line-clamp-2 text-sm overflow-ellipsis text-muted-foreground">
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
                               voluptatum, voluptate, quibusdam, quia voluptas quod exercitationem
                               quos quas voluptatibus quidem
@@ -95,8 +95,7 @@
                           variant="ghost"
                           class="w-full justify-start text-base capitalize *:data-[state=open]:-rotate-180"
                           to="#"
-                          >Blogs
-                          <Icon name="lucide:chevron-down" class="ml-auto h-4 w-4 transition"
+                          >Blogs <Icon name="lucide:chevron-down" class="ml-auto size-4 transition"
                         /></UiButton>
                       </UiCollapsibleTrigger>
                       <UiCollapsibleContent
@@ -107,9 +106,9 @@
                             <li v-for="b in 3" :key="b">
                               <NuxtLink
                                 to="#"
-                                class="flex flex-col gap-5 rounded-md transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:hover:bg-muted/20"
+                                class="flex flex-col gap-5 rounded-md transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                               >
-                                <div class="h-[200px] w-full overflow-hidden rounded-lg shadow-sm">
+                                <div class="h-[200px] w-full overflow-hidden rounded-lg shadow-xs">
                                   <!-- eslint-disable-next-line vue/html-self-closing -->
                                   <img
                                     :src="`http://unsplash.it/400/210?random=${b}&gravity=center.webp`"
@@ -117,15 +116,15 @@
                                     width="400"
                                     loading="lazy"
                                     height="200"
-                                    class="h-full w-full object-cover transition hover:scale-110 group-hover:scale-110"
+                                    class="h-full w-full object-cover transition group-hover:scale-110 hover:scale-110"
                                   />
                                 </div>
                                 <div class="flex flex-col gap-1.5 leading-none">
-                                  <p class="line-clamp-1 overflow-ellipsis font-semibold">
+                                  <p class="line-clamp-1 font-semibold overflow-ellipsis">
                                     Auto layout explained
                                   </p>
                                   <p
-                                    class="line-clamp-2 overflow-ellipsis text-sm text-muted-foreground"
+                                    class="line-clamp-2 text-sm overflow-ellipsis text-muted-foreground"
                                   >
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                     Quisquam voluptatum, voluptate, quibusdam, quia voluptas quod

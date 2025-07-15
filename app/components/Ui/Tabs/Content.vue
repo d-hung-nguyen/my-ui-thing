@@ -1,21 +1,22 @@
 <template>
-  <TabsContent v-bind="forwarded" :class="styles({ class: props.class })">
+  <TabsContent data-slot="tabs-content" v-bind="forwarded" :class="styles({ class: props.class })">
     <slot />
   </TabsContent>
 </template>
 
 <script lang="ts" setup>
-  import { TabsContent } from "radix-vue";
-  import type { TabsContentProps } from "radix-vue";
+  import { TabsContent } from "reka-ui";
+  import type { TabsContentProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     TabsContentProps & {
       /** Custom class(es) to add to parent element */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    base: "flex-1 outline-none",
   });
 </script>

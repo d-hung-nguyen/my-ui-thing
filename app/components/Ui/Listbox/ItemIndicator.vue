@@ -1,19 +1,22 @@
 <template>
-  <ListboxItemIndicator v-bind="forwarded">
+  <ListboxItemIndicator data-slot="listbox-indicator" v-bind="forwarded">
     <slot>
-      <Icon :class="styles({ class: props.class })" :name="icon || 'lucide:circle-check'" />
+      <Icon :class="styles({ class: props.class })" :name="icon || 'lucide:check'" />
     </slot>
   </ListboxItemIndicator>
 </template>
 
 <script lang="ts" setup>
-  import { ListboxItemIndicator, useForwardPropsEmits } from "radix-vue";
-  import type { ListboxItemIndicatorProps } from "radix-vue";
+  import { ListboxItemIndicator, useForwardPropsEmits } from "reka-ui";
+  import type { ListboxItemIndicatorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-  const props = defineProps<ListboxItemIndicatorProps & { class?: any; icon?: string }>();
+  const props = defineProps<
+    ListboxItemIndicatorProps & { class?: HTMLAttributes["class"]; icon?: string }
+  >();
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"));
 
   const styles = tv({
-    base: "size-5 shrink-0",
+    base: "size-4 shrink-0 text-primary",
   });
 </script>

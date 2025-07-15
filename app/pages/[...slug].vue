@@ -1,13 +1,15 @@
 <template>
   <div
     :class="[
-      toc && toc.links && toc.links.length ? 'xl:grid-cols-[1fr,250px]' : 'xl:grid-cols-[1fr]',
+      toc && toc.links && toc.links.length && !isBlocksPage
+        ? 'xl:grid-cols-[1fr_250px]'
+        : 'xl:grid-cols-1',
     ]"
     class="xl:grid xl:gap-5"
   >
     <!-- Page content -->
     <div
-      class="prose prose-base mx-auto w-full min-w-0 max-w-none py-5 dark:prose-invert lg:prose-base prose-headings:scroll-mt-16 prose-headings:tracking-tight prose-h2:mt-6 prose-h2:border-b prose-h2:pb-3 first:prose-h2:mt-10 prose-a:decoration-primary prose-a:decoration-wavy prose-a:underline-offset-2 hover:prose-a:text-primary prose-pre:text-base lg:prose-pre:text-base"
+      class="mx-auto prose prose-base max-w-none min-w-0 py-5 xl:container dark:prose-invert prose-headings:scroll-mt-16 prose-headings:tracking-tight prose-h2:mt-6 prose-h2:border-b prose-h2:pb-3 first:prose-h2:mt-10 prose-a:decoration-primary prose-a:decoration-wavy prose-a:underline-offset-2 prose-a:hover:text-primary prose-pre:text-base"
     >
       <DocsHeader v-if="page" :page />
       <ContentRenderer v-if="page" :value="page" />
@@ -16,8 +18,8 @@
     <!-- Table of contents for current page -->
     <ClientOnly>
       <aside
-        v-if="toc && toc.links && toc.links.length"
-        class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] xl:block"
+        v-if="toc && toc.links && toc.links.length && !isBlocksPage"
+        class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-l xl:block"
       >
         <UiScrollArea type="auto" class="h-full">
           <div class="p-5">
@@ -31,17 +33,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { kebabCase } from "lodash-es";
+  import { snakeCase } from "lodash-es";
   import { useActiveScroll } from "vue-use-active-scroll";
   import type { Targets } from "vue-use-active-scroll";
 
   const route = useRoute();
-  const { data: page } = await useAsyncData(kebabCase(route.path), () => {
+  const { data: page } = await useAsyncData(snakeCase(route.path), () => {
     return queryCollection("content").path(route.path).first();
   });
-  if (!page.value) {
-    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-  }
   const toc = computed(() => {
     if (!page.value) return;
     return page.value?.body?.toc;
@@ -59,21 +58,26 @@
     overlayHeight: 80,
   });
 
+  // Check if a page starts with `/blocks/` The sidenave will be removed if this is true
+  const isBlocksPage = computed(() => route.path.startsWith("/blocks/"));
+
   useSeoMeta({
-    title: page.value.title,
+    title: page?.value?.title,
     titleTemplate: `%s | ${SITE_NAME}`,
-    description: page.value.description,
+    description: page.value?.description,
     keywords: SITE_KEYWORDS.join(", "),
-    ogTitle: page.value.title,
-    ogDescription: page.value.description,
-    twitterTitle: page.value.title,
-    twitterDescription: page.value.description,
+    ogTitle: page.value?.title,
+    ogDescription: page.value?.description,
+    twitterTitle: page.value?.title,
+    twitterDescription: page.value?.description,
     twitterCard: "summary_large_image",
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  defineOgImageComponent("UIThing", {
-    title: page.value.title,
-    description: page.value.description,
-  });
+  if (import.meta.server) {
+    defineOgImageComponent("UIThing", {
+      title: page.value?.title,
+      description: page.value?.description,
+    });
+  }
 </script>

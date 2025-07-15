@@ -3,13 +3,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { ContextMenuArrow } from "radix-vue";
-  import type { ContextMenuArrowProps } from "radix-vue";
+  import { ContextMenuArrow } from "reka-ui";
+  import type { ContextMenuArrowProps } from "reka-ui";
+  import type { HtmlHTMLAttributes } from "vue";
 
   const props = defineProps<
     ContextMenuArrowProps & {
-      /** Custom class(es) to add to teh arrow */
-      class?: any;
+      /** Custom class(es) to add to the arrow */
+      class?: HtmlHTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");

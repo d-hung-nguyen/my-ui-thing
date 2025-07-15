@@ -32,13 +32,13 @@
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg">
+  <div class="mx-auto max-w-lg p-2">
     <UiAccordion :items type="single" collapsible class="w-full space-y-2" default-value="3">
       <UiAccordionItem
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="rounded-lg border bg-background px-4 py-1"
+        class="rounded-lg border bg-background px-4 py-1 last:border-b"
       >
         <UiAccordionTrigger class="w-full py-2 text-[15px] leading-6 hover:no-underline">
           {{ item.title }}

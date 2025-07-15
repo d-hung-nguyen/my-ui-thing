@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { SplitterPanel, useForwardPropsEmits } from "radix-vue";
-  import type { SplitterPanelEmits, SplitterPanelProps } from "radix-vue";
+  import { SplitterPanel, useForwardPropsEmits } from "reka-ui";
+  import type { SplitterPanelEmits, SplitterPanelProps } from "reka-ui";
 
   const props = withDefaults(defineProps<SplitterPanelProps>(), {});
 

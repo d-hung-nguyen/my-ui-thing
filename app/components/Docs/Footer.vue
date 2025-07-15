@@ -4,14 +4,14 @@
       <NuxtLink
         v-if="prev"
         :to="prev.path"
-        class="flex gap-4 rounded-lg border p-5 transition hover:border-primary"
+        class="flex gap-4 rounded-md border p-5 transition hover:border-primary"
       >
         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border">
           <Icon name="lucide:arrow-left" class="h-5 w-5 text-muted-foreground" />
         </div>
         <div class="flex flex-col gap-1">
           <p class="font-semibold lg:text-sm">{{ prev.title }}</p>
-          <p class="line-clamp-2 text-ellipsis text-[15px] text-muted-foreground lg:text-sm">
+          <p class="line-clamp-2 text-[15px] text-ellipsis text-muted-foreground lg:text-sm">
             {{ prev.description }}
           </p>
         </div>
@@ -19,11 +19,11 @@
       <NuxtLink
         v-if="next"
         :to="next.path"
-        class="flex justify-between gap-4 rounded-lg border p-5 transition hover:border-primary"
+        class="flex gap-4 rounded-md border p-5 transition hover:border-primary"
       >
         <div class="flex flex-col gap-1">
           <p class="font-semibold lg:text-sm">{{ next.title }}</p>
-          <p class="line-clamp-2 text-ellipsis text-[15px] text-muted-foreground lg:text-sm">
+          <p class="line-clamp-2 text-[15px] text-ellipsis text-muted-foreground lg:text-sm">
             {{ next.description }}
           </p>
         </div>
@@ -37,11 +37,11 @@
 
 <script lang="ts" setup>
   const route = useRoute();
-  const { data: surround } = await useAsyncData("surround", () =>
-    queryCollectionItemSurroundings("content", route.path, {
-      fields: ["title", "description", "path"],
-    }).where("path", "NOT LIKE", "%/.navigation")
-  );
-  const prev = computed(() => surround.value?.[0]);
-  const next = computed(() => surround.value?.[1]);
+
+  const surround = await queryCollectionItemSurroundings("content", route.path, {
+    fields: ["title", "description", "path"],
+  }).where("path", "NOT LIKE", "%/.navigation");
+
+  const prev = computed(() => surround?.[0]);
+  const next = computed(() => surround?.[1]);
 </script>

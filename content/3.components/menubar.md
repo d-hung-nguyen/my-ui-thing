@@ -2,11 +2,11 @@
 title: Menubar
 description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/menubar.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/menubar.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/menubar.html#api-reference
+    href: https://reka-ui.com/docs/components/menubar.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -47,12 +47,12 @@ npx ui-thing@latest add menubar
               <UiMenubarSeparator v-if="child.divider" />
               <UiMenubarCheckboxItem
                 v-else-if="child.type === 'check'"
-                v-model:checked="child.model.value"
+                v-model="child.model!.value"
                 :title="child.title"
                 :shortcut="child.shortcut"
                 @select="(e) => e.preventDefault()"
               />
-              <UiMenubarRadioGroup v-else-if="child.type === 'radio'" v-model="child.model.value">
+              <UiMenubarRadioGroup v-else-if="child.type === 'radio'" v-model="child.model!.value">
                 <template v-for="(o, m) in child.options" :key="m">
                   <UiMenubarRadioItem
                     :title="o.title"
@@ -90,7 +90,23 @@ npx ui-thing@latest add menubar
   const showBookmarks = ref(false);
   const showURLs = ref(false);
   const person = ref();
-  const menu = [
+  type Menu = {
+    trigger?: string;
+    value?: string;
+    items?: Array<{
+      title?: string;
+      shortcut?: string;
+      disabled?: boolean;
+      inset?: boolean;
+      type?: "check" | "radio";
+      model?: { value: any };
+      options?: Array<{ title: string; value: any; shortcut?: string }>;
+      icon?: string;
+      items?: Menu["items"];
+      divider?: boolean;
+    }>;
+  };
+  const menu: Menu[] = [
     {
       trigger: "File",
       value: "file",

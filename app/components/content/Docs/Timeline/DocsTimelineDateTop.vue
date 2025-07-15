@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineDate>{{ item.date }}</UiTimelineDate>
-          <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-        <UiTimelineContent>{{ item.description }}</UiTimelineContent>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="3">
+    <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineDate>{{ item.date }}</UiTimelineDate>
+        <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+      <UiTimelineContent>{{ item.description }}</UiTimelineContent>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>

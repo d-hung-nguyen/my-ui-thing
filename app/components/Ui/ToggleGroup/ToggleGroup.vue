@@ -1,6 +1,7 @@
 <template>
   <ToggleGroupRoot
     v-slot="{ modelValue }"
+    data-slot="toggle-group"
     v-bind="forwarded"
     :class="styles({ class: props.class })"
   >
@@ -9,14 +10,18 @@
 </template>
 
 <script lang="ts" setup>
-  import { ToggleGroupRoot, useForwardPropsEmits } from "radix-vue";
-  import type { ToggleGroupRootEmits, ToggleGroupRootProps } from "radix-vue";
+  import { ToggleGroupRoot, useForwardPropsEmits } from "reka-ui";
+  import type { ToggleVariants } from "../Toggle.vue";
+  import type { ToggleGroupRootEmits, ToggleGroupRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       ToggleGroupRootProps & {
         /** custom class to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
+        variant?: ToggleVariants["variant"];
+        size?: ToggleVariants["size"];
       }
     >(),
     {
@@ -25,9 +30,11 @@
   );
 
   const emit = defineEmits<ToggleGroupRootEmits>();
-  const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emit);
+  const forwarded = useForwardPropsEmits(reactiveOmit(props, "class", "variant", "size"), emit);
 
   const styles = tv({
     base: "flex items-center justify-center gap-1",
   });
+
+  provide("toggleGroup", { variant: props.variant, size: props.size });
 </script>

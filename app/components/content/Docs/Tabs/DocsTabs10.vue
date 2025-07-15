@@ -3,7 +3,7 @@
     <UiTabs default-value="Projects">
       <div class="relative mb-3 flex justify-center">
         <UiTabsList
-          class="h-auto -space-x-px bg-background p-0 shadow-sm shadow-black/5 rtl:space-x-reverse"
+          class="h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in tabs"

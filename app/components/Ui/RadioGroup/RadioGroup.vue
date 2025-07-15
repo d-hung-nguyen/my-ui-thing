@@ -1,18 +1,23 @@
 <template>
-  <RadioGroupRoot v-bind="forwarded" :class="styles({ class: props.class })">
+  <RadioGroupRoot
+    data-slot="radio-group"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot />
   </RadioGroupRoot>
 </template>
 
 <script lang="ts" setup>
-  import { RadioGroupRoot, useForwardPropsEmits } from "radix-vue";
-  import type { RadioGroupRootEmits, RadioGroupRootProps } from "radix-vue";
+  import { RadioGroupRoot, useForwardPropsEmits } from "reka-ui";
+  import type { RadioGroupRootEmits, RadioGroupRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       RadioGroupRootProps & {
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {

@@ -18,7 +18,7 @@
                   :key="i"
                   class="rounded-md p-3 text-sm hover:bg-muted"
                 >
-                  <p class="mb-1 font-semibold leading-none text-foreground">{{ item.title }}</p>
+                  <p class="mb-1 leading-none font-semibold text-foreground">{{ item.title }}</p>
                   <p class="line-clamp-2 text-muted-foreground">{{ item.description }}</p>
                 </li>
               </ul>
@@ -46,7 +46,7 @@
             <div class="grid w-[300px] grid-cols-1 place-items-center gap-5 p-3">
               <!-- eslint-disable-next-line vue/html-self-closing -->
               <img
-                src="https://www.radix-vue.com/logo.svg"
+                src="https://www.reka-ui.com/logo.svg"
                 alt="Radix Vue Logo"
                 class="h-[100px] w-[100px] rounded-md object-cover"
               />
@@ -69,7 +69,7 @@
       <template #viewport>
         <div class="absolute -right-7 bottom-full flex justify-center">
           <UiNavigationMenuViewport
-            class="origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-[0.97] data-[state=open]:zoom-in-95 md:w-[var(--radix-navigation-menu-viewport-width)]"
+            class="origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=closed]:zoom-out-[0.97] data-[state=open]:animate-in data-[state=open]:zoom-in-95 md:w-[var(--radix-navigation-menu-viewport-width)]"
           >
             <slot />
           </UiNavigationMenuViewport>

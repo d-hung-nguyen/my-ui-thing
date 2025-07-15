@@ -1,12 +1,12 @@
 <template>
-  <TreeItem v-slot="slotProps" v-bind="forwarded">
+  <TreeItem v-slot="slotProps" data-slot="tree-item" v-bind="forwarded">
     <slot v-bind="slotProps" />
   </TreeItem>
 </template>
 
 <script lang="ts" setup generic="T extends Record<string, any>">
-  import { TreeItem, useForwardPropsEmits } from "radix-vue";
-  import type { TreeItemEmits, TreeItemProps } from "radix-vue";
+  import { TreeItem, useForwardPropsEmits } from "reka-ui";
+  import type { TreeItemEmits, TreeItemProps } from "reka-ui";
 
   const props = defineProps<TreeItemProps<T>>();
   const emit = defineEmits<TreeItemEmits<T>>();

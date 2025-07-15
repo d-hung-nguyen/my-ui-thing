@@ -38,30 +38,31 @@ Checkboxes can be tricky to implement with validation libraries. Luckily, Vee-Va
       <UiVeeCheckbox name="drinks" value="coffee" label="Coffee" hint="I love coffee" />
       <UiVeeCheckbox name="drinks" value="tea" label="Tea" hint="I love tea" />
       <UiVeeCheckbox name="drinks" value="water" label="Water" hint="I love water" />
-      <UiButton type="submit"> Order now </UiButton>
+      <UiButton :loading="isSubmitting" type="submit"> Order now </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
-
-  const required_error = "Please select at least one drink";
-
-  const schema = z.object({
-    drinks: z.array(z.string({ required_error }), { required_error }).min(1, required_error),
-  });
+  import { promiseTimeout } from "@vueuse/core";
+  import { array, object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
-    validationSchema: toTypedSchema(schema),
+    validationSchema: toTypedSchema(
+      object({
+        drinks: array()
+          .min(1, "Please select at least one drink")
+          .label("Drinks")
+          .required()
+          .of(string()),
+      })
+    ),
   });
 
   const onSubmit = handleSubmit(async (values) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Sending order details...",
-      success: (_) => `We will be sending you ${values.drinks.join(", ")} soon!`,
-      error: (_) => "Error! Your information could not be sent to our servers!",
+    await promiseTimeout(2000); // Simulate a network request
+    useSonner.success("Order Complete", {
+      description: () => `We will be sending you ${values.drinks.join(", ")} soon!`,
     });
   });
 </script>
@@ -85,7 +86,7 @@ Checkboxes can be tricky to implement with validation libraries. Luckily, Vee-Va
 <template>
   <form class="mx-auto max-w-md" @submit="onSubmit">
     <p class="font-semibold">Terms of Service</p>
-    <p class="mb-4 mt-2 text-sm text-muted-foreground">
+    <p class="mt-2 mb-4 text-sm text-muted-foreground">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit, perspiciatis sunt, quae
       architecto, dicta nobis corrupti commodi tempora asperiores eligendi id dolore dolores.
       Dolores quaerat architecto in sapiente expedita cum?
@@ -98,22 +99,22 @@ Checkboxes can be tricky to implement with validation libraries. Luckily, Vee-Va
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
-
-  const schema = z.object({
-    terms: z.boolean({ required_error: "You must agree to the terms of service" }),
-  });
+  import { boolean, object } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
-    validationSchema: toTypedSchema(schema),
+    validationSchema: toTypedSchema(
+      object({
+        terms: boolean().label("Terms of Service").required().is([true]),
+      })
+    ),
   });
 
   const onSubmit = handleSubmit(async (_) => {
     const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
     useSonner.promise(promise, {
       loading: "Starting the process...",
-      success: (_) => `We will begin the process now`,
-      error: (_) => "Error! Your information could not be sent to our servers!",
+      success: () => `We will begin the process now`,
+      error: () => "Error! Your information could not be sent to our servers!",
     });
   });
 </script>
@@ -140,7 +141,7 @@ We can use the `v-model` prop to set the default value of the VeeCheckbox.
   <div class="flex items-center justify-center">
     <form class="mx-auto max-w-md">
       <p class="font-semibold">On by default</p>
-      <p class="mb-4 mt-2 text-sm text-muted-foreground">This checkbox will be true by default.</p>
+      <p class="mt-2 mb-4 text-sm text-muted-foreground">This checkbox will be true by default.</p>
       <fieldset class="space-y-5">
         <UiVeeCheckbox v-model="someVariable" name="terms" label="I will be on by default" />
       </fieldset>
@@ -176,11 +177,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsVeeCheckboxColored.vue]
 <template>
   <div
-    class="flex justify-center"
-    :style="{
-      '--primary': '238.7 83.5% 66.7%',
-      '--ring': '238.7 83.5% 66.7%',
-    }"
+    class="flex justify-center [--primary:var(--color-indigo-500)] [--ring:var(--color-indigo-300)] dark:[--ring:var(--color-indigo-900)]"
   >
     <UiVeeCheckbox :model-value="true" label="Colored checkbox" />
   </div>
@@ -236,7 +233,7 @@ To use these examples you will have to copy the code and adjust it for your own 
     />
     <UiLabel
       for="checkbox-06"
-      class="relative after:absolute after:left-0 after:top-1/2 after:h-px after:w-full after:origin-bottom after:-translate-y-1/2 after:scale-x-0 after:bg-muted-foreground after:transition-transform after:ease-in-out peer-has-[button[data-state=checked]]:text-muted-foreground peer-has-[button[data-state=checked]]:line-through peer-has-[button[data-state=checked]]:after:scale-x-100"
+      class="relative peer-has-[button[data-state=checked]]:text-muted-foreground peer-has-[button[data-state=checked]]:line-through after:absolute after:top-1/2 after:left-0 after:h-px after:w-full after:origin-bottom after:-translate-y-1/2 after:scale-x-0 after:bg-muted-foreground after:transition-transform after:ease-in-out peer-has-[button[data-state=checked]]:after:scale-x-100"
     >
       Fancy todo item
     </UiLabel>
@@ -320,7 +317,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsVeeCheckboxRightAligned.vue]
 <template>
-  <div className="flex items-center justify-between gap-2 max-w-sm mx-auto">
+  <div class="mx-auto flex max-w-sm items-center justify-between gap-2">
     <UiLabel for="checkbox-09">Right aligned checkbox</UiLabel>
     <UiVeeCheckbox id="checkbox-09" />
   </div>
@@ -351,7 +348,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <template #label>
         <UiLabel for="checkbox-10" class="justify-start gap-2">
           Label
-          <span class="text-xs font-normal leading-[inherit] text-muted-foreground">
+          <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
             (Sublabel)
           </span>
         </UiLabel>
@@ -377,7 +374,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsVeeCheckboxInputExpansion.vue]
 <template>
-  <div class="mx-auto flex max-w-sm flex-col items-start">
+  <div class="mx-auto flex max-w-sm flex-col items-start gap-5">
     <div>
       <UiVeeCheckbox
         id="checkbox-11"
@@ -389,13 +386,22 @@ To use these examples you will have to copy the code and adjust it for your own 
         Check the <span class="font-semibold">Checkbox</span> to expand the input field.
       </p>
     </div>
-    <TransitionExpand>
-      <UiVeeInput v-if="open" class="mt-5" placeholder="Enter your text here" />
-    </TransitionExpand>
+    <AnimatePresence as="div" class="w-full">
+      <motion.div
+        v-if="open"
+        :exit="{ opacity: 0, height: 0 }"
+        :initial="{ opacity: 0, height: 0 }"
+        :animate="{ opacity: 1, height: 'auto' }"
+      >
+        <UiInput autofocus class="w-full" placeholder="Enter your text here" />
+      </motion.div>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { motion } from "motion-v";
+
   const open = ref(false);
 </script>
 ```
@@ -420,7 +426,7 @@ To use these examples you will have to copy the code and adjust it for your own 
     <div class="grid grow gap-2">
       <UiLabel for="checkbox-12" class="justify-start gap-2">
         Label
-        <span class="text-xs font-normal leading-[inherit] text-muted-foreground">
+        <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
           (Sublabel)
         </span>
       </UiLabel>
@@ -450,12 +456,12 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsVeeCheckboxRightAlignedSublabelBorder.vue]
 <template>
   <div
-    class="relative mx-auto flex w-full max-w-sm items-start gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[div_button[data-state=checked]]:border-ring"
+    class="relative mx-auto flex w-full max-w-sm items-start gap-2 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[div_button[data-state=checked]]:border-ring"
   >
     <div class="grid grow gap-2">
       <UiLabel for="checkbox-13" class="justify-start gap-2">
         Label
-        <span class="text-xs font-normal leading-[inherit] text-muted-foreground">
+        <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
           (Sublabel)
         </span>
       </UiLabel>
@@ -489,7 +495,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <div
         v-for="item in items"
         :key="item.id"
-        class="relative flex cursor-pointer flex-col gap-4 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring"
+        class="relative flex cursor-pointer flex-col gap-4 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[[data-state=checked]]:border-ring"
       >
         <div class="flex justify-between gap-2">
           <UiVeeCheckbox
@@ -540,12 +546,12 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <div class="flex justify-center">
     <fieldset class="space-y-4">
-      <legend class="text-sm font-medium leading-none text-foreground">Days of the week</legend>
+      <legend class="text-sm leading-none font-medium text-foreground">Days of the week</legend>
       <div class="flex gap-1.5">
         <label
           v-for="item in items"
           :key="item.id"
-          class="relative flex size-9 cursor-pointer flex-col items-center justify-center gap-3 rounded-full border border-input text-center shadow-sm shadow-black/5 outline-offset-2 transition-colors has-[[data-disabled]]:cursor-not-allowed has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary has-[[data-state=checked]]:text-primary-foreground has-[[data-disabled]]:opacity-50 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70"
+          class="relative flex size-9 cursor-pointer flex-col items-center justify-center gap-3 rounded-full border border-input text-center shadow-xs shadow-black/5 outline-offset-2 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary has-[[data-state=checked]]:text-primary-foreground"
         >
           <UiVeeCheckbox
             :id="item.id"

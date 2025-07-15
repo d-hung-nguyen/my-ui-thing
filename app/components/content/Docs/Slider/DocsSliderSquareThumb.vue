@@ -6,7 +6,7 @@
         v-model="value"
         :step="10"
         :max="100"
-        class="[&>div[role=slider]]:rounded"
+        class="[&_[data-slot=slider-thumb]]:rounded"
         aria-label="Slider with square thumb"
       />
     </div>

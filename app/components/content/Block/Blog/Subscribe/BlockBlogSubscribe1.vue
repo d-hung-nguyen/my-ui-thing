@@ -3,12 +3,12 @@
     <UiCard>
       <UiCardContent>
         <div
-          class="inline-flex h-14 w-14 items-center justify-center rounded-md border bg-background shadow-sm"
+          class="inline-flex h-14 w-14 items-center justify-center rounded-md border bg-background shadow-xs"
         >
           <Icon name="lucide:send" class="h-6 w-6" />
         </div>
 
-        <h3 class="mb-2 mt-8 text-2xl font-semibold">Weekly newsletter</h3>
+        <h3 class="mt-8 mb-2 text-2xl font-semibold">Weekly newsletter</h3>
         <p class="mb-8 text-muted-foreground">
           No spam. Just the latest releases and tips, interesting articles, and exclusive interviews
           in your inbox every week.

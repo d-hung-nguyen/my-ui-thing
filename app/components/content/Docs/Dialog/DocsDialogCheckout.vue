@@ -24,7 +24,7 @@
                 v-for="plan in plans"
                 :key="plan.id"
                 :for="`radio-${plan.id}`"
-                class="relative flex cursor-pointer flex-col gap-1 rounded-lg border border-input p-4 shadow-sm shadow-black/5 outline-offset-2 transition-colors has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70"
+                class="relative flex cursor-pointer flex-col gap-1 rounded-lg border border-input p-4 shadow-xs shadow-black/5 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring/50 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70"
               >
                 <UiRadioGroupItem
                   :id="`radio-${plan.id}`"
@@ -42,7 +42,7 @@
             <UiVeeInput name="nameOnCard" label="Name on card" required />
             <div class="space-y-2">
               <legend class="text-sm font-medium text-foreground">Card Details</legend>
-              <div class="rounded-lg shadow-sm shadow-black/5">
+              <div class="rounded-lg shadow-xs shadow-black/5">
                 <div class="relative focus-within:z-10">
                   <UiVeeInput
                     v-maska="'#### #### #### ####'"
@@ -54,7 +54,7 @@
                   />
                 </div>
                 <div class="-mt-px flex">
-                  <div class="min-w-0 flex-1 focus-within:z-10">
+                  <div class="min-w-0 focus-within:z-10">
                     <UiVeeInput
                       v-maska="'##/##'"
                       placeholder="MM/YY"
@@ -63,7 +63,7 @@
                       class="rounded-e-none rounded-t-none shadow-none [direction:inherit]"
                     />
                   </div>
-                  <div class="-ms-px min-w-0 flex-1 focus-within:z-10">
+                  <div class="-ms-px min-w-0 focus-within:z-10">
                     <UiVeeInput
                       v-maska="'###'"
                       placeholder="CVC"
@@ -79,7 +79,7 @@
             <button
               v-if="!showCouponInput"
               type="button"
-              class="text-base underline underline-offset-2 hover:no-underline md:text-sm"
+              class="text-sm underline underline-offset-2 hover:no-underline"
               @click="showCouponInput = true"
             >
               + Add coupon

@@ -10,15 +10,16 @@
 
 <script lang="ts" setup>
   import { reactiveOmit } from "@vueuse/core";
-  import { Primitive, useForwardProps } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive, useForwardProps } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const styles = tv({
     base: "text-sm text-muted-foreground",
   });
   const props = defineProps<
     PrimitiveProps & {
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
 

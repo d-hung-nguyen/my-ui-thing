@@ -2,7 +2,7 @@
   <UiContainer class="flex flex-col gap-y-5 py-10 md:flex-row md:gap-10 md:py-0 lg:h-[720px]">
     <div class="flex h-full items-center justify-center md:w-2/3 xl:w-1/2">
       <div>
-        <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mb-6 lg:mt-5 xl:text-6xl">
+        <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           People who care about your growth
         </h1>
         <p class="text-lg text-muted-foreground lg:text-xl">
@@ -41,7 +41,7 @@
               <template v-for="s in 5" :key="s">
                 <Icon
                   name="material-symbols:kid-star"
-                  class="h-5 w-5 fill-yellow-400 text-yellow-400"
+                  class="inline size-5 fill-yellow-400 text-yellow-400"
                 />
               </template>
             </div>

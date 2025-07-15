@@ -1,6 +1,8 @@
 <template>
   <textarea
     v-bind="props"
+    ref="textarea"
+    data-slot="textarea"
     :value="modelValue"
     :class="styles({ class: props.class })"
     @input="handleInput"
@@ -8,16 +10,18 @@
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes, TextareaHTMLAttributes } from "vue";
+
   const props = withDefaults(
     defineProps<{
       /** Additional classes to add to the textarea */
-      class?: any;
+      class?: HTMLAttributes["class"];
       /** The name of the textarea */
-      name?: string;
+      name?: TextareaHTMLAttributes["name"];
       /** The id of the textarea */
-      id?: string;
+      id?: TextareaHTMLAttributes["id"];
       /** The placeholder of the textarea */
-      placeholder?: string;
+      placeholder?: TextareaHTMLAttributes["placeholder"];
       /** Whether the textarea is required */
       required?: boolean;
       /** Whether the textarea is disabled */
@@ -30,6 +34,8 @@
       maxlength?: number;
       /** The `RegExp` pattern of the textarea */
       pattern?: string;
+      /** Whether the textarea should be focused when mounted. */
+      autofocus?: boolean;
     }>(),
     {
       modelValue: "",
@@ -39,6 +45,8 @@
   const emit = defineEmits<{
     "update:modelValue": [value: string];
   }>();
+
+  const textarea = useTemplateRef("textarea");
 
   const handleInput = (event: Event) => {
     const target = event.target as HTMLTextAreaElement;
@@ -62,6 +70,10 @@
   };
 
   const styles = tv({
-    base: "form-textarea flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:border-input focus:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:[color-scheme:dark] sm:text-sm",
+    base: "flex field-sizing-content min-h-16 w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40",
+  });
+
+  onMounted(() => {
+    if (props.autofocus) textarea.value?.focus();
   });
 </script>

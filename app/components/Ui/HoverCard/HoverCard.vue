@@ -1,12 +1,12 @@
 <template>
-  <HoverCardRoot v-bind="forwarded">
+  <HoverCardRoot data-slot="hover-card" v-bind="forwarded">
     <slot />
   </HoverCardRoot>
 </template>
 
 <script lang="ts" setup>
-  import { HoverCardRoot, useForwardPropsEmits } from "radix-vue";
-  import type { HoverCardRootEmits, HoverCardRootProps } from "radix-vue";
+  import { HoverCardRoot, useForwardPropsEmits } from "reka-ui";
+  import type { HoverCardRootEmits, HoverCardRootProps } from "reka-ui";
 
   const props = withDefaults(defineProps<HoverCardRootProps>(), {
     openDelay: 200,

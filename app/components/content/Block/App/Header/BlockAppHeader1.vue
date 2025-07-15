@@ -24,23 +24,27 @@
       <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div class="flex items-center gap-5">
           <slot name="avatar">
-            <UiAvatar v-if="props.avatar" :src="props.avatar" class="size-14 md:size-16" />
+            <UiAvatar v-if="props.avatar" :src="props.avatar" class="size-8 md:size-10" />
           </slot>
-          <div>
+          <div class="flex flex-col gap-1">
             <slot name="title">
-              <h1 v-if="props.title" class="text-2xl font-bold lg:text-3xl" v-html="props.title" />
+              <h1
+                v-if="props.title"
+                class="leading-none font-bold lg:text-lg"
+                v-html="props.title"
+              />
             </slot>
             <slot name="description">
               <p
                 v-if="props.description"
-                class="text-muted-foreground"
+                class="text-sm leading-none text-muted-foreground"
                 v-html="props.description"
               />
             </slot>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
+        <div class="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:items-center">
           <slot>
             <UiButton size="sm" variant="outline">Download</UiButton>
             <UiButton size="sm">Create new</UiButton>
@@ -53,13 +57,13 @@
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "@/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "@/components/Ui/Breadcrumbs.vue";
 
   const props = withDefaults(
     defineProps<{
       title?: string;
       description?: string;
-      crumbs?: Crumbs[];
+      crumbs?: BreadcrumbItem[];
       avatar?: string;
       image?: string;
     }>(),
@@ -85,7 +89,7 @@
             label: "John Doe",
             link: "#",
           },
-        ] as Crumbs[],
+        ] as BreadcrumbItem[],
       avatar: "https://randomuser.me/api/portraits/med/men/2.jpg",
     }
   );

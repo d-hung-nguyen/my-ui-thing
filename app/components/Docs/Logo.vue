@@ -20,8 +20,10 @@
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
-    class?: any;
+    class?: HTMLAttributes["class"];
   }>();
   const styles = tv({
     base: "h-5 w-5",

@@ -77,7 +77,7 @@ You can change the color of the ripple effect by passing a color to the directiv
         initialOpacity: 0.7,
         duration: 1,
       }"
-      class="flex size-[250px] cursor-pointer items-center justify-center rounded-md border shadow-sm"
+      class="flex size-[250px] cursor-pointer items-center justify-center rounded-md border shadow-xs"
     />
   </div>
 </template>

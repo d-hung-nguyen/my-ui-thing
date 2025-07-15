@@ -2,7 +2,7 @@
   <UiContainer class="pb-16">
     <UiContainer class="py-16 text-center lg:py-24">
       <p class="font-semibold text-primary">We're hiring!</p>
-      <h2 class="mb-4 mt-2 text-4xl font-bold lg:mb-6 lg:mt-3 lg:text-5xl">Join our team</h2>
+      <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">Join our team</h2>
       <p class="mx-auto max-w-[768px] text-lg text-muted-foreground lg:text-xl">
         Our philosophy is simple — hire a team of diverse, passionate people and foster a culture
         that empowers you to do your best work.

@@ -1,22 +1,30 @@
 <template>
-  <AccordionHeader v-bind="forwarded" :class="styles({ class: props.class })">
+  <AccordionHeader
+    data-slot="accordion-header"
+    v-bind="forwarded"
+    :class="accordionHeaderStyle({ class: props.class })"
+  >
     <slot />
   </AccordionHeader>
 </template>
 
-<script lang="ts" setup>
-  import { AccordionHeader } from "radix-vue";
-  import type { AccordionHeaderProps } from "radix-vue";
+<script lang="ts">
+  import { AccordionHeader } from "reka-ui";
+  import type { AccordionHeaderProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
+  export const accordionHeaderStyle = tv({ base: "flex" });
+</script>
+
+<script lang="ts" setup>
   const props = defineProps<
     AccordionHeaderProps & {
-      class?: any;
+      /**
+       * Custom class to apply to the component
+       */
+      class?: HTMLAttributes["class"];
     }
   >();
 
   const forwarded = reactiveOmit(props, "class");
-
-  const styles = tv({
-    base: "flex",
-  });
 </script>

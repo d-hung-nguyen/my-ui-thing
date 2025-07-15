@@ -8,34 +8,47 @@
     <UiRadioGroup v-bind="{ ...forwarded, ...$attrs }" v-model="value">
       <slot />
     </UiRadioGroup>
-    <div class="flex flex-col gap-1.5">
-      <TransitionSlide tag="div" group>
-        <slot name="hint" :error-message="errorMessage" :value="value">
-          <p
-            v-if="hint && !errorMessage"
-            key="hint"
-            class="mt-1.5 text-sm leading-none text-muted-foreground"
-          >
-            {{ hint }}
-          </p>
-        </slot>
-        <slot name="errorMessage" :error-message="errorMessage" :value="value">
-          <p
-            v-if="errorMessage"
-            key="errorMessage"
-            class="mt-1.5 text-sm leading-none text-destructive"
-          >
-            {{ errorMessage }}
-          </p>
-        </slot>
-      </TransitionSlide>
-    </div>
+    <AnimatePresence multiple as="div" mode="wait">
+      <slot name="hint" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="hint && !errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-muted-foreground"
+        >
+          {{ hint }}
+        </motion.p>
+      </slot>
+      <slot name="errorMessage" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-destructive"
+        >
+          {{ errorMessage }}
+        </motion.p>
+      </slot>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { useForwardProps } from "radix-vue";
-  import type { RadioGroupRootProps } from "radix-vue";
+  import { AnimatePresence, motion } from "motion-v";
+  import { useForwardProps } from "reka-ui";
+  import type { RadioGroupRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   const props = defineProps<
     RadioGroupRootProps & {
@@ -44,7 +57,7 @@
       id?: string;
       rules?: any;
       validateOnMount?: boolean;
-      class?: any;
+      class?: HTMLAttributes["class"];
       name: string;
     }
   >();

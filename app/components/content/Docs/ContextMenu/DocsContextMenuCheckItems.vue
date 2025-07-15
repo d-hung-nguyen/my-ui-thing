@@ -16,12 +16,12 @@
           :key="hero.id"
           inset
           class="mb-1"
-          :checked="selectedHeros.includes(hero.id)"
+          :model-value="selectedHeroes.includes(hero.id)"
           @select="(e) => e.preventDefault()"
           @click="
-            selectedHeros.includes(hero.id)
-              ? selectedHeros.splice(selectedHeros.indexOf(hero.id), 1)
-              : selectedHeros.push(hero.id)
+            selectedHeroes.includes(hero.id)
+              ? selectedHeroes.splice(selectedHeroes.indexOf(hero.id), 1)
+              : selectedHeroes.push(hero.id)
           "
         >
           <div class="flex items-center gap-4">
@@ -54,5 +54,5 @@
         "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/The-Hulk.The-Incredible-Hulk.webp",
     },
   ];
-  const selectedHeros = ref<string[]>([]);
+  const selectedHeroes = ref<string[]>([]);
 </script>

@@ -14,14 +14,12 @@ interface CodeConfig {
 /** The open/closed state of the mobile drawer */
 export const useMobileNavState = () => useState("mobile_nav_state", () => false);
 
-export const RADII = [0, 0.25, 0.5, 0.75, 1];
+export const RADII = [0, 0.25, 0.5, 0.625, 0.75, 1];
 
 export function useConfigStore() {
-  const colorMode = useColorMode();
-  const isDark = computed(() => colorMode.value === "dark");
   const config = useStorage<Config>("config", {
     theme: "zinc",
-    radius: 0.5,
+    radius: 0.625,
   });
   const codeConfig = useStorage<CodeConfig>("code-config", {
     prefix: "",
@@ -42,11 +40,6 @@ export function useConfigStore() {
     config.value.radius = newRadius;
   }
 
-  const themePrimary = computed(() => {
-    const t = themes.find((t) => t.name === theme.value);
-    return `hsl(${t?.cssVars[isDark ? "dark" : "light"].primary})`;
-  });
-
   const setCodeConfig = (payload: CodeConfig) => {
     codeConfig.value = payload;
   };
@@ -58,7 +51,6 @@ export function useConfigStore() {
     radius,
     setRadius,
     themeClass,
-    themePrimary,
 
     codeConfig,
     setCodeConfig,

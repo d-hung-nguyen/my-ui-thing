@@ -2,11 +2,11 @@
 title: Hover Card
 description: For sighted users to preview content available behind a link.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/hover-card.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/hover-card.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/hover-card.html#api-reference
+    href: https://reka-ui.com/docs/components/hover-card.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -38,7 +38,7 @@ npx ui-thing@latest add hover-card
     <UiHoverCard>
       <UiHoverCardTrigger as-child>
         <div
-          class="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border bg-background shadow-sm"
+          class="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border bg-background shadow-xs"
         >
           <Icon name="logos:nuxt-icon" class="h-8 w-8" />
         </div>
@@ -54,7 +54,7 @@ npx ui-thing@latest add hover-card
           <div
             class="relative h-[40%] w-full rounded-t-2xl bg-white p-4 text-slate-800 transition-all group-hover:h-[50%]"
           >
-            <p class="text-lg font-semibold leading-none">John Doe</p>
+            <p class="text-lg leading-none font-semibold">John Doe</p>
             <small class="text-sm opacity-70"
               >Software Engineer @<a
                 target="_blank"
@@ -114,7 +114,7 @@ npx ui-thing@latest add hover-card
               Progressive JavaScript framework for building modern web interfaces.
             </p>
             <div class="flex items-center pt-2">
-              <Icon name="lucide:calendar-days" class="mr-2 h-4 w-4 opacity-70" />
+              <Icon name="lucide:calendar-days" class="mr-2 size-4 opacity-70" />
               <span class="text-xs text-muted-foreground"> Joined January 2014 </span>
             </div>
           </div>

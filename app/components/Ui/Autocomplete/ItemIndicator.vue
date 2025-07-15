@@ -1,12 +1,12 @@
 <template>
-  <ComboboxItemIndicator v-bind="props">
-    <slot><Icon :name="icon || 'ph:check'" class="h-4 w-4" /></slot>
+  <ComboboxItemIndicator data-slot="autocomplete-item-indicator" v-bind="props">
+    <slot><Icon :name="icon || 'lucide:check'" class="size-4" /></slot>
   </ComboboxItemIndicator>
 </template>
 
 <script lang="ts" setup>
-  import { ComboboxItemIndicator } from "radix-vue";
-  import type { ComboboxItemIndicatorProps } from "radix-vue";
+  import { ComboboxItemIndicator } from "reka-ui";
+  import type { ComboboxItemIndicatorProps } from "reka-ui";
 
   const props = defineProps<
     ComboboxItemIndicatorProps & {

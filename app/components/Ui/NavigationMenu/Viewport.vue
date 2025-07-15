@@ -1,6 +1,7 @@
 <template>
-  <div class="absolute left-0 top-full flex justify-center">
+  <div class="absolute top-full left-0 isolate z-50 flex justify-center">
     <NavigationMenuViewport
+      data-slot="navigation-menu-viewport"
       v-bind="{ ...forwarded, ...$attrs }"
       :class="styles({ class: props.class })"
     />
@@ -8,18 +9,19 @@
 </template>
 
 <script lang="ts" setup>
-  import { NavigationMenuViewport } from "radix-vue";
-  import type { NavigationMenuViewportProps } from "radix-vue";
+  import { NavigationMenuViewport } from "reka-ui";
+  import type { NavigationMenuViewportProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   defineOptions({ inheritAttrs: false });
   const props = defineProps<
     NavigationMenuViewportProps & {
       /** Custom class(es) to add to the parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
+    base: "origin-top-center relative mt-1.5 h-[var(--reka-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:zoom-in-90 md:w-[var(--reka-navigation-menu-viewport-width)]",
   });
 </script>

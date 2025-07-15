@@ -2,11 +2,11 @@
 title: Stepper
 description: A set of steps that are used to indicate progress through a multi-step process.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/stepper.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/stepper.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/stepper.html#api-reference
+    href: https://reka-ui.com/docs/components/stepper.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -20,501 +20,508 @@ Click :SourceCodeLink{component="Stepper"} to see the source code for this compo
 npx ui-thing@latest add stepper
 ```
 
-## Introduction
-
-So steppers are weird to add a general style to. I really don't see the point in giving your stepper just one style. It would be more beneficial to look at how other component libraries style their steppers and then just create a custom one that you like with the components provided by Radix Vue.
-
-## Untitled UI
-
-Now we will look at how Jordan from [Untitled UI](https://www.untitledui.com/) styled the steppers in his design system. You can view them here: [Steppers - Untitled UI](https://www.untitledui.com/components/progress-steps)
-
-### Stepper with Icon - Horizontal
-
-So here is how I think this should be implemented. Take a look at the source code. Feel free to move things around and try out different things. Of course, you can turn this into a component if you want to.
+### Origin UI
 
 ::ShowCase
 
-:DocsUntitledU_IStepperIconHorizontal
+:DocsStepperOrigin
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Stepper/UntitledUI/DocsUntitledUIStepperIconHorizontal.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Stepper/DocsStepperOrigin.vue" code lang="vue" -->
 
-```vue [DocsUntitledUIStepperIconHorizontal.vue]
+```vue [DocsStepperOrigin.vue]
 <template>
-  <div>
-    <UiStepper class="flex w-full items-start gap-2">
-      <UiStepperItem
-        v-for="step in steps"
-        :key="step.step"
-        v-slot="{ state }"
-        class="group relative flex w-full flex-col items-center justify-center"
-        :step="step.step"
-      >
-        <UiStepperSeparator
-          v-if="step.step != steps[steps.length - 1].step"
-          class="absolute left-[calc(50%+20px)] right-[calc(-50%+10px)] top-5 block h-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-primary"
-        />
-        <UiStepperTrigger as-child>
-          <UiButton
-            :variant="state == 'completed' || state == 'active' ? 'default' : 'outline'"
-            size="icon"
-            class="z-10 rounded-full"
-            :class="[state == 'active' && 'ring-2 ring-ring ring-offset-2 ring-offset-background']"
-          >
-            <TransitionScale mode="out-in" :scale="0.8">
-              <Icon v-if="state == 'completed'" name="lucide:check" class="size-5" />
-              <Icon v-if="state == 'active'" name="lucide:circle" class="size-5" />
-              <Icon v-if="state == 'inactive'" name="lucide:dot" class="size-10" />
-            </TransitionScale>
-          </UiButton>
-        </UiStepperTrigger>
-
-        <div class="mt-5 flex flex-col items-center text-center">
-          <UiStepperTitle
-            :class="[state == 'active' && 'text-primary']"
-            class="text-sm font-semibold transition lg:text-base"
-            >{{ step.title }}</UiStepperTitle
-          >
-          <UiStepperDescription
-            :class="[state == 'active' && 'text-primary']"
-            class="sr-only text-xs text-muted-foreground transition md:not-sr-only lg:text-sm"
-            >{{ step.description }}</UiStepperDescription
-          >
-        </div>
-      </UiStepperItem>
-    </UiStepper>
-  </div>
-</template>
-
-<script lang="ts" setup>
-  const steps = [
-    {
-      step: 1,
-      title: "Your details",
-      description: "Provide your name and email",
-    },
-    {
-      step: 2,
-      title: "Company details",
-      description: "A few details about your company",
-    },
-    {
-      step: 3,
-      title: "Invite your team",
-      description: "Start collaborating with your team",
-    },
-  ];
-</script>
-```
-
-<!-- /automd -->
-
-::
-
-### Stepper with Icon - Vertical
-
-For the vertical variation, this is how I think it should be implemented.
-
-::ShowCase
-
-:DocsUntitledU_IStepperIconVertical
-
-#code
-
-<!-- automd:file src="../../app/components/content/Docs/Stepper/UntitledUI/DocsUntitledUIStepperIconVertical.vue" code lang="vue" -->
-
-```vue [DocsUntitledUIStepperIconVertical.vue]
-<template>
-  <div>
-    <UiStepper
-      orientation="vertical"
-      class="mx-auto flex w-full max-w-md flex-col justify-start gap-10"
-    >
-      <UiStepperItem
-        v-for="step in steps"
-        :key="step.step"
-        v-slot="{ state }"
-        class="group relative flex w-full items-start gap-6"
-        :step="step.step"
-      >
-        <UiStepperSeparator
-          v-if="step.step != steps[steps.length - 1].step"
-          class="absolute left-[18px] top-[38px] block h-[105%] w-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-primary"
-        />
-        <UiStepperTrigger as-child>
-          <UiButton
-            :variant="state == 'completed' || state == 'active' ? 'default' : 'outline'"
-            size="icon"
-            class="z-10 shrink-0 rounded-full"
-            :class="[state == 'active' && 'ring-2 ring-ring ring-offset-2 ring-offset-background']"
-          >
-            <TransitionScale mode="out-in" :scale="0.8">
-              <Icon v-if="state == 'completed'" name="lucide:check" class="size-5" />
-              <Icon v-if="state == 'active'" name="lucide:circle" class="size-5" />
-              <Icon v-if="state == 'inactive'" name="lucide:dot" class="size-10" />
-            </TransitionScale>
-          </UiButton>
-        </UiStepperTrigger>
-
-        <div class="flex flex-col gap-1">
-          <UiStepperTitle
-            :class="[state == 'active' && 'text-primary']"
-            class="text-sm font-semibold transition lg:text-base"
-            >{{ step.title }}</UiStepperTitle
-          >
-          <UiStepperDescription
-            :class="[state == 'active' && 'text-primary']"
-            class="text-xs text-muted-foreground transition lg:text-sm"
-            >{{ step.description }}</UiStepperDescription
-          >
-        </div>
-      </UiStepperItem>
-    </UiStepper>
-  </div>
-</template>
-
-<script lang="ts" setup>
-  const steps = [
-    {
-      step: 1,
-      title: "Your details",
-      description:
-        "Provide your name and email address. We will use this information to create your account",
-    },
-    {
-      step: 2,
-      title: "Company details",
-      description: "A few details about your company will help us personalize your experience",
-    },
-    {
-      step: 3,
-      title: "Invite your team",
-      description:
-        "Start collaborating with your team by inviting them to join your account. You can skip this step and invite them later",
-    },
-  ];
-</script>
-```
-
-<!-- /automd -->
-
-::
-
-### Stepper with Top Line
-
-::ShowCase
-
-:DocsUntitledU_IStepperIconTopLine
-
-#code
-
-<!-- automd:file src="../../app/components/content/Docs/Stepper/UntitledUI/DocsUntitledUIStepperIconTopLine.vue" code lang="vue" -->
-
-```vue [DocsUntitledUIStepperIconTopLine.vue]
-<template>
-  <div>
-    <UiStepper class="flex w-full items-start gap-4">
-      <UiStepperItem
-        v-for="step in steps"
-        :key="step.step"
-        v-slot="{ state }"
-        class="group w-full"
-        :step="step.step"
-      >
-        <UiStepperTrigger
-          class="relative flex w-full flex-col rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-[10px] focus-visible:ring-offset-background"
-        >
-          <UiStepperSeparator
-            class="block h-1 w-full shrink-0 rounded-full bg-muted group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"
-          />
-
-          <div class="mt-5 flex flex-col items-start text-left">
-            <UiStepperTitle
-              :class="[state == 'active' && 'text-primary']"
-              class="text-sm font-semibold transition lg:text-base"
-              >{{ step.title }}</UiStepperTitle
-            >
-            <UiStepperDescription
-              :class="[state == 'active' && 'text-primary']"
-              class="text-xs text-muted-foreground transition lg:text-sm"
-              >{{ step.description }}</UiStepperDescription
-            >
-          </div>
-        </UiStepperTrigger>
-      </UiStepperItem>
-    </UiStepper>
-  </div>
-</template>
-
-<script lang="ts" setup>
-  const steps = [
-    {
-      step: 1,
-      title: "Your details",
-      description: "Provide your name and email",
-    },
-    {
-      step: 2,
-      title: "Company details",
-      description: "A few details about your company",
-    },
-    {
-      step: 3,
-      title: "Invite your team",
-      description: "Start collaborating with your team",
-    },
-  ];
-</script>
-```
-
-<!-- /automd -->
-
-::
-
-## Vuetify
-
-Now our friends over at [Vuetify](https://vuetifyjs.com/en/components/steppers/) takes a different approach to the whole stepper thing.
-
-::ShowCase
-
-:DocsVuetifyStepper
-
-#code
-
-<!-- automd:file src="../../app/components/content/Docs/Stepper/Vuetify/DocsVuetifyStepper.vue" code lang="vue" -->
-
-```vue [DocsVuetifyStepper.vue]
-<template>
-  <div>
-    <UiCard>
-      <UiStepper
-        v-model="stepper"
-        class="flex w-full items-start justify-between gap-2 border-b p-6"
-      >
+  <div class="flex flex-col gap-10 gap-y-10 divide-y *:pb-10 *:last:pb-0">
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
         <UiStepperItem
           v-for="step in steps"
-          :key="step.step"
-          v-slot="{ state }"
-          class="group relative w-full"
-          :step="step.step"
-          :class="[isLastItem(step.step) && '!w-fit']"
+          :key="step"
+          :step="step"
+          :class="step !== steps.length ? 'flex-1' : ''"
         >
-          <UiStepperTrigger
-            as="div"
-            class="flex items-center gap-3"
-            :class="[isLastItem(step.step) && 'justify-end']"
-          >
-            <UiButton
-              :variant="state == 'completed' || state == 'active' ? 'default' : 'outline'"
-              size="icon-sm"
-              class="z-10 size-8 shrink-0 rounded-full"
-              :class="[
-                state == 'active' && 'ring-2 ring-ring ring-offset-2 ring-offset-background',
-              ]"
-            >
-              <TransitionScale mode="out-in" :scale="0.8" :duration="100">
-                <Icon v-if="state == 'active'" name="lucide:pen" class="size-4" />
-                <Icon v-else-if="state == 'completed'" name="lucide:check" class="size-4" />
-                <span v-else>{{ step.step }}</span>
-              </TransitionScale>
-            </UiButton>
-            <UiStepperTitle
-              :class="[state == 'active' && 'text-primary']"
-              class="sr-only font-medium transition md:not-sr-only"
-              >{{ step.title }}</UiStepperTitle
-            >
-            <UiStepperSeparator
-              v-if="step.step != steps[steps.length - 1].step"
-              class="h-0.5 shrink-0 grow rounded-full bg-muted group-data-[state=completed]:bg-primary"
+          <UiStepperTrigger>
+            <UiStepperIndicator>{{ step }}</UiStepperIndicator>
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with numbers only
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="step in steps"
+          :key="step"
+          :step="step"
+          :class="step !== steps.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger>
+            <UiStepperIndicator />
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with numbers and checkmarks
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="step in steps"
+          :key="step"
+          :step="step"
+          :class="step !== steps.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger>
+            <UiStepperIndicator
+              class="size-4 group-data-[state=active]/step:border-2 group-data-[state=active]/step:border-primary group-data-[state=active]/step:bg-transparent [&_span]:sr-only [&_svg]:size-3"
             />
-            <VisuallyHidden as-child>
-              <UiStepperDescription>{{ step.description }}</UiStepperDescription>
-            </VisuallyHidden>
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with tiny buttons and checkmarks
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper v-model="currentStep">
+        <UiStepperItem
+          v-for="step in steps"
+          :key="step"
+          :step="step"
+          :class="step !== steps.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger as-child>
+            <UiStepperIndicator />
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <div class="flex justify-center space-x-4">
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep === 1"
+          @click="currentStep = currentStep - 1"
+        >
+          Prev step
+        </UiButton>
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep >= steps.length"
+          @click="currentStep = currentStep + 1"
+        >
+          Next step
+        </UiButton>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Controlled stepper with checkmarks
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper v-model="currentStep">
+        <UiStepperItem
+          v-for="step in steps"
+          :key="step"
+          :step="step"
+          :class="step !== steps.length ? 'flex-1' : ''"
+          :data-loading="isLoading && step === currentStep ? 'true' : undefined"
+        >
+          <UiStepperTrigger as-child>
+            <UiStepperIndicator :is-loading="isLoading" />
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <div class="flex justify-center space-x-4">
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep === 1"
+          @click="currentStep = currentStep - 1"
+        >
+          Prev step
+        </UiButton>
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep >= steps.length"
+          @click="handleNextStep"
+        >
+          Next step
+        </UiButton>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Controlled stepper with checkmarks and loading state
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem :step="1" class="not-last:flex-1">
+          <UiStepperTrigger>
+            <UiStepperIndicator as-child>
+              <img
+                class="rounded-full"
+                src="https://i.pravatar.cc/300"
+                width="32"
+                height="32"
+                alt="Mike Palmer"
+              />
+            </UiStepperIndicator>
+          </UiStepperTrigger>
+          <UiStepperSeparator />
+        </UiStepperItem>
+        <UiStepperItem :step="2" class="not-last:flex-1" data-loading>
+          <UiStepperTrigger>
+            <UiStepperIndicator :is-loading="true" />
+          </UiStepperTrigger>
+          <UiStepperSeparator />
+        </UiStepperItem>
+        <UiStepperItem :step="3">
+          <UiStepperTrigger>
+            <UiStepperIndicator as-child>
+              <div>
+                <Icon name="lucide:shuffle" aria-hidden="true" class="size-3.5" />
+                <span class="sr-only">Shuffle</span>
+              </div>
+            </UiStepperIndicator>
           </UiStepperTrigger>
         </UiStepperItem>
       </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with mixed elements
+      </p>
+    </div>
 
-      <div class="overflow-hidden">
-        <TransitionSlide
-          mode="out-in"
-          :duration="100"
-          :offset="{
-            enter: ['10%', 0],
-            leave: ['-10%', 0],
-          }"
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2" class="items-start gap-4">
+        <UiStepperItem v-for="{ step, title } in steps2" :key="step" :step="step" class="flex-1">
+          <UiStepperTrigger class="w-full flex-col items-start gap-2 rounded">
+            <UiStepperIndicator class="h-1 w-full bg-border">
+              <span class="sr-only">{{ step }}</span>
+            </UiStepperIndicator>
+            <div class="space-y-0.5">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+            </div>
+          </UiStepperTrigger>
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with labels
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <div class="flex items-center gap-2">
+        <UiButton
+          class="shrink-0"
+          variant="ghost"
+          size="icon"
+          :disabled="currentStep === 1"
+          aria-label="Prev step"
+          @click="currentStep = currentStep - 1"
         >
-          <UiCardContent v-if="stepper == 1">
-            <UiCardTitle class="">Order</UiCardTitle>
-            <div class="mt-6 overflow-x-auto rounded-md border">
-              <UiTable>
-                <UiTableHeader>
-                  <UiTableRow>
-                    <UiTableHead>Description</UiTableHead>
-                    <UiTableHead class="text-end">Quantity</UiTableHead>
-                    <UiTableHead class="text-end">Price</UiTableHead>
-                  </UiTableRow>
-                </UiTableHeader>
-                <UiTableBody>
-                  <template v-for="(product, index) in products" :key="index">
-                    <UiTableRow>
-                      <UiTableCell class="font-medium">{{ product.name }} </UiTableCell>
-                      <UiTableCell class="text-end">{{ product.quantity }}</UiTableCell>
-                      <UiTableCell class="text-end">{{
-                        formatPrice(product.price * product.quantity)
-                      }}</UiTableCell>
-                    </UiTableRow>
-                  </template>
-                  <UiTableRow>
-                    <UiTableCell class="font-medium">Total</UiTableCell>
-                    <UiTableCell />
-                    <UiTableCell class="text-end font-semibold">
-                      {{ subTotal }}
-                    </UiTableCell>
-                  </UiTableRow>
-                </UiTableBody>
-              </UiTable>
-            </div>
-          </UiCardContent>
-          <UiCardContent v-if="stepper == 2" class="pb-10">
-            <UiCardTitle class="">Shipping</UiCardTitle>
-            <UiRadioGroup v-model="shippingMethod" class="mt-6">
-              <div v-for="m in shippingMethods" :key="m.name" class="flex items-center gap-3">
-                <!-- @vue-expect-error - we are storing the price as the value which is a number -->
-                <UiRadioGroupItem :id="m.name" :value="m.price" />
-                <UiLabel class="gap-3 !text-base" :for="m.name"
-                  >{{ m.name }}
-                  <span class="text-muted-foreground">{{ formatPrice(m.price) }}</span></UiLabel
-                >
-              </div>
-            </UiRadioGroup>
-          </UiCardContent>
-          <UiCardContent v-if="stepper == 3">
-            <UiCardTitle class="">Submit</UiCardTitle>
-            <div class="mt-6 overflow-x-auto rounded-md border">
-              <UiTable>
-                <UiTableHeader>
-                  <UiTableRow>
-                    <UiTableHead>Description</UiTableHead>
-                    <UiTableHead class="text-end">Quantity</UiTableHead>
-                    <UiTableHead class="text-end">Price</UiTableHead>
-                  </UiTableRow>
-                </UiTableHeader>
-                <UiTableBody>
-                  <template v-for="(product, index) in products" :key="index">
-                    <UiTableRow>
-                      <UiTableCell class="font-medium">{{ product.name }} </UiTableCell>
-                      <UiTableCell class="text-end">{{ product.quantity }}</UiTableCell>
-                      <UiTableCell class="text-end">{{
-                        formatPrice(product.price * product.quantity)
-                      }}</UiTableCell>
-                    </UiTableRow>
-                  </template>
-                  <UiTableRow>
-                    <UiTableCell class="font-medium">Shipping</UiTableCell>
-                    <UiTableCell />
-                    <UiTableCell class="text-end">{{ formatPrice(shippingMethod) }}</UiTableCell>
-                  </UiTableRow>
-                  <UiTableRow>
-                    <UiTableCell class="font-medium">Total</UiTableCell>
-                    <UiTableCell />
-                    <UiTableCell class="text-end font-semibold">
-                      {{ total }}
-                    </UiTableCell>
-                  </UiTableRow>
-                </UiTableBody>
-              </UiTable>
-            </div>
-          </UiCardContent>
-        </TransitionSlide>
+          <Icon name="lucide:chevron-left" :size="16" aria-hidden="true" />
+        </UiButton>
+        <UiStepper v-model="currentStep" class="gap-1">
+          <UiStepperItem v-for="step in steps" :key="step" :step="step" class="flex-1">
+            <UiStepperTrigger class="w-full flex-col items-start gap-2" as-child>
+              <UiStepperIndicator class="h-1 w-full bg-border">
+                <span class="sr-only">{{ step }}</span>
+              </UiStepperIndicator>
+            </UiStepperTrigger>
+          </UiStepperItem>
+        </UiStepper>
+        <UiButton
+          class="shrink-0"
+          variant="ghost"
+          size="icon"
+          aria-label="Next step"
+          :disabled="currentStep === steps.length"
+          @click="currentStep = currentStep + 1"
+        >
+          <Icon name="lucide:chevron-right" :size="16" aria-hidden="true" />
+        </UiButton>
       </div>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Paginated stepper
+      </p>
+    </div>
 
-      <UiCardFooter class="flex items-center justify-between gap-5">
-        <UiButton :disabled="!canGoBack" variant="outline" size="sm" @click="goBack">Back</UiButton>
-        <div class="flex items-center gap-3">
-          <UiButton v-if="stepper != 3" :disabled="!canGoNext" size="sm" @click="goNext"
-            >Next</UiButton
-          >
-          <UiButton v-if="stepper == 3" size="sm" @click="useSonner.success('Order submitted')"
-            >Submit</UiButton
-          >
+    <div class="space-y-8 text-center">
+      <div class="space-y-3">
+        <UiStepper v-model="currentStep">
+          <UiStepperItem v-for="step in steps" :key="step" :step="step" class="flex-1">
+            <UiStepperTrigger class="w-full flex-col items-start gap-2" as-child>
+              <UiStepperIndicator class="h-2 w-full rounded-none bg-border">
+                <span class="sr-only">{{ step }}</span>
+              </UiStepperIndicator>
+            </UiStepperTrigger>
+          </UiStepperItem>
+        </UiStepper>
+        <div class="text-sm font-medium text-muted-foreground tabular-nums">
+          Step {{ currentStep }} of {{ steps.length }}
         </div>
-      </UiCardFooter>
-    </UiCard>
+      </div>
+      <div class="flex justify-center space-x-4">
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep === 1"
+          @click="currentStep = currentStep - 1"
+        >
+          Prev step
+        </UiButton>
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep >= steps.length"
+          @click="currentStep = currentStep + 1"
+        >
+          Next step
+        </UiButton>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Progress stepper
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="{ step, title, description } in steps3"
+          :key="step"
+          :step="step"
+          class="relative flex-1 flex-col!"
+        >
+          <UiStepperTrigger class="flex-col gap-3 rounded">
+            <UiStepperIndicator />
+            <div class="space-y-0.5 px-2">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+              <UiStepperDescription class="max-sm:hidden">
+                {{ description }}
+              </UiStepperDescription>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator
+            v-if="step < steps3.length"
+            class="absolute inset-x-0 top-3 left-[calc(50%+0.75rem+0.125rem)] -order-1 m-0 -translate-y-1/2 group-data-[orientation=horizontal]/stepper:w-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=horizontal]/stepper:flex-none"
+          />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with titles and descriptions
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="{ step, title } in steps3"
+          :key="step"
+          :step="step"
+          class="max-md:items-start"
+          :class="step !== steps3.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger class="rounded max-md:flex-col">
+            <UiStepperIndicator />
+            <div class="text-center md:text-left">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps3.length" class="max-md:mt-3.5 md:mx-4" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with inline titles
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="{ step, title, description } in steps3"
+          :key="step"
+          :step="step"
+          class="max-md:items-start"
+          :class="step !== steps3.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger class="rounded max-md:flex-col">
+            <UiStepperIndicator />
+            <div class="text-center text-[13px] md:text-left">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+              <UiStepperDescription class="truncate text-xs max-sm:hidden">
+                {{ description }}
+              </UiStepperDescription>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps3.length" class="max-md:mt-3.5 md:mx-4" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with inline titles and descriptions
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2">
+        <UiStepperItem
+          v-for="{ step, title, description } in steps3"
+          :key="step"
+          :step="step"
+          class="max-md:items-start"
+          :class="step !== steps3.length ? 'flex-1' : ''"
+        >
+          <UiStepperTrigger class="gap-4 rounded max-md:flex-col">
+            <UiStepperIndicator />
+            <div class="text-center md:-order-1 md:text-left">
+              <UiStepperTitle class="text-[13px]">{{ title }}</UiStepperTitle>
+              <UiStepperDescription class="text-xs max-sm:hidden">
+                {{ description }}
+              </UiStepperDescription>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps3.length" class="max-md:mt-3.5 md:mx-4" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Stepper with inline titles and descriptions
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2" orientation="vertical">
+        <UiStepperItem v-for="step in steps" :key="step" :step="step" class="not-last:flex-1">
+          <UiStepperTrigger>
+            <UiStepperIndicator />
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Vertical stepper with numbers and checkmarks
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper v-model="currentStep" orientation="vertical">
+        <UiStepperItem v-for="step in steps" :key="step" :step="step" class="not-last:flex-1">
+          <UiStepperTrigger as-child>
+            <UiStepperIndicator />
+          </UiStepperTrigger>
+          <UiStepperSeparator v-if="step < steps.length" />
+        </UiStepperItem>
+      </UiStepper>
+      <div class="flex justify-center space-x-4">
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep === 1"
+          @click="currentStep = currentStep - 1"
+        >
+          Prev step
+        </UiButton>
+        <UiButton
+          variant="outline"
+          class="w-32"
+          :disabled="currentStep > steps.length"
+          @click="currentStep = currentStep + 1"
+        >
+          Next step
+        </UiButton>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Controlled vertical stepper with checkmarks
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2" orientation="vertical">
+        <UiStepperItem
+          v-for="{ step, title } in steps2"
+          :key="step"
+          :step="step"
+          class="relative items-start not-last:flex-1"
+        >
+          <UiStepperTrigger class="items-start rounded pb-12 last:pb-0">
+            <UiStepperIndicator />
+            <div class="mt-0.5 px-2 text-left">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator
+            v-if="step < steps2.length"
+            class="absolute inset-y-0 top-[calc(1.5rem+0.125rem)] left-3 -order-1 m-0 -translate-x-1/2 group-data-[orientation=horizontal]/stepper:w-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=horizontal]/stepper:flex-none group-data-[orientation=vertical]/stepper:h-[calc(100%-1.5rem-0.25rem)]"
+          />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Vertical stepper with inline titles
+      </p>
+    </div>
+
+    <div class="space-y-8 text-center">
+      <UiStepper :default-value="2" orientation="vertical">
+        <UiStepperItem
+          v-for="{ step, title, description } in steps3"
+          :key="step"
+          :step="step"
+          class="relative items-start not-last:flex-1"
+        >
+          <UiStepperTrigger class="items-start rounded pb-12 last:pb-0">
+            <UiStepperIndicator />
+            <div class="mt-0.5 space-y-0.5 px-2 text-left">
+              <UiStepperTitle>{{ title }}</UiStepperTitle>
+              <UiStepperDescription>{{ description }}</UiStepperDescription>
+            </div>
+          </UiStepperTrigger>
+          <UiStepperSeparator
+            v-if="step < steps3.length"
+            class="absolute inset-y-0 top-[calc(1.5rem+0.125rem)] left-3 -order-1 m-0 -translate-x-1/2 group-data-[orientation=horizontal]/stepper:w-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=horizontal]/stepper:flex-none group-data-[orientation=vertical]/stepper:h-[calc(100%-1.5rem-0.25rem)]"
+          />
+        </UiStepperItem>
+      </UiStepper>
+      <p class="mt-2 text-xs text-muted-foreground" role="region" aria-live="polite">
+        Vertical stepper with inline titles and descriptions
+      </p>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { get, set } from "@vueuse/core";
-  import { VisuallyHidden } from "radix-vue";
-
-  const stepper = ref(1);
-  const steps = [
-    {
-      step: 1,
-      title: "Review Order",
-      description: "Ensure your order is correct",
-    },
-    {
-      step: 2,
-      title: "Select Shipping",
-      description: "Choose the best shipping option for you",
-    },
-    {
-      step: 3,
-      title: "Submit",
-      description: "Complete your order",
-    },
+  const steps = [1, 2, 3, 4];
+  const steps2 = [
+    { step: 1, title: "Step One" },
+    { step: 2, title: "Step Two" },
+    { step: 3, title: "Step Three" },
+    { step: 4, title: "Step Four" },
   ];
+  const steps3 = [
+    { step: 1, title: "Step One", description: "Desc for step one" },
+    { step: 2, title: "Step Two", description: "Desc for step two" },
+    { step: 3, title: "Step Three", description: "Desc for step three" },
+  ];
+  const currentStep = ref(2);
+  const isLoading = ref(false);
 
-  const products = ref([
-    {
-      name: "Product 1",
-      price: 10,
-      quantity: 2,
-    },
-    {
-      name: "Product 2",
-      price: 15,
-      quantity: 10,
-    },
-  ]);
-
-  const shippingMethod = ref(0);
-
-  const shippingMethods = ref([
-    { name: "Express Shipping", price: 10 },
-    { name: "Standard Shipping", price: 5 },
-    { name: "Free Shipping", price: 0 },
-  ]);
-
-  const formatPrice = (p: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(p);
-
-  const subTotal = computed(() =>
-    formatPrice(products.value.reduce((acc, product) => acc + product.price * product.quantity, 0))
-  );
-
-  const total = computed(() =>
-    formatPrice(
-      products.value.reduce((acc, product) => acc + product.price * product.quantity, 0) +
-        shippingMethod.value
-    )
-  );
-
-  const isLastItem = (step: number) => step === steps.length;
-
-  const canGoNext = computed(() => stepper.value < steps.length);
-  const canGoBack = computed(() => stepper.value > 1);
-  const goNext = () => {
-    if (get(canGoNext)) {
-      set(stepper, stepper.value + 1);
-    }
-  };
-  const goBack = () => {
-    if (get(canGoBack)) {
-      set(stepper, stepper.value - 1);
-    }
+  const handleNextStep = () => {
+    isLoading.value = true;
+    setTimeout(() => {
+      currentStep.value = currentStep.value + 1;
+      isLoading.value = false;
+    }, 1000);
   };
 </script>
 ```

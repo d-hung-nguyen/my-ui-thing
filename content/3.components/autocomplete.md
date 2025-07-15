@@ -2,11 +2,11 @@
 title: Autocomplete
 description: Choose from a list of suggested values with full keyboard support.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/combobox.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/combobox.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/combobox.html#api-reference
+    href: https://reka-ui.com/docs/components/combobox.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -34,7 +34,7 @@ npx ui-thing@latest add autocomplete
 
 ```vue [DocsAutoCompleteBasic.vue]
 <template>
-  <div>
+  <div class="mx-auto max-w-sm">
     <UiAutocomplete>
       <UiAutocompleteAnchor>
         <UiAutocompleteInput placeholder="Select an item" />
@@ -44,7 +44,9 @@ npx ui-thing@latest add autocomplete
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>Fruits</UiAutocompleteLabel>
           <template v-for="f in fruits" :key="f">
@@ -102,17 +104,19 @@ npx ui-thing@latest add autocomplete
 
 ```vue [DocsAutoCompleteObjects.vue]
 <template>
-  <div>
-    <UiAutocomplete v-model="selected" :display-value="displaySelected">
+  <div class="mx-auto max-w-sm">
+    <UiAutocomplete v-model="selected">
       <UiAutocompleteAnchor>
-        <UiAutocompleteInput placeholder="Select a car..." />
+        <UiAutocompleteInput :display-value="displaySelected" placeholder="Select a car..." />
         <UiAutocompleteTrigger>
           <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>Cars</UiAutocompleteLabel>
           <template v-for="(c, i) in cars" :key="i">
@@ -161,26 +165,25 @@ npx ui-thing@latest add autocomplete
 
 ```vue [DocsAutoCompleteMultiple.vue]
 <template>
-  <div>
-    <UiAutocomplete
-      v-model="selectedPeople"
-      multiple
-      :display-value="displaySelected"
-      :filter-function="filtered"
-    >
+  <div class="mx-auto max-w-sm">
+    <UiAutocomplete v-model="selectedPeople" multiple>
       <UiAutocompleteAnchor>
-        <UiAutocompleteInput placeholder="Select people..." />
+        <UiAutocompleteInput :display-value="displaySelected" placeholder="Select people..." />
         <UiAutocompleteTrigger>
           <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>People</UiAutocompleteLabel>
           <template v-for="(p, i) in people" :key="i">
-            <UiAutocompleteItem :value="p" icon="lucide:check">{{ p.name }}</UiAutocompleteItem>
+            <UiAutocompleteItem class="mb-1 last:mb-0" :value="p" icon="lucide:check">{{
+              p.name
+            }}</UiAutocompleteItem>
           </template>
         </UiAutocompleteGroup>
       </UiAutocompleteContent>
@@ -198,14 +201,124 @@ npx ui-thing@latest add autocomplete
   ];
   const selectedPeople = ref([people[0], people[1]]);
 
+  type Person = (typeof people)[number];
+
   const displaySelected = (p: any) => {
-    console.log(p);
-    return p;
+    if (!p) return;
+    if (p && p.length == 1) return p[0]?.name;
+    return p.map((i: Person) => i.name).join(", ");
+  };
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Async
+
+This example shows how you can search for a value and make a call to your API for the results.
+
+::ShowCase
+
+:DocsAutoCompleteAsync
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Autocomplete/DocsAutoCompleteAsync.vue" code lang="vue" -->
+
+```vue [DocsAutoCompleteAsync.vue]
+<template>
+  <div class="mx-auto max-w-sm">
+    <UiAutocomplete v-model="selectedUser" ignore-filter>
+      <UiAutocompleteAnchor>
+        <UiAutocompleteInput
+          v-model="search"
+          :display-value="displaySelected"
+          placeholder="Search for user..."
+        />
+        <UiAutocompleteTrigger :disabled="loading">
+          <Icon v-if="!loading" name="lucide:chevron-down" class="size-4 text-muted-foreground" />
+          <Icon
+            v-else
+            name="lucide:loader-circle"
+            class="size-4 animate-spin text-muted-foreground"
+          />
+        </UiAutocompleteTrigger>
+      </UiAutocompleteAnchor>
+
+      <UiAutocompleteContent>
+        <UiAutocompleteEmpty
+          v-if="!users.length"
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        >
+          <p v-if="search && loading">Please wait while we get your users</p>
+          <p v-else>Please enter the name of a user to start searching</p>
+        </UiAutocompleteEmpty>
+        <UiAutocompleteGroup v-else>
+          <UiAutocompleteLabel>Results</UiAutocompleteLabel>
+          <template v-for="(p, i) in users" :key="i">
+            <UiAutocompleteItem
+              class="mb-1 last:mb-0"
+              :disabled="p.disabled"
+              :value="p"
+              icon="lucide:check"
+            >
+              <div class="flex items-center gap-3">
+                <UiAvatar class="size-7" :src="p.image" />
+                <p :class="[p.disabled ? 'line-through' : '']">{{ p.name }}</p>
+              </div>
+            </UiAutocompleteItem>
+          </template>
+        </UiAutocompleteGroup>
+      </UiAutocompleteContent>
+    </UiAutocomplete>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import { faker } from "@faker-js/faker";
+  import { promiseTimeout } from "@vueuse/core";
+
+  type Person = {
+    id: number;
+    name: string;
+    image: string;
+    disabled?: boolean;
   };
 
-  function filtered(list: any[], searchTerm: string) {
-    return list.filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  }
+  const loading = ref(false);
+  const search = ref<string>();
+  const selectedUser = ref<Person>();
+  const users = ref<Person[]>([]);
+
+  const getUsers = async () => {
+    // if user list is empty, make API call
+    if (users.value.length) return;
+    // simulate making an api call
+    await promiseTimeout(2000);
+    //  create 6 random users. Acts as response from API call
+    users.value = Array.from({ length: 6 }, (_, i) => ({
+      id: i + 1,
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      disabled: faker.datatype.boolean(0.5),
+    }));
+  };
+
+  watchDebounced(
+    search,
+    async () => {
+      loading.value = true;
+      await getUsers();
+      loading.value = false;
+    },
+    { debounce: 300 }
+  );
+
+  const displaySelected = (p: Person) => {
+    return p?.name;
+  };
 </script>
 ```
 

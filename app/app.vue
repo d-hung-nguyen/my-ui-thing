@@ -1,12 +1,11 @@
 <template>
   <div>
     <NuxtPwaManifest />
-    <NuxtLoadingIndicator color="hsl(var(--primary))" />
+    <NuxtLoadingIndicator color="var(--primary)" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <UiToastToaster />
-    <UiVueSonner />
+    <UiSonner />
   </div>
 </template>
 

@@ -1,5 +1,9 @@
 <template>
-  <div data-sidebar="group-content" :class="sideBarGroupContentStyles({ class: props.class })">
+  <div
+    data-slot="sidebar-group-content"
+    data-sidebar="group-content"
+    :class="sideBarGroupContentStyles({ class: props.class })"
+  >
     <slot />
   </div>
 </template>

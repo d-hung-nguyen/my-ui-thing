@@ -1,16 +1,16 @@
 <template>
-  <div class="flex flex-col items-center gap-10">
+  <div class="flex w-full flex-col items-center gap-10">
     <UiPagination :total="2" :items-per-page="1" class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <UiPaginationPrev as-child>
-          <UiButton variant="outline">
+          <UiButton variant="outline" size="default">
             <span class="sr-only">Previous</span>
             <Icon name="lucide:chevron-left" class="size-4" />
             Previous
           </UiButton>
         </UiPaginationPrev>
         <UiPaginationNext as-child>
-          <UiButton variant="outline">
+          <UiButton variant="outline" size="default">
             <span class="sr-only">Next</span>
             Next
             <Icon name="lucide:chevron-right" class="size-4" />
@@ -19,9 +19,9 @@
       </UiPaginationList>
     </UiPagination>
     <UiPagination :total="2" :items-per-page="1" class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <UiPaginationPrev as-child>
-          <UiButton class="group" variant="ghost">
+          <UiButton class="group" variant="ghost" size="default">
             <span class="sr-only">Previous</span>
             <Icon
               name="lucide:arrow-left"
@@ -31,7 +31,7 @@
           </UiButton>
         </UiPaginationPrev>
         <UiPaginationNext as-child>
-          <UiButton class="group" variant="ghost">
+          <UiButton class="group" variant="ghost" size="default">
             <span class="sr-only">Next</span>
             Next
             <Icon

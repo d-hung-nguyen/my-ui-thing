@@ -3,7 +3,7 @@
     <div class="w-full pb-16 lg:w-1/2 lg:pb-0">
       <UiContainer class="text-center lg:text-left">
         <p class="font-semibold text-primary">We're hiring!</p>
-        <h2 class="mb-4 mt-2 text-4xl font-bold lg:mb-6 lg:mt-3 lg:text-5xl">Join our team</h2>
+        <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">Join our team</h2>
         <p class="mx-auto max-w-[800px] text-lg text-muted-foreground lg:text-xl">
           Our philosophy is simple — hire a team of diverse, passionate people and foster a culture
           that empowers you to do your best work.

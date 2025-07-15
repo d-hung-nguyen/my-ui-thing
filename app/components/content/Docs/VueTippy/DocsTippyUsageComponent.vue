@@ -11,7 +11,7 @@
           <UiButton
             variant="ghost"
             size="icon-xs"
-            class="absolute right-0 top-2 size-5 p-1"
+            class="absolute top-2 right-0 size-5 p-1"
             @click="props.hide()"
           >
             <Icon class="size-3" name="lucide:x" />

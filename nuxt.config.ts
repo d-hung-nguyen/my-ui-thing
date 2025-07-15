@@ -1,4 +1,5 @@
 import { createResolver } from "@nuxt/kit";
+import tailwindcss from "@tailwindcss/vite";
 
 import * as SEO from "./app/utils/seo";
 
@@ -6,34 +7,38 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: [
-    "~/assets/css/full-calendar.css",
-    "~/assets/css/quill.css",
-    "~/assets/css/theme.css",
-    "~/assets/css/tippy.css",
-  ],
   future: { compatibilityVersion: 4 },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: true,
+      },
+    },
+  },
   vite: {
+    plugins: [tailwindcss()],
+    build: { sourcemap: false },
     optimizeDeps: {
       include: [
         "vue-use-active-scroll",
         "date-fns",
         "@unovis/ts",
         "vee-validate",
-        "@vee-validate/zod",
+        "@vee-validate/yup",
         "zod",
         "v-calendar",
+        "lodash-es",
+        "vaul-vue",
       ],
     },
   },
 
   modules: [
     "@vueuse/nuxt",
-    "@nuxtjs/tailwindcss",
-    "radix-vue/nuxt",
+    "reka-ui/nuxt",
     "@samk-dev/nuxt-vcalendar",
     "@vee-validate/nuxt",
-    "@nuxt/content",
+    "nuxt-llms",
     "@nuxtjs/color-mode",
     "@morev/vue-transitions/nuxt",
     "@nuxt/eslint",
@@ -44,6 +49,9 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@vite-pwa/nuxt",
     "nuxt-og-image",
+    "vue-sonner/nuxt",
+    "motion-v/nuxt",
+    "@nuxt/content",
     (_, nuxt) => {
       nuxt.hook("components:dirs", (dirs) => {
         dirs.unshift({
@@ -56,13 +64,20 @@ export default defineNuxtConfig({
     },
   ],
 
-  build: { transpile: ["vue-sonner", "shiki"] },
-
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        allowSyntheticDefaultImports: true,
-      },
+  css: [
+    "~/assets/css/tippy.css",
+    "~/assets/css/theme.css",
+    "~/assets/css/quill.css",
+    "~/assets/css/full-calendar.css",
+    "~/assets/css/tailwind.css",
+  ],
+  llms: {
+    domain: process.env.PUBLIC_URL || "https://ui-thing.behonbaker.com",
+    description: SEO.SITE_DESCRIPTION,
+    title: SEO.SITE_TITLE,
+    full: {
+      title: "Complete Documentation for UI Thing",
+      description: "The complete documentation including all content",
     },
   },
 
@@ -75,13 +90,10 @@ export default defineNuxtConfig({
   },
   icon: {
     clientBundle: { scan: true, sizeLimitKb: 0 },
+    mode: "svg",
+    class: "shrink-0",
     fetchTimeout: 2000,
     serverBundle: "local",
-  },
-  tailwindcss: {
-    exposeConfig: true,
-    editorSupport: true,
-    cssPath: ["~/assets/css/tailwind.css", { injectPosition: 2 }],
   },
 
   imports: {
@@ -117,7 +129,6 @@ export default defineNuxtConfig({
 
   content: {
     build: {
-      pathMeta: {},
       markdown: {
         toc: { depth: 4, searchDepth: 4 },
         highlight: {
@@ -136,9 +147,8 @@ export default defineNuxtConfig({
             "javascript",
           ],
           theme: {
-            default: "material-theme-palenight",
-            dark: "one-dark-pro",
-            light: "material-theme-palenight",
+            default: "github-light",
+            dark: "github-dark",
           },
         },
       },
@@ -148,9 +158,11 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { redirect: "/getting-started/introduction" },
     "/getting-started": { redirect: "/getting-started/introduction" },
+    "/goodies": { redirect: "/goodies/border-beam" },
     "/components": { redirect: "/components/accordion" },
     "/examples": { redirect: "/examples/cards" },
     "/blocks": { redirect: "/blocks/app-empty-state" },
+    "/block-renderer": { ssr: false, static: true },
   },
   colorMode: { classSuffix: "", fallback: "dark", preference: "system" },
 
@@ -209,5 +221,5 @@ export default defineNuxtConfig({
       alt: SEO.SITE_NAME,
     },
   },
-  compatibilityDate: "2024-12-01",
+  compatibilityDate: "2025-06-30",
 });

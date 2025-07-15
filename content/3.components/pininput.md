@@ -2,11 +2,11 @@
 title: Pin Input
 description: A sequence of one-character alphanumeric inputs. Useful for PIN codes, verification codes, etc.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/pin-input.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/pin-input.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/pin-input.html#api-reference
+    href: https://reka-ui.com/docs/components/pin-input.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -97,6 +97,64 @@ The complete event is emitted when the user has entered a value in all inputs.
     </UiLabel>
   </div>
 </template>
+```
+
+<!-- /automd -->
+
+::
+
+### Origin UI
+
+::ShowCase
+
+:DocsPinInputOrigin
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/PinInput/DocsPinInputOrigin.vue" code lang="vue" -->
+
+```vue [DocsPinInputOrigin.vue]
+<template>
+  <div class="mx-auto grid max-w-xs grid-cols-1 gap-10">
+    <div class="flex flex-col gap-3">
+      <UiLabel for="otp-single">OTP input single</UiLabel>
+      <UiPinInput id="otp-single" otp>
+        <UiPinInputGroup>
+          <UiPinInputInput
+            v-for="n in 4"
+            :key="n"
+            :index="n"
+            class="rounded-s-none rounded-e-none border-l-0 will-change-[box-shadow] first:rounded-s-md first:border-l last:rounded-e-md focus:z-20 focus:border-l"
+          />
+        </UiPinInputGroup>
+      </UiPinInput>
+    </div>
+    <div class="flex flex-col gap-3">
+      <UiLabel for="otp-double">OTP input double</UiLabel>
+      <UiPinInput id="otp-double" otp>
+        <UiPinInputGroup>
+          <template v-for="n in [1, 2, 3]" :key="n">
+            <UiPinInputInput
+              :index="n"
+              class="rounded-s-none rounded-e-none border-l-0 will-change-[box-shadow] first:rounded-s-md first:border-l last:rounded-e-md focus:z-20 focus:border-l"
+            />
+          </template>
+        </UiPinInputGroup>
+        <Icon name="lucide:minus" />
+        <UiPinInputGroup>
+          <template v-for="n in [4, 5, 6]" :key="n">
+            <UiPinInputInput
+              :index="n"
+              class="rounded-s-none rounded-e-none border-l-0 will-change-[box-shadow] first:rounded-s-md first:border-l last:rounded-e-md focus:z-20 focus:border-l"
+            />
+          </template>
+        </UiPinInputGroup>
+      </UiPinInput>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup></script>
 ```
 
 <!-- /automd -->

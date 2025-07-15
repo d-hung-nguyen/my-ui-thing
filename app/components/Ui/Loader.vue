@@ -1,25 +1,35 @@
 <template>
-  <TransitionFade :duration="500" appear tag="template">
-    <Teleport v-if="fullPage && open" to="#teleports">
-      <div :class="loaderStyles().backdrop({ class: backdropClass, fullPage })">
-        <Icon :class="loaderStyles().icon({ class: props.class })" :name="props.icon" />
-        <slot :open>{{ text }}</slot>
-      </div>
-    </Teleport>
-    <div
+  <AnimatePresence>
+    <motion.div
+      v-if="fullPage && open"
+      :initial="{ opacity: 0 }"
+      :animate="{ opacity: 1 }"
+      :exit="{ opacity: 0, scale: 0.95 }"
+      :class="loaderStyles().backdrop({ class: backdropClass, fullPage })"
+    >
+      <Icon :class="loaderStyles().icon({ class: props.class })" :name="props.icon" />
+      <slot :open>{{ text }}</slot>
+    </motion.div>
+    <motion.div
       v-if="!fullPage && open"
+      :initial="{ opacity: 0 }"
+      :exit="{ opacity: 0 }"
+      :animate="{ opacity: 1 }"
+      :transition="{ duration: 0.5 }"
       :class="loaderStyles().backdrop({ class: props.backdropClass, fullPage })"
     >
       <Icon :class="loaderStyles().icon({ class: props.class })" :name="props.icon" />
       <slot :open>{{ text }}</slot>
-    </div>
-  </TransitionFade>
+    </motion.div>
+  </AnimatePresence>
 </template>
 
 <script lang="ts">
   import { useMagicKeys } from "@vueuse/core";
-  import { useBodyScrollLock } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { AnimatePresence, motion } from "motion-v";
+  import { useBodyScrollLock } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HtmlHTMLAttributes } from "vue";
 
   export type LoaderProps = PrimitiveProps & {
     /**
@@ -31,11 +41,11 @@
     /**
      * The class to apply to the loader Icon
      */
-    class?: any;
+    class?: HtmlHTMLAttributes["class"];
     /**
      * The class to apply to the backdrop
      */
-    backdropClass?: any;
+    backdropClass?: HtmlHTMLAttributes["class"];
     /**
      * Whether the loader should take up the full page.
      *

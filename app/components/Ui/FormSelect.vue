@@ -6,7 +6,7 @@
     <div class="relative">
       <slot name="icon">
         <span v-if="hasIcon" class="absolute">
-          <Icon v-if="icon" :name="icon" class="h-4 w-4 text-muted-foreground" />
+          <Icon v-if="icon" :name="icon" class="size-4 text-muted-foreground" />
         </span>
       </slot>
       <UiSelect
@@ -24,16 +24,45 @@
         </slot>
       </UiSelect>
     </div>
-    <p v-if="hint && !errorMessage" class="mt-1 text-sm text-muted-foreground animate-in fade-in">
-      {{ hint }}
-    </p>
-    <p v-if="errorMessage" class="mt-1 text-sm text-destructive animate-in fade-in">
-      {{ errorMessage }}
-    </p>
+    <AnimatePresence multiple as="div" mode="wait">
+      <slot name="hint" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="hint && !errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-muted-foreground"
+        >
+          {{ hint }}
+        </motion.p>
+      </slot>
+      <slot name="errorMessage" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-destructive"
+        >
+          {{ errorMessage }}
+        </motion.p>
+      </slot>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { AnimatePresence, motion } from "motion-v";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
+
   const props = defineProps<{
     label?: string;
     icon?: string;
@@ -50,9 +79,7 @@
 
   defineOptions({ inheritAttrs: false });
 
-  const inputId = computed(
-    () => props.id || `select-${Math.random().toString(36).substring(2, 9)}`
-  );
+  const inputId = computed(() => props.id || useId());
 
   const hasIcon = computed(() => Boolean(props.icon) || Boolean(useSlots().icon));
 

@@ -12,7 +12,7 @@
         description="Make changes to your profile here. Click save when you're done."
       >
         <template #content>
-          <div class="grid gap-4 py-4">
+          <div class="grid gap-4 p-4">
             <div class="grid grid-cols-4 items-center gap-4">
               <UiLabel for="name" class="text-right"> Name </UiLabel>
               <UiInput id="name" model-value="Pedro Duarte" class="col-span-3" />

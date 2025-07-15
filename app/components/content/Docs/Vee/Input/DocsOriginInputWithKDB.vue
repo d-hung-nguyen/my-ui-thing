@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Search input with &lt;kbd&gt;"
-      class="pe-11"
+      class="pr-12"
       placeholder="Search..."
       type="search"
     >

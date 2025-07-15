@@ -1,13 +1,18 @@
 <template>
-  <div v-if="shown" :class="styles().base({ variant, filled, class: props.class })">
+  <div
+    v-if="shown"
+    data-slot="alert"
+    :class="styles().base({ variant, filled, class: props.class })"
+  >
     <slot :props="props" name="icon">
       <Icon
         v-if="icon"
+        data-slot="alert-icon"
         :name="icon"
         :class="styles().icon({ variant, filled, class: props.iconClass })"
       />
     </slot>
-    <div :class="styles().content({ variant, filled })">
+    <div data-slot="alert-content" :class="styles().content({ variant, filled })">
       <slot :props="props">
         <slot name="title">
           <UiAlertTitle v-if="title" :title="title" />
@@ -21,12 +26,14 @@
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = withDefaults(
     defineProps<{
       /** Custom class to add to the `Alert` parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
       /** Classes to add to the icon */
-      iconClass?: any;
+      iconClass?: HTMLAttributes["class"];
       /** Whether the alert should have a filled/colored background */
       filled?: boolean;
       /**
@@ -60,7 +67,7 @@
     variants: {
       variant: {
         default: {
-          base: "bg-background text-foreground",
+          base: "bg-background text-foreground shadow-xs",
           icon: "text-foreground",
         },
         destructive: {
@@ -98,24 +105,24 @@
         filled: true,
         variant: "destructive",
         class: {
-          base: "bg-destructive text-destructive-foreground",
+          base: "bg-destructive text-destructive-foreground shadow-xs",
           icon: "text-destructive-foreground",
         },
       },
       {
         filled: true,
         variant: "info",
-        class: { base: "bg-blue-500 text-blue-50", icon: "text-blue-50" },
+        class: { base: "bg-blue-500 text-blue-50 shadow-xs", icon: "text-blue-50" },
       },
       {
         filled: true,
         variant: "success",
-        class: { base: "bg-emerald-500 text-emerald-50", icon: "text-emerald-50" },
+        class: { base: "bg-emerald-500 text-emerald-50 shadow-xs", icon: "text-emerald-50" },
       },
       {
         filled: true,
         variant: "warning",
-        class: { base: "bg-amber-500 text-amber-50", icon: "text-amber-50" },
+        class: { base: "bg-amber-500 text-amber-50 shadow-xs", icon: "text-amber-50" },
       },
     ],
   });

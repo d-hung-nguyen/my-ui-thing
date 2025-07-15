@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex h-screen items-center justify-center">
     <div
-      class="absolute h-full w-full bg-[radial-gradient(theme(colors.border/90%)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+      class="absolute h-full w-full bg-[radial-gradient(--alpha(var(--color-border)/90%)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] [background-size:20px_20px]"
     />
 
     <div class="relative w-full max-w-[330px] px-5">

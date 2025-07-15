@@ -2,7 +2,7 @@
   <div>
     <div class="[&>div]:max-h-96">
       <UiTable
-        class="border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none"
+        class="border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr]:border-none [&_tr:not(:last-child)_td]:border-b"
       >
         <UiTableHeader class="sticky top-0 z-10 bg-background/90 backdrop-blur-sm">
           <UiTableRow class="hover:bg-transparent">

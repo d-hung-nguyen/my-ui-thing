@@ -1,13 +1,18 @@
 <template>
-  <Primitive v-bind="forwarded" :class="drawerHeaderStyles({ class: props.class })">
+  <Primitive
+    data-slot="drawer-header"
+    v-bind="forwarded"
+    :class="drawerHeaderStyles({ class: props.class })"
+  >
     <slot />
   </Primitive>
 </template>
 
 <script lang="ts">
   import { reactiveOmit } from "@vueuse/core";
-  import { Primitive, useForwardProps } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive, useForwardProps } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   export const drawerHeaderStyles = tv({
     base: "grid gap-1.5 p-4 text-center sm:text-left",
@@ -17,7 +22,7 @@
     /**
      * Classes to add to the header.
      */
-    class?: any;
+    class?: HTMLAttributes["class"];
   };
 </script>
 <script lang="ts" setup>

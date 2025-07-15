@@ -50,7 +50,7 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
 </template>
 
 <script setup lang="ts">
-  import { z } from "zod";
+  import { number, object } from "yup";
 
   const options = [
     { name: "Batman", id: 1, disabled: true },
@@ -68,11 +68,8 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        heroObject: z.number({
-          required_error: "Please select a hero",
-          invalid_type_error: "Please select a hero",
-        }),
+      object({
+        heroObject: number().label("Hero").required(),
       })
     ),
   });
@@ -131,7 +128,7 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
 </template>
 
 <script setup lang="ts">
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const options = [
     {
@@ -140,17 +137,14 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
     },
     {
       label: "Marvel",
-      options: ["Spiderman", "Iron Man", "Captain America"],
+      options: ["Spider-man", "Iron Man", "Captain America"],
     },
   ];
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        hero: z.string({
-          required_error: "Please select a hero",
-          invalid_type_error: "Please select a hero",
-        }),
+      object({
+        hero: string().label("Hero").required(),
       })
     ),
   });
@@ -211,7 +205,7 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
     { name: "Batman", id: 1, disabled: true },
     { name: "Robin", id: 2 },
     { name: "Joker", id: 3 },
-    { name: "Catwoman", id: 4 },
+    { name: "Cat Woman", id: 4 },
     { name: "Bane", id: 5 },
     { name: "Scarecrow", id: 6 },
     { name: "Riddler", id: 7 },
@@ -220,6 +214,101 @@ You can visit the [VueForm Multiselect page](https://www.npmjs.com/package/@vuef
     { name: "Poison Ivy", id: 10 },
     { name: "Harley Quinn", id: 11 },
   ];
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Tags w/ Search & Create
+
+::ShowCase
+
+:DocsMultiselectTagsSearchCreate
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Vee/Multiselect/DocsMultiselectTagsSearchCreate.vue" code lang="vue" -->
+
+```vue [DocsMultiselectTagsSearchCreate.vue]
+<template>
+  <div class="mx-auto w-full max-w-xs">
+    <UiVeeMultiSelect
+      v-model="value"
+      mode="tags"
+      :close-on-select="false"
+      :searchable="true"
+      :create-option="true"
+      :options="[
+        { value: 'batman', label: 'Batman' },
+        { value: 'robin', label: 'Robin' },
+        { value: 'joker', label: 'Joker' },
+      ]"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  const value = ref(["batman", "robin"]);
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Autocomplete w/ Async
+
+::ShowCase
+
+:DocsMultiselectAutocompleteAsync
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Vee/Multiselect/DocsMultiselectAutocompleteAsync.vue" code lang="vue" -->
+
+```vue [DocsMultiselectAutocompleteAsync.vue]
+<template>
+  <div class="mx-auto w-full max-w-xs">
+    <UiVeeMultiSelect
+      v-model="value"
+      placeholder="Choose a programming language"
+      :filter-results="false"
+      :min-chars="0"
+      :delay="400"
+      :searchable="true"
+      :options="fetchLanguages"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import { promiseTimeout } from "@vueuse/core";
+  import { useFilter } from "reka-ui";
+
+  const { contains } = useFilter({ sensitivity: "base" });
+  const value = ref();
+
+  const fetchLanguages = async (q?: string) => {
+    if (q) {
+      // Simulate network delay if a query is provided
+      await promiseTimeout(2000);
+    }
+    const languages = [
+      { value: "javascript", label: "JavaScript" },
+      { value: "python", label: "Python" },
+      { value: "java", label: "Java" },
+      { value: "csharp", label: "C#" },
+      { value: "php", label: "PHP" },
+      { value: "ruby", label: "Ruby" },
+      { value: "go", label: "Go" },
+      { value: "swift", label: "Swift" },
+    ];
+
+    if (!q) return [...languages];
+    return languages.filter((lang) => contains(lang.label, q));
+  };
 </script>
 ```
 

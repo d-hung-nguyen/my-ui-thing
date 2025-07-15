@@ -2,11 +2,11 @@
 title: Alert Dialog
 description: A modal dialog that interrupts the user with important content and expects a response.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/alert-dialog.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/alert-dialog.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/alert-dialog.html#api-reference
+    href: https://reka-ui.com/docs/components/alert-dialog.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -129,7 +129,7 @@ npx ui-thing@latest add alert-dialog
         <!-- eslint-disable-next-line vue/html-self-closing -->
         <img
           src="https://images.unsplash.com/photo-1515865404355-ddb5b0910878?q=60&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          class="h-[200px] w-full rounded-lg object-cover shadow-sm"
+          class="h-[200px] w-full rounded-lg object-cover shadow-xs"
         />
         <UiAlertDialogHeader>
           <UiAlertDialogTitle class="text-center">Blog post published</UiAlertDialogTitle>

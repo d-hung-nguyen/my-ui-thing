@@ -1,5 +1,9 @@
 <template>
-  <RadioGroupItem v-bind="forwarded" :class="styles({ class: props.class })">
+  <RadioGroupItem
+    data-slot="radio-group-item"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       <UiRadioGroupIndicator :icon="props.icon" />
     </slot>
@@ -7,19 +11,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { RadioGroupItem } from "radix-vue";
-  import type { RadioGroupItemProps } from "radix-vue";
+  import { RadioGroupItem } from "reka-ui";
+  import type { RadioGroupItemProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     RadioGroupItemProps & {
       /** Class to apply to the item */
-      class?: any;
+      class?: HTMLAttributes["class"];
       /** Icon to show */
       icon?: string;
     }
   >();
   const forwarded = reactiveOmit(props, "class", "icon");
   const styles = tv({
-    base: "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+    base: "aspect-square size-4 shrink-0 rounded-full border border-input text-primary shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40",
   });
 </script>

@@ -1,6 +1,7 @@
 <template>
   <UiTooltipProvider :delay-duration="0">
     <div
+      data-slot="sidebar-wrapper"
       :style="{
         '--sidebar-width': SIDEBAR_WIDTH,
         '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
@@ -16,7 +17,7 @@
   import type { HTMLAttributes, Ref } from "vue";
 
   export const sideBarProviderStyles = tv({
-    base: "group/sidebar-wrapper flex min-h-svh w-full text-sidebar-foreground has-[[data-variant=inset]]:bg-sidebar",
+    base: "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
   });
 </script>
 
@@ -51,9 +52,7 @@
     default: () => false,
   });
 
-  const emits = defineEmits<{
-    "update:open": [open: boolean];
-  }>();
+  const emits = defineEmits<{ "update:open": [open: boolean] }>();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   const openMobile = ref(false);
@@ -63,12 +62,14 @@
     passive: (props.open === undefined) as false,
   }) as Ref<boolean>;
 
-  function setOpen(value: boolean) {
+  function setOpen(value: MaybeRefOrGetter<boolean>) {
+    value = toValue(value);
     open.value = value; // emits('update:open', value)
     SIDEBAR_COOKIE.value = value;
   }
 
-  function setOpenMobile(value: boolean) {
+  function setOpenMobile(value: MaybeRefOrGetter<boolean>) {
+    value = toValue(value);
     openMobile.value = value;
   }
 

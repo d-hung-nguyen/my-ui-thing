@@ -106,7 +106,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { array, object, string } from "yup";
 
   const { copied, copy } = useClipboard();
   const { handleSubmit, isSubmitting } = useForm({
@@ -115,8 +115,8 @@
       members: ["", "mur@ha.pw"],
     },
     validationSchema: toTypedSchema(
-      z.object({
-        members: z.array(z.string().email()).min(1),
+      object({
+        members: array().of(string().email().label("Email").required()).label("Members").min(1),
       })
     ),
   });
@@ -126,7 +126,7 @@
   const submit = handleSubmit(async (v) => {
     try {
       useSonner.success("Invitations Sent", {
-        description: `${v.members.length} invitations were successfully sent`,
+        description: `${v.members?.length} invitations were successfully sent`,
       });
       open.value = false;
     } catch (error: any) {

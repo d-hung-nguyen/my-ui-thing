@@ -16,7 +16,7 @@
     { name: "Batman", id: 1, disabled: true },
     { name: "Robin", id: 2 },
     { name: "Joker", id: 3 },
-    { name: "Catwoman", id: 4 },
+    { name: "Cat Woman", id: 4 },
     { name: "Bane", id: 5 },
     { name: "Scarecrow", id: 6 },
     { name: "Riddler", id: 7 },

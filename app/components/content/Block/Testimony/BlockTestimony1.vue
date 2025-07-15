@@ -20,7 +20,7 @@
                 <template v-for="s in item.rating" :key="s">
                   <Icon
                     name="material-symbols:kid-star"
-                    class="h-5 w-5 fill-yellow-400 text-yellow-400"
+                    class="inline h-5 w-5 fill-yellow-400 text-yellow-400"
                   />
                 </template>
               </div>

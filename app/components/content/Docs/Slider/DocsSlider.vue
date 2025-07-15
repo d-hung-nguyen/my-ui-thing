@@ -1,6 +1,6 @@
 <template>
-  <div class="flex w-full flex-col gap-4">
-    <p class="font-semibold">Value {{ sliderValue }}</p>
+  <div class="mx-auto flex w-full max-w-xs flex-col gap-4">
+    <p class="text-sm font-medium">Value {{ sliderValue }}</p>
     <UiSlider v-model="sliderValue" />
   </div>
 </template>

@@ -1,5 +1,7 @@
 <template>
-  <UiAccordion type="single" default-value="item-2" :items="accordionItems" />
+  <div class="mx-auto max-w-lg">
+    <UiAccordion type="single" default-value="item-2" :items="accordionItems" />
+  </div>
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,9 @@
 <template>
-  <ul data-sidebar="menu" :class="sideBarMenuStyles({ class: props.class })">
+  <ul
+    data-slot="sidebar-menu"
+    data-sidebar="menu"
+    :class="sideBarMenuStyles({ class: props.class })"
+  >
     <slot />
   </ul>
 </template>

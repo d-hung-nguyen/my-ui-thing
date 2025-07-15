@@ -1,19 +1,26 @@
 <template>
-  <AccordionContent v-bind="forwarded" :class="styles({ class: props.class })">
-    <div class="pb-4 pt-0">
+  <AccordionContent
+    data-slot="accordion-content"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
+    <div class="pt-0 pb-4">
       <slot>{{ content }}</slot>
     </div>
   </AccordionContent>
 </template>
 
+<script lang="ts"></script>
+
 <script lang="ts" setup>
-  import { AccordionContent } from "radix-vue";
-  import type { AccordionContentProps } from "radix-vue";
+  import { AccordionContent } from "reka-ui";
+  import type { AccordionContentProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     AccordionContentProps & {
       /** Custom class(es) to add to the parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
       /** The content of the accordion */
       content?: any;
     }
@@ -22,6 +29,6 @@
   const forwarded = reactiveOmit(props, "class", "content");
 
   const styles = tv({
-    base: "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+    base: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
   });
 </script>

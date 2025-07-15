@@ -1,23 +1,31 @@
 <template>
-  <AccordionItem v-slot="slotProps" v-bind="forwarded" :class="styles({ class: props.class })">
+  <AccordionItem
+    v-slot="slotProps"
+    data-slot="accordion-item"
+    v-bind="forwarded"
+    :class="accordionItemStyle({ class: props.class })"
+  >
     <slot v-bind="slotProps" />
   </AccordionItem>
 </template>
 
-<script setup lang="ts">
-  import { AccordionItem } from "radix-vue";
-  import type { AccordionItemProps } from "radix-vue";
+<script lang="ts">
+  import { AccordionItem } from "reka-ui";
+  import type { AccordionItemProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
+  export const accordionItemStyle = tv({ base: "border-b last:border-b-0" });
+</script>
+
+<script setup lang="ts">
   const props = defineProps<
     AccordionItemProps & {
-      /** Custom class(es) to add to the parent */
-      class?: any;
+      /**
+       * Custom class to apply to the component
+       */
+      class?: HTMLAttributes["class"];
     }
   >();
 
   const forwarded = reactiveOmit(props, "class");
-
-  const styles = tv({
-    base: "border-b",
-  });
 </script>

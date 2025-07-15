@@ -12,14 +12,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { SplitterResizeHandle, useForwardPropsEmits } from "radix-vue";
-  import type { SplitterResizeHandleEmits, SplitterResizeHandleProps } from "radix-vue";
+  import { SplitterResizeHandle, useForwardPropsEmits } from "reka-ui";
+  import type { SplitterResizeHandleEmits, SplitterResizeHandleProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       SplitterResizeHandleProps & {
         direction?: "horizontal" | "vertical";
-        class?: any;
+        /** Custom class(es) to add to parent element */
+        class?: HTMLAttributes["class"];
         withHandle?: boolean;
         icon?: string;
       }
@@ -35,6 +37,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class", "withHandle", "icon"), emit);
 
   const styles = tv({
-    base: "relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full data-[orientation=vertical]:after:left-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full data-[orientation=vertical]:after:-translate-y-1/2 data-[orientation=vertical]:after:translate-x-0 [&[data-orientation=vertical]>div]:rotate-90",
+    base: "relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:outline-none data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full data-[orientation=vertical]:after:left-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full data-[orientation=vertical]:after:translate-x-0 data-[orientation=vertical]:after:-translate-y-1/2 [&[data-orientation=vertical]>div]:rotate-90",
   });
 </script>

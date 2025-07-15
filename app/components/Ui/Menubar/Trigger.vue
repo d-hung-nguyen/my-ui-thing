@@ -1,21 +1,26 @@
 <template>
-  <MenubarTrigger :class="styles({ class: props.class })" v-bind="forwarded">
+  <MenubarTrigger
+    data-slot="menubar-trigger"
+    :class="styles({ class: props.class })"
+    v-bind="forwarded"
+  >
     <slot />
   </MenubarTrigger>
 </template>
 
 <script lang="ts" setup>
-  import { MenubarTrigger } from "radix-vue";
-  import type { MenubarTriggerProps } from "radix-vue";
+  import { MenubarTrigger } from "reka-ui";
+  import type { MenubarTriggerProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     MenubarTriggerProps & {
       /** Custom class(es) to add to the parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "flex cursor-pointer select-none items-center rounded-sm px-3 py-1.5 text-sm font-medium outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[state=open]:bg-accent data-[highlighted]:text-accent-foreground data-[state=open]:text-accent-foreground",
+    base: "flex items-center rounded-sm px-2 py-1 text-sm font-medium outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
   });
 </script>

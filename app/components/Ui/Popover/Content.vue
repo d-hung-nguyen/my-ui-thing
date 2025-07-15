@@ -1,14 +1,19 @@
 <template>
   <UiPopoverPortal :to="to">
-    <PopoverContent v-bind="{ ...forwarded, ...$attrs }" :class="styles({ class: props.class })">
+    <PopoverContent
+      data-slot="popover-content"
+      v-bind="{ ...forwarded, ...$attrs }"
+      :class="styles({ class: props.class })"
+    >
       <slot />
     </PopoverContent>
   </UiPopoverPortal>
 </template>
 
 <script lang="ts" setup>
-  import { PopoverContent, useForwardPropsEmits } from "radix-vue";
-  import type { PopoverContentEmits, PopoverContentProps } from "radix-vue";
+  import { PopoverContent, useForwardPropsEmits } from "reka-ui";
+  import type { PopoverContentEmits, PopoverContentProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   defineOptions({ inheritAttrs: false });
 
@@ -16,13 +21,13 @@
     defineProps<
       PopoverContentProps & {
         to?: string | HTMLElement;
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {
       side: "bottom",
-      sideOffset: 8,
-      align: "start",
+      sideOffset: 4,
+      align: "center",
       avoidCollisions: true,
       collisionPadding: 0,
       sticky: "partial",
@@ -33,6 +38,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "to", "class"), emits);
 
   const styles = tv({
-    base: "z-50 w-72 rounded-md border bg-popover p-4 text-accent-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+    base: "z-50 w-72 origin-(--reka-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
   });
 </script>

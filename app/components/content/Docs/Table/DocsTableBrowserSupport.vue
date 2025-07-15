@@ -41,7 +41,7 @@
         :key="item.feature"
         class="*:border-border [&>:not(:last-child)]:border-r"
       >
-        <UiTableHead class="whitespace-nowrap font-medium text-foreground">{{
+        <UiTableHead class="font-medium whitespace-nowrap text-foreground">{{
           item.feature
         }}</UiTableHead>
         <UiTableCell

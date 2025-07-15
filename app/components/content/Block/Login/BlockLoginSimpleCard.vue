@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen items-center justify-center">
     <div
-      class="w-full max-w-[380px] border border-border/60 bg-card px-8 py-5 shadow-sm dark:border-border min-[480px]:rounded-lg"
+      class="w-full max-w-[380px] border border-border/60 bg-card px-8 py-5 shadow-xs min-[480px]:rounded-lg dark:border-border"
     >
       <h1 class="text-2xl font-bold tracking-tight lg:text-3xl">Log in</h1>
       <p class="mt-1 text-muted-foreground">Enter your email & password to log in.</p>

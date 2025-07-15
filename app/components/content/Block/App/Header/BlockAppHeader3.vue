@@ -4,16 +4,20 @@
       class="flex flex-col flex-wrap justify-between gap-5 px-4 py-5 md:flex-row md:items-center md:px-6"
     >
       <div class="flex items-center gap-5">
-        <div>
+        <div class="flex flex-col gap-1 *:leading-none">
           <slot name="title">
-            <p v-if="props.title" class="text-lg font-semibold" v-html="props.title" />
+            <p v-if="props.title" class="font-semibold" v-html="props.title" />
           </slot>
           <slot name="description">
-            <p v-if="props.description" class="text-muted-foreground" v-html="props.description" />
+            <p
+              v-if="props.description"
+              class="text-sm text-muted-foreground"
+              v-html="props.description"
+            />
           </slot>
         </div>
       </div>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:items-center">
         <slot>
           <UiButton variant="outline" size="sm">Download</UiButton>
           <UiButton size="sm">Add new</UiButton>

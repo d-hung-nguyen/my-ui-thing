@@ -15,9 +15,9 @@ npx ui-thing@latest add vee-native-checkbox
 
 ## Why?
 
-You may be wondering why this is here. I ran into an issue the other way with how the checkbox from Radix Vue was working with an array of values.
+You may be wondering why this is here. I ran into an issue the other day with how the checkbox from Radix Vue was working with an array of values.
 
-Sadly, I couldn't find a way to make it work with an array of values. So I decided to create a native checkbox that works with an array of values.
+This has been fixed with the `CheckboxGroup` component in Reka UI but I am keeping this here anyways 🙂
 
 ## Usage
 

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-  import type { InjectionKey } from "vue";
+  import type { HTMLAttributes, InjectionKey } from "vue";
 
   export const FORM_ITEM_INJECTION_KEY = Symbol() as InjectionKey<string>;
 </script>
@@ -30,7 +30,7 @@
   provide(FORM_ITEM_INJECTION_KEY, id);
 
   const props = defineProps<{
-    class?: any;
+    class?: HTMLAttributes["class"];
     label?: string;
     description?: string;
     hint?: string;

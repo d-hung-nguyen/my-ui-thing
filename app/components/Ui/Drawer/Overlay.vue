@@ -1,16 +1,19 @@
 <template>
-  <DrawerOverlay v-bind="props" :class="styles({ class: props.class })" />
+  <DrawerOverlay
+    data-slot="drawer-overlay"
+    v-bind="props"
+    :class="styles({ class: props.class })"
+  />
 </template>
 
 <script lang="ts" setup>
   import { DrawerOverlay } from "vaul-vue";
+  import type { DialogOverlayProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-  interface Props
-    extends /* @vue-ignore */ Partial<Pick<InstanceType<typeof DrawerOverlay>, "$props">> {}
-
-  const props = defineProps<Props & { class?: any }>();
+  const props = defineProps<DialogOverlayProps & { class?: HTMLAttributes["class"] }>();
 
   const styles = tv({
-    base: "fixed inset-0 z-50 bg-black/40 backdrop-blur",
+    base: "fixed inset-0 z-50 bg-background/40 backdrop-blur",
   });
 </script>

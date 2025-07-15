@@ -2,11 +2,11 @@
 title: Tabs
 description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/tabs.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/tabs.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/tabs.html#api-reference
+    href: https://reka-ui.com/docs/components/tabs.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -381,7 +381,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <div class="flex justify-center">
         <UiTabsList
           :pill="false"
-          class="relative h-auto -space-x-px bg-background p-0 shadow-sm shadow-black/5 rtl:space-x-reverse"
+          class="relative h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in 3"
@@ -585,7 +585,7 @@ To use these examples you will have to copy the code and adjust it for your own 
     <UiTabs default-value="Projects">
       <div class="relative mb-3 flex justify-center">
         <UiTabsList
-          class="h-auto -space-x-px bg-background p-0 shadow-sm shadow-black/5 rtl:space-x-reverse"
+          class="h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in tabs"
@@ -786,7 +786,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsTabs13.vue]
 <template>
   <div class="flex justify-center">
-    <UiTabs default-value="Projects">
+    <UiTabs default-value="Projects" class="items-center">
       <UiTabsList
         class="flex h-auto justify-center rounded-none border-b border-border bg-transparent p-0"
       >
@@ -801,7 +801,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -848,7 +848,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <div class="flex justify-center">
     <UiTabs default-value="Projects">
-      <UiTabsList class="mx-auto flex max-w-xs bg-transparent">
+      <UiTabsList class="mx-auto flex w-full max-w-xs bg-transparent">
         <UiTabsTrigger
           v-for="t in tabs"
           :key="t.title"
@@ -864,7 +864,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -924,7 +924,7 @@ To use these examples you will have to copy the code and adjust it for your own 
                     v-if="t.badge"
                     class="bg-primary text-primary-foreground"
                     :text="t.badge?.toString()"
-                    size="lg"
+                    size="xl"
                   >
                     <Icon :name="t.icon" class="size-5 shrink-0" />
                   </UiChip>
@@ -937,7 +937,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -984,34 +984,30 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsTabs16.vue]
 <template>
   <div class="mx-auto w-full max-w-lg">
-    <UiTabs default-value="Projects" orientation="vertical" class="flex w-full gap-2">
-      <div class="flex justify-center">
-        <UiTabsList class="h-auto flex-col p-0.5">
-          <UiTooltip v-for="t in tabs" :key="t.title">
-            <UiTooltipTrigger as-child>
-              <span class="h-full">
-                <UiTabsTrigger :value="t.title" class="h-full py-3">
-                  <UiChip
-                    v-if="t.badge"
-                    class="bg-primary text-primary-foreground"
-                    :text="t.badge?.toString()"
-                    size="lg"
-                  >
-                    <Icon :name="t.icon" class="size-5 shrink-0" />
-                  </UiChip>
-                  <Icon v-else :name="t.icon" class="size-5 shrink-0" />
-                </UiTabsTrigger>
-              </span>
-            </UiTooltipTrigger>
-            <UiTooltipContent side="right" class="px-2 py-1 text-xs">{{
-              t.title
-            }}</UiTooltipContent>
-          </UiTooltip>
-        </UiTabsList>
-      </div>
-      <div className="grow rounded-lg border border-border text-start">
+    <UiTabs default-value="Projects" orientation="vertical" class="w-full flex-row">
+      <UiTabsList class="flex-col">
+        <UiTooltip v-for="t in tabs" :key="t.title">
+          <UiTooltipTrigger as-child>
+            <span class="h-full">
+              <UiTabsTrigger :value="t.title" class="py-3">
+                <UiChip
+                  v-if="t.badge"
+                  class="bg-primary text-primary-foreground"
+                  :text="t.badge?.toString()"
+                  size="lg"
+                >
+                  <Icon :name="t.icon" class="size-4 shrink-0" />
+                </UiChip>
+                <Icon v-else :name="t.icon" class="size-4 shrink-0" />
+              </UiTabsTrigger>
+            </span>
+          </UiTooltipTrigger>
+          <UiTooltipContent side="right" class="px-2 py-1 text-xs">{{ t.title }}</UiTooltipContent>
+        </UiTooltip>
+      </UiTabsList>
+      <div class="grow rounded-md border text-start">
         <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-          <p class="text-pretty px-3 text-sm text-muted-foreground">
+          <p class="px-4 py-3 text-xs text-muted-foreground">
             {{ t.content }}
           </p>
         </UiTabsContent>
@@ -1058,20 +1054,16 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsTabs17.vue]
 <template>
-  <UiTabs
-    default-value="Projects"
-    orientation="vertical"
-    class="mx-auto flex w-full max-w-lg justify-center gap-2"
-  >
-    <UiTabsList class="h-auto flex-col p-0.5">
+  <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
+    <UiTabsList class="flex-col">
       <UiTabsTrigger v-for="t in tabs" :key="t.title" :value="t.title" class="w-full">
         {{ t.title }}
       </UiTabsTrigger>
     </UiTabsList>
 
-    <div className="grow rounded-lg border border-border text-start">
+    <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="text-pretty px-3 text-sm text-muted-foreground">
+        <p class="px-4 py-3 text-xs text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1117,29 +1109,22 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsTabs18.vue]
 <template>
-  <UiTabs
-    default-value="Projects"
-    orientation="vertical"
-    class="mx-auto flex w-full max-w-lg justify-center gap-2"
-  >
-    <UiTabsList
-      :pill="false"
-      class="relative h-auto flex-col rounded-none border-l border-border bg-transparent p-0"
-    >
+  <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
+    <UiTabsList :pill="false" class="relative flex-col rounded-none border-l bg-transparent p-0">
       <UiTabsTrigger
         v-for="t in tabs"
         :key="t.title"
         :pill="false"
         :value="t.title"
-        class="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:after:bg-primary"
+        class="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
       >
         {{ t.title }}
       </UiTabsTrigger>
     </UiTabsList>
 
-    <div className="grow rounded-lg border border-border text-start">
+    <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="text-pretty px-3 text-sm text-muted-foreground">
+        <p class="px-4 py-3 text-xs text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1185,14 +1170,10 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsTabs19.vue]
 <template>
-  <UiTabs
-    default-value="Projects"
-    orientation="vertical"
-    class="mx-auto flex w-full max-w-lg justify-center gap-2"
-  >
+  <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
     <UiTabsList
       :pill="false"
-      class="relative h-auto flex-col gap-1 rounded-none bg-transparent px-1 py-0 text-foreground"
+      class="flex-col gap-1 rounded-none bg-transparent px-1 py-0 text-foreground"
     >
       <UiTabsTrigger
         v-for="t in tabs"
@@ -1206,9 +1187,9 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiTabsTrigger>
     </UiTabsList>
 
-    <div className="grow rounded-lg border border-border text-start">
+    <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="text-pretty px-3 text-sm text-muted-foreground">
+        <p class="px-4 py-3 text-xs text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1253,12 +1234,8 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsTabs20.vue]
 <template>
-  <UiTabs
-    default-value="Projects"
-    orientation="vertical"
-    class="mx-auto flex w-full max-w-lg justify-center"
-  >
-    <UiTabsList :pill="false" class="h-auto flex-col gap-1 py-0">
+  <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
+    <UiTabsList :pill="false" class="flex-col gap-1 bg-transparent py-0">
       <UiTabsTrigger
         v-for="t in tabs"
         :key="t.title"
@@ -1270,9 +1247,9 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiTabsTrigger>
     </UiTabsList>
 
-    <div className="grow rounded-lg border border-border text-start">
+    <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="text-pretty px-3 text-sm text-muted-foreground">
+        <p class="px-4 py-3 text-xs text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>

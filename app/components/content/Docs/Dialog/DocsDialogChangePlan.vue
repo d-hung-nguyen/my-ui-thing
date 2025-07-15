@@ -23,7 +23,7 @@
             <div
               v-for="(plan, index) in plans"
               :key="index"
-              class="relative flex w-full items-center gap-4 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent md:gap-2"
+              class="relative flex w-full items-center gap-4 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent md:gap-2"
             >
               <UiRadioGroupItem
                 :id="plan.value"

@@ -3,7 +3,7 @@
     <UiHoverCard>
       <UiHoverCardTrigger as-child>
         <div
-          class="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border bg-background shadow-sm"
+          class="flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border bg-background shadow-xs"
         >
           <Icon name="logos:nuxt-icon" class="h-8 w-8" />
         </div>
@@ -19,7 +19,7 @@
           <div
             class="relative h-[40%] w-full rounded-t-2xl bg-white p-4 text-slate-800 transition-all group-hover:h-[50%]"
           >
-            <p class="text-lg font-semibold leading-none">John Doe</p>
+            <p class="text-lg leading-none font-semibold">John Doe</p>
             <small class="text-sm opacity-70"
               >Software Engineer @<a
                 target="_blank"

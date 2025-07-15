@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { MenubarArrow } from "radix-vue";
-  import type { MenubarArrowProps } from "radix-vue";
+  import { MenubarArrow } from "reka-ui";
+  import type { MenubarArrowProps } from "reka-ui";
 
   const props = withDefaults(defineProps<MenubarArrowProps>(), {
     width: 10,

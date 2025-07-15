@@ -16,9 +16,11 @@
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
     /**Custom class(es) to add to the element */
-    class?: any;
+    class?: HTMLAttributes["class"];
     /** Function called when the item is clicked */
     onClick?: () => void;
     /** The location that the item should navigate to when clicked */

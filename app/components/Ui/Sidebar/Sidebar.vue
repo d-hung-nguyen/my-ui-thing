@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="collapsible === 'none'"
+    data-slot="sidebar"
     :class="sideBarStyles().collapsible({ class: props.class })"
     v-bind="$attrs"
   >
@@ -10,6 +11,7 @@
   <UiSheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
     <UiSheetContent
       data-sidebar="sidebar"
+      data-slot="sidebar"
       data-mobile="true"
       :side="side"
       :class="sideBarStyles().mobileSheet()"
@@ -31,14 +33,16 @@
 
   <div
     v-else
-    class="group peer hidden md:block"
+    class="group peer hidden text-sidebar-foreground md:block"
+    data-slot="sidebar"
     :data-state="state"
     :data-collapsible="state === 'collapsed' ? collapsible : ''"
     :data-variant="variant"
     :data-side="side"
   >
     <!-- This is what handles the sidebar gap on desktop  -->
-    <div :class="sideBarStyles().sideBarWrapper({ variant })" />
+    <div data-slot="sidebar-gap" :class="sideBarStyles().sideBarWrapper({ variant })" />
+
     <div
       :class="sideBarStyles().sideBarWrapper2({ collapsible, side, variant, class: props.class })"
       v-bind="$attrs"
@@ -51,21 +55,22 @@
 </template>
 
 <script lang="ts">
-  import { VisuallyHidden } from "radix-vue";
-  import type { VariantProps } from "tailwind-variants";
+  import { VisuallyHidden } from "reka-ui";
   import type { HTMLAttributes } from "vue";
 
   export const sideBarStyles = tv({
     slots: {
-      collapsible: "flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
-      mobileSheet: "w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden",
-      mobileInner: "flex h-full w-full flex-col",
+      collapsible:
+        "flex h-full w-(--sidebar-width) flex-col bg-sidebar-background text-sidebar-foreground",
+      mobileSheet:
+        "w-(--sidebar-width) bg-sidebar-background p-0 text-sidebar-foreground [&>button]:hidden",
+      mobileInner: "flex size-full flex-col",
       sideBarWrapper:
-        "relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180",
+        "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180",
       sideBarWrapper2:
-        "fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex",
+        "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
       sideBarInner:
-        "flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow",
+        "flex h-full w-full flex-col bg-sidebar-background group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm",
     },
     variants: {
       side: {
@@ -80,21 +85,21 @@
       },
       variant: {
         sidebar: {
-          sideBarWrapper: "group-data-[collapsible=icon]:w-[--sidebar-width-icon]",
+          sideBarWrapper: "group-data-[collapsible=icon]:w-(--sidebar-width-icon)",
           sideBarWrapper2:
-            "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+            "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
         },
         floating: {
           sideBarWrapper:
-            "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]",
+            "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]",
           sideBarWrapper2:
-            "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]",
+            "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]",
         },
         inset: {
           sideBarWrapper:
-            "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]",
+            "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]",
           sideBarWrapper2:
-            "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]",
+            "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]",
         },
       },
       collapsible: {
@@ -132,6 +137,7 @@
     class?: HTMLAttributes["class"];
   };
 </script>
+
 <script setup lang="ts">
   defineOptions({ inheritAttrs: false });
 

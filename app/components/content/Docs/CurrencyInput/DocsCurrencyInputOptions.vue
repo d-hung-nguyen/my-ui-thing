@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full items-center justify-center">
+  <div class="mx-auto flex w-full max-w-xs items-center justify-center">
     <UiCurrencyInput
       :options="{
         currency: 'JMD',

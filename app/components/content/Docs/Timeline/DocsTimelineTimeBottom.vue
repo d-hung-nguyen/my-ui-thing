@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-        <UiTimelineContent>
-          {{ item.description }}
-          <UiTimelineDate class="mb-0 mt-2">{{ item.date }}</UiTimelineDate>
-        </UiTimelineContent>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="2">
+    <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+      <UiTimelineContent>
+        {{ item.description }}
+        <UiTimelineDate v-if="item.date" class="mt-2 mb-0">
+          {{ item.date }}
+        </UiTimelineDate>
+      </UiTimelineContent>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>

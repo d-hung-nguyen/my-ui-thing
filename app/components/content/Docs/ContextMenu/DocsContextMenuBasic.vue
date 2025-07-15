@@ -6,7 +6,7 @@
     >
       Right click to see basic context menu
     </UiContextMenuTrigger>
-    <UiContextMenuContent loop class="w-64">
+    <UiContextMenuContent loop class="w-56">
       <UiContextMenuItem title="Back" inset shortcut="⌘[" />
       <UiContextMenuItem title="Forward" disabled inset shortcut="⌘]" />
       <UiContextMenuItem title="Reload" inset shortcut="⌘R" />
@@ -19,18 +19,20 @@
           <UiContextMenuItem title="Clear data" shortcut="⌘⇧⌫" />
           <UiContextMenuSeparator />
           <UiContextMenuItem title="Developer tools" shortcut="⌥⌘I" />
+          <UiContextMenuSeparator />
+          <UiContextMenuItem title="Delete all" variant="destructive" />
         </UiContextMenuSubContent>
       </UiContextMenuSub>
       <UiContextMenuSeparator />
       <UiContextMenuCheckboxItem
-        v-model:checked="showBookmark"
-        title="Show Bookmarks Bar"
+        v-model="showBookmark"
+        title="Show Bookmarks"
         inset
         shortcut="⌘⇧B"
         @select="(e) => e.preventDefault()"
       />
       <UiContextMenuCheckboxItem
-        v-model:checked="showFullUrls"
+        v-model="showFullUrls"
         title="Show full URLs"
         inset
         shortcut="⌘⇧U"

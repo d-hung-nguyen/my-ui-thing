@@ -3,10 +3,6 @@ title: Blog - Card
 description: On this page you will find different ways in which you can style the blog post cards of your website.
 ---
 
-## Note
-
-In order to see the full(Desktop) view, please click on the `External View` button ( :icon{name="lucide:square-arrow-out-up-right"} ) at the top of the style.
-
 ## Style One
 
 :BlockShowcase{blockPath="Blog/Post/BlockBlogPostCard1" component="BlockBlogPostCard1" containerClass="container py-10" iframeHeight="550px"}

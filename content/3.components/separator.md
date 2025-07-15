@@ -2,11 +2,11 @@
 title: Separator
 description: Visually or semantically separates content.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/separator.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/separator.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/separator.html#api-reference
+    href: https://reka-ui.com/docs/components/separator.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -34,9 +34,9 @@ npx ui-thing@latest add separator
 
 ```vue [DocsSeparator.vue]
 <template>
-  <div>
-    <div class="space-y-1">
-      <h4 class="text-sm font-semibold leading-none">UI Thing</h4>
+  <div class="mx-auto max-w-fit">
+    <div class="gap-y-1">
+      <h4 class="text-sm leading-none font-semibold">UI Thing</h4>
       <p class="text-sm text-muted-foreground">An open-source UI component library for Nuxt.</p>
     </div>
     <UiSeparator class="my-4" />

@@ -2,11 +2,11 @@
 title: Avatar
 description: An image element with a fallback for representing the user.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/avatar.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/avatar.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/avatar.html#api-reference
+    href: https://reka-ui.com/docs/components/avatar.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -100,15 +100,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsAvatarInitialOnly.vue]
 <template>
   <div class="flex items-center justify-center gap-10">
-    <UiAvatar>
-      <UiAvatarFallback>KK</UiAvatarFallback>
-    </UiAvatar>
-    <UiAvatar class="rounded-lg">
-      <UiAvatarFallback>MW</UiAvatarFallback>
-    </UiAvatar>
-    <UiAvatar class="rounded-none">
-      <UiAvatarFallback>BB</UiAvatarFallback>
-    </UiAvatar>
+    <UiAvatar fallback="KK" />
+    <UiAvatar class="rounded-lg" fallback="MW" />
+    <UiAvatar class="rounded-none" fallback="BB" />
   </div>
 </template>
 ```
@@ -132,17 +126,17 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div class="flex items-center justify-center gap-10">
     <UiAvatar>
       <UiAvatarFallback>
-        <Icon name="lucide:user-round" class="size-5 opacity-80" aria-hidden="true" />
+        <Icon name="lucide:user-round" class="opacity-80" aria-hidden="true" />
       </UiAvatarFallback>
     </UiAvatar>
     <UiAvatar>
       <UiAvatarFallback>
-        <Icon name="lucide:rocket" class="size-5 opacity-80" aria-hidden="true" />
+        <Icon name="lucide:rocket" class="opacity-80" aria-hidden="true" />
       </UiAvatarFallback>
     </UiAvatar>
     <UiAvatar>
       <UiAvatarFallback>
-        <Icon name="lucide:accessibility" class="size-5 opacity-80" aria-hidden="true" />
+        <Icon name="lucide:accessibility" class="opacity-80" aria-hidden="true" />
       </UiAvatarFallback>
     </UiAvatar>
   </div>

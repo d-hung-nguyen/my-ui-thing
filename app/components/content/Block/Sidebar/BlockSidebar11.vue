@@ -63,7 +63,7 @@
     <UiSidebarInset>
       <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
         <UiSidebarTrigger class="-ml-1" />
-        <UiSeparator orientation="vertical" class="mr-2 h-4" />
+        <UiDivider orientation="vertical" class="mr-2 h-4 w-px" />
         <UiBreadcrumbs :items="breadcrumbItems" />
       </header>
       <div class="flex flex-1 flex-col gap-4 p-4">

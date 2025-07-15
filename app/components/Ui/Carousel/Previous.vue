@@ -1,6 +1,7 @@
 <template>
   <UiButton
     :disabled="!canScrollPrev"
+    data-slot="carousel-previous"
     :class="styles().base({ orientation, class: props.class })"
     :variant
     @click="scrollPrev"
@@ -13,14 +14,29 @@
 </template>
 
 <script setup lang="ts">
+  import type { buttonStyles } from "~/components/Ui/Button.vue";
   import type { WithClassAsProps } from "~/composables/useCarousel";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       WithClassAsProps & {
+        /** The icon to display in the button
+         *
+         * @default "lucide:arrow-left"
+         */
         icon?: string;
+        /** The screen reader text
+         *
+         * @default "Previous Slide"
+         */
         srText?: string;
-        iconClass?: any;
+        /** Custom class(es) to add to the icon */
+        iconClass?: HTMLAttributes["class"];
+        /** The variant of the button
+         *
+         * @default "outline"
+         */
         variant?: VariantProps<typeof buttonStyles>["variant"];
       }
     >(),
@@ -40,7 +56,7 @@
     },
     variants: {
       orientation: {
-        horizontal: { base: "-left-12 top-1/2 -translate-y-1/2" },
+        horizontal: { base: "top-1/2 -left-12 -translate-y-1/2" },
         vertical: { base: "-top-12 left-1/2 -translate-x-1/2 rotate-90" },
       },
     },

@@ -70,6 +70,8 @@
 </script>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.tiptap) {
     :first-child {
       margin-top: 0;
@@ -100,12 +102,12 @@
     h4,
     h5,
     h6 {
-      @apply mt-9 text-pretty font-bold leading-tight;
+      @apply mt-9 leading-tight font-bold text-pretty;
     }
 
     h1,
     h2 {
-      @apply mb-6 mt-14;
+      @apply mt-14 mb-6;
     }
 
     h1 {

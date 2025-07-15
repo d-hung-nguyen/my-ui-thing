@@ -1,5 +1,5 @@
 <template>
-  <div ref="carouselRef" :class="styles().base({ orientation })">
+  <div ref="carouselRef" data-slot="carousel-content" :class="styles().base({ orientation })">
     <div :class="styles().content({ orientation, class: props.class })" v-bind="$attrs">
       <slot />
     </div>

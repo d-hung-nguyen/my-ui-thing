@@ -34,66 +34,63 @@ vcalendar: {
 
 ## Usage
 
+### Attributes
+
+Attributes are visual decorators that can be applied to specific calendar dates. Learn more about them <a href="https://vcalendar.io/calendar/attributes.html" target="_blank">here</a>.
+
 ::ShowCase
 
-:DocsCalendar
+:DocsCalendarAttributes
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/DocsCalendar.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarAttributes.vue" code lang="vue" -->
 
-```vue [DocsCalendar.vue]
+```vue [DocsCalendarAttributes.vue]
 <template>
-  <div>
-    <div class="flex flex-wrap justify-center gap-5">
-      <UiCalendar :attributes="attributes" />
-      <UiCalendar title-position="right" />
-      <UiCalendar show-weeknumbers>
-        <template #header-title="{ title }">
-          <div class="flex items-center gap-2">
-            <p>{{ title }}</p>
-            <Icon class="h-4 w-4 text-muted-foreground" name="lucide:chevron-down" />
-          </div>
-        </template>
-      </UiCalendar>
-    </div>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar :attributes="attributes" />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { addDays, endOfMonth, startOfMonth, startOfToday } from "date-fns";
+  import dayjs from "dayjs";
+  import type { AttributeConfig } from "~/components/Ui/Calendar.vue";
+  import type { CSSProperties } from "vue";
 
-  const attributes = ref([
+  const attributes = ref<AttributeConfig[]>([
     {
       highlight: true,
       popover: {
-        label: "Out of town bussiness trip",
+        label: "Out of town business trip",
       },
-      dates: {
-        start: startOfMonth(startOfToday()).toString(),
-        end: addDays(startOfMonth(startOfToday()), 3).toString(),
-      },
+      dates: [
+        {
+          start: dayjs().startOf("month").toString(),
+          span: 3,
+        },
+      ],
     },
     {
       popover: {
         label: "Take the dog to the vet",
       },
       dot: "red",
-      dates: addDays(startOfMonth(startOfToday()), 5).toString(),
+      dates: dayjs().startOf("month").add(5, "days").toString(),
     },
     {
       bar: "green",
       popover: {
         label: "Dinner with friends",
       },
-      dates: addDays(startOfMonth(startOfToday()), 8).toString(),
+      dates: dayjs().startOf("month").add(8, "days").toString(),
     },
     {
       dot: "purple",
       popover: {
         label: "Take the car to the mechanic",
       },
-      dates: addDays(startOfMonth(startOfToday()), 14).toString(),
+      dates: dayjs().startOf("month").add(14, "days").toString(),
     },
     {
       highlight: true,
@@ -101,8 +98,8 @@ vcalendar: {
         label: "Family vacation in Ibiza",
       },
       dates: {
-        start: addDays(startOfMonth(startOfToday()), 16).toString(),
-        end: addDays(startOfMonth(startOfToday()), 24).toString(),
+        start: dayjs().startOf("month").add(16, "days").toString(),
+        end: dayjs().startOf("month").add(24, "days").toString(),
       },
     },
     {
@@ -110,17 +107,220 @@ vcalendar: {
       popover: {
         label: "Take Noah to the football game",
       },
-      dates: addDays(startOfMonth(startOfToday()), 22).toString(),
+      dates: dayjs().startOf("month").add(22, "days").toString(),
     },
     {
       highlight: true,
       popover: {
         label: "Visit the in-laws",
       },
-      dates: endOfMonth(startOfToday()).toString(),
+      dates: dayjs().endOf("month").toString(),
+    },
+    {
+      popover: { label: "Therapy Session", hideIndicator: true },
+      bar: {
+        style: {
+          backgroundImage: "linear-gradient(to right, #f0f, #0ff)",
+          borderRadius: "10px",
+        } as CSSProperties,
+      },
+      dates: [
+        {
+          // get last sunday in month's date
+          start: dayjs().endOf("month").day(0).toString(),
+          repeat: {
+            every: "month",
+            ordinalWeekdays: [-1, 1],
+          },
+        },
+      ],
     },
   ]);
 </script>
+```
+
+<!-- /automd -->
+
+::
+
+### Right Title - Left Nav
+
+::ShowCase
+
+:DocsCalendarRightTitle
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarRightTitle.vue" code lang="vue" -->
+
+```vue [DocsCalendarRightTitle.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar title-position="right" />
+  </div>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Header Slot
+
+::ShowCase
+
+:DocsCalendarHeaderSlot
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarHeaderSlot.vue" code lang="vue" -->
+
+```vue [DocsCalendarHeaderSlot.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar show-weeknumbers>
+      <template #header-title="{ title }">
+        <div class="flex items-center gap-2">
+          <p>{{ title }}</p>
+          <Icon class="size-4 text-muted-foreground" name="lucide:chevron-down" />
+        </div>
+      </template>
+    </UiCalendar>
+  </div>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Date Range
+
+::ShowCase
+
+:DocsCalendarRange
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarRange.vue" code lang="vue" -->
+
+```vue [DocsCalendarRange.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar :attributes />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import dayjs from "dayjs";
+  import type { AttributeConfig } from "~/components/Ui/Calendar.vue";
+
+  const attributes = ref<AttributeConfig[]>([
+    {
+      highlight: true,
+      dates: [[dayjs().toDate(), dayjs().add(1.5, "w").toDate()]],
+    },
+  ]);
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Disabled Dates
+
+::ShowCase
+
+:DocsCalendarDisabledDate
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarDisabledDate.vue" code lang="vue" -->
+
+```vue [DocsCalendarDisabledDate.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar :disabled-dates />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import dayjs from "dayjs";
+
+  const disabledDates = ref([
+    // disable today
+    dayjs().toDate(),
+    // disable the next 8 days
+    dayjs().add(8, "day").toDate(),
+    // disable the 22nd of the month
+    dayjs().date(22).toDate(),
+  ]);
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Footer Slot
+
+::ShowCase
+
+:DocsCalendarFooterSlot
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarFooterSlot.vue" code lang="vue" -->
+
+```vue [DocsCalendarFooterSlot.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar ref="cal">
+      <template #footer>
+        <div class="grid grid-cols-2 gap-3 p-4 pt-0">
+          <UiButton size="sm" variant="outline" @click="moveToRandomMonth">Random Month</UiButton>
+          <UiButton size="sm" effect="ringHover" @click="moveToThisMonth">This Month</UiButton>
+        </div>
+      </template>
+    </UiCalendar>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import dayjs from "dayjs";
+
+  const cal = useTemplateRef("cal");
+  const moveToRandomMonth = () => {
+    const randomMonth = dayjs().add(Math.floor(Math.random() * 12), "month");
+    cal.value?.calendarRef?.move(randomMonth.toDate());
+  };
+  const moveToThisMonth = () => {
+    cal.value?.calendarRef?.move(new Date());
+  };
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Week View
+
+::ShowCase
+
+:DocsCalendarWeekView
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Calendar/DocsCalendarWeekView.vue" code lang="vue" -->
+
+```vue [DocsCalendarWeekView.vue]
+<template>
+  <div class="flex flex-wrap justify-center gap-5">
+    <UiCalendar view="weekly" />
+  </div>
+</template>
 ```
 
 <!-- /automd -->

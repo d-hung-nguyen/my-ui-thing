@@ -1,19 +1,49 @@
 <template>
-  <div :class="styles().base({ class: props.class, color, type, size, circle })">
+  <div
+    data-slot="fancy-icon"
+    :class="styles().base({ class: props.class, color, type, size, circle })"
+  >
     <slot :styles="styles().icon({ color, type, size, circle })">
-      <Icon v-if="icon" :name="icon" :class="styles().icon({ color, type, size, circle })" />
+      <Icon
+        v-if="icon"
+        data-slot="fancy-icon-icon"
+        :name="icon"
+        :class="styles().icon({ color, type, size, circle })"
+      />
     </slot>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = withDefaults(
     defineProps<{
-      class?: any;
+      /**
+       * Custom class(es) to add to the icon container.
+       */
+      class?: HTMLAttributes["class"];
+      /**
+       * The icon to display.
+       */
       icon?: string;
+      /**
+       * The color variant of the icon.
+       */
       color?: VariantProps<typeof styles>["color"];
+      /**
+       * The type variant of the icon.
+       */
       type?: VariantProps<typeof styles>["type"];
+      /**
+       * The size variant of the icon.
+       */
       size?: VariantProps<typeof styles>["size"];
+      /**
+       * Whether the icon should be circular.
+       *
+       * @default false
+       */
       circle?: boolean;
     }>(),
     {

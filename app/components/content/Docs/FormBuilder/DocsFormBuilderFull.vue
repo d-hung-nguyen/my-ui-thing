@@ -355,7 +355,7 @@
       variant: "NativeCheckbox",
       name: "vueFormNativeCheckbox",
       label: "Enable Notifications",
-      wrapperClass: tw`col-span-full mb-8 mt-2`,
+      wrapperClass: tw`col-span-full mt-2 mb-8`,
       description: "Receive notifications on your device",
     },
     {

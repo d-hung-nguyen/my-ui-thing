@@ -33,31 +33,30 @@ In the form below, we are using the `useForm` composition function provided by V
 
 ```vue [DocsVeeInput.vue]
 <template>
-  <form class="mx-auto max-w-md" @submit="onSubmit">
+  <form class="mx-auto max-w-xs" @submit="onSubmit">
     <fieldset :disabled="isSubmitting" class="space-y-5">
       <UiVeeInput label="Full name" name="name" hint="This will be displayed to the public" />
       <UiVeeInput label="Email" name="email" type="email" />
       <UiVeeInput label="Age" name="age" type="number" />
-      <UiButton type="submit"> Submit </UiButton>
+      <UiButton :loading="isSubmitting" type="submit"> Submit </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { number, object, string } from "yup";
 
-  const schema = z.object({
-    name: z.string({ required_error: "Required" }).min(3, { message: "Min 3 characters" }),
-    age: z
-      .number({
-        coerce: true,
-        required_error: "Required",
-        invalid_type_error: "Please enter a number",
-      })
-      .int("Only numbers are allowed")
-      .min(18, "You must be at least 18 years old")
-      .max(120, "You must be less than 120 years old"),
-    email: z.string({ required_error: "Required" }).email("Please enter a valid email"),
+  const schema = object({
+    name: string().required().label("Name").min(3),
+    age: number()
+      .required()
+      .label("Age")
+      .integer()
+      .min(18)
+      .max(120)
+      .typeError("Age must be a number"),
+    email: string().required().label("Email").email(),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
@@ -65,11 +64,9 @@ In the form below, we are using the `useForm` composition function provided by V
   });
 
   const onSubmit = handleSubmit(async (_) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Sending information to our servers...",
-      success: (_) => "We updated your information.",
-      error: (_) => "Error! Your information could not be sent to our servers!",
+    await promiseTimeout(3000);
+    useSonner.success("Information Saved", {
+      description: (_) => "We updated your information.",
     });
   });
 </script>
@@ -173,8 +170,9 @@ Not all examples are copied but these should give you a good idea of what you ca
 
 ```vue [DocsOriginInputColoredBorder.vue]
 <template>
-  <!-- NOTE: This inline style is to show how to set the --ring variable in your CSS file in order to change the focus ring color. -->
-  <div class="flex items-center justify-center" style="--ring: 234 89% 74%">
+  <div
+    class="flex items-center justify-center [--ring:var(--color-indigo-300)] dark:[--ring:var(--color-indigo-900)]"
+  >
     <UiVeeInput label="Input with colored ring" placeholder="Email" type="email" />
   </div>
 </template>
@@ -300,7 +298,7 @@ Not all examples are copied but these should give you a good idea of what you ca
 ```vue [DocsOriginInputStartInlineAddOn.vue]
 <template>
   <div class="flex items-center justify-center">
-    <UiVeeInput label="Input with start inline add-on" class="peer ps-16" placeholder="google.com">
+    <UiVeeInput label="Input with start inline add-on" class="peer pl-16" placeholder="google.com">
       <template #icon>
         <span
           class="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-sm text-muted-foreground peer-disabled:opacity-50"
@@ -330,7 +328,7 @@ Not all examples are copied but these should give you a good idea of what you ca
 ```vue [DocsOriginInputEndInlineAddOn.vue]
 <template>
   <div class="flex items-center justify-center">
-    <UiVeeInput label="Input with end inline add-on" class="peer pe-14" placeholder="google.com">
+    <UiVeeInput label="Input with end inline add-on" class="peer pr-14" placeholder="google.com">
       <template #trailingIcon>
         <span
           class="pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 text-sm text-muted-foreground peer-disabled:opacity-50"
@@ -360,7 +358,7 @@ Not all examples are copied but these should give you a good idea of what you ca
 ```vue [DocsOriginInputInlineAddOns.vue]
 <template>
   <div class="flex items-center justify-center">
-    <UiVeeInput label="Input with inline add-ons" class="peer pe-12 ps-6" placeholder="0.00">
+    <UiVeeInput label="Input with inline add-ons" class="peer ps-6 pe-12" placeholder="0.00">
       <template #trailingIcon>
         <span
           class="pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 text-sm text-muted-foreground peer-disabled:opacity-50"
@@ -399,7 +397,7 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with start add-on"
-      class="peer ps-20"
+      class="peer pl-20"
       placeholder="google.com"
       type="text"
     >
@@ -434,7 +432,7 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with end add-on"
-      class="peer pe-16"
+      class="peer pr-16"
       placeholder="google.com"
       type="text"
     >
@@ -469,7 +467,7 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with inline start and end add-on"
-      class="peer pe-16 ps-7"
+      class="peer pr-16"
       placeholder="0.00"
       type="text"
     >
@@ -511,14 +509,14 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with start select"
-      class="peer ps-28"
+      class="peer pl-28"
       placeholder="192.168.1.1"
       type="text"
     >
       <template #icon>
         <select
           aria-label="Protocol"
-          class="form-select absolute inset-y-0 start-0 flex items-center justify-center rounded-s-md border border-input bg-background ps-3 text-sm text-muted-foreground ring-offset-background focus:border-input focus:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 peer-disabled:opacity-50"
+          class="absolute inset-y-0 start-0 flex form-select items-center justify-center rounded-s-md border border-input bg-background ps-3 text-sm text-muted-foreground ring-offset-background peer-disabled:opacity-50 focus:border-input focus:ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <option value="https://">https://</option>
           <option value="http://">http://</option>
@@ -550,11 +548,11 @@ Not all examples are copied but these should give you a good idea of what you ca
 ```vue [DocsOriginInputEndSelect.vue]
 <template>
   <div class="flex items-center justify-center">
-    <UiVeeInput label="Input with end select" class="peer pe-20" placeholder="google">
+    <UiVeeInput label="Input with end select" class="peer pr-20" placeholder="google">
       <template #trailingIcon>
         <select
           aria-label="Protocol"
-          class="form-select absolute inset-y-0 end-0 flex items-center justify-center rounded-e-md border border-input bg-background pe-7 text-sm text-muted-foreground ring-offset-background focus:border-input focus:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 peer-disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex form-select rounded-e-md border border-input bg-background pe-7 text-sm text-muted-foreground peer-disabled:opacity-50 focus:border-input focus:border-primary focus:ring-[3px] focus:ring-ring/50"
         >
           <option>.com</option>
           <option>.org</option>
@@ -593,7 +591,7 @@ Not all examples are copied but these should give you a good idea of what you ca
         <button
           type="button"
           aria-label="Subscribe"
-          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Icon name="lucide:send" class="size-4" />
         </button>
@@ -622,7 +620,7 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with end icon button"
-      class="peer pe-9"
+      class="peer pr-10"
       placeholder="Email"
       type="email"
     >
@@ -630,7 +628,7 @@ Not all examples are copied but these should give you a good idea of what you ca
         <button
           type="button"
           aria-label="Subscribe"
-          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent border-l-input text-muted-foreground/80 ring-offset-background transition-shadow hover:bg-muted/50 hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent border-l-input text-muted-foreground/80 ring-offset-background transition-shadow hover:bg-muted/50 hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Icon name="lucide:download" class="size-4" />
         </button>
@@ -657,12 +655,12 @@ Not all examples are copied but these should give you a good idea of what you ca
 ```vue [DocsOriginInputEndButton.vue]
 <template>
   <div class="flex items-center justify-center">
-    <UiVeeInput label="Input with end button" class="peer pe-9" placeholder="Email" type="email">
+    <UiVeeInput label="Input with end button" class="peer pr-16" placeholder="Email" type="email">
       <template #trailingIcon>
         <button
           type="button"
           aria-label="Send email"
-          class="absolute inset-y-0 end-0 flex h-full items-center justify-center rounded-e-md border border-transparent border-l-input px-3 text-sm ring-offset-background transition-shadow hover:bg-muted/50 hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex h-full items-center justify-center rounded-e-md border border-transparent border-l-input px-3 text-sm ring-offset-background transition-shadow hover:bg-muted/50 hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         >
           Send
         </button>
@@ -688,9 +686,9 @@ Not all examples are copied but these should give you a good idea of what you ca
 
 ```vue [DocsOriginInputWithButton.vue]
 <template>
-  <div class="flex items-center justify-center gap-2">
+  <div class="flex items-end justify-center gap-2">
     <UiVeeInput label="Input with button" placeholder="Email" type="email" />
-    <UiButton aria-label="Send the email" class="mt-7" variant="outline">Send</UiButton>
+    <UiButton aria-label="Send the email" variant="outline">Send</UiButton>
   </div>
 </template>
 ```
@@ -723,7 +721,7 @@ Not all examples are copied but these should give you a good idea of what you ca
             <button
               type="button"
               aria-label="Login password"
-              class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+              class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
               @click="toggleVisibility"
             >
               <Icon :name="isVisible ? 'lucide:eye-off' : 'lucide:eye'" class="size-4" />
@@ -764,18 +762,19 @@ Not all examples are copied but these should give you a good idea of what you ca
     <UiVeeInput v-model="value" label="Input with clear button" placeholder="Enter a value">
       <template #trailingIcon>
         <UiTooltip disable-closing-trigger>
-          <TransitionScale>
-            <UiTooltipTrigger v-if="value" as-child>
-              <button
-                type="button"
-                aria-label="Clear input"
-                class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-                @click="value = ''"
-              >
+          <AnimatePresence>
+            <Motion
+              v-if="value"
+              class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center text-muted-foreground hover:text-foreground"
+              :initial="{ opacity: 0, scale: 0.5 }"
+              :animate="{ opacity: 1, scale: 1 }"
+              :exit="{ opacity: 0, scale: 0 }"
+            >
+              <UiTooltipTrigger type="button" aria-label="Clear input" @click="value = ''">
                 <Icon name="lucide:circle-x" class="size-4" />
-              </button>
-            </UiTooltipTrigger>
-          </TransitionScale>
+              </UiTooltipTrigger>
+            </Motion>
+          </AnimatePresence>
           <UiTooltipContent align="center"> Clear </UiTooltipContent>
         </UiTooltip>
       </template>
@@ -807,7 +806,7 @@ Not all examples are copied but these should give you a good idea of what you ca
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Search input with &lt;kbd&gt;"
-      class="pe-11"
+      class="pr-12"
       placeholder="Search..."
       type="search"
     >
@@ -851,7 +850,7 @@ Not all examples are copied but these should give you a good idea of what you ca
         <button
           type="button"
           aria-label="Subscribe"
-          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Icon name="lucide:arrow-right" class="size-4" />
         </button>
@@ -890,7 +889,7 @@ Not all examples are copied but these should give you a good idea of what you ca
         <button
           type="button"
           aria-label="Start/Stop recording"
-          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
           @click="useSonner.success('Recording started!')"
         >
           <Icon name="lucide:mic" class="size-4" />
@@ -969,7 +968,7 @@ Not all examples are copied but these should give you a good idea of what you ca
       class="peer pe-9"
       placeholder="Password"
       :type="isVisible ? 'text' : 'password'"
-      :aria-invalid="strengthScore < requirements.length"
+      :aria-invalid="strengthScore < requirements.length && password.length > 0"
     >
       <template #trailingIcon>
         <UiTooltip disable-closing-trigger>
@@ -977,7 +976,7 @@ Not all examples are copied but these should give you a good idea of what you ca
             <button
               type="button"
               aria-label="Subscribe"
-              class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+              class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md border border-transparent text-muted-foreground/80 ring-offset-background transition-shadow hover:text-foreground focus-visible:border-ring focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
               @click="toggleVisibility"
             >
               <Icon :name="isVisible ? 'lucide:eye-off' : 'lucide:eye'" class="size-4" />
@@ -991,7 +990,7 @@ Not all examples are copied but these should give you a good idea of what you ca
     </UiVeeInput>
 
     <div
-      class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
+      class="mt-3 mb-4 h-1 w-full overflow-hidden rounded-full bg-border"
       role="progressbar"
       :aria-valuenow="strengthScore"
       :aria-valuemin="0"

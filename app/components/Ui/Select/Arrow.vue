@@ -1,10 +1,10 @@
 <template>
-  <SelectArrow v-bind="useForwardProps(props)" />
+  <SelectArrow data-slot="select-arrow" v-bind="useForwardProps(props)" />
 </template>
 
 <script lang="ts" setup>
-  import { SelectArrow, useForwardProps } from "radix-vue";
-  import type { SelectArrowProps } from "radix-vue";
+  import { SelectArrow, useForwardProps } from "reka-ui";
+  import type { SelectArrowProps } from "reka-ui";
 
   const props = withDefaults(defineProps<SelectArrowProps>(), {
     width: 10,

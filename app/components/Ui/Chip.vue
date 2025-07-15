@@ -1,20 +1,20 @@
 <template>
-  <div class="relative inline-flex flex-shrink-0 items-center justify-center">
+  <div data-slot="chip" class="relative inline-flex flex-shrink-0 items-center justify-center">
     <slot />
-    <TransitionScale>
-      <span
-        v-if="localModel"
-        :class="[styles({ position, size, inset, class: [props.color, props.class] })]"
-      >
-        <slot name="content">
-          {{ text }}
-        </slot>
-      </span>
-    </TransitionScale>
+    <span
+      v-if="localModel"
+      :class="[styles({ position, size, inset, class: [props.color, props.class] })]"
+    >
+      <slot name="content">
+        {{ text }}
+      </slot>
+    </span>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   defineOptions({ inheritAttrs: false });
   const props = withDefaults(
     defineProps<{
@@ -59,7 +59,7 @@
       /**
        * Additional classes to apply to the chip.
        */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }>(),
     { show: true, color: "bg-primary", inset: false }
   );
@@ -67,12 +67,12 @@
   const localModel = defineModel<boolean>("show", { default: true });
 
   const styles = tv({
-    base: "absolute flex items-center justify-center whitespace-nowrap rounded-full font-medium text-foreground ring-[2px] ring-background",
+    base: "absolute flex items-center justify-center rounded-full font-medium whitespace-nowrap text-foreground ring-[2px] ring-background",
     variants: {
       position: {
-        "top-right": "right-0 top-0",
-        "bottom-right": "bottom-0 right-0",
-        "top-left": "left-0 top-0",
+        "top-right": "top-0 right-0",
+        "bottom-right": "right-0 bottom-0",
+        "top-left": "top-0 left-0",
         "bottom-left": "bottom-0 left-0",
       },
       inset: {
@@ -100,7 +100,7 @@
       {
         inset: false,
         position: "top-right",
-        class: "-translate-y-1/2 translate-x-1/2 transform",
+        class: "translate-x-1/2 -translate-y-1/2 transform",
       },
       {
         inset: false,

@@ -20,61 +20,6 @@ Click :SourceCodeLink{component="Datatable.client.vue"} to see the source code f
 npx ui-thing@latest add datatable
 ```
 
-Adding this component will also add a plugin called `datatables.client.ts` with the following content:
-
-```ts
-import DataTablesCore from "datatables.net";
-import DataTable from "datatables.net-vue3";
-import JSZip from "jszip";
-
-import "datatables.net-buttons";
-import "datatables.net-buttons-dt";
-import "datatables.net-buttons/js/buttons.colVis.mjs";
-import "datatables.net-buttons/js/buttons.html5.mjs";
-import "datatables.net-buttons/js/buttons.print.mjs";
-import "datatables.net-responsive-dt";
-import "datatables.net-searchbuilder-dt";
-import "datatables.net-select-dt";
-import "datatables.net-fixedcolumns-dt";
-import "datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css";
-import "datatables.net-fixedheader-dt";
-import "datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css";
-
-// @ts-expect-error - We are not creating a declaration file for this library
-window.JSZip = JSZip;
-
-DataTable.use(DataTablesCore);
-
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.component("DataTable", DataTable);
-});
-```
-
-This plugin will register the following extensions from the [DataTables.net](https://datatables.net/) library:
-
-- [Buttons](https://datatables.net/extensions/buttons/)
-- [Responsive](https://datatables.net/extensions/responsive/)
-- [SearchBuilder](https://datatables.net/extensions/searchbuilder/)
-- [Select](https://datatables.net/extensions/select/)
-
-Feel free to remove any of these extensions if you don't need them.
-
-It will also update your `nuxt.config.ts` file with the following content:
-
-```ts
-app: {
-    head: {
-      script: [
-        // Add pdfmake scripts for DataTables.net export buttons
-        { src: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js" },
-        { src: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.min.js" },
-      ],
-    },
-  },
-```
-
-If you are not going to use the PDF export feature, you can remove the `script` tags from your `nuxt.config.ts` file.
-
 ## Usage
 
 ### Dom
@@ -195,8 +140,6 @@ With the new version of DataTables.net, you can now use custom Vue components in
 
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import type { DataTablesNamedSlotProps } from "~/components/Ui/Datatable.client.vue";
   import type { Config, ConfigColumns } from "datatables.net";
 
   interface Staff {
@@ -550,10 +493,10 @@ For this, you will actually need to add some custom classes for things to look h
   <UiDatatable :data="data" :options>
     <template #name="{ cellData }: { cellData: Item }">
       <div class="flex items-center gap-3">
-        <UiAvatar class="size-10" :src="cellData.image" :alt="cellData.name" />
+        <UiAvatar :src="cellData.image" :alt="cellData.name" />
         <div>
           <div class="font-medium">{{ cellData.name }}</div>
-          <span class="mt-0.5 text-xs text-muted-foreground">@{{ cellData.username }}</span>
+          <span class="text-xs text-muted-foreground">@{{ cellData.username }}</span>
         </div>
       </div>
     </template>
@@ -708,6 +651,8 @@ For this, you will actually need to add some custom classes for things to look h
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(table.dataTable td) {
     border-bottom-width: 0px;
     border-top-width: 0px;
@@ -794,6 +739,8 @@ For this, you will actually need to add some custom classes for things to look h
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable.cell-border tr th) {
     @apply border-r first:border-l;
   }
@@ -900,6 +847,8 @@ For this, you will actually need to add some custom classes for things to look h
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable thead tr) {
     @apply bg-muted/50;
   }
@@ -918,27 +867,22 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableRowSelection.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableRowSelection.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableRowSelection.vue]
+```vue [DocsDatatableRowSelection.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 5 }, (item, index) => ({
-        id: index + 1,
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        location: faker.location.city(),
-        status: faker.helpers.arrayElement(["Active", "Inactive"]),
-        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
-    },
-    { default: () => [] }
-  );
+  const data = Array.from({ length: 5 }, (item, index) => ({
+    id: index + 1,
+    name: faker.person.fullName(),
+    email: faker.internet.email().toLowerCase(),
+    location: faker.location.city(),
+    status: faker.helpers.arrayElement(["Active", "Inactive"]),
+    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+  }));
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -980,12 +924,6 @@ For this, you will actually need to add some custom classes for things to look h
     </p>
   </div>
 </template>
-
-<style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
-</style>
 ```
 
 <!-- /automd -->
@@ -1000,27 +938,22 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableCard.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableCard.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableCard.vue]
+```vue [DocsDatatableCard.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 5 }, (item, index) => ({
-        id: index + 1,
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        location: faker.location.city(),
-        status: faker.helpers.arrayElement(["Active", "Inactive"]),
-        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
-    },
-    { default: () => [] }
-  );
+  const data = Array.from({ length: 5 }, (item, index) => ({
+    id: index + 1,
+    name: faker.person.fullName(),
+    email: faker.internet.email().toLowerCase(),
+    location: faker.location.city(),
+    status: faker.helpers.arrayElement(["Active", "Inactive"]),
+    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+  }));
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1064,12 +997,6 @@ For this, you will actually need to add some custom classes for things to look h
     </div>
   </div>
 </template>
-
-<style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
-</style>
 ```
 
 <!-- /automd -->
@@ -1084,27 +1011,22 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableScrollY.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableScrollY.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableScrollY.vue]
+```vue [DocsDatatableScrollY.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 30 }, (item, index) => ({
-        id: index + 1,
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        location: faker.location.city(),
-        status: faker.helpers.arrayElement(["Active", "Inactive"]),
-        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
-    },
-    { default: () => [] }
-  );
+  const data = Array.from({ length: 30 }, (item, index) => ({
+    id: index + 1,
+    name: faker.person.fullName(),
+    email: faker.internet.email().toLowerCase(),
+    location: faker.location.city(),
+    status: faker.helpers.arrayElement(["Active", "Inactive"]),
+    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+  }));
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1152,11 +1074,10 @@ For this, you will actually need to add some custom classes for things to look h
 </template>
 
 <style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
   :deep(.dt-scroll-body table thead tr) {
-    @apply first:hidden;
+    &:first-child {
+      display: none;
+    }
   }
 </style>
 ```
@@ -1173,33 +1094,28 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableBadge.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableBadge.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableBadge.vue]
+```vue [DocsDatatableBadge.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 30 }, (item, index) => ({
-        id: index + 1,
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        location: {
-          city: faker.location.city(),
-          country: faker.location.country(),
-          flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
-        },
-        status: faker.helpers.arrayElement(["Active", "Inactive"]),
-        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
+  const data = Array.from({ length: 30 }, (item, index) => ({
+    id: index + 1,
+    name: faker.person.fullName(),
+    email: faker.internet.email().toLowerCase(),
+    location: {
+      city: faker.location.city(),
+      country: faker.location.country(),
+      flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
     },
-    { default: () => [] }
-  );
+    status: faker.helpers.arrayElement(["Active", "Inactive"]),
+    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+  }));
 
-  type Item = (typeof data.value)[0];
+  type Item = (typeof data)[0];
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1273,9 +1189,8 @@ For this, you will actually need to add some custom classes for things to look h
 </template>
 
 <style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dt-scroll-body table thead tr) {
     @apply first:hidden;
   }
@@ -1294,40 +1209,33 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableSearchSort.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableSearchSort.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableSearchSort.vue]
+```vue [DocsDatatableSearchSort.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 8 }, (item, index) => ({
-        id: index + 1,
-        keyword: faker.lorem.sentence({ min: 3, max: 5 }),
-        intents: faker.helpers.arrayElements(
-          ["Informational", "Navigational", "Commercial", "Transactional"],
-          { min: 1, max: 2 }
-        ),
-        volume: faker.number.int({ max: 2000, min: 100 }),
-        cpc: faker.number.float({ min: 0.1, max: 10, fractionDigits: 2 }),
-        traffic: faker.number.int({ max: 100, min: 10 }),
-        link: faker.internet.url({ protocol: "https" }),
-      }));
-    },
-    { default: () => [] }
-  );
+  const data = Array.from({ length: 8 }, (item, index) => ({
+    id: index + 1,
+    keyword: faker.lorem.sentence({ min: 3, max: 5 }),
+    intents: faker.helpers.arrayElements(
+      ["Informational", "Navigational", "Commercial", "Transactional"],
+      { min: 1, max: 2 }
+    ),
+    volume: faker.number.int({ max: 2000, min: 100 }),
+    cpc: faker.number.float({ min: 0.1, max: 10, fractionDigits: 2 }),
+    traffic: faker.number.int({ max: 100, min: 10 }),
+    link: faker.internet.url({ protocol: "https" }),
+  }));
 
-  type Item = (typeof data.value)[0];
+  type Item = (typeof data)[0];
   const search = ref("");
 
   const filteredData = computed(() => {
-    if (!search.value) return data.value;
-    return data.value.filter((item) =>
-      item.keyword.toLowerCase().includes(search.value.toLowerCase())
-    );
+    if (!search.value) return data;
+    return data.filter((item) => item.keyword.toLowerCase().includes(search.value.toLowerCase()));
   });
 
   const styles = {
@@ -1422,19 +1330,13 @@ For this, you will actually need to add some custom classes for things to look h
         </div>
       </template>
       <template #link="{ cellData }: { cellData: Item }">
-        <a :href="cellData.link" target="_blank" class="hover:text-sky-500 hover:underline">
+        <a :href="cellData.link" target="_blank" class="hover:underline">
           {{ cellData.link }}
         </a>
       </template>
     </UiDatatable>
   </div>
 </template>
-
-<style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
-</style>
 ```
 
 <!-- /automd -->
@@ -1443,55 +1345,37 @@ For this, you will actually need to add some custom classes for things to look h
 
 ### Fixed Columns
 
-this requires the fixedColumns plugin to be installed.
-
-```bash
-npm install --save datatables.net-fixedcolumns-dt
-```
-
-Then add the following to your `datatables` plugin file
-
-```ts
-import "datatables.net-fixedcolumns-dt";
-import "datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css";
-```
-
 ::ShowCase
 
 :DocsDatatableFixedColumn
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableFixedColumn.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableFixedColumn.client.vue" code lang="vue" -->
 
-```vue [DocsDatatableFixedColumn.vue]
+```vue [DocsDatatableFixedColumn.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 8 }, (item, index) => {
-        const firstName = faker.person.firstName();
-        const lastName = faker.person.lastName();
-        const email = faker.internet.email({ firstName, lastName }).toLowerCase();
-        return {
-          id: index + 1,
-          firstName,
-          lastName,
-          email,
-          location: `${faker.location.city()} ${faker.location.country()}`,
-          status: faker.helpers.arrayElement(["Active", "Inactive"]),
-          balance: faker.number.float({ min: 100, max: 1000, fractionDigits: 2 }),
-          department: faker.person.jobTitle(),
-          joinDate: faker.date.past({ years: 2 }),
-          lastActive: faker.date.recent({ days: 30 }),
-        };
-      });
-    },
-    { default: () => [] }
-  );
+  const data = Array.from({ length: 8 }, (item, index) => {
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const email = faker.internet.email({ firstName, lastName }).toLowerCase();
+    return {
+      id: index + 1,
+      firstName,
+      lastName,
+      email,
+      location: `${faker.location.city()} ${faker.location.country()}`,
+      status: faker.helpers.arrayElement(["Active", "Inactive"]),
+      balance: faker.number.float({ min: 100, max: 1000, fractionDigits: 2 }),
+      department: faker.person.jobTitle(),
+      joinDate: faker.date.past({ years: 2 }),
+      lastActive: faker.date.recent({ days: 30 }),
+    };
+  });
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1550,14 +1434,14 @@ import "datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css";
 </template>
 
 <style scoped>
-  :deep(.dataTable .dt-select-checkbox) {
-    @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-  }
   :deep(.dt-scroll-body table thead tr) {
-    @apply first:hidden;
+    &:first-child {
+      display: none;
+    }
   }
   :deep(.dtfc-fixed-start, .dtfc-fixed-left) {
-    @apply z-10 !bg-background;
+    z-index: 10;
+    background: var(--background) !important;
   }
 </style>
 ```
@@ -1669,6 +1553,8 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable) {
     .dtcr-moving-first {
       @apply border-l border-primary;
@@ -1695,9 +1581,9 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatablePagination.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatablePagination.client.vue" code lang="vue" -->
 
-```vue [DocsDatatablePagination.vue]
+```vue [DocsDatatablePagination.client.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import DataTable from "datatables.net";
@@ -1880,13 +1766,9 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 </template>
 
 <style scoped>
-  :deep(.dataTable) {
-    .dt-select-checkbox {
-      @apply form-checkbox size-[18px] cursor-pointer rounded-sm border-border bg-background checked:bg-sky-500 checked:text-sky-500 indeterminate:bg-sky-500 hover:indeterminate:bg-sky-500 focus:outline-none focus:ring-ring focus:ring-sky-500 focus:ring-offset-background;
-    }
-  }
   :deep(button.dt-paging-button) {
-    @apply rounded-md border border-border;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
   }
 </style>
 ```

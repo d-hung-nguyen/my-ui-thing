@@ -1,11 +1,16 @@
 <template>
-  <Primitive :class="styles({ size, variant, class: props.class })" v-bind="forwarded">
+  <Primitive
+    data-slot="kbd"
+    :class="styles({ size, variant, class: props.class })"
+    v-bind="forwarded"
+  >
     <slot />
   </Primitive>
 </template>
 <script setup lang="ts">
-  import { Primitive } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
@@ -13,7 +18,7 @@
         /** The size of the component */
         size?: VariantProps<typeof styles>["size"];
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
         /** The variant of the component */
         variant?: VariantProps<typeof styles>["variant"];
       }
@@ -27,7 +32,7 @@
   const forwarded = reactiveOmit(props, "class", "size");
 
   const styles = tv({
-    base: "pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded-md border border-border bg-muted font-sans font-medium",
+    base: "pointer-events-none inline-flex items-center gap-1 rounded-sm border border-border bg-muted font-sans font-medium shadow-xs select-none",
     variants: {
       size: {
         xs: "h-5 min-h-[16px] px-1 text-[10px]",

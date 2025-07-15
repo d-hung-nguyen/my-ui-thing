@@ -1,29 +1,28 @@
 <template>
-  <UiCard description="Choose what you want to be notified about.">
-    <template #title>
-      <UiCardTitle class="text-xl">Notifications </UiCardTitle>
-    </template>
+  <UiCard title="Notifications" description="Choose what you want to be notified about.">
     <template #content>
       <UiCardContent class="grid gap-1">
-        <template v-for="(n, k) in notez" :key="k">
-          <div
-            class="-mx-2 flex items-start space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground"
-            :class="[k === 1 ? 'bg-accent text-accent-foreground' : '']"
-          >
-            <Icon :name="n.icon" class="mt-px h-5 w-5" />
-            <div class="space-y-1">
-              <p class="text-sm font-medium leading-none">{{ n.title }}</p>
-              <p class="text-sm text-muted-foreground">{{ n.description }}</p>
-            </div>
-          </div>
-        </template>
+        <ToggleGroupRoot>
+          <template v-for="(n, k) in notes" :key="k">
+            <ToggleGroupItem
+              :value="n.title"
+              class="group flex w-full items-start gap-4 rounded-md p-4 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
+            >
+              <Icon :name="n.icon" class="mt-px size-5 group-data-[state=on]:text-primary" />
+              <div class="flex flex-col gap-0.5 text-left">
+                <p class="text-sm leading-none font-medium">{{ n.title }}</p>
+                <p class="text-sm text-muted-foreground">{{ n.description }}</p>
+              </div>
+            </ToggleGroupItem>
+          </template>
+        </ToggleGroupRoot>
       </UiCardContent>
     </template>
   </UiCard>
 </template>
 
 <script lang="ts" setup>
-  const notez = [
+  const notes = [
     {
       icon: "lucide:bell",
       title: "Everything",

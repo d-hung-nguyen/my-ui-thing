@@ -1,6 +1,6 @@
 <template>
-  <form class="mx-auto max-w-md" @submit="onSubmit">
-    <fieldset :disabled="isSubmitting" class="space-y-5">
+  <form class="mx-auto w-full max-w-xs" @submit="onSubmit">
+    <fieldset :disabled="isSubmitting" class="grid gap-5">
       <UiVeeTagsInput
         :max="5"
         placeholder="Type a brand and press enter..."
@@ -8,19 +8,17 @@
         name="brands"
         hint="This will be displayed to the public"
       />
-      <UiButton type="submit"> Submit </UiButton>
+      <UiButton :loading="isSubmitting" type="submit"> Submit </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { array, object, string } from "yup";
 
-  const schema = z.object({
-    brands: z
-      .array(z.string())
-      .min(2, "Add at least 2 brands")
-      .max(5, "You can add up to 5 brands"),
+  const schema = object({
+    brands: array(string().label("Brand")).label("Brands").min(2).max(5).required(),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
@@ -28,12 +26,9 @@
   });
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Saving brands...",
-      success: (_) => "Success! Your information has been saved!",
-      error: (_) => "Error! Your information could not be sent to our servers!",
+    await promiseTimeout(2000); // Simulate a network request
+    useSonner.success("Brands Submitted", {
+      description: h("pre", null, JSON.stringify(values.brands, null, 2)),
     });
   });
 </script>

@@ -50,15 +50,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-sign-up",
     validationSchema: toTypedSchema(
-      z.object({
-        fullName: z.string().min(3).max(50),
-        email: z.string().email(),
-        password: z.string().min(8).max(50),
+      object({
+        fullName: string().label("Full Name").min(3).max(50).required(),
+        email: string().label("Email").email().required(),
+        password: string().label("Password").required().min(8).max(50),
       })
     ),
   });

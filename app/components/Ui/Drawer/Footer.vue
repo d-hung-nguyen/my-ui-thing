@@ -1,13 +1,18 @@
 <template>
-  <Primitive v-bind="forwarded" :class="drawerFooterStyles({ class: props.class })">
+  <Primitive
+    data-slot="drawer-footer"
+    v-bind="forwarded"
+    :class="drawerFooterStyles({ class: props.class })"
+  >
     <slot />
   </Primitive>
 </template>
 
 <script lang="ts">
   import { reactiveOmit } from "@vueuse/core";
-  import { Primitive, useForwardProps } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive, useForwardProps } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   export const drawerFooterStyles = tv({
     base: "mt-auto flex flex-col gap-2 p-4",
@@ -17,7 +22,7 @@
     /**
      * Classes to add to the parent.
      */
-    class?: any;
+    class?: HTMLAttributes["class"];
   };
 </script>
 

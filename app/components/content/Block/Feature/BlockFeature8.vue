@@ -13,7 +13,7 @@
     <div class="grid grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-24">
       <div class="">
         <p class="font-semibold text-primary">New feature</p>
-        <h2 class="mb-4 mt-3 text-3xl font-semibold lg:mb-5 lg:text-4xl">
+        <h2 class="mt-3 mb-4 text-3xl font-semibold lg:mb-5 lg:text-4xl">
           Introducing team inboxes
         </h2>
         <p class="text-lg text-muted-foreground lg:text-xl">

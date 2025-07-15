@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-30 border-b bg-background/80 backdrop-blur">
-    <div class="container flex h-14 items-center justify-between">
+    <div class="flex h-14 w-full items-center justify-between px-6">
       <div class="flex items-center gap-10">
         <div class="flex items-center gap-5">
           <UiButton
@@ -8,7 +8,7 @@
             variant="outline"
             class="h-9 w-9 lg:hidden"
             @click="mobileNavState = true"
-            ><Icon name="heroicons:bars-2" class="h-4 w-4" />
+            ><Icon name="heroicons:bars-2" class="size-4" />
           </UiButton>
           <NuxtLink to="/" class="text-lg font-bold">UI Thing</NuxtLink>
         </div>
@@ -55,6 +55,12 @@
               </template>
             </UiDropdownMenuContent>
           </UiDropdownMenu>
+          <NuxtLink
+            :class="[route.path.includes('/colors/') ? '!text-primary' : '']"
+            to="/colors"
+            class="text-foreground/60 transition-colors hover:text-foreground"
+            >Colors</NuxtLink
+          >
         </nav>
       </div>
 
@@ -153,7 +159,6 @@
   const localProjects = [
     { name: "Cards", link: "/examples/cards" },
     { name: "Dashboard", link: "/examples/dashboard" },
-    { name: "Ticket Dashboard", link: "/examples/ticket-dashboard" },
     { name: "Schema Visualizer", link: "/examples/schema-visualizer" },
   ];
 </script>

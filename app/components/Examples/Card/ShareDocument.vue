@@ -1,36 +1,45 @@
 <template>
-  <UiCard description="Anyone with the link can view this document.">
-    <template #title>
-      <UiCardTitle class="text-xl"> Share this document </UiCardTitle>
-    </template>
+  <UiCard title="Share this document" description="Anyone with the link can view this document.">
     <template #content>
       <UiCardContent>
-        <div class="flex space-x-2">
-          <UiInput class="select-all" model-value="http://example.com/link/to/document" read-only />
-          <UiButton variant="secondary" class="shrink-0"> Copy Link </UiButton>
+        <div class="flex items-center gap-2">
+          <UiLabel for="link" class="sr-only"> Link </UiLabel>
+          <UiInput id="link" readonly value="http://example.com/link/to/document" class="h-8" />
+          <UiButton size="sm" variant="outline" class="shadow-none"> Copy Link </UiButton>
         </div>
         <UiSeparator class="my-4" />
-        <div class="space-y-4">
-          <h4 class="text-sm font-medium">People with access</h4>
+        <div class="flex flex-col gap-4">
+          <div class="text-sm font-medium">People with access</div>
           <div class="grid gap-6">
-            <template v-for="(p, i) in people" :key="i">
-              <div class="flex items-center justify-between space-x-4">
-                <div class="flex items-center space-x-4">
-                  <UiAvatar :src="p.avatar" :fallback="p.fallback" />
-                  <div>
-                    <p class="text-sm font-medium leading-none">{{ p.name }}</p>
-                    <p class="text-sm text-muted-foreground">{{ p.email }}</p>
-                  </div>
+            <div
+              v-for="person in people"
+              :key="person.email"
+              class="flex items-center justify-between gap-4"
+            >
+              <div class="flex items-center gap-4">
+                <UiAvatar>
+                  <UiAvatarImage :src="person.avatar" :alt="person.name" />
+                  <UiAvatarFallback>{{ person.name.charAt(0) }}</UiAvatarFallback>
+                </UiAvatar>
+                <div>
+                  <p class="text-sm leading-none font-medium">
+                    {{ person.name }}
+                  </p>
+                  <p class="text-sm text-muted-foreground">
+                    {{ person.email }}
+                  </p>
                 </div>
-                <UiSelect v-model="p.model" :default-value="p.model">
-                  <UiSelectTrigger placeholder="Select" class="ml-auto w-[110px]" />
-                  <UiSelectContent>
-                    <UiSelectItem value="edit" text="Can Edit" />
-                    <UiSelectItem value="view" text="Can View" />
-                  </UiSelectContent>
-                </UiSelect>
               </div>
-            </template>
+              <UiSelect v-model="person.model" class="w-fit">
+                <UiSelectTrigger class="ml-auto w-fit pr-2" aria-label="Edit" size="sm">
+                  <UiSelectValue placeholder="Select" />
+                </UiSelectTrigger>
+                <UiSelectContent align="end">
+                  <UiSelectItem value="edit">Can edit</UiSelectItem>
+                  <UiSelectItem value="view">Can view</UiSelectItem>
+                </UiSelectContent>
+              </UiSelect>
+            </div>
           </div>
         </div>
       </UiCardContent>
@@ -42,24 +51,27 @@
   const people = ref([
     {
       name: "Olivia Martin",
-      email: "o@example.com",
-      avatar: "https://avatar.vercel.sh/oliviamartin",
-      fallback: "OM",
+      email: "m@example.com",
+      avatar: "https://randomuser.me/api/portraits/med/women/85.jpg",
       model: ref("edit"),
     },
     {
       name: "Isabella Nguyen",
-      email: "i@example.com",
-      avatar: "https://avatar.vercel.sh/isabellanguyen",
-      fallback: "IG",
-      mdoel: ref("view"),
+      email: "b@example.com",
+      avatar: "https://randomuser.me/api/portraits/med/women/75.jpg",
+      model: ref("edit"),
     },
     {
       name: "Sofia Davis",
-      email: "s@example.com",
-      avatar: "https://avatar.vercel.sh/sofiadavis",
-      fallback: "SD",
-      model: ref("view"),
+      email: "p@example.com",
+      avatar: "https://randomuser.me/api/portraits/med/women/65.jpg",
+      model: ref("edit"),
+    },
+    {
+      name: "Ethan Thompson",
+      email: "e@example.com",
+      avatar: "https://randomuser.me/api/portraits/med/men/1.jpg",
+      model: ref("edit"),
     },
   ]);
 </script>

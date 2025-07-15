@@ -11,6 +11,7 @@
   import { UiBadge, UiCheckbox } from "#components";
   // Import any type that you may need
   import type { RowSelectionState } from "@tanstack/vue-table";
+  import type { CheckboxRootProps } from "reka-ui";
 
   //3. Fetch your data
   const { data } = await useAsyncData(
@@ -50,20 +51,20 @@
     columnHelper.accessor("select", {
       header({ table }) {
         return h(UiCheckbox, {
-          checked: table.getIsSomeRowsSelected()
+          modelValue: table.getIsSomeRowsSelected()
             ? "indeterminate"
             : table.getIsAllRowsSelected()
               ? true
               : false,
-          "onUpdate:checked": (v) =>
+          "onUpdate:modelValue": (v: CheckboxRootProps["modelValue"]) =>
             table.getToggleAllRowsSelectedHandler()({ target: { checked: v } }),
         });
       },
       cell({ row }) {
         return h(UiCheckbox, {
-          checked: row.getIsSelected(),
+          modelValue: row.getIsSelected(),
           disabled: !row.getCanSelect(),
-          "onUpdate:checked": row.getToggleSelectedHandler(),
+          "onUpdate:modelValue": row.getToggleSelectedHandler(),
         });
       },
     }),

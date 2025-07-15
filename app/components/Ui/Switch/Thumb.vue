@@ -1,21 +1,22 @@
 <template>
-  <SwitchThumb :class="styles({ class: props.class })" v-bind="forwarded">
+  <SwitchThumb data-slot="switch-thumb" :class="styles({ class: props.class })" v-bind="forwarded">
     <slot />
   </SwitchThumb>
 </template>
 
 <script lang="ts" setup>
-  import { SwitchThumb } from "radix-vue";
-  import type { SwitchThumbProps } from "radix-vue";
+  import { SwitchThumb } from "reka-ui";
+  import type { SwitchThumbProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     SwitchThumbProps & {
       /** Custom class(es) to add to parent element */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
+    base: "pointer-events-none block size-5 rounded-full bg-background shadow-xs ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0 data-[state=checked]:rtl:-translate-x-4",
   });
 </script>

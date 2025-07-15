@@ -3,7 +3,7 @@
     <div class="grid grow gap-2">
       <UiLabel for="checkbox-12" class="justify-start gap-2">
         Label
-        <span class="text-xs font-normal leading-[inherit] text-muted-foreground">
+        <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
           (Sublabel)
         </span>
       </UiLabel>

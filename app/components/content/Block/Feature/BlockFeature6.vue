@@ -1,6 +1,6 @@
 <template>
   <UiContainer class="relative py-16 lg:py-24">
-    <div class="absolute hidden lg:right-[350px] lg:top-[50px] lg:block xl:right-[550px]">
+    <div class="absolute hidden lg:top-[50px] lg:right-[350px] lg:block xl:right-[550px]">
       <div
         class="h-[300px] w-[300px] scale-x-100"
         style="transform: rotateX(180deg) rotate(309deg)"
@@ -15,7 +15,7 @@
     </div>
     <div class="max-w-[760px]">
       <p class="font-semibold text-primary">Features</p>
-      <h2 class="mb-4 mt-3 text-3xl font-semibold lg:mb-5 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-3xl font-semibold lg:mb-5 lg:text-4xl">
         Overflowing with useful features
       </h2>
       <p class="max-w-[700px] text-lg text-muted-foreground lg:text-xl">
@@ -47,7 +47,7 @@
         <img
           src="https://images.unsplash.com/photo-1507908708918-778587c9e563?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Share team inboxes feature"
-          class="h-[300px] w-full rounded-lg object-cover shadow-sm lg:h-[520px]"
+          class="h-[300px] w-full rounded-lg object-cover shadow-xs lg:h-[520px]"
         />
       </div>
     </div>

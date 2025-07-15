@@ -3,10 +3,10 @@
     <div class="mx-auto max-w-[760px]">
       <div class="text-center">
         <UiBadge variant="outline" class="gap-2 px-3 py-1.5 text-sm font-normal"
-          ><Icon name="lucide:circle-dot" class="h-4 w-4 text-primary" /> Features</UiBadge
+          ><Icon name="lucide:circle-dot" class="size-4 text-primary" /> Features</UiBadge
         >
       </div>
-      <h2 class="mb-4 mt-3 text-center text-3xl font-semibold lg:mb-5 lg:mt-7 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mt-7 lg:mb-5 lg:text-4xl">
         Cutting-edge features for advanced analytics
       </h2>
       <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
@@ -26,14 +26,14 @@
               />
             </div>
             <h3
-              class="mt-4 text-balance text-lg font-semibold lg:mt-5 lg:text-xl"
+              class="mt-4 text-lg font-semibold text-balance lg:mt-5 lg:text-xl"
               v-text="f.title"
             />
             <p class="mt-1 text-balance text-muted-foreground lg:mt-2" v-text="f.description" />
             <NuxtLink
               class="mt-4 inline-block font-semibold text-primary underline-offset-2 hover:underline lg:mt-5"
               :to="f.link.url"
-              >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="h-4 w-4"
+              >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="size-4"
             /></NuxtLink>
           </div>
         </template>
@@ -56,14 +56,14 @@
               />
             </div>
             <h3
-              class="mt-4 text-balance text-lg font-semibold lg:mt-5 lg:text-xl"
+              class="mt-4 text-lg font-semibold text-balance lg:mt-5 lg:text-xl"
               v-text="f.title"
             />
             <p class="mt-1 text-balance text-muted-foreground lg:mt-2" v-text="f.description" />
             <NuxtLink
               class="mt-4 inline-block font-semibold text-primary underline-offset-2 hover:underline lg:mt-5"
               :to="f.link.url"
-              >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="h-4 w-4"
+              >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="size-4"
             /></NuxtLink>
           </div>
         </template>

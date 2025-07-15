@@ -2,11 +2,11 @@
 title: Toggle
 description: A two-state button that can be either on or off.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/toggle.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/toggle.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/toggle.html#api-reference
+    href: https://reka-ui.com/docs/components/toggle.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -36,7 +36,7 @@ npx ui-thing@latest add toggle
 <template>
   <div class="flex w-full items-center justify-center">
     <UiToggle aria-label="Toggle italic">
-      <Icon name="lucide:bold" class="h-4 w-4" />
+      <Icon name="lucide:bold" class="size-4" />
     </UiToggle>
   </div>
 </template>

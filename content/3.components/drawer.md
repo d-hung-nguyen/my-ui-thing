@@ -3,7 +3,7 @@ title: Drawer
 description: A drawer component that can be used as a Dialog replacement on tablet and mobile devices.
 links:
   - title: Vaul Vue Docs
-    href: https://github.com/radix-vue/vaul-vue/tree/main?tab=readme-ov-file#vaul-vue
+    href: https://github.com/reka-ui/vaul-vue/tree/main?tab=readme-ov-file#vaul-vue
 ---
 
 ## Source code
@@ -42,9 +42,6 @@ We can bring the different components together to make a simple drawer.
           <UiDrawerTitle class="mb-1.5">Drawer Title</UiDrawerTitle>
           <UiDrawerDescription>
             This is a basic drawer with a title and description.
-            <!-- eslint-disable-next-line vue/html-self-closing -->
-            <br />
-            For some strange reason the Vaul won't pull to close when a form is present inside it
           </UiDrawerDescription>
 
           <div class="relative">
@@ -64,7 +61,7 @@ We can bring the different components together to make a simple drawer.
             </form>
           </div>
 
-          <UiDrawerClose class="absolute right-4 top-3 h-7 w-7" as-child>
+          <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
             <UiButton variant="ghost" size="icon-sm" class="opacity-50 hover:opacity-100">
               <Icon name="lucide:x" />
             </UiButton>
@@ -76,15 +73,15 @@ We can bring the different components together to make a simple drawer.
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const isOpen = defineModel<boolean>();
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        email: z.string().email(),
-        username: z.string().min(3),
+      object({
+        email: string().label("Email").email().required().trim(),
+        username: string().label("Username").min(3).required().trim().lowercase(),
       })
     ),
   });
@@ -123,8 +120,7 @@ We can add an image inside as well.
         <div class="mx-auto w-full max-w-screen-md rounded-t-lg p-4 pb-10">
           <UiDrawerTitle class="mb-1.5">Image</UiDrawerTitle>
           <UiDrawerDescription>
-            Right click on the image to see the context menu. This drawer seems to not have the pull
-            down issue.
+            Right click on the image to see the context menu.
           </UiDrawerDescription>
 
           <div class="relative min-h-[400px]">
@@ -162,7 +158,7 @@ We can add an image inside as well.
             </UiAspectRatio>
           </div>
 
-          <UiDrawerClose class="absolute right-4 top-3 h-7 w-7" as-child>
+          <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
             <UiButton variant="ghost" size="icon-sm" class="opacity-50 hover:opacity-100">
               <Icon name="lucide:x" />
             </UiButton>

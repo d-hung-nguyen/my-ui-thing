@@ -1,6 +1,6 @@
 # UI Thing
 
-Set of components created with Radix-Vue. Inspired by shadc/ui & shadcn-vue.
+Set of components created with Reka UI. Inspired by shadcn/ui & shadcn-vue.
 
 ![Cover Image](/public/cover.png)
 
@@ -11,7 +11,7 @@ The documentation can be found here: https://ui-thing.behonbaker.com/
 ## Credits
 
 - [shadcn/ui](https://ui.shadcn.com/)
-- [Radix-Vue](https://www.radix-vue.com/)
+- [Reka UI](https://www.reka-ui.com/)
 - [TailwindCSS for Nuxt](https://tailwindcss.nuxtjs.org/)
 - [Nuxt](https://nuxt.com/)
 - [Nuxt UI](https://ui.nuxt.com/getting-started)

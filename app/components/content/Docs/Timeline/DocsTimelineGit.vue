@@ -1,5 +1,5 @@
 <template>
-  <UiTimeline :model-value="2">
+  <UiTimeline :model-value="3">
     <UiTimelineItem
       v-for="item in items"
       :key="item.id"
@@ -8,18 +8,20 @@
     >
       <UiTimelineHeader>
         <UiTimelineSeparator
-          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-[1.625rem]"
+          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5"
         />
         <UiTimelineTitle class="mt-0.5">{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-[orientation=vertical]/timeline:-left-7 group-data-[completed=true]/timeline-item:bg-primary group-data-[completed=true]/timeline-item:text-primary-foreground"
+          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
         >
-          <Icon :name="item.icon" class="size-4" />
+          <Icon :name="item.icon" :size="14" />
         </UiTimelineIndicator>
       </UiTimelineHeader>
       <UiTimelineContent>
         {{ item.description }}
-        <UiTimelineDate class="mb-0 mt-2">{{ item.date }}</UiTimelineDate>
+        <UiTimelineDate v-if="item.date" class="mt-2 mb-0">
+          {{ item.date }}
+        </UiTimelineDate>
       </UiTimelineContent>
     </UiTimelineItem>
   </UiTimeline>

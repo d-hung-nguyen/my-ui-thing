@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem
-        v-for="item in items"
-        :key="item.id"
-        :step="item.id"
-        class="w-[calc(50%-1.5rem)] odd:!ml-auto odd:ms-auto even:text-right even:group-data-[orientation=vertical]/timeline:me-8 even:group-data-[orientation=vertical]/timeline:ms-0 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2"
-      >
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineDate>{{ item.date }}</UiTimelineDate>
-          <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="4">
+    <UiTimelineItem
+      v-for="item in items"
+      :key="item.id"
+      :step="item.id"
+      class="w-[calc(50%-1.5rem)] odd:ms-auto even:text-right even:group-data-[orientation=vertical]/timeline:ms-0 even:group-data-[orientation=vertical]/timeline:me-8 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:-right-6 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:left-auto even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:translate-x-1/2 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:-right-6 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:left-auto even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:translate-x-1/2"
+    >
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineDate>{{ item.date }}</UiTimelineDate>
+        <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>

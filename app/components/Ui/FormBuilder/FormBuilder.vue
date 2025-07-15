@@ -171,6 +171,8 @@
 </template>
 
 <script lang="ts">
+  import type { HTMLAttributes } from "vue";
+
   export type FormBuilder = {
     description?: string;
     hint?: string;
@@ -182,9 +184,9 @@
     type?: string;
     value?: any;
     rules?: any;
-    class?: any;
+    class?: HTMLAttributes["class"];
     slot?: string;
-    wrapperClass?: any;
+    wrapperClass?: HTMLAttributes["class"];
     renderIf?: () => boolean;
     options?: any[];
     variant:
@@ -208,6 +210,7 @@
     fields: FormBuilder[];
   };
 </script>
+
 <script lang="ts" setup>
   defineProps<FormBuilderProps>();
 

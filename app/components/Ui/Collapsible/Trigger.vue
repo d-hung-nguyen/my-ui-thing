@@ -1,12 +1,12 @@
 <template>
-  <CollapsibleTrigger v-bind="forwarded">
+  <CollapsibleTrigger data-slot="collapsible-trigger" v-bind="forwarded">
     <slot />
   </CollapsibleTrigger>
 </template>
 
 <script lang="ts" setup>
-  import { CollapsibleTrigger, useForwardProps } from "radix-vue";
-  import type { CollapsibleTriggerProps } from "radix-vue";
+  import { CollapsibleTrigger, useForwardProps } from "reka-ui";
+  import type { CollapsibleTriggerProps } from "reka-ui";
 
   const props = defineProps<CollapsibleTriggerProps>();
   const forwarded = useForwardProps(props);

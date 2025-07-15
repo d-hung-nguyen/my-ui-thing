@@ -2,11 +2,11 @@
 title: Dialog
 description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/dialog.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/dialog.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/dialog.html#api-reference
+    href: https://reka-ui.com/docs/components/dialog.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -115,16 +115,37 @@ npx ui-thing@latest add dialog
         class="sm:max-w-md"
         title="Share link"
         description="Anyone who has this link will be able to view this."
+        @interact-outside="
+          (event) => {
+            const target = event.target as HTMLElement;
+            if (target?.closest('[data-sonner-toaster]')) return event.preventDefault();
+          }
+        "
       >
         <template #content>
           <div class="flex items-center space-x-2">
             <div class="grid flex-1 gap-2">
               <UiLabel for="link" class="sr-only"> Link </UiLabel>
-              <UiInput id="link" model-value="https://ui.shadcn.com/docs/installation" read-only />
+              <UiInput
+                id="link"
+                model-value="https://ui-thing.behonbaker.com/getting-started"
+                readonly
+              />
             </div>
-            <UiButton type="submit" size="icon" class="px-3" @click="copyValue">
+            <UiButton
+              :disabled="!isSupported"
+              type="submit"
+              size="icon"
+              class="px-3"
+              @click="
+                copy('https://ui-thing.behonbaker.com/getting-started');
+                useSonner('Copied', {
+                  description: 'The link has been copied to your clipboard.',
+                });
+              "
+            >
               <span class="sr-only">Copy</span>
-              <Icon name="lucide:copy" class="h-4 w-4" />
+              <Icon name="lucide:copy" class="size-4" />
             </UiButton>
           </div>
         </template>
@@ -141,27 +162,7 @@ npx ui-thing@latest add dialog
 </template>
 
 <script lang="ts" setup>
-  const copyValue = () => {
-    const { isSupported, copy } = useClipboard({ legacy: true });
-    if (isSupported.value) {
-      copy("https://ui.shadcn.com/docs/installation");
-      useToast().toast({
-        title: "Copied",
-        description: `The link has been copied to your clipboard.`,
-        duration: 5000,
-        icon: "lucide:thumbs-up",
-      });
-      return;
-    } else {
-      useToast().toast({
-        title: "Not supported",
-        description: `Your browser does not support copying to clipboard.`,
-        duration: 5000,
-        icon: "lucide:thumbs-down",
-      });
-      return;
-    }
-  };
+  const { isSupported, copy } = useClipboard({ legacy: true });
 </script>
 ```
 
@@ -1087,18 +1088,18 @@ I just made them work with my setup.
             <div class="space-y-4">
               <div>
                 <fieldset class="space-y-4">
-                  <legend class="text-lg font-semibold leading-none text-foreground">
+                  <legend class="text-lg leading-none font-semibold text-foreground">
                     How hard was it to set up your account?
                   </legend>
                   <UiRadioGroup
                     orientation="horizontal"
-                    class="flex gap-0 -space-x-px rounded-lg shadow-sm shadow-black/5"
+                    class="flex gap-0 -space-x-px rounded-lg shadow-xs shadow-black/5"
                   >
                     <label
                       v-for="number in 8"
                       :key="number"
                       :for="`radio-17-r${number}`"
-                      class="relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border border-input text-center text-sm outline-offset-2 transition-colors first:rounded-s-lg last:rounded-e-lg has-[[data-state=checked]]:z-10 has-[[data-disabled]]:cursor-not-allowed has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent has-[[data-disabled]]:opacity-50 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70"
+                      class="relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border border-input text-center text-sm outline-offset-2 transition-colors first:rounded-s-lg last:rounded-e-lg has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 has-[[data-state=checked]]:z-10 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent"
                     >
                       <RadioGroupItem
                         :id="`radio-17-r${number}`"
@@ -1304,15 +1305,15 @@ I just made them work with my setup.
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-sign-up",
     validationSchema: toTypedSchema(
-      z.object({
-        fullName: z.string().min(3).max(50),
-        email: z.string().email(),
-        password: z.string().min(8).max(50),
+      object({
+        fullName: string().label("Full Name").min(3).max(50).required(),
+        email: string().label("Email").email().required(),
+        password: string().label("Password").required().min(8).max(50),
       })
     ),
   });
@@ -1407,15 +1408,15 @@ I just made them work with my setup.
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { bool, object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-sign-in",
     validationSchema: toTypedSchema(
-      z.object({
-        email: z.string().email(),
-        password: z.string().min(8).max(50),
-        rememberMe: z.boolean().optional().default(true),
+      object({
+        email: string().label("Email").email().required(),
+        password: string().label("Password").required().min(8).max(50),
+        rememberMe: bool().label("Remember me").optional().default(true),
       })
     ),
   });
@@ -1560,7 +1561,7 @@ I just made them work with my setup.
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { array, object, string } from "yup";
 
   const { copied, copy } = useClipboard();
   const { handleSubmit, isSubmitting } = useForm({
@@ -1569,8 +1570,8 @@ I just made them work with my setup.
       members: ["", "mur@ha.pw"],
     },
     validationSchema: toTypedSchema(
-      z.object({
-        members: z.array(z.string().email()).min(1),
+      object({
+        members: array().of(string().email().label("Email").required()).label("Members").min(1),
       })
     ),
   });
@@ -1580,7 +1581,7 @@ I just made them work with my setup.
   const submit = handleSubmit(async (v) => {
     try {
       useSonner.success("Invitations Sent", {
-        description: `${v.members.length} invitations were successfully sent`,
+        description: `${v.members?.length} invitations were successfully sent`,
       });
       open.value = false;
     } catch (error: any) {
@@ -1666,17 +1667,30 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
 
 <script lang="ts" setup>
   import dayjs from "dayjs";
-  import { z } from "zod";
+  import { bool, object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-card-details",
     validationSchema: toTypedSchema(
-      z.object({
-        nameOnCard: z.string().min(2).max(50).default("Elijah Baker"),
-        cardNumber: z.string().length(19, "Must be 16 digits").default("4242 4242 4242 4242"),
-        expiryDate: z.string().length(5, "Invalid").default(dayjs().format("MM/YY")),
-        cvc: z.string().length(3, "Invalid").default("123"),
-        saveCard: z.boolean().optional().default(true),
+      object({
+        nameOnCard: string()
+          .label("Name on card")
+          .required()
+          .min(2)
+          .max(50)
+          .default("Elijah Baker"),
+        cardNumber: string()
+          .label("Card number")
+          .required()
+          .default("4242 4242 4242 4242")
+          .matches(/^\d{4} \d{4} \d{4} \d{4}$/, "Must be 16 digits"),
+        expiryDate: string().label("Expiry date").required().default(dayjs().format("MM/YY")),
+        cvc: string()
+          .label("CVC")
+          .required()
+          .default("123")
+          .matches(/^\d{3}$/, "Invalid CVC"),
+        saveCard: bool().default(true),
       })
     ),
   });
@@ -1739,7 +1753,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 v-for="plan in plans"
                 :key="plan.id"
                 :for="`radio-${plan.id}`"
-                class="relative flex cursor-pointer flex-col gap-1 rounded-lg border border-input p-4 shadow-sm shadow-black/5 outline-offset-2 transition-colors has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70"
+                class="relative flex cursor-pointer flex-col gap-1 rounded-lg border border-input p-4 shadow-xs shadow-black/5 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring/50 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70"
               >
                 <UiRadioGroupItem
                   :id="`radio-${plan.id}`"
@@ -1757,7 +1771,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             <UiVeeInput name="nameOnCard" label="Name on card" required />
             <div class="space-y-2">
               <legend class="text-sm font-medium text-foreground">Card Details</legend>
-              <div class="rounded-lg shadow-sm shadow-black/5">
+              <div class="rounded-lg shadow-xs shadow-black/5">
                 <div class="relative focus-within:z-10">
                   <UiVeeInput
                     v-maska="'#### #### #### ####'"
@@ -1769,7 +1783,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                   />
                 </div>
                 <div class="-mt-px flex">
-                  <div class="min-w-0 flex-1 focus-within:z-10">
+                  <div class="min-w-0 focus-within:z-10">
                     <UiVeeInput
                       v-maska="'##/##'"
                       placeholder="MM/YY"
@@ -1778,7 +1792,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                       class="rounded-e-none rounded-t-none shadow-none [direction:inherit]"
                     />
                   </div>
-                  <div class="-ms-px min-w-0 flex-1 focus-within:z-10">
+                  <div class="-ms-px min-w-0 focus-within:z-10">
                     <UiVeeInput
                       v-maska="'###'"
                       placeholder="CVC"
@@ -1794,7 +1808,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             <button
               v-if="!showCouponInput"
               type="button"
-              class="text-base underline underline-offset-2 hover:no-underline md:text-sm"
+              class="text-sm underline underline-offset-2 hover:no-underline"
               @click="showCouponInput = true"
             >
               + Add coupon
@@ -1864,7 +1878,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             <div
               v-for="(plan, index) in plans"
               :key="index"
-              class="relative flex w-full items-center gap-4 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent md:gap-2"
+              class="relative flex w-full items-center gap-4 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent md:gap-2"
             >
               <UiRadioGroupItem
                 :id="plan.value"
@@ -2000,7 +2014,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
           <!-- Avatar -->
           <div class="-mt-10 px-6">
             <div
-              class="relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-muted shadow-sm shadow-black/10"
+              class="relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-muted shadow-xs shadow-black/10"
             >
               <img
                 v-if="currentAvatarImage"
@@ -2021,7 +2035,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
               </button>
             </div>
           </div>
-          <div class="px-6 pb-6 pt-4">
+          <div class="px-6 pt-4 pb-6">
             <form @submit="submit">
               <fieldset class="space-y-4" :disabled="isSubmitting">
                 <div class="flex flex-col gap-4 sm:flex-row">
@@ -2075,7 +2089,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const defaultBanner =
     "https://images.unsplash.com/photo-1474779751981-5d6bb8cb0a35?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -2128,31 +2142,23 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-edit-profile",
     validationSchema: toTypedSchema(
-      z.object({
-        firstName: z
-          .string()
-          .nonempty("First name too short")
-          .max(50, "Too long")
-          .default("James")
-          .describe("First name"),
-        lastName: z.string().nonempty("Last name too short").max(50, "Too long").default("Bond"),
-        username: z
-          .string()
-          .nonempty("Username too short")
-          .max(30, "Too long")
-          .default("agent-007"),
-        website: z
-          .string()
-          .nonempty("Website invalid")
-          .default("www.007.com")
-          .refine(
-            (v) => {
-              // regex to check if a website is valid
-              return /^(https?:\/\/)?([\da-z\\.-]+)\.([a-z\\.]{2,6})([\\/\w \\.-]*)*\/?$/.test(v);
-            },
-            { message: "Invalid URL" }
-          ),
-        bio: z.string().nonempty().max(200).default("The name is Bond, James Bond."),
+      object({
+        firstName: string().label("First name").required().min(2).max(50).default("James").trim(),
+        lastName: string().label("Last name").required().min(2).max(50).default("Bond").trim(),
+        username: string()
+          .label("Username")
+          .required()
+          .max(30)
+          .default("agent-007")
+          .trim()
+          .lowercase(),
+        website: string().label("Website").required().default("www.007.com").url(),
+        bio: string()
+          .label("Biography")
+          .required()
+          .max(200)
+          .default("The name is Bond, James Bond.")
+          .trim(),
       })
     ),
   });
@@ -2210,7 +2216,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             />
           </TransitionFade>
         </div>
-        <div class="space-y-6 overflow-x-hidden px-6 pb-6 pt-3">
+        <div class="space-y-6 overflow-x-hidden px-6 pt-3 pb-6">
           <TransitionFade mode="out-in">
             <UiDialogHeader v-if="showImage">
               <UiDialogTitle>{{ stepContent[step - 1].title }}</UiDialogTitle>
@@ -2244,7 +2250,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 Next
                 <Icon
                   name="lucide:arrow-right"
-                  class="-me-1 ms-2 size-4 opacity-60 transition-transform group-hover:translate-x-0.5"
+                  class="ms-2 -me-1 size-4 opacity-60 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </UiButton>

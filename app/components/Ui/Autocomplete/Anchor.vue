@@ -1,20 +1,25 @@
 <template>
-  <ComboboxAnchor v-bind="props" :class="styles({ class: props.class })">
+  <ComboboxAnchor
+    data-slot="autocomplete-anchor"
+    v-bind="props"
+    :class="styles({ class: props.class })"
+  >
     <slot />
   </ComboboxAnchor>
 </template>
 
 <script lang="ts" setup>
-  import { ComboboxAnchor } from "radix-vue";
-  import type { ComboboxAnchorProps } from "radix-vue";
+  import { ComboboxAnchor } from "reka-ui";
+  import type { ComboboxAnchorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     ComboboxAnchorProps & {
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
 
   const styles = tv({
-    base: "flex h-10 w-full items-center rounded-md border border-input bg-background px-3 py-2 ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+    base: "flex h-9 w-full items-center rounded-md border border-input bg-background px-3 text-base shadow-xs transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:outline-none dark:bg-input/30",
   });
 </script>

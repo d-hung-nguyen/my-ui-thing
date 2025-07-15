@@ -9,10 +9,10 @@
         <UiDropdownMenuSeparator />
         <template v-for="h in heroList" :key="h.id">
           <UiDropdownMenuCheckboxItem
-            :checked="selectedHeros.includes(h.id)"
+            :model-value="selectedHeros.includes(h.id)"
             class="mb-1"
             @select="(e) => e.preventDefault()"
-            @update:checked="
+            @update:model-value="
               selectedHeros.includes(h.id)
                 ? selectedHeros.splice(selectedHeros.indexOf(h.id), 1)
                 : selectedHeros.push(h.id)

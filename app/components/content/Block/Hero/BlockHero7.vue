@@ -3,11 +3,11 @@
     <div>
       <UiBadge to="#" variant="outline" class="px-3 py-1.5 text-sm font-normal lg:py-2"
         >New feature! Check out our new dashboard
-        <Icon class="ml-3 h-4 w-4" name="lucide:arrow-right"
+        <Icon class="ml-3 size-4" name="lucide:arrow-right"
       /></UiBadge>
     </div>
 
-    <h1 class="mb-4 mt-7 text-4xl font-bold lg:mb-6 lg:mt-5 lg:text-center lg:text-5xl xl:text-6xl">
+    <h1 class="mt-7 mb-4 text-4xl font-bold lg:mt-5 lg:mb-6 lg:text-center lg:text-5xl xl:text-6xl">
       <!-- eslint-disable-next-line vue/html-self-closing -->
       High-performing remote teams.<br />The future of work.
     </h1>

@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="grid space-y-1">
-      <h1 class="text-md font-semibold text-foreground">Customize</h1>
+      <h1 class="text-base font-semibold text-foreground">Customize</h1>
       <p class="text-xs text-muted-foreground">Pick a style and color for your components.</p>
     </div>
     <div class="space-y-1.5 pt-6">
@@ -11,13 +11,13 @@
           v-for="(color, index) in allColors"
           :key="index"
           variant="outline"
-          class="h-8 justify-start px-3"
+          class="h-8 justify-start bg-transparent px-3"
           :class="color === theme ? 'border-2 border-foreground' : ''"
           @click="setTheme(color)"
         >
           <span
             class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
-            :style="{ backgroundColor: colors[color][7].rgb }"
+            :style="{ backgroundColor: colors?.[color]?.[7]?.rgb || '' }"
           >
             <Icon v-if="color === theme" name="lucide:check" class="h-3 w-3 text-white" />
           </span>
@@ -54,7 +54,7 @@
           :class="{ 'border-2 border-foreground': !isDark }"
           @click="toggleColorMode"
         >
-          <Icon name="lucide:sun" class="mr-2 h-4 w-4" />
+          <Icon name="lucide:sun" class="mr-2 size-4" />
           <span class="text-xs">Light</span>
         </UiButton>
         <UiButton
@@ -63,7 +63,7 @@
           :class="{ 'border-2 border-foreground': isDark }"
           @click="toggleColorMode"
         >
-          <Icon name="lucide:moon" class="mr-2 h-4 w-4" />
+          <Icon name="lucide:moon" class="mr-2 size-4" />
           <span class="text-xs">Dark</span>
         </UiButton>
       </div>

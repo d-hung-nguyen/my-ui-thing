@@ -1,18 +1,21 @@
 <template>
-  <ComboboxArrow v-bind="props" :class="styles({ class: props.class })" />
+  <ComboboxArrow
+    data-slot="autocomplete-arrow"
+    v-bind="props"
+    :class="styles({ class: props.class })"
+  />
 </template>
 
 <script lang="ts" setup>
-  import { ComboboxArrow } from "radix-vue";
-  import type { ComboboxArrowProps } from "radix-vue";
+  import { ComboboxArrow } from "reka-ui";
+  import type { ComboboxArrowProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     ComboboxArrowProps & {
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
 
-  const styles = tv({
-    base: "rotate-45 border bg-muted",
-  });
+  const styles = tv({ base: "fill-muted stroke-border" });
 </script>

@@ -12,11 +12,11 @@
           A list of navigation items for mobile
         </UiDrawerDescription>
 
-        <div class="relative h-[calc(100dvh-230px)] overflow-y-auto pl-6 pr-2">
+        <div class="relative h-[calc(100dvh-230px)] overflow-y-auto pr-2 pl-6">
           <DocsNav :links="navigation" @clicked="mobileNavState = false" />
         </div>
 
-        <UiDrawerClose class="absolute right-4 top-3 h-7 w-7" as-child>
+        <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
           <UiButton variant="ghost" size="icon-sm" class="opacity-50 hover:opacity-100">
             <Icon name="lucide:x" />
           </UiButton>

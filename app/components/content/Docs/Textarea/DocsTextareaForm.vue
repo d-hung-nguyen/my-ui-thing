@@ -1,5 +1,5 @@
 <template>
-  <form @submit="onSubmit">
+  <form class="mx-auto max-w-xs" @submit="onSubmit">
     <Field v-slot="{ componentField }" name="bio">
       <UiFormItem label="Tell us about yourself" description="Feel free to @mention others">
         <UiTextarea v-bind="componentField" />
@@ -12,27 +12,19 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        bio: z
-          .string({
-            required_error: "Please tell us about yourself",
-          })
-          .min(10, "At least 10 characters please")
-          .max(1000),
+      object({
+        bio: string().label("Bio").required().min(10).max(1000).trim(),
       })
     ),
   });
 
-  const onSubmit = handleSubmit((values) => {
-    toast({
-      title: "Success!",
-      description: h("pre", null, JSON.stringify(values, null, 2)),
-      variant: "success",
-      duration: 5000,
+  const onSubmit = handleSubmit(() => {
+    useSonner.success("Bio Updated", {
+      description: "Your bio has been successfully updated.",
     });
   });
 </script>

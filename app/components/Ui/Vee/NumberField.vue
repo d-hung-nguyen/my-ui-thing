@@ -14,6 +14,7 @@
         v-model="value"
         :disabled="disabled"
         :required="required"
+        :aria-invalid="!!errorMessage"
         :name="name"
       >
         <template v-for="(_, slotName) in $slots" #[slotName]="scope">
@@ -21,30 +22,79 @@
         </template>
       </UiNumberField>
     </div>
-    <TransitionSlide group tag="div">
-      <p v-if="hint && !errorMessage" key="hint" class="mt-1.5 text-sm text-muted-foreground">
+    <AnimatePresence as="div" multiple mode="wait">
+      <motion.p
+        v-if="hint && !errorMessage"
+        :variants
+        initial="initial"
+        exit="initial"
+        animate="animate"
+        :transition="{ type: 'keyframes' }"
+        class="mt-1.5 text-sm text-muted-foreground"
+      >
         {{ hint }}
-      </p>
+      </motion.p>
 
-      <p v-if="errorMessage" key="errorMessage" class="mt-1.5 text-sm text-destructive">
+      <motion.p
+        v-if="errorMessage"
+        :variants
+        initial="initial"
+        exit="initial"
+        animate="animate"
+        :transition="{ type: 'keyframes' }"
+        class="mt-1.5 text-sm text-destructive"
+      >
         {{ errorMessage }}
-      </p>
-    </TransitionSlide>
+      </motion.p>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import type { NumberFieldRootProps } from "radix-vue";
+  import { motion } from "motion-v";
+  import type { NumberFieldRootProps } from "reka-ui";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   interface Props extends NumberFieldRootProps {
+    /**
+     * The label to display above the field
+     */
     label?: string;
+    /**
+     * The label hint to display next to the label.
+     */
     labelHint?: string;
+    /**
+     * Hint to display below the input field.
+     */
     hint?: string;
+    /**
+     * Whether the field is disabled.
+     */
     disabled?: boolean;
+    /**
+     * The name of the field, used for form submission.
+     */
     name?: string;
+    /**
+     * The id of the input element.
+     */
     id?: string;
+    /**
+     * Rules for the field validation.
+     */
     rules?: any;
+    /**
+     * Whether to validate the field on mount.
+     */
     validateOnMount?: boolean;
+    /**
+     * Whether the field is required.
+     */
     required?: boolean;
   }
   const props = defineProps<Props>();

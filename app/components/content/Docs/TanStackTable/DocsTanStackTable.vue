@@ -6,7 +6,7 @@
         <UiDropdownMenuTrigger as-child>
           <UiButton variant="outline">
             <span>View</span>
-            <Icon name="lucide:chevron-down" class="h-4 w-4" />
+            <Icon name="lucide:chevron-down" class="size-4" />
           </UiButton>
         </UiDropdownMenuTrigger>
         <UiDropdownMenuContent :side-offset="10" align="start" class="w-[300px] md:w-[200px]">
@@ -16,8 +16,8 @@
             <UiDropdownMenuCheckboxItem
               v-for="column in table?.getAllColumns().filter((column) => column.getCanHide())"
               :key="column.id"
-              :checked="column.getIsVisible()"
-              @update:checked="tableRef?.toggleColumnVisibility(column)"
+              :model-value="column.getIsVisible()"
+              @update:model-value="tableRef?.toggleColumnVisibility(column)"
             >
               <span class="text-sm capitalize">{{ column?.id }}</span>
             </UiDropdownMenuCheckboxItem>
@@ -127,7 +127,7 @@
         return h(
           resolveComponent("UiButton"),
           { variant: "ghost", size: "icon", class: "w-9 h-9" },
-          () => [h(resolveComponent("Icon"), { name: "lucide:more-horizontal", class: "h-4 w-4" })]
+          () => [h(resolveComponent("Icon"), { name: "lucide:more-horizontal", class: "size-4" })]
         );
       },
     },

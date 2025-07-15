@@ -1,22 +1,26 @@
 <template>
-  <ComboboxRoot v-bind="forwarded" :class="styles({ class: props.class })">
-    <slot />
+  <ComboboxRoot
+    v-slot="slotProps"
+    data-slot="autocomplete"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
+    <slot v-bind="slotProps" />
   </ComboboxRoot>
 </template>
 
 <script lang="ts" setup>
-  import { ComboboxRoot, useForwardPropsEmits } from "radix-vue";
-  import type { ComboboxRootEmits, ComboboxRootProps } from "radix-vue";
+  import { ComboboxRoot, useForwardPropsEmits } from "reka-ui";
+  import type { ComboboxRootEmits, ComboboxRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     ComboboxRootProps & {
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
 
   const emits = defineEmits<ComboboxRootEmits>();
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);
-  const styles = tv({
-    base: "relative",
-  });
+  const styles = tv({ base: "relative" });
 </script>

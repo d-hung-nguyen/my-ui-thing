@@ -12,9 +12,9 @@
                   <div
                     class="flex aspect-square size-5 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
                   >
-                    <Icon :name="activeTeam.logo" mode="svg" class="size-3" />
+                    <Icon v-if="activeTeam" :name="activeTeam?.logo" mode="svg" class="size-3" />
                   </div>
-                  <span class="truncate font-semibold">{{ activeTeam.name }}</span>
+                  <span class="truncate font-semibold">{{ activeTeam?.name }}</span>
                   <Icon name="lucide:chevron-down" class="ml-auto opacity-50" />
                 </UiSidebarMenuButton>
               </UiDropdownMenuTrigger>
@@ -188,7 +188,7 @@
       <header class="flex h-14 shrink-0 items-center gap-2">
         <div class="flex flex-1 items-center gap-2 px-3">
           <UiSidebarTrigger />
-          <UiSeparator orientation="vertical" class="mr-2 h-4" />
+          <UiDivider orientation="vertical" class="mr-2 h-4 w-px" />
           <UiBreadcrumbs :items="breadcrumbItems" />
         </div>
         <div class="ml-auto px-3">

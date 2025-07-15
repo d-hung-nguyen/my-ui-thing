@@ -37,23 +37,21 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        type: z.enum(["all", "mentions", "none"], {
-          required_error: "You need to select a notification type.",
-        }),
+      object({
+        type: string()
+          .oneOf(["all", "mentions", "none"], "You need to select a notification type.")
+          .required("You need to select a notification type."),
       })
     ),
   });
 
   const onSubmit = handleSubmit((values) => {
-    toast({
-      title: "Settings updated",
+    useSonner("Settings updated", {
       description: h("pre", { class: "p-2" }, JSON.stringify(values, null, 2)),
-      variant: "success",
     });
   });
 </script>

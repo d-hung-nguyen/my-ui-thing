@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center">
     <UiVeeInput
       label="Input with end add-on"
-      class="peer pe-16"
+      class="peer pr-16"
       placeholder="google.com"
       type="text"
     >

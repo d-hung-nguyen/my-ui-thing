@@ -9,9 +9,6 @@
           <UiDrawerTitle class="mb-1.5">Drawer Title</UiDrawerTitle>
           <UiDrawerDescription>
             This is a basic drawer with a title and description.
-            <!-- eslint-disable-next-line vue/html-self-closing -->
-            <br />
-            For some strange reason the Vaul won't pull to close when a form is present inside it
           </UiDrawerDescription>
 
           <div class="relative">
@@ -31,7 +28,7 @@
             </form>
           </div>
 
-          <UiDrawerClose class="absolute right-4 top-3 h-7 w-7" as-child>
+          <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
             <UiButton variant="ghost" size="icon-sm" class="opacity-50 hover:opacity-100">
               <Icon name="lucide:x" />
             </UiButton>
@@ -43,15 +40,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const isOpen = defineModel<boolean>();
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        email: z.string().email(),
-        username: z.string().min(3),
+      object({
+        email: string().label("Email").email().required().trim(),
+        username: string().label("Username").min(3).required().trim().lowercase(),
       })
     ),
   });

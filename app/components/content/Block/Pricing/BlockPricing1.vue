@@ -2,7 +2,7 @@
   <UiContainer class="relative py-16 lg:py-24">
     <div class="max-w-[760px]">
       <p class="font-semibold text-primary">Pricing</p>
-      <h2 class="mb-4 mt-3 text-3xl font-semibold lg:mb-5 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-3xl font-semibold lg:mb-5 lg:text-4xl">
         Simple, transparent pricing
       </h2>
       <p class="text-lg text-muted-foreground lg:text-xl">

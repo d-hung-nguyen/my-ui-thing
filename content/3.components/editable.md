@@ -2,11 +2,11 @@
 title: Editable
 description: Displays an input field used for editing a single line of text, rendering as static text on load. It transforms into a text input field when the edit interaction is triggered.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/editable.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/editable.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/editable.html#api-reference
+    href: https://reka-ui.com/docs/components/editable.html#api-reference
     icon: "icon-park-solid:api"
 ---
 

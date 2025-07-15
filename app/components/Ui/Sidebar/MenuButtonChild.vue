@@ -1,6 +1,7 @@
 <template>
   <Primitive
     data-sidebar="menu-button"
+    data-slot="sidebar-menu-button"
     :data-size="size"
     :data-active="isActive"
     :class="sidebarMenuButtonVariants({ variant, size, class: props.class })"
@@ -12,8 +13,8 @@
   </Primitive>
 </template>
 <script lang="ts">
-  import { Primitive } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
   import type { HTMLAttributes } from "vue";
 
   export interface SidebarMenuButtonProps extends PrimitiveProps {

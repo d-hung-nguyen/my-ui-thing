@@ -55,17 +55,30 @@
 
 <script lang="ts" setup>
   import dayjs from "dayjs";
-  import { z } from "zod";
+  import { bool, object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-card-details",
     validationSchema: toTypedSchema(
-      z.object({
-        nameOnCard: z.string().min(2).max(50).default("Elijah Baker"),
-        cardNumber: z.string().length(19, "Must be 16 digits").default("4242 4242 4242 4242"),
-        expiryDate: z.string().length(5, "Invalid").default(dayjs().format("MM/YY")),
-        cvc: z.string().length(3, "Invalid").default("123"),
-        saveCard: z.boolean().optional().default(true),
+      object({
+        nameOnCard: string()
+          .label("Name on card")
+          .required()
+          .min(2)
+          .max(50)
+          .default("Elijah Baker"),
+        cardNumber: string()
+          .label("Card number")
+          .required()
+          .default("4242 4242 4242 4242")
+          .matches(/^\d{4} \d{4} \d{4} \d{4}$/, "Must be 16 digits"),
+        expiryDate: string().label("Expiry date").required().default(dayjs().format("MM/YY")),
+        cvc: string()
+          .label("CVC")
+          .required()
+          .default("123")
+          .matches(/^\d{3}$/, "Invalid CVC"),
+        saveCard: bool().default(true),
       })
     ),
   });

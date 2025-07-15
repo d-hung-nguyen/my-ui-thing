@@ -6,8 +6,8 @@
           <UiCarouselContent>
             <UiCarouselItem v-for="(_, index) in 10" :key="index" grab-cursor>
               <div class="p-1">
-                <UiCard>
-                  <UiCardContent class="flex aspect-square items-center justify-center p-6">
+                <UiCard class="h-52">
+                  <UiCardContent class="flex size-full items-center justify-center p-6">
                     <span class="text-4xl font-semibold">{{ index + 1 }}</span>
                   </UiCardContent>
                 </UiCard>
@@ -27,8 +27,8 @@
               @click="onThumbClick(index)"
             >
               <div class="p-1" :class="index === selectedIndex ? '' : 'opacity-50'">
-                <UiCard>
-                  <UiCardContent class="flex aspect-square items-center justify-center p-6">
+                <UiCard class="h-32">
+                  <UiCardContent class="flex size-full items-center justify-center p-6">
                     <span class="text-4xl font-semibold">{{ index + 1 }}</span>
                   </UiCardContent>
                 </UiCard>

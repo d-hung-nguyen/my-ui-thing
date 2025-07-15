@@ -71,7 +71,7 @@
         v-for="item in items"
         :key="item.id"
         :value="item.id"
-        class="overflow-hidden border bg-background first:rounded-t-lg last:rounded-b-lg"
+        class="overflow-hidden border bg-background first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger
           :title="item.title"
@@ -85,7 +85,7 @@
             :default-open="collapsible.open"
           >
             <UiCollapsibleTrigger
-              class="flex gap-2 text-[15px] font-semibold leading-6 [&[data-state=open]>svg]:rotate-180"
+              class="flex gap-2 text-[15px] leading-6 font-semibold [&[data-state=open]>svg]:rotate-180"
             >
               <Icon
                 name="lucide:chevron-down"
@@ -97,7 +97,7 @@
               {{ collapsible.title }}
             </UiCollapsibleTrigger>
             <UiCollapsibleContent
-              class="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden ps-6 text-sm text-muted-foreground transition-all"
+              class="overflow-hidden ps-6 text-sm text-muted-foreground transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
             >
               {{ collapsible.content }}
             </UiCollapsibleContent>

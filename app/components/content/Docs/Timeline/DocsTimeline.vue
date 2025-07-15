@@ -1,15 +1,13 @@
 <template>
   <div class="flex justify-center">
     <UiTimeline :model-value="3">
-      <template v-for="(item, i) of items" :key="i">
-        <UiTimelineItem :step="item.id">
-          <UiTimelineHeader>
-            <UiTimelineSeparator />
-            <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
-            <UiTimelineIndicator />
-          </UiTimelineHeader>
-        </UiTimelineItem>
-      </template>
+      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+        <UiTimelineHeader>
+          <UiTimelineSeparator />
+          <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
+          <UiTimelineIndicator />
+        </UiTimelineHeader>
+      </UiTimelineItem>
     </UiTimeline>
   </div>
 </template>

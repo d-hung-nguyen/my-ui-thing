@@ -30,11 +30,15 @@ npm install @vueup/vue-quill@latest --save
 
 In order to make the editor match the design of this website (and the whole shadcn/ui theme), I had to add this css file: You should copy this and add it to your project.
 
-<!-- automd:file src="../../app/assets/css/quill.css" code lang="css -->
+<!-- automd:file src="../../app/assets/css/quill.css" code lang="css" -->
 
-```"css [quill.css]
+```css [quill.css]
+@reference "./tailwind.css";
+
 @import "@vueup/vue-quill/dist/vue-quill.snow.css";
 @import "@vueup/vue-quill/dist/vue-quill.bubble.css";
+
+@reference "./tailwind.css";
 
 .ql-toolbar {
   &.ql-snow {
@@ -158,7 +162,7 @@ In order to make the editor match the design of this website (and the whole shad
 }
 
 .ql-container {
-  @apply min-h-[150px] font-sans text-sm;
+  @apply min-h-[150px] bg-transparent font-sans text-sm focus-within:border-ring! focus-within:ring-[3px] focus-within:ring-ring/50 dark:bg-input/30;
   &.ql-snow {
     a {
       @apply text-sky-500 hover:text-sky-500;
@@ -172,14 +176,14 @@ In order to make the editor match the design of this website (and the whole shad
     }
     &.ql-blank {
       &:before {
-        @apply not-italic text-muted-foreground;
+        @apply text-muted-foreground not-italic;
       }
     }
   }
   .ql-tooltip {
     @apply z-[9999] rounded border-border bg-card px-4 py-2 text-sm text-card-foreground shadow before:cursor-pointer before:font-medium;
     input[type="text"] {
-      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring;
+      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:ring-1 focus:ring-ring focus:outline-none;
     }
     .ql-preview {
       @apply text-sm leading-[26px] underline underline-offset-2;
@@ -195,7 +199,7 @@ In order to make the editor match the design of this website (and the whole shad
   .ql-tooltip {
     @apply z-[9999] rounded-lg border border-border bg-card px-4 py-2 text-sm text-card-foreground shadow before:cursor-pointer before:font-medium;
     input[type="text"] {
-      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring;
+      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:ring-1 focus:ring-ring focus:outline-none;
     }
     .ql-preview {
       @apply text-sm leading-[26px] underline underline-offset-2;

@@ -1,8 +1,5 @@
 <template>
-  <UiCard>
-    <template #title>
-      <UiCardTitle class="text-lg"> Pick a date</UiCardTitle>
-    </template>
+  <UiCard title="Pick Date" description="Select a date range for your report.">
     <template #content>
       <UiCardContent>
         <UiDatepicker v-model.range="date" :columns="2">
@@ -12,8 +9,9 @@
               :class="['w-full justify-start text-left font-normal']"
               @click="togglePopover"
             >
-              <Icon name="lucide:calendar" class="h-4 w-4" />
-              {{ format(date.start, "MMM dd, yyyy") }} to {{ format(date.end, "MMM dd, yyyy") }}
+              <Icon name="lucide:calendar" class="size-4" />
+              {{ useDateFormat(date.start, "MMM DD, YYYY").value }} to
+              {{ useDateFormat(date.end, "MMM DD, YYYY") }}
             </UiButton>
           </template>
         </UiDatepicker>
@@ -23,10 +21,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { addDays, format, startOfMonth } from "date-fns";
+  import dayjs from "dayjs";
 
   const date = ref({
-    start: startOfMonth(new Date()),
-    end: addDays(new Date(), 7),
+    start: dayjs().startOf("month").toDate(),
+    end: dayjs().add(7, "days").toDate(),
   });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <UiContainer class="py-16 lg:py-24">
     <p class="text-center font-semibold text-primary">Features</p>
-    <h2 class="mb-4 mt-3 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
+    <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
       Beautiful analytics to grow smarter
     </h2>
     <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
@@ -21,11 +21,11 @@
             />
           </div>
           <h3
-            class="mt-4 text-balance text-center text-lg font-semibold lg:mt-5 lg:text-xl"
+            class="mt-4 text-center text-lg font-semibold text-balance lg:mt-5 lg:text-xl"
             v-html="f.title"
           />
           <p
-            class="mt-1 max-w-[400px] text-balance text-center text-muted-foreground lg:mt-2"
+            class="mt-1 max-w-[400px] text-center text-balance text-muted-foreground lg:mt-2"
             v-html="f.description"
           />
         </div>

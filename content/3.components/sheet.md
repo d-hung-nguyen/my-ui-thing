@@ -2,11 +2,11 @@
 title: Sheet
 description: Extends the Dialog component to display content that complements the main content of the screen.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/dialog.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/dialog.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/dialog.html#api-reference
+    href: https://reka-ui.com/docs/components/dialog.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -47,7 +47,7 @@ npx ui-thing@latest add sheet
         description="Make changes to your profile here. Click save when you're done."
       >
         <template #content>
-          <div class="grid gap-4 py-4">
+          <div class="grid gap-4 p-4">
             <div class="grid grid-cols-4 items-center gap-4">
               <UiLabel for="name" class="text-right"> Name </UiLabel>
               <UiInput id="name" model-value="Pedro Duarte" class="col-span-3" />

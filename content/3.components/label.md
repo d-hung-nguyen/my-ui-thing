@@ -2,11 +2,11 @@
 title: Label
 description: Renders an accessible label associated with controls.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/label.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/label.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/label.html#api-reference
+    href: https://reka-ui.com/docs/components/label.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -35,7 +35,7 @@ npx ui-thing@latest add label
 ```vue [DocsInputLabel.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <div>
+    <div class="grid w-full max-w-sm gap-2">
       <UiLabel for="picture">Picture</UiLabel>
       <UiInput id="picture" type="file" />
     </div>

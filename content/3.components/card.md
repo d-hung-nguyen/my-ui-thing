@@ -29,35 +29,31 @@ npx ui-thing@latest add card
     <form>
       <UiCard
         class="w-[360px] max-w-sm"
-        title="Create project"
-        description="Deploy your new project in one-click."
+        title="UI Thing"
+        description="Enter your email and password to get started."
       >
         <template #content>
           <UiCardContent>
             <div class="grid w-full items-center gap-4">
-              <div class="flex flex-col space-y-1.5">
-                <UiLabel for="name">Name</UiLabel>
-                <UiInput id="name" required placeholder="Name of your project" />
-              </div>
-              <div class="flex flex-col space-y-1.5">
-                <UiLabel for="framework">Framework</UiLabel>
-                <UiSelect required>
-                  <UiSelectTrigger id="framework" placeholder="Select" />
-                  <UiSelectContent>
-                    <UiSelectItem value="next">Next.js</UiSelectItem>
-                    <UiSelectItem value="sveltekit">SvelteKit</UiSelectItem>
-                    <UiSelectItem value="astro">Astro</UiSelectItem>
-                    <UiSelectItem value="nuxt">Nuxt.js</UiSelectItem>
-                  </UiSelectContent>
-                </UiSelect>
+              <UiVeeInput name="email" label="Email" type="email" required />
+              <UiVeeInput name="password" label="Password" type="password" required />
+              <div class="flex items-center justify-between pt-2 text-sm">
+                <UiVeeCheckbox class="gap-1.5" label="Remember me" />
+                <NuxtLink class="text-primary underline-offset-2 hover:underline" to="#"
+                  >Forgot password?</NuxtLink
+                >
               </div>
             </div>
           </UiCardContent>
         </template>
         <template #footer>
-          <UiCardFooter class="flex justify-between">
-            <UiButton type="reset" variant="outline">Cancel</UiButton>
-            <UiButton type="submit">Deploy</UiButton>
+          <UiCardFooter class="flex-col gap-4">
+            <UiButton class="w-full" effect="ringHover" type="submit">Sign In</UiButton>
+            <UiDivider><span class="text-sm text-muted-foreground">or</span></UiDivider>
+            <UiButton variant="outline" class="w-full">
+              <Icon name="logos:google-icon" />
+              <span>Continue with Google</span>
+            </UiButton>
           </UiCardFooter>
         </template>
       </UiCard>
@@ -91,11 +87,9 @@ npx ui-thing@latest add card
       <template #content>
         <UiCardContent>
           <div class="flex items-center gap-3 rounded-lg border p-3">
-            <div class="shrink-0 self-start">
-              <Icon name="lucide:bell" class="h-6 w-6" />
-            </div>
+            <Icon name="lucide:bell" class="-mt-3 size-5 shrink-0" />
             <UiLabel for="push" class="flex flex-col items-start text-sm">
-              <p class="font-medium">Push Notifications</p>
+              <p class="text-sm font-semibold">Push Notifications</p>
               <p class="text-muted-foreground">Send notifications to device.</p>
             </UiLabel>
             <div class="ml-auto">
@@ -105,9 +99,9 @@ npx ui-thing@latest add card
 
           <ul class="mt-7 flex flex-col gap-6 pl-2">
             <li v-for="(item, i) in items" :key="i" class="flex items-start gap-4">
-              <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-500" />
+              <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-primary" />
               <div class="flex flex-col gap-px text-sm">
-                <p class="font-medium leading-none">{{ item.text }}</p>
+                <p class="leading-none font-medium">{{ item.text }}</p>
                 <span class="text-muted-foreground">{{ item.time }}</span>
               </div>
             </li>

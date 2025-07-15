@@ -6,9 +6,9 @@
           to="#"
           variant="secondary"
           class="px-3 py-1.5 text-xs font-normal md:text-sm lg:py-2"
-          >We're hiring! Join our remote team <Icon class="ml-3 h-4 w-4" name="lucide:arrow-right"
+          >We're hiring! Join our remote team <Icon class="ml-3 size-4" name="lucide:arrow-right"
         /></UiBadge>
-        <h1 class="mb-4 mt-7 text-4xl font-bold md:text-5xl lg:mb-6 lg:mt-5 xl:text-6xl">
+        <h1 class="mt-7 mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           People who care about your growth
         </h1>
         <p class="text-lg text-muted-foreground lg:text-xl">

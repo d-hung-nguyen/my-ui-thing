@@ -2,7 +2,7 @@
   <UiContainer class="relative py-16 lg:py-24">
     <div class="mx-auto max-w-[760px] text-center">
       <p class="font-semibold text-primary">Pricing</p>
-      <h2 class="mb-4 mt-3 text-3xl font-semibold lg:mb-6 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-3xl font-semibold lg:mb-6 lg:text-4xl">
         Plans that fit your scale
       </h2>
       <p class="text-lg text-muted-foreground lg:text-xl">

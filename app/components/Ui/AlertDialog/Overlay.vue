@@ -1,19 +1,24 @@
 <template>
-  <AlertDialogOverlay v-bind="forwarded" :class="styles({ class: props.class })" />
+  <AlertDialogOverlay
+    data-slot="alert-dialog-overlay"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  />
 </template>
 
 <script lang="ts" setup>
-  import { AlertDialogOverlay } from "radix-vue";
-  import type { AlertDialogOverlayProps } from "radix-vue";
+  import { AlertDialogOverlay } from "reka-ui";
+  import type { AlertDialogOverlayProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     AlertDialogOverlayProps & {
       /** Custom class(es) to add to the overlay */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=closed]:animate-fadeOut data-[state=open]:animate-fadeIn",
+    base: "fixed inset-0 z-50 bg-background/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0",
   });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="mx-auto flex w-full max-w-xs justify-center">
     <UiSelect v-model="option">
       <UiSelectTrigger placeholder="Select an option" />
       <UiSelectContent>

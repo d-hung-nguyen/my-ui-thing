@@ -8,40 +8,56 @@
       :name="name"
       :required="required"
       :disabled="disabled"
-      :checked="checked"
-      @update:checked="handleChange"
+      :model-value="checked"
+      @update:model-value="handleChange"
     />
-    <div class="flex flex-col gap-1.5">
+    <div class="flex flex-col gap-1.5 leading-[1.25]">
       <slot name="label" :error-message="errorMessage" :checked="checked">
-        <UiLabel
-          v-if="label"
-          :for="inputId"
-          class="leading-none"
-          :class="[errorMessage && 'text-destructive']"
-          >{{ label }}</UiLabel
-        >
+        <UiLabel v-if="label" :for="inputId" :class="[errorMessage && 'text-destructive']">{{
+          label
+        }}</UiLabel>
       </slot>
-      <TransitionSlide tag="div" group>
+      <AnimatePresence as="div" multiple mode="wait">
         <slot name="hint" :error-message="errorMessage" :checked="checked">
-          <p
+          <motion.p
             v-if="hint && !errorMessage"
-            key="hint"
+            :variants
+            initial="initial"
+            exit="initial"
+            animate="animate"
+            :transition="{ type: 'keyframes' }"
             class="text-sm leading-none text-muted-foreground"
           >
             {{ hint }}
-          </p>
+          </motion.p>
         </slot>
         <slot name="errorMessage" :error-message="errorMessage" :checked="checked">
-          <p v-if="errorMessage" key="errorMessage" class="text-sm leading-none text-destructive">
+          <motion.p
+            v-if="errorMessage"
+            :variants
+            initial="initial"
+            exit="initial"
+            animate="animate"
+            :transition="{ type: 'keyframes' }"
+            class="text-sm leading-none text-destructive"
+          >
             {{ errorMessage }}
-          </p>
+          </motion.p>
         </slot>
-      </TransitionSlide>
+      </AnimatePresence>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { AnimatePresence, motion } from "motion-v";
+  import type { HTMLAttributes } from "vue";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
+
   const props = defineProps<{
     label?: string;
     icon?: string;
@@ -56,7 +72,7 @@
     value?: any;
     required?: boolean;
     disabled?: boolean;
-    class?: any;
+    class?: HTMLAttributes["class"];
   }>();
   const styles = tv({
     base: "flex gap-3",

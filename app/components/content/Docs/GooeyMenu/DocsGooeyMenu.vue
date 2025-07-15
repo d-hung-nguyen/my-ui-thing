@@ -14,18 +14,18 @@
         <!-- eslint-disable-next-line vue/html-self-closing -->
         <input id="menu" type="checkbox" class="peer hidden" name="menu" />
         <label
-          class="absolute bottom-10 right-10 z-10 flex size-14 scale-125 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-1000 [transition-timing-function:var(--spring-easing)] peer-checked:rotate-[135deg] peer-checked:scale-100"
+          class="absolute right-10 bottom-10 z-10 flex size-14 scale-125 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-1000 [transition-timing-function:var(--spring-easing)] peer-checked:scale-100 peer-checked:rotate-[135deg]"
           for="menu"
         >
           <Icon name="lucide:plus" class="size-5" />
         </label>
         <button
-          class="absolute bottom-10 right-10 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 ease-in peer-checked:translate-y-[-80px] peer-checked:duration-1000 peer-checked:[transition-timing-function:var(--spring-easing)]"
+          class="absolute right-10 bottom-10 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 ease-in peer-checked:translate-y-[-80px] peer-checked:duration-1000 peer-checked:[transition-timing-function:var(--spring-easing)]"
         >
           <Icon name="lucide:settings-2" class="size-5" />
         </button>
         <button
-          class="absolute bottom-10 right-10 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 ease-in peer-checked:translate-y-[-162px] peer-checked:duration-1000 peer-checked:[transition-timing-function:var(--spring-easing)]"
+          class="absolute right-10 bottom-10 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 ease-in peer-checked:translate-y-[-162px] peer-checked:duration-1000 peer-checked:[transition-timing-function:var(--spring-easing)]"
         >
           <Icon name="lucide:heart" class="size-5" />
         </button>

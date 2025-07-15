@@ -11,7 +11,7 @@
                     v-if="t.badge"
                     class="bg-primary text-primary-foreground"
                     :text="t.badge?.toString()"
-                    size="lg"
+                    size="xl"
                   >
                     <Icon :name="t.icon" class="size-5 shrink-0" />
                   </UiChip>
@@ -24,7 +24,7 @@
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>

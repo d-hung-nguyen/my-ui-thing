@@ -31,8 +31,30 @@ npx ui-thing@latest add input
 
 ```vue [DocsInputEmail.vue]
 <template>
-  <div class="flex w-full items-center justify-center">
+  <div class="mx-auto w-full max-w-xs">
     <UiInput type="email" placeholder="Email" />
+  </div>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Disabled
+
+::ShowCase
+
+:DocsInputDisabled
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Input/DocsInputDisabled.vue" code lang="vue" -->
+
+```vue [DocsInputDisabled.vue]
+<template>
+  <div class="mx-auto w-full max-w-xs">
+    <UiInput type="email" placeholder="Email" disabled />
   </div>
 </template>
 ```
@@ -54,7 +76,7 @@ npx ui-thing@latest add input
 ```vue [DocsInputLabel.vue]
 <template>
   <div class="flex w-full items-center justify-center">
-    <div>
+    <div class="grid w-full max-w-sm gap-2">
       <UiLabel for="picture">Picture</UiLabel>
       <UiInput id="picture" type="file" />
     </div>
@@ -93,23 +115,20 @@ npx ui-thing@latest add input
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        username: z
-          .string({
-            required_error: "Username is required",
-          })
-          .min(3, "Username must be at least 3 characters long")
-          .max(20, "Username must be at most 20 characters long"),
+      object({
+        username: string().label("Username").required().min(3).max(20).trim().lowercase(),
       })
     ),
   });
 
   const onSubmit = handleSubmit((values) => {
-    alert(JSON.stringify(values, null, 2));
+    useSonner("Form submitted successfully!", {
+      description: `Your username has been updated to ${values.username}.`,
+    });
   });
 </script>
 ```

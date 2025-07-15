@@ -118,20 +118,20 @@
       enableGlobalFilter: false,
       header({ table }) {
         return h(UiCheckbox, {
-          checked: table.getIsSomeRowsSelected()
+          modelValue: table.getIsSomeRowsSelected()
             ? "indeterminate"
             : table.getIsAllRowsSelected()
               ? true
               : false,
-          "onUpdate:checked": (v) =>
+          "onUpdate:modelValue": (v: boolean | "indeterminate") =>
             table.getToggleAllRowsSelectedHandler()({ target: { checked: v } }),
         });
       },
       cell({ row }) {
         return h(UiCheckbox, {
-          checked: row.getIsSelected(),
+          modelValue: row.getIsSelected(),
           disabled: !row.getCanSelect(),
-          "onUpdate:checked": row.getToggleSelectedHandler(),
+          "onUpdate:modelValue": row.getToggleSelectedHandler(),
         });
       },
     }),
@@ -206,7 +206,7 @@
           {
             href: getValue(),
             target: "_blank",
-            class: tw`inline-flex items-center gap-1 hover:underline`,
+            class: tw`inline-flex items-center gap-1 transition-all hover:text-sky-500 hover:underline`,
           },
           [
             getValue(),
@@ -291,7 +291,7 @@
             :key="header.id"
             :colspan="header.colSpan"
             :class="header.column.getCanSort() ? 'cursor-pointer select-none' : ''"
-            class="relative h-10 select-none border-t"
+            class="relative h-10 border-t select-none"
             @click="header.column.getToggleSortingHandler()?.($event)"
           >
             <div class="flex w-full items-center gap-3 whitespace-nowrap">

@@ -1,5 +1,9 @@
 <template>
-  <ul data-sidebar="menu-badge" :class="sideBarMenuSubStyles({ class: props.class })">
+  <ul
+    data-slot="sidebar-menu-sub"
+    data-sidebar="menu-badge"
+    :class="sideBarMenuSubStyles({ class: props.class })"
+  >
     <slot />
   </ul>
 </template>

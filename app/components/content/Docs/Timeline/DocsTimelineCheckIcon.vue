@@ -1,5 +1,5 @@
 <template>
-  <UiTimeline :model-value="3">
+  <UiTimeline :model-value="2">
     <UiTimelineItem
       v-for="item in items"
       :key="item.id"
@@ -8,16 +8,17 @@
     >
       <UiTimelineHeader>
         <UiTimelineSeparator
-          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-[1.625rem]"
+          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5"
         />
         <UiTimelineDate>{{ item.date }}</UiTimelineDate>
         <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7 group-data-[completed=true]/timeline-item:border-none group-data-[completed=true]/timeline-item:bg-primary group-data-[completed=true]/timeline-item:text-primary-foreground"
+          class="flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
         >
           <Icon
             name="lucide:check"
-            class="size-4 group-data-[completed=false]/timeline-item:hidden"
+            :size="16"
+            class="group-not-data-completed/timeline-item:hidden"
           />
         </UiTimelineIndicator>
       </UiTimelineHeader>

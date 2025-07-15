@@ -1,5 +1,9 @@
 <template>
-  <UiSeparator data-sidebar="separator" :class="sideBarSeparatorStyles({ class: props.class })">
+  <UiSeparator
+    data-slot="sidebar-separator"
+    data-sidebar="separator"
+    :class="sideBarSeparatorStyles({ class: props.class })"
+  >
     <slot />
   </UiSeparator>
 </template>

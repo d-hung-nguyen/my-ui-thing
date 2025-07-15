@@ -133,14 +133,14 @@
                 v-for="mail in mails"
                 :key="mail.email"
                 href="#"
-                class="flex flex-col items-start gap-2 whitespace-nowrap border-b p-4 text-sm leading-tight last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               >
                 <div class="flex w-full items-center gap-2">
                   <span>{{ mail.name }}</span>
                   <span class="ml-auto text-xs">{{ mail.date }}</span>
                 </div>
                 <span class="font-medium">{{ mail.subject }}</span>
-                <span class="line-clamp-2 w-[260px] whitespace-break-spaces text-xs">
+                <span class="line-clamp-2 w-[260px] text-xs whitespace-break-spaces">
                   {{ mail.teaser }}
                 </span>
               </NuxtLink>
@@ -154,7 +154,7 @@
       <!-- Navbar -->
       <UiNavbar sticky class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
         <UiSidebarTrigger class="-ml-1" />
-        <UiSeparator orientation="vertical" class="mr-2 h-4" />
+        <UiDivider orientation="vertical" class="mr-2 h-4 w-px" />
         <UiBreadcrumbs :items="breadcrumbItems" />
       </UiNavbar>
       <div class="grid auto-rows-min gap-4 p-4 md:grid-cols-3">

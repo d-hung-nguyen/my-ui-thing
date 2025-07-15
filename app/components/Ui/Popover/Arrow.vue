@@ -1,10 +1,10 @@
 <template>
-  <PopoverArrow v-bind="forwarded" />
+  <PopoverArrow data-slot="popover-arrow" v-bind="forwarded" />
 </template>
 
 <script lang="ts" setup>
-  import { PopoverArrow, useForwardProps } from "radix-vue";
-  import type { PopoverArrowProps } from "radix-vue";
+  import { PopoverArrow, useForwardProps } from "reka-ui";
+  import type { PopoverArrowProps } from "reka-ui";
 
   const props = withDefaults(defineProps<PopoverArrowProps>(), {
     width: 10,

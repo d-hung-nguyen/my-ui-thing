@@ -1,9 +1,11 @@
 <template>
-  <div class="relative flex h-screen items-center">
+  <div class="relative flex min-h-dvh items-center">
     <div
-      class="absolute h-full w-full bg-[radial-gradient(theme(colors.border)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+      class="absolute h-full w-full bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] [background-size:20px_20px]"
     />
-    <div class="container relative z-[1] flex flex-col items-center justify-center text-center">
+    <div
+      class="relative z-[1] container flex flex-col items-center justify-center py-20 text-center"
+    >
       <h1 class="mb-2 text-4xl font-bold tracking-tight lg:text-6xl">{{ error?.statusCode }}</h1>
       <p class="font-bold tracking-tight text-primary">{{ error?.message }} error</p>
       <UiButton class="mt-5" @click="clearError({ redirect: '/' })">Take me home</UiButton>

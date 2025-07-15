@@ -1,7 +1,7 @@
 <template>
   <UiCard class="relative">
     <slot>
-      <div class="absolute right-3 top-2">
+      <div class="absolute top-2 right-3">
         <UiDropdownMenu>
           <UiDropdownMenuTrigger as-child>
             <UiButton variant="ghost" size="icon-sm">

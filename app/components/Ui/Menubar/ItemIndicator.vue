@@ -1,21 +1,22 @@
 <template>
   <MenubarItemIndicator v-bind="forwarded" :class="styles({ class: props.class })">
     <slot>
-      <Icon v-if="icon" :name="icon" class="h-4 w-4" />
+      <Icon v-if="icon" :name="icon" class="size-4" />
     </slot>
   </MenubarItemIndicator>
 </template>
 
 <script lang="ts" setup>
-  import { MenubarItemIndicator } from "radix-vue";
-  import type { MenubarItemIndicatorProps } from "radix-vue";
+  import { MenubarItemIndicator } from "reka-ui";
+  import type { MenubarItemIndicatorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     MenubarItemIndicatorProps & {
       /** The icon to display */
       icon?: string;
       /** The class(es) to apply to the parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class", "icon");

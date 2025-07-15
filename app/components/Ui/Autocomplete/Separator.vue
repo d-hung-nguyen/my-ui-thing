@@ -1,12 +1,12 @@
 <template>
-  <ComboboxSeparator v-bind="props">
+  <ComboboxSeparator data-slot="autocomplete-separator" v-bind="props">
     <slot />
   </ComboboxSeparator>
 </template>
 
 <script lang="ts" setup>
-  import { ComboboxSeparator } from "radix-vue";
-  import type { ComboboxSeparatorProps } from "radix-vue";
+  import { ComboboxSeparator } from "reka-ui";
+  import type { ComboboxSeparatorProps } from "reka-ui";
 
   const props = defineProps<ComboboxSeparatorProps>();
 </script>

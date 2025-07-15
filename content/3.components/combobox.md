@@ -2,11 +2,11 @@
 title: Combobox
 description: Autocomplete input and command palette with a list of suggestions.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/combobox.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/combobox.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/combobox.html#api-reference
+    href: https://reka-ui.com/docs/components/combobox.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -31,7 +31,7 @@ See installation instructions for the [Popover](/components/popover) and the [Co
         >
           {{ value ? selectedFramework : "Select framework..." }}
 
-          <Icon name="lucide:chevrons-up-down" class="ml-auto h-4 w-4 shrink-0 opacity-50" />
+          <Icon name="lucide:chevrons-up-down" class="ml-auto size-4 shrink-0 opacity-50" />
         </UiButton>
       </UiPopoverTrigger>
       <UiPopoverContent class="w-[250px] p-0">
@@ -49,7 +49,7 @@ See installation instructions for the [Popover](/components/popover) and the [Co
                 <Icon
                   name="lucide:check"
                   :class="[
-                    'mr-2 h-4 w-4',
+                    'mr-2 size-4',
                     value?.value === framework.value ? 'opacity-100' : 'opacity-0',
                   ]"
                 />
@@ -100,15 +100,15 @@ See installation instructions for the [Popover](/components/popover) and the [Co
           variant="outline"
           role="combobox"
           :aria-expanded="open"
-          class="w-[250px] justify-between"
+          class="w-[200px] justify-between"
         >
           {{ value ? selectedFramework : "Select framework..." }}
 
-          <Icon name="lucide:chevrons-up-down" class="ml-auto h-4 w-4 shrink-0 opacity-50" />
+          <Icon name="lucide:chevrons-up-down" class="ml-auto size-4 shrink-0 opacity-50" />
         </UiButton>
       </UiPopoverTrigger>
-      <UiPopoverContent class="w-[250px] p-0">
-        <UiCommand v-model="value" :filter-function="filterFunction">
+      <UiPopoverContent class="w-(--reka-popover-trigger-width) p-0">
+        <UiCommand v-model="value" by="label">
           <UiCommandInput placeholder="Search framework..." />
           <UiCommandList>
             <UiCommandEmpty>No framework found.</UiCommandEmpty>
@@ -119,14 +119,14 @@ See installation instructions for the [Popover](/components/popover) and the [Co
                 :value="framework"
                 @select="open = false"
               >
+                {{ framework.label }}
                 <Icon
                   name="lucide:check"
                   :class="[
-                    'mr-2 h-4 w-4',
+                    'ml-auto size-4',
                     value?.value === framework.value ? 'opacity-100' : 'opacity-0',
                   ]"
                 />
-                {{ framework.label }}
               </UiCommandItem>
             </UiCommandGroup>
           </UiCommandList>
@@ -151,9 +151,89 @@ See installation instructions for the [Popover](/components/popover) and the [Co
   const selectedFramework = computed(
     () => frameworks.find((framework) => framework.value === value?.value?.value)?.label
   );
+</script>
+```
 
-  const filterFunction = (list: typeof frameworks, search: string) =>
-    list.filter((i) => i.value.toLowerCase().includes(search.toLowerCase()));
+<!-- /automd -->
+
+::
+
+### Origin UI
+
+::ShowCase
+
+:DocsComboboxOrigin
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Combobox/DocsComboboxOrigin.vue" code lang="vue" -->
+
+```vue [DocsComboboxOrigin.vue]
+<template>
+  <div class="mx-auto grid max-w-xs grid-cols-1 gap-8">
+    <div class="grid gap-2">
+      <UiLabel>Combobox with search</UiLabel>
+      <UiPopover v-model:open="open">
+        <UiPopoverTrigger as-child>
+          <UiButton variant="outline" role="combobox" class="w-full justify-between">
+            <span :class="['truncate', selectedFramework?.label ? '' : 'text-muted-foreground']">{{
+              selectedFramework?.label || "Select a framework"
+            }}</span>
+            <Icon name="lucide:chevron-down" class="size-4 shrink-0 text-muted-foreground/50" />
+          </UiButton>
+        </UiPopoverTrigger>
+        <UiPopoverContent class="w-(--reka-popover-trigger-width) border-input p-0">
+          <UiCommand v-model="value" by="label">
+            <UiCommandInput placeholder="Search framework..." />
+            <UiCommandList>
+              <UiCommandEmpty>No framework found.</UiCommandEmpty>
+              <UiCommandGroup>
+                <UiCommandItem
+                  v-for="framework in frameworks"
+                  :key="framework.value"
+                  :value="framework.value"
+                  @select="open = false"
+                >
+                  {{ framework.label }}
+                  <Icon
+                    v-if="value === framework.value"
+                    name="lucide:check"
+                    :size="16"
+                    class="ml-auto"
+                  />
+                </UiCommandItem>
+              </UiCommandGroup>
+            </UiCommandList>
+          </UiCommand>
+        </UiPopoverContent>
+      </UiPopover>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  const frameworks = [
+    { value: "next.js", label: "Next.js" },
+    { value: "sveltekit", label: "SvelteKit" },
+    { value: "nuxt.js", label: "Nuxt.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "angular", label: "Angular" },
+    { value: "vue", label: "Vue.js" },
+    { value: "react", label: "React" },
+    { value: "ember", label: "Ember.js" },
+    { value: "gatsby", label: "Gatsby" },
+    { value: "eleventy", label: "Eleventy" },
+    { value: "solid", label: "SolidJS" },
+    { value: "preact", label: "Preact" },
+    { value: "qwik", label: "Qwik" },
+    { value: "alpine", label: "Alpine.js" },
+    { value: "lit", label: "Lit" },
+  ];
+
+  const selectedFramework = ref(frameworks[2]);
+  const open = ref(false);
+  const value = ref("");
 </script>
 ```
 

@@ -2,11 +2,11 @@
 title: Date Field
 description: Enables users to input specific dates within a designated field.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/date-field
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/date-field
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/date-field#api-reference
+    href: https://reka-ui.com/docs/components/date-field#api-reference
     icon: "icon-park-solid:api"
 ---
 

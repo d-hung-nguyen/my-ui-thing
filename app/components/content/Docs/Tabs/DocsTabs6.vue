@@ -4,7 +4,7 @@
       <div class="flex justify-center">
         <UiTabsList
           :pill="false"
-          class="relative h-auto -space-x-px bg-background p-0 shadow-sm shadow-black/5 rtl:space-x-reverse"
+          class="relative h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in 3"

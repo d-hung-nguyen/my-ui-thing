@@ -2,11 +2,11 @@
 title: Context Menu
 description: Displays a menu located at the pointer, triggered by a right-click or a long-press.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/context-menu.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/context-menu.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/context-menu.html#api-reference
+    href: https://reka-ui.com/docs/components/context-menu.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -41,7 +41,7 @@ npx ui-thing@latest add context-menu
     >
       Right click to see basic context menu
     </UiContextMenuTrigger>
-    <UiContextMenuContent loop class="w-64">
+    <UiContextMenuContent loop class="w-56">
       <UiContextMenuItem title="Back" inset shortcut="⌘[" />
       <UiContextMenuItem title="Forward" disabled inset shortcut="⌘]" />
       <UiContextMenuItem title="Reload" inset shortcut="⌘R" />
@@ -54,18 +54,20 @@ npx ui-thing@latest add context-menu
           <UiContextMenuItem title="Clear data" shortcut="⌘⇧⌫" />
           <UiContextMenuSeparator />
           <UiContextMenuItem title="Developer tools" shortcut="⌥⌘I" />
+          <UiContextMenuSeparator />
+          <UiContextMenuItem title="Delete all" variant="destructive" />
         </UiContextMenuSubContent>
       </UiContextMenuSub>
       <UiContextMenuSeparator />
       <UiContextMenuCheckboxItem
-        v-model:checked="showBookmark"
-        title="Show Bookmarks Bar"
+        v-model="showBookmark"
+        title="Show Bookmarks"
         inset
         shortcut="⌘⇧B"
         @select="(e) => e.preventDefault()"
       />
       <UiContextMenuCheckboxItem
-        v-model:checked="showFullUrls"
+        v-model="showFullUrls"
         title="Show full URLs"
         inset
         shortcut="⌘⇧U"
@@ -132,12 +134,12 @@ npx ui-thing@latest add context-menu
           :key="hero.id"
           inset
           class="mb-1"
-          :checked="selectedHeros.includes(hero.id)"
+          :model-value="selectedHeroes.includes(hero.id)"
           @select="(e) => e.preventDefault()"
           @click="
-            selectedHeros.includes(hero.id)
-              ? selectedHeros.splice(selectedHeros.indexOf(hero.id), 1)
-              : selectedHeros.push(hero.id)
+            selectedHeroes.includes(hero.id)
+              ? selectedHeroes.splice(selectedHeroes.indexOf(hero.id), 1)
+              : selectedHeroes.push(hero.id)
           "
         >
           <div class="flex items-center gap-4">
@@ -170,7 +172,7 @@ npx ui-thing@latest add context-menu
         "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/The-Hulk.The-Incredible-Hulk.webp",
     },
   ];
-  const selectedHeros = ref<string[]>([]);
+  const selectedHeroes = ref<string[]>([]);
 </script>
 ```
 
@@ -209,6 +211,7 @@ npx ui-thing@latest add context-menu
           :value="item"
           :title="item"
           :text-value="item"
+          @select="(e) => e.preventDefault()"
         />
       </UiContextMenuRadioGroup>
     </UiContextMenuContent>

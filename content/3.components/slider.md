@@ -2,11 +2,11 @@
 title: Slider
 description: An input where the user selects a value from within a given range.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/slider.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/slider.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/slider.html#api-reference
+    href: https://reka-ui.com/docs/components/slider.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -34,8 +34,8 @@ npx ui-thing@latest add slider
 
 ```vue [DocsSlider.vue]
 <template>
-  <div class="flex w-full flex-col gap-4">
-    <p class="font-semibold">Value {{ sliderValue }}</p>
+  <div class="mx-auto flex w-full max-w-xs flex-col gap-4">
+    <p class="text-sm font-medium">Value {{ sliderValue }}</p>
     <UiSlider v-model="sliderValue" />
   </div>
 </template>
@@ -61,8 +61,8 @@ npx ui-thing@latest add slider
 
 ```vue [DocsSliderMultiple.vue]
 <template>
-  <div class="flex w-full flex-col gap-4">
-    <p class="font-semibold">Range {{ rangeValue }}</p>
+  <div class="mx-auto flex w-full max-w-xs flex-col gap-4">
+    <p class="text-sm font-medium">Range {{ rangeValue }}</p>
     <UiSlider v-model="rangeValue" :max="250" />
   </div>
 </template>
@@ -101,7 +101,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-model="value"
         :step="10"
         :max="100"
-        class="[&>div[role=slider]]:rounded"
+        class="[&_[data-slot=slider-thumb]]:rounded"
         aria-label="Slider with square thumb"
       />
     </div>
@@ -134,7 +134,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <UiLabel>Slider with solid thumb</UiLabel>
       <UiSlider
         v-model="value"
-        class="[&>:first-child>span]:opacity-70 [&_div[role=slider]]:bg-primary"
+        class="[&_[data-slot=slider-thumb]]:bg-primary [&>:first-child>span]:opacity-70"
         aria-label="Slider with solid thumb"
       />
     </div>
@@ -167,7 +167,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <UiLabel>Slider with tiny thumb</UiLabel>
       <UiSlider
         v-model="value"
-        class="[&_div[role=slider]]:h-6 [&_div[role=slider]]:w-2.5 [&_div[role=slider]]:border-[3px] [&_div[role=slider]]:border-background [&_div[role=slider]]:bg-primary [&_div[role=slider]]:ring-offset-0"
+        class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-2.5 [&_[data-slot=slider-thumb]]:border-[3px] [&_[data-slot=slider-thumb]]:border-background [&_[data-slot=slider-thumb]]:bg-primary [&_[data-slot=slider-thumb]]:ring-offset-0"
         aria-label="Slider with tiny thumb"
       />
     </div>
@@ -349,33 +349,22 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsSliderLabelsTooltips.vue]
 <template>
-  <div class="mx-auto max-w-sm">
-    <div class="space-y-4">
-      <UiLabel>Slider with labels and tooltip</UiLabel>
-      <div>
-        <span
-          class="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
-          aria-hidden="true"
-        >
-          <span>Low</span>
-          <span>High</span>
-        </span>
-        <UiSlider
-          v-model="value"
-          :step="10"
-          show-tooltip
-          aria-label="Slider with labels and tooltip"
-        >
-          <template #thumb>
-            <UiTooltip v-for="(t, i) in value.length" :key="i" disable-closing-trigger>
-              <UiTooltipTrigger as-child>
-                <UiSliderThumb />
-              </UiTooltipTrigger>
-              <UiTooltipContent align="center">{{ value[i] }}</UiTooltipContent>
-            </UiTooltip>
-          </template>
-        </UiSlider>
-      </div>
+  <div class="mx-auto max-w-sm *:not-first:mt-4">
+    <UiLabel>Slider with labels and tooltip</UiLabel>
+    <div>
+      <span
+        class="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
+        aria-hidden="true"
+      >
+        <span>Low</span>
+        <span>High</span>
+      </span>
+      <UiSlider
+        v-model="value"
+        :step="10"
+        show-tooltip
+        aria-label="Slider with labels and tooltip"
+      />
     </div>
   </div>
 </template>
@@ -961,21 +950,16 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsSliderVerticalDualTooltip.vue]
 <template>
   <div class="mx-auto max-w-sm">
-    <div class="space-y-4">
-      <UiLabel class="justify-center">Vertical dual range slider and tooltip</UiLabel>
+    <div class="*:not-first:mt-4">
+      <UiLabel>Vertical dual range slider and tooltip</UiLabel>
       <div class="flex h-40 justify-center">
-        <UiSlider v-model="value" :max="10" orientation="vertical" aria-label="Vertical slider">
-          <template #thumb>
-            <UiTooltip v-for="(t, i) in value.length" :key="i" disable-closing-trigger>
-              <UiTooltipTrigger as-child>
-                <UiSliderThumb />
-              </UiTooltipTrigger>
-              <UiTooltipContent side="right" align="center">{{
-                value[i] !== undefined ? value[i] : ""
-              }}</UiTooltipContent>
-            </UiTooltip>
-          </template>
-        </UiSlider>
+        <UiSlider
+          v-model="value"
+          :max="10"
+          orientation="vertical"
+          aria-label="Vertical slider"
+          show-tooltip
+        />
       </div>
     </div>
   </div>
@@ -1341,21 +1325,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-model="v1"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="60 Hz"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v1.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v1[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">60</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -1363,21 +1337,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-model="v2"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="250 Hz"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v2.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v2[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">250</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -1385,21 +1349,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-model="v3"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="1k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v3.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v3[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">1k</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -1407,21 +1361,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-model="v4"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="4k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v4.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v4[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">4k</UiLabel>
         </div>
         <div class="flex flex-col items-center gap-2">
@@ -1429,21 +1373,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-model="v5"
             :min
             :max
+            show-tooltip
             orientation="vertical"
-            class="[&>div[role=slider]]:h-6 [&>div[role=slider]]:w-4 [&>div[role=slider]]:rounded"
+            class="[&_[data-slot=slider-thumb]]:h-6 [&_[data-slot=slider-thumb]]:w-4 [&_[data-slot=slider-thumb]]:rounded"
             aria-label="16k"
-          >
-            <template #thumb>
-              <UiTooltip v-for="(t, i) in v5.length" :key="i" disable-closing-trigger>
-                <UiTooltipTrigger as-child>
-                  <UiSliderThumb />
-                </UiTooltipTrigger>
-                <UiTooltipContent class="text-xs" side="right" align="center">{{
-                  v5[i]
-                }}</UiTooltipContent>
-              </UiTooltip>
-            </template>
-          </UiSlider>
+          />
           <UiLabel class="flex w-0 justify-center text-xs text-muted-foreground">16K</UiLabel>
         </div>
       </div>

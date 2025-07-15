@@ -31,6 +31,7 @@
 
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
+  import { useFilter } from "reka-ui";
 
   const genPeople = async () => {
     return Array.from({ length: 10 }, () => ({
@@ -47,8 +48,9 @@
 
   const search = ref("");
   const selected = ref(people.value?.[3]);
+  const { contains } = useFilter({ sensitivity: "base" });
 
-  const filteredPeople = computed(() => {
-    return people.value?.filter((p) => p.name.toLowerCase().includes(search.value.toLowerCase()));
-  });
+  const filteredPeople = computed(() =>
+    people.value.filter((p) => contains(p.name, search.value) || contains(p.email, search.value))
+  );
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <NumberFieldIncrement v-bind="forwarded" :class="styles({ class: props.class })">
+  <NumberFieldIncrement
+    data-slot="number-field-increment"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       <Icon :name="props.icon" />
     </slot>
@@ -7,13 +11,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { NumberFieldIncrement, useForwardProps } from "radix-vue";
-  import type { NumberFieldIncrementProps } from "radix-vue";
+  import { NumberFieldIncrement, useForwardProps } from "reka-ui";
+  import type { NumberFieldIncrementProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       NumberFieldIncrementProps & {
-        class?: any;
+        class?: HTMLAttributes["class"];
         icon?: string;
       }
     >(),

@@ -11,16 +11,16 @@
 
 <script lang="ts">
   import { reactiveOmit } from "@vueuse/core";
-  import { Primitive, useForwardProps } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
-  import type { ModelRef } from "vue";
+  import { Primitive, useForwardProps } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes, ModelRef } from "vue";
 
   export type TimelineData = {
     model: ModelRef<number | undefined, string, number | undefined, number | undefined>;
     orientation: "horizontal" | "vertical";
   };
   export type TimelineProps = PrimitiveProps & {
-    class?: any;
+    class?: HTMLAttributes["class"];
     orientation?: "horizontal" | "vertical";
     modelValue?: number | undefined;
   };

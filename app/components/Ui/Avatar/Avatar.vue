@@ -1,5 +1,10 @@
 <template>
-  <AvatarRoot :as="as" :as-child="asChild" :class="styles({ class: props.class })">
+  <AvatarRoot
+    data-slot="avatar"
+    :as="as"
+    :as-child="asChild"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       <slot name="image">
         <UiAvatarImage
@@ -18,33 +23,42 @@
 </template>
 
 <script lang="ts" setup>
-  import { AvatarRoot } from "radix-vue";
-  import type { AvatarImageEmits, AvatarImageProps, AvatarRootProps } from "radix-vue";
+  import { AvatarRoot } from "reka-ui";
+  import type { AvatarImageEmits, AvatarImageProps, AvatarRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<
-      AvatarRootProps &
-        Partial<AvatarImageProps> & {
-          class?: any;
-          imageClass?: any;
-          fallbackClass?: any;
-          alt?: string;
-          fallback?: string;
-          delayMs?: number;
-        }
-    >(),
-    {
-      class: undefined,
-      imageClass: undefined,
-      fallbackClass: undefined,
-      alt: undefined,
-      fallback: undefined,
-      delayMs: undefined,
-    }
-  );
+  const props = defineProps<
+    AvatarRootProps &
+      Partial<AvatarImageProps> & {
+        /**
+         * Class to add to the root element
+         */
+        class?: HTMLAttributes["class"];
+        /**
+         * Class to pass to the image element
+         */
+        imageClass?: HTMLAttributes["class"];
+        /**
+         * Class to pass to the fallback element
+         */
+        fallbackClass?: HTMLAttributes["class"];
+        /**
+         * The `alt` attribute value for the image
+         */
+        alt?: string;
+        /**
+         * The fallback text to display when the image fails to load
+         */
+        fallback?: string;
+        /**
+         * Useful for delaying rendering so it only appears for those with slower connections.
+         */
+        delayMs?: number;
+      }
+  >();
 
   const emits = defineEmits<AvatarImageEmits>();
   const styles = tv({
-    base: "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+    base: "relative flex size-8 shrink-0 overflow-hidden rounded-full",
   });
 </script>

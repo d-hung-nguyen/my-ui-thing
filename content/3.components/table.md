@@ -466,10 +466,12 @@ To use these examples you will have to copy the code and adjust it for your own 
         <UiTableRow v-for="item in data" :key="item.id">
           <UiTableCell>
             <div class="flex items-center gap-3">
-              <UiAvatar class="size-10" :src="item.image" :alt="item.name" />
-              <div>
+              <UiAvatar class="size-8" :src="item.image" :alt="item.name" />
+              <div class="leading-none">
                 <div class="font-medium">{{ item.name }}</div>
-                <span class="mt-0.5 text-xs text-muted-foreground">@{{ item.username }}</span>
+                <span class="mt-1 inline-block text-xs text-muted-foreground"
+                  >@{{ item.username }}</span
+                >
               </div>
             </div>
           </UiTableCell>
@@ -559,9 +561,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p className="mt-4 text-center text-sm text-muted-foreground">
-      Table without horizontal dividers
-    </p>
+    <p class="mt-4 text-center text-sm text-muted-foreground">Table without horizontal dividers</p>
   </div>
 </template>
 
@@ -780,7 +780,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <UiTable>
         <UiTableHeader>
           <UiTableRow class="bg-muted/50">
-            <UiTableHead v-for="h in headers" :key="h" class="h-9 whitespace-nowrap py-2">{{
+            <UiTableHead v-for="h in headers" :key="h" class="h-9 py-2 whitespace-nowrap">{{
               h
             }}</UiTableHead>
           </UiTableRow>
@@ -1117,7 +1117,7 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div>
     <div class="[&>div]:max-h-96">
       <UiTable
-        class="border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr:not(:last-child)_td]:border-b [&_tr]:border-none"
+        class="border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr]:border-none [&_tr:not(:last-child)_td]:border-b"
       >
         <UiTableHeader class="sticky top-0 z-10 bg-background/90 backdrop-blur-sm">
           <UiTableRow class="hover:bg-transparent">
@@ -1237,7 +1237,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         :key="item.feature"
         class="*:border-border [&>:not(:last-child)]:border-r"
       >
-        <UiTableHead class="whitespace-nowrap font-medium text-foreground">{{
+        <UiTableHead class="font-medium whitespace-nowrap text-foreground">{{
           item.feature
         }}</UiTableHead>
         <UiTableCell

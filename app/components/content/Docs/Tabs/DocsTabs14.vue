@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <UiTabs default-value="Projects">
-      <UiTabsList class="mx-auto flex max-w-xs bg-transparent">
+      <UiTabsList class="mx-auto flex w-full max-w-xs bg-transparent">
         <UiTabsTrigger
           v-for="t in tabs"
           :key="t.title"
@@ -17,7 +17,7 @@
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm text-pretty p-4 text-center text-sm text-muted-foreground">
+        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>

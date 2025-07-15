@@ -8,8 +8,7 @@
         <div class="mx-auto w-full max-w-screen-md rounded-t-lg p-4 pb-10">
           <UiDrawerTitle class="mb-1.5">Image</UiDrawerTitle>
           <UiDrawerDescription>
-            Right click on the image to see the context menu. This drawer seems to not have the pull
-            down issue.
+            Right click on the image to see the context menu.
           </UiDrawerDescription>
 
           <div class="relative min-h-[400px]">
@@ -47,7 +46,7 @@
             </UiAspectRatio>
           </div>
 
-          <UiDrawerClose class="absolute right-4 top-3 h-7 w-7" as-child>
+          <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
             <UiButton variant="ghost" size="icon-sm" class="opacity-50 hover:opacity-100">
               <Icon name="lucide:x" />
             </UiButton>

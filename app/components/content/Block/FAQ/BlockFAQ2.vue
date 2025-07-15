@@ -1,7 +1,7 @@
 <template>
   <UiContainer class="pb-16">
     <UiContainer class="py-16 text-center lg:py-24">
-      <h2 class="mb-4 mt-2 text-4xl font-bold lg:mb-6 lg:mt-3 lg:text-5xl">FAQs</h2>
+      <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">FAQs</h2>
 
       <p class="mx-auto max-w-[800px] text-lg text-muted-foreground lg:text-xl">
         Everything you need to know about the product and billing.
@@ -23,7 +23,7 @@
     </section>
 
     <section
-      class="mx-auto mt-16 flex flex-col items-center justify-between gap-6 rounded-lg bg-muted/50 p-8 py-8 text-center dark:bg-muted/20 lg:flex-row lg:text-left"
+      class="mx-auto mt-16 flex flex-col items-center justify-between gap-6 rounded-lg bg-muted/50 p-8 py-8 text-center lg:flex-row lg:text-left dark:bg-muted/20"
     >
       <div>
         <p class="mb-3 text-lg font-semibold">Still have questions?</p>

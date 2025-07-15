@@ -5,19 +5,18 @@
 </template>
 
 <script lang="ts" setup>
-  import { _border, _muted, _violet } from "#tailwind-config/theme/colors";
   import type { ApexOptions } from "apexcharts";
 
   const series: ApexOptions["series"] = [
     {
       name: "Series 2",
       data: [50, 25, 70, 10, 20, 100, 5, 150, 180, 300, 120, 200],
-      color: _violet["700"], // Example color
+      color: "var(--color-violet-700)", // Example color
     },
     {
       name: "Series 3",
       data: [300, 150, 250, 50, 80, 200, 400, 100, 120, 10, 500, 300],
-      color: _violet["900"], // Example color
+      color: "var(--color-violet-900)", // Example color
     },
   ];
 
@@ -25,8 +24,8 @@
     plotOptions: {
       radar: {
         polygons: {
-          connectorColors: _border,
-          strokeColors: _border,
+          connectorColors: "var(--color-border)",
+          strokeColors: "var(--color-border)",
         },
       },
     },
@@ -35,13 +34,13 @@
       fontWeight: 500,
       offsetY: 5,
       labels: {
-        colors: _muted.foreground,
+        colors: "var(--color-muted-foreground)",
       },
     },
     stroke: { show: false },
     markers: {
       strokeWidth: 1,
-      strokeColors: [_border],
+      strokeColors: ["var(--color-border)"],
     },
     chart: {
       toolbar: {
@@ -55,7 +54,7 @@
       labels: {
         style: {
           fontSize: "12px",
-          colors: _muted.foreground,
+          colors: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
@@ -63,7 +62,7 @@
     xaxis: {
       labels: {
         style: {
-          colors: _muted.foreground,
+          colors: "var(--color-muted-foreground)",
           fontFamily: "inherit",
         },
       },
@@ -86,6 +85,8 @@
 </script>
 
 <style>
+  @reference "~/assets/css/tailwind.css";
+
   .apexcharts-menu {
     @apply border-border bg-background text-foreground;
     .apexcharts-menu-item {
@@ -94,16 +95,16 @@
   }
 
   .apexcharts-tooltip {
-    background: theme("colors.background") !important;
-    color: theme("colors.foreground") !important;
-    border: 1px solid theme("colors.border") !important;
-    box-shadow: theme("boxShadow.DEFAULT") !important;
+    background: var(--color-background) !important;
+    color: var(--color-foreground) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: var(--shadow) !important;
 
     .apexcharts-tooltip-title {
-      color: theme("colors.foreground") !important;
-      background-color: theme("colors.muted.DEFAULT") !important;
-      font-family: theme("fontFamily.sans") !important;
-      border-bottom: 1px solid theme("colors.border") !important;
+      color: var(--color-foreground) !important;
+      background-color: var(--color-muted) !important;
+      font-family: var(--font-sans) !important;
+      border-bottom: 1px solid var(--color-border) !important;
     }
   }
 </style>

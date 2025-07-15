@@ -3,7 +3,7 @@ title: Form
 description: Building forms with VeeValidate and Zod.
 links:
   - title: Vee-Validate
-    href: https://www.radix-vue.com/components/accordion
+    href: https://reka-ui.com/docs/components/accordion
     icon: mdi:vuejs
   - title: Zod
     href: https://zod.dev/
@@ -122,28 +122,18 @@ npx ui-thing@latest add form
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        fullName: z
-          .string({
-            required_error: "Full name is required",
-          })
-          .min(3, "Full name must be at least 3 characters"),
-        email: z
-          .string({
-            required_error: "Email is required",
-          })
-          .email("Email must be a valid email"),
-        phone: z
-          .string()
+      object({
+        fullName: string().label("Full Name").min(3).required().trim(),
+        email: string().label("Email").email().required().trim(),
+        phone: string()
+          .label("Phone number")
           .transform((value) => (!value ? null : value))
-          .refine((value) => !value || value.length === 10, {
-            message: "Phone must be 10 digits",
-          })
-          .nullish(),
+          .length(10)
+          .nullable(),
       })
     ),
   });

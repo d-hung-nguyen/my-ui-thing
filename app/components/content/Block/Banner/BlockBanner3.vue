@@ -7,7 +7,7 @@
         <Icon :name="icon" class="h-6 w-6" />
       </div>
       <UiButton class="shrink-0 lg:hidden" size="icon-sm" variant="ghost">
-        <Icon name="lucide:x" class="h-4 w-4 text-muted-foreground" />
+        <Icon name="lucide:x" class="size-4 text-muted-foreground" />
       </UiButton>
     </div>
     <div class="flex grow flex-col gap-2 lg:flex-row lg:items-center">

@@ -1,18 +1,20 @@
 <template>
-  <UiAccordion type="single" default-value="item-2" :items="accordionItems">
-    <template #trigger="{ open, item }">
-      <UiAccordionTrigger
-        class="text-left text-sm"
-        :class="[open && 'underline underline-offset-2']"
-        :title="item.title"
-      >
-        <template #icon>
-          <Icon v-if="!open" name="lucide:plus" class="size-4 shrink-0" />
-          <Icon v-else name="lucide:minus" class="size-4 shrink-0" />
-        </template>
-      </UiAccordionTrigger>
-    </template>
-  </UiAccordion>
+  <div class="mx-auto max-w-lg">
+    <UiAccordion type="single" default-value="item-2" :items="accordionItems">
+      <template #trigger="{ open, item }">
+        <UiAccordionTrigger
+          class="text-left text-sm"
+          :class="[open && 'underline underline-offset-2']"
+          :title="item.title"
+        >
+          <template #icon>
+            <Icon v-if="!open" name="lucide:plus" class="size-4 shrink-0" />
+            <Icon v-else name="lucide:minus" class="size-4 shrink-0" />
+          </template>
+        </UiAccordionTrigger>
+      </template>
+    </UiAccordion>
+  </div>
 </template>
 
 <script lang="ts" setup>

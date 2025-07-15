@@ -53,6 +53,8 @@
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable.cell-border tr th) {
     @apply border-r first:border-l;
   }

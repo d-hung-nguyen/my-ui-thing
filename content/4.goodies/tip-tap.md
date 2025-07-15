@@ -32,7 +32,7 @@ The one used here looks like this. Like I said earlier, you have to install a lo
   <div v-if="editor">
     <EditorContent :editor="editor" />
     <div
-      class="flex flex-wrap items-center gap-1 rounded-bl-md rounded-br-md border border-input bg-transparent p-1"
+      class="flex flex-wrap items-center gap-1 rounded-br-md rounded-bl-md border border-input bg-transparent p-1"
     >
       <UiButton
         size="sm"
@@ -218,13 +218,14 @@ The one used here looks like this. Like I said earlier, you have to install a lo
   import Typography from "@tiptap/extension-typography";
   import StarterKit from "@tiptap/starter-kit";
   import { EditorContent, useEditor } from "@tiptap/vue-3";
+  import type { HTMLAttributes } from "vue";
 
   const model = defineModel<any>({ default: "" });
 
   const props = withDefaults(
     defineProps<{
       modelType?: "html" | "json";
-      class?: any;
+      class?: HTMLAttributes["class"];
     }>(),
     {
       modelType: "html",
@@ -237,7 +238,7 @@ The one used here looks like this. Like I said earlier, you have to install a lo
     editorProps: {
       attributes: {
         class:
-          tw`max-h-[250px] min-h-[150px] w-full overflow-auto rounded-md rounded-bl-none rounded-br-none border border-b-0 border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50` as any,
+          tw`max-h-[250px] min-h-[150px] w-full overflow-auto rounded-md rounded-br-none rounded-bl-none border border-b-0 border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50` as any,
       },
     },
     onUpdate(val) {
@@ -359,6 +360,8 @@ In this example, we are just passing the model to the editor. We are also custom
 </script>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.tiptap) {
     :first-child {
       margin-top: 0;
@@ -389,12 +392,12 @@ In this example, we are just passing the model to the editor. We are also custom
     h4,
     h5,
     h6 {
-      @apply mt-9 text-pretty font-bold leading-tight;
+      @apply mt-9 leading-tight font-bold text-pretty;
     }
 
     h1,
     h2 {
-      @apply mb-6 mt-14;
+      @apply mt-14 mb-6;
     }
 
     h1 {

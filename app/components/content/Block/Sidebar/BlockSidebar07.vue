@@ -10,7 +10,7 @@
               <UiDropdownMenuTrigger as-child>
                 <UiSidebarMenuButton
                   size="lg"
-                  class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-0"
+                  class="group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-0 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <div
                     class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"
@@ -70,7 +70,7 @@
               <UiSidebarInput id="search" placeholder="Search the docs..." class="pl-8" />
               <Icon
                 name="lucide:search"
-                class="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50"
+                class="pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2 opacity-50 select-none"
               />
             </UiSidebarGroupContent>
           </UiSidebarGroup>
@@ -233,7 +233,7 @@
       <!-- Navbar -->
       <UiNavbar sticky class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
         <UiSidebarTrigger class="-ml-1" />
-        <UiSeparator orientation="vertical" class="mr-2 h-4" />
+        <UiDivider orientation="vertical" class="mr-2 h-4 w-px" />
         <UiBreadcrumbs :items="breadcrumbItems" />
       </UiNavbar>
       <div class="grid auto-rows-min gap-4 p-4 md:grid-cols-3">

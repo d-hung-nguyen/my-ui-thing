@@ -1,5 +1,5 @@
 <template>
-  <AccordionRoot v-slot="rootSlotProps" v-bind="forwarded">
+  <AccordionRoot v-slot="rootSlotProps" data-slot="accordion" v-bind="forwarded">
     <slot v-bind="rootSlotProps" :items="items">
       <template v-for="(item, i) in items" :key="i">
         <UiAccordionItem v-slot="itemSlotProps" :disabled="item.disabled" :value="item.value">
@@ -19,10 +19,13 @@
   </AccordionRoot>
 </template>
 
-<script setup lang="ts">
-  import { AccordionRoot, useForwardPropsEmits } from "radix-vue";
-  import type { AccordionRootEmits, AccordionRootProps } from "radix-vue";
+<script lang="ts">
+  import { AccordionRoot, useForwardPropsEmits } from "reka-ui";
+  import type { AccordionRootEmits, AccordionRootProps } from "reka-ui";
 
+  /**
+   * Interface that represents a single item in the accordion
+   */
   export interface AccordionItem {
     title?: string;
     content?: string;
@@ -31,7 +34,9 @@
     icon?: string;
     [key: string]: any;
   }
+</script>
 
+<script setup lang="ts">
   const props = withDefaults(
     defineProps<
       AccordionRootProps & {

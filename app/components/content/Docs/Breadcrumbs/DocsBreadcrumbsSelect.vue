@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [{ label: "Databases" }, { slot: "select" }];
+  const items: BreadcrumbItem[] = [{ label: "Databases" }, { slot: "select" }];
 </script>

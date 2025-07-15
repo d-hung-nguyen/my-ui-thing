@@ -1,12 +1,14 @@
 <template>
-  <tr :class="styles({ class: props.class })">
+  <tr data-slot="table-row" :class="styles({ class: props.class })">
     <slot />
   </tr>
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
-    class?: any;
+    class?: HTMLAttributes["class"];
   }>();
 
   const styles = tv({

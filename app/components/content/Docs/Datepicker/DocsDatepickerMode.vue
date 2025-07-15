@@ -1,11 +1,17 @@
 <template>
   <div class="flex w-full items-center justify-center">
-    <UiDatepicker v-model="today" mode="dateTime" title-position="right" />
+    <UiDatepicker
+      v-model="today"
+      is-required
+      :select-attribute="{ dot: true }"
+      mode="dateTime"
+      title-position="right"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { addDays } from "date-fns";
+  import dayjs from "dayjs";
 
-  const today = addDays(new Date(), 3);
+  const today = ref(dayjs().add(3, "days").toDate());
 </script>

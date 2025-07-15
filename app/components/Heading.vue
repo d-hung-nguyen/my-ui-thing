@@ -25,10 +25,12 @@
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
     title?: string;
     subtext?: string;
-    class?: any;
+    class?: HTMLAttributes["class"];
     radixLink?: string;
   }>();
 

@@ -14,22 +14,19 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        username: z
-          .string({
-            required_error: "Username is required",
-          })
-          .min(3, "Username must be at least 3 characters long")
-          .max(20, "Username must be at most 20 characters long"),
+      object({
+        username: string().label("Username").required().min(3).max(20).trim().lowercase(),
       })
     ),
   });
 
   const onSubmit = handleSubmit((values) => {
-    alert(JSON.stringify(values, null, 2));
+    useSonner("Form submitted successfully!", {
+      description: `Your username has been updated to ${values.username}.`,
+    });
   });
 </script>

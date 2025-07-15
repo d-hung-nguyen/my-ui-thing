@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [
+  const items: BreadcrumbItem[] = [
     { label: "Home", link: "/", icon: "lucide:home" },
     { label: "Components", link: "/", icon: "lucide:component" },
     { label: "Breadcrumb" },

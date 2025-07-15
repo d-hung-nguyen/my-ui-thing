@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <UiAutocomplete
-      v-model="selectedPeople"
-      multiple
-      :display-value="displaySelected"
-      :filter-function="filtered"
-    >
+  <div class="mx-auto max-w-sm">
+    <UiAutocomplete v-model="selectedPeople" multiple>
       <UiAutocompleteAnchor>
-        <UiAutocompleteInput placeholder="Select people..." />
+        <UiAutocompleteInput :display-value="displaySelected" placeholder="Select people..." />
         <UiAutocompleteTrigger>
           <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>People</UiAutocompleteLabel>
           <template v-for="(p, i) in people" :key="i">
-            <UiAutocompleteItem :value="p" icon="lucide:check">{{ p.name }}</UiAutocompleteItem>
+            <UiAutocompleteItem class="mb-1 last:mb-0" :value="p" icon="lucide:check">{{
+              p.name
+            }}</UiAutocompleteItem>
           </template>
         </UiAutocompleteGroup>
       </UiAutocompleteContent>
@@ -36,12 +35,11 @@
   ];
   const selectedPeople = ref([people[0], people[1]]);
 
-  const displaySelected = (p: any) => {
-    console.log(p);
-    return p;
-  };
+  type Person = (typeof people)[number];
 
-  function filtered(list: any[], searchTerm: string) {
-    return list.filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  }
+  const displaySelected = (p: any) => {
+    if (!p) return;
+    if (p && p.length == 1) return p[0]?.name;
+    return p.map((i: Person) => i.name).join(", ");
+  };
 </script>

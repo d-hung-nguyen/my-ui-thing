@@ -38,7 +38,7 @@
                       />
                     </UiButton>
                   </UiCollapsibleTrigger>
-                  <UiCollapsibleContent class="flex flex-col gap-1.5 pl-4 pr-2">
+                  <UiCollapsibleContent class="flex flex-col gap-1.5 pr-2 pl-4">
                     <template v-for="(item, index) in n.items" :key="index">
                       <UiButton
                         :to="item.link"
@@ -80,7 +80,7 @@
                       />
                     </UiButton>
                   </UiCollapsibleTrigger>
-                  <UiCollapsibleContent class="flex flex-col gap-1.5 pl-4 pr-2">
+                  <UiCollapsibleContent class="flex flex-col gap-1.5 pr-2 pl-4">
                     <template v-for="(item, index) in n.items" :key="index">
                       <UiButton
                         :to="item.link"

@@ -83,6 +83,8 @@
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable thead tr) {
     @apply bg-muted/50;
   }

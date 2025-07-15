@@ -7,8 +7,8 @@
           :class="[!date && 'text-muted-foreground', 'w-[260px] justify-start text-left']"
           @click="togglePopover"
         >
-          <Icon name="lucide:calendar" class="h-4 w-4" />
-          {{ date ? format(date, "MMMM dd, yyyy") : "Select a date" }}
+          <Icon name="lucide:calendar" class="size-4" />
+          {{ date ? dayjs(date).format("MMMM DD, YYYY") : "Select a date" }}
         </UiButton>
       </template>
     </UiDatepicker>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { format } from "date-fns";
+  import dayjs from "dayjs";
 
   const date = ref();
 </script>

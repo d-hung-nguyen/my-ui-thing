@@ -33,15 +33,13 @@ npx ui-thing@latest add timeline
 <template>
   <div class="flex justify-center">
     <UiTimeline :model-value="3">
-      <template v-for="(item, i) of items" :key="i">
-        <UiTimelineItem :step="item.id">
-          <UiTimelineHeader>
-            <UiTimelineSeparator />
-            <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
-            <UiTimelineIndicator />
-          </UiTimelineHeader>
-        </UiTimelineItem>
-      </template>
+      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+        <UiTimelineHeader>
+          <UiTimelineSeparator />
+          <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
+          <UiTimelineIndicator />
+        </UiTimelineHeader>
+      </UiTimelineItem>
     </UiTimeline>
   </div>
 </template>
@@ -101,12 +99,12 @@ npx ui-thing@latest add timeline
         v-for="item in items"
         :key="item.id"
         :step="item.id"
-        class="sm:group-data-[orientation=vertical]/timeline:ms-32"
+        class="group-data-[orientation=vertical]/timeline:sm:ms-32"
       >
         <UiTimelineHeader>
           <UiTimelineSeparator />
           <UiTimelineDate
-            class="sm:group-data-[orientation=vertical]/timeline:absolute sm:group-data-[orientation=vertical]/timeline:-left-32 sm:group-data-[orientation=vertical]/timeline:w-20 sm:group-data-[orientation=vertical]/timeline:text-right"
+            class="group-data-[orientation=vertical]/timeline:sm:absolute group-data-[orientation=vertical]/timeline:sm:-left-32 group-data-[orientation=vertical]/timeline:sm:w-20 group-data-[orientation=vertical]/timeline:sm:text-right"
           >
             {{ item.date }}
           </UiTimelineDate>
@@ -168,19 +166,17 @@ npx ui-thing@latest add timeline
 
 ```vue [DocsTimelineDateTop.vue]
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineDate>{{ item.date }}</UiTimelineDate>
-          <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-        <UiTimelineContent>{{ item.description }}</UiTimelineContent>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="3">
+    <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineDate>{{ item.date }}</UiTimelineDate>
+        <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+      <UiTimelineContent>{{ item.description }}</UiTimelineContent>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>
@@ -232,21 +228,21 @@ npx ui-thing@latest add timeline
 
 ```vue [DocsTimelineTimeBottom.vue]
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-        <UiTimelineContent>
-          {{ item.description }}
-          <UiTimelineDate class="mb-0 mt-2">{{ item.date }}</UiTimelineDate>
-        </UiTimelineContent>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="2">
+    <UiTimelineItem v-for="item in items" :key="item.id" :step="item.id">
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineTitle class="-mt-0.5">{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+      <UiTimelineContent>
+        {{ item.description }}
+        <UiTimelineDate v-if="item.date" class="mt-2 mb-0">
+          {{ item.date }}
+        </UiTimelineDate>
+      </UiTimelineContent>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>
@@ -298,7 +294,7 @@ npx ui-thing@latest add timeline
 
 ```vue [DocsTimelineCheckIcon.vue]
 <template>
-  <UiTimeline :model-value="3">
+  <UiTimeline :model-value="2">
     <UiTimelineItem
       v-for="item in items"
       :key="item.id"
@@ -307,16 +303,17 @@ npx ui-thing@latest add timeline
     >
       <UiTimelineHeader>
         <UiTimelineSeparator
-          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-[1.625rem]"
+          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5"
         />
         <UiTimelineDate>{{ item.date }}</UiTimelineDate>
         <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center group-data-[orientation=vertical]/timeline:-left-7 group-data-[completed=true]/timeline-item:border-none group-data-[completed=true]/timeline-item:bg-primary group-data-[completed=true]/timeline-item:text-primary-foreground"
+          class="flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
         >
           <Icon
             name="lucide:check"
-            class="size-4 group-data-[completed=false]/timeline-item:hidden"
+            :size="16"
+            class="group-not-data-completed/timeline-item:hidden"
           />
         </UiTimelineIndicator>
       </UiTimelineHeader>
@@ -374,7 +371,7 @@ npx ui-thing@latest add timeline
 
 ```vue [DocsTimelineGit.vue]
 <template>
-  <UiTimeline :model-value="2">
+  <UiTimeline :model-value="3">
     <UiTimelineItem
       v-for="item in items"
       :key="item.id"
@@ -383,18 +380,20 @@ npx ui-thing@latest add timeline
     >
       <UiTimelineHeader>
         <UiTimelineSeparator
-          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-[1.625rem]"
+          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5"
         />
         <UiTimelineTitle class="mt-0.5">{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-[orientation=vertical]/timeline:-left-7 group-data-[completed=true]/timeline-item:bg-primary group-data-[completed=true]/timeline-item:text-primary-foreground"
+          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
         >
-          <Icon :name="item.icon" class="size-4" />
+          <Icon :name="item.icon" :size="14" />
         </UiTimelineIndicator>
       </UiTimelineHeader>
       <UiTimelineContent>
         {{ item.description }}
-        <UiTimelineDate class="mb-0 mt-2">{{ item.date }}</UiTimelineDate>
+        <UiTimelineDate v-if="item.date" class="mt-2 mb-0">
+          {{ item.date }}
+        </UiTimelineDate>
       </UiTimelineContent>
     </UiTimelineItem>
   </UiTimeline>
@@ -456,25 +455,27 @@ npx ui-thing@latest add timeline
       v-for="item in items"
       :key="item.id"
       :step="item.id"
-      class="group-data-[orientation=vertical]/timeline:ms-10 group-data-[orientation=vertical]/timeline:[&:not(:last-child)]:pb-8"
+      class="group-data-[orientation=vertical]/timeline:ms-10 group-data-[orientation=vertical]/timeline:not-last:pb-8"
     >
       <UiTimelineHeader>
         <UiTimelineSeparator
-          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-[1.625rem]"
+          class="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5"
         />
         <UiTimelineTitle class="mt-0.5">
           {{ item.title }}
-          <span class="text-sm font-normal text-muted-foreground">{{ item.action }}</span>
+          <span class="text-sm font-normal text-muted-foreground">
+            {{ item.action }}
+          </span>
         </UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-[orientation=vertical]/timeline:-left-7 group-data-[completed=true]/timeline-item:bg-primary group-data-[completed=true]/timeline-item:text-primary-foreground"
+          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
         >
-          <UiAvatar :src="item.image" :alt="item.title" class="size-6" />
+          <img :src="item.image" :alt="item.title" class="size-6 rounded-full" />
         </UiTimelineIndicator>
       </UiTimelineHeader>
       <UiTimelineContent class="mt-2 rounded-lg border px-4 py-3 text-foreground">
         {{ item.description }}
-        <UiTimelineDate class="mb-0 mt-1">{{ item.date }}</UiTimelineDate>
+        <UiTimelineDate class="mt-1 mb-0">{{ item.date }}</UiTimelineDate>
       </UiTimelineContent>
     </UiTimelineItem>
   </UiTimeline>
@@ -536,23 +537,21 @@ npx ui-thing@latest add timeline
 
 ```vue [DocsTimelineLeftRight.vue]
 <template>
-  <div>
-    <UiTimeline :model-value="3">
-      <UiTimelineItem
-        v-for="item in items"
-        :key="item.id"
-        :step="item.id"
-        class="w-[calc(50%-1.5rem)] odd:!ml-auto odd:ms-auto even:text-right even:group-data-[orientation=vertical]/timeline:me-8 even:group-data-[orientation=vertical]/timeline:ms-0 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2"
-      >
-        <UiTimelineHeader>
-          <UiTimelineSeparator />
-          <UiTimelineDate>{{ item.date }}</UiTimelineDate>
-          <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
-          <UiTimelineIndicator />
-        </UiTimelineHeader>
-      </UiTimelineItem>
-    </UiTimeline>
-  </div>
+  <UiTimeline :model-value="4">
+    <UiTimelineItem
+      v-for="item in items"
+      :key="item.id"
+      :step="item.id"
+      class="w-[calc(50%-1.5rem)] odd:ms-auto even:text-right even:group-data-[orientation=vertical]/timeline:ms-0 even:group-data-[orientation=vertical]/timeline:me-8 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:-right-6 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:left-auto even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-indicator]]:translate-x-1/2 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:-right-6 even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:left-auto even:group-data-[orientation=vertical]/timeline:[&_[data-slot=timeline-separator]]:translate-x-1/2"
+    >
+      <UiTimelineHeader>
+        <UiTimelineSeparator />
+        <UiTimelineDate>{{ item.date }}</UiTimelineDate>
+        <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
+        <UiTimelineIndicator />
+      </UiTimelineHeader>
+    </UiTimelineItem>
+  </UiTimeline>
 </template>
 
 <script lang="ts" setup>

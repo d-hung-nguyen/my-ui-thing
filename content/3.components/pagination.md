@@ -2,11 +2,11 @@
 title: Pagination
 description: Displays data in paged format and provides navigation between pages.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/pagination.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/pagination.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/pagination.html#api-reference
+    href: https://reka-ui.com/docs/components/pagination.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -61,7 +61,7 @@ npx ui-thing@latest add pagination
 ```vue [DocsPagination.vue]
 <template>
   <div class="flex w-full justify-center">
-    <UiPagination :total="100" :sibling-count="1" />
+    <UiPagination :items-per-page="10" :total="100" :sibling-count="1" />
   </div>
 </template>
 ```
@@ -88,18 +88,18 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsPaginationApart.vue]
 <template>
-  <div class="flex flex-col items-center gap-10">
+  <div class="flex w-full flex-col items-center gap-10">
     <UiPagination :total="2" :items-per-page="1" class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <UiPaginationPrev as-child>
-          <UiButton variant="outline">
+          <UiButton variant="outline" size="default">
             <span class="sr-only">Previous</span>
             <Icon name="lucide:chevron-left" class="size-4" />
             Previous
           </UiButton>
         </UiPaginationPrev>
         <UiPaginationNext as-child>
-          <UiButton variant="outline">
+          <UiButton variant="outline" size="default">
             <span class="sr-only">Next</span>
             Next
             <Icon name="lucide:chevron-right" class="size-4" />
@@ -108,9 +108,9 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiPaginationList>
     </UiPagination>
     <UiPagination :total="2" :items-per-page="1" class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <UiPaginationPrev as-child>
-          <UiButton class="group" variant="ghost">
+          <UiButton class="group" variant="ghost" size="default">
             <span class="sr-only">Previous</span>
             <Icon
               name="lucide:arrow-left"
@@ -120,7 +120,7 @@ To use these examples you will have to copy the code and adjust it for your own 
           </UiButton>
         </UiPaginationPrev>
         <UiPaginationNext as-child>
-          <UiButton class="group" variant="ghost">
+          <UiButton class="group" variant="ghost" size="default">
             <span class="sr-only">Next</span>
             Next
             <Icon
@@ -153,7 +153,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <div class="flex flex-col items-center gap-10">
     <UiPagination v-model:page="page1" :total :items-per-page class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <UiPaginationPrev as-child>
           <UiButton variant="outline" size="icon-sm">
             <span class="sr-only">Previous</span>
@@ -172,8 +172,8 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiPaginationNext>
       </UiPaginationList>
     </UiPagination>
-    <UiPagination v-model:page="page2" :total :items-per-page>
-      <UiPaginationList class="justify-between gap-5">
+    <UiPagination v-model:page="page2" :total :items-per-page class="mx-auto w-full max-w-md">
+      <UiPaginationList class="w-full justify-between gap-5">
         <UiPaginationPrev as-child>
           <UiButton variant="ghost" size="icon-sm">
             <span class="sr-only">Previous</span>
@@ -219,9 +219,9 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsPaginationInfoStartEnd.vue]
 <template>
-  <div class="flex flex-col items-center gap-10">
-    <UiPagination v-model:page="page1" :total :items-per-page class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+  <div class="mx-auto flex w-full max-w-md flex-col items-center gap-10">
+    <UiPagination v-model:page="page1" :total :items-per-page>
+      <UiPaginationList class="w-full justify-between">
         <div class="text-sm text-muted-foreground">
           Page <span class="text-foreground">{{ page1 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
@@ -241,7 +241,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiPaginationList>
     </UiPagination>
     <UiPagination v-model:page="page1" :total :items-per-page class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <div class="text-sm text-muted-foreground">
           Page <span class="text-foreground">{{ page1 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
@@ -263,7 +263,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiPaginationList>
     </UiPagination>
     <UiPagination v-model:page="page2" :total :items-per-page class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <div class="flex items-center gap-3">
           <UiPaginationPrev as-child>
             <UiButton variant="outline" size="sm">
@@ -283,7 +283,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiPaginationList>
     </UiPagination>
     <UiPagination v-model:page="page2" :total :items-per-page class="mx-auto w-full max-w-md">
-      <UiPaginationList class="justify-between">
+      <UiPaginationList class="w-full justify-between">
         <div class="flex items-center gap-3">
           <UiPaginationPrev as-child>
             <UiButton variant="outline" size="icon-sm">
@@ -333,15 +333,17 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <div class="flex flex-col items-center gap-10">
     <UiPagination v-model:page="page1" :items-per-page :sibling-count="1" :total class="mx-auto">
-      <UiPaginationList v-slot="{ items }" class="gap-0 divide-x rounded-lg border">
-        <UiPaginationPrev class="rounded-e-none" as-child icon="lucide:chevron-left" />
+      <UiPaginationList v-slot="{ items }" class="gap-0 rounded-lg border">
+        <UiPaginationPrev class="h-full rounded-e-none" as-child icon="lucide:chevron-left" />
         <template v-for="(page, index) in items" :key="index">
-          <UiPaginationItem
-            v-if="page.type === 'page'"
-            class="rounded-none border-x-0 border-y-0 data-[selected=true]:!border-primary"
-            as-child
-            v-bind="page"
-          />
+          <UiPaginationItem v-if="page.type === 'page'" as-child v-bind="page">
+            <UiButton
+              class="size-9 rounded-none border-0 shadow-none data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground dark:bg-transparent dark:data-[selected=true]:bg-primary dark:data-[selected=true]:text-primary-foreground"
+              variant="outline"
+              size="icon-sm"
+              >{{ page.value }}</UiButton
+            >
+          </UiPaginationItem>
           <UiPaginationEllipsis
             v-else-if="page.type === 'ellipsis'"
             as-child
@@ -349,7 +351,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             icon="lucide:ellipsis"
           />
         </template>
-        <UiPaginationNext class="rounded-s-none" as-child icon="lucide:chevron-right" />
+        <UiPaginationNext class="h-full rounded-s-none" as-child icon="lucide:chevron-right" />
       </UiPaginationList>
     </UiPagination>
   </div>
@@ -378,36 +380,35 @@ To use these examples you will have to copy the code and adjust it for your own 
 
 ```vue [DocsPaginationTable.vue]
 <template>
-  <div class="flex w-full items-center justify-between gap-5">
-    <div class="flex basis-full items-center justify-between gap-5 md:basis-1/2">
-      <div class="flex items-center gap-3">
-        <span class="shrink-0 text-sm">Rows per page</span>
-        <UiSelect v-model="itemsPerPage">
-          <UiSelectTrigger class="h-9 w-20" />
-          <UiSelectContent>
-            <UiSelectItem v-for="item in selectOptions" :key="item" :text="item" :value="item" />
-          </UiSelectContent>
-        </UiSelect>
-      </div>
-      <div class="hidden text-sm text-muted-foreground md:block">
-        <span class="text-foreground">{{ page1 }}</span> of
-        <span class="text-foreground">{{ pageTotal }}</span>
-      </div>
+  <div class="@container flex w-full items-center justify-between gap-5">
+    <div class="flex items-center gap-3">
+      <UiLabel :for="id1" class="hidden text-sm @[450px]:inline-block">Rows per page</UiLabel>
+      <UiSelect v-model="itemsPerPage">
+        <UiSelectTrigger :id="id1" class="h-8 w-fit whitespace-nowrap" />
+        <UiSelectContent class="min-w-fit">
+          <UiSelectItem v-for="item in selectOptions" :key="item" :text="item" :value="item" />
+        </UiSelectContent>
+      </UiSelect>
     </div>
-    <UiPagination
-      v-model:page="page1"
-      class="basis-1/2"
-      :items-per-page="Number(itemsPerPage)"
-      :sibling-count="1"
-      :total
-    >
-      <UiPaginationList class="justify-end">
-        <UiPaginationFirst as-child icon="lucide:chevron-first" />
-        <UiPaginationPrev as-child icon="lucide:chevron-left" />
-        <UiPaginationNext as-child icon="lucide:chevron-right" />
-        <UiPaginationLast as-child icon="lucide:chevron-last" />
-      </UiPaginationList>
-    </UiPagination>
+    <div class="grow text-right text-sm whitespace-nowrap text-muted-foreground">
+      <span class="text-foreground">{{ page1 }}</span> of
+      <span class="text-foreground">{{ pageTotal }}</span>
+    </div>
+    <div>
+      <UiPagination
+        v-model:page="page1"
+        :items-per-page="Number(itemsPerPage)"
+        :sibling-count="1"
+        :total
+      >
+        <UiPaginationList class="justify-end">
+          <UiPaginationFirst as-child variant="outline" icon="lucide:chevron-first" />
+          <UiPaginationPrev as-child variant="outline" icon="lucide:chevron-left" />
+          <UiPaginationNext as-child variant="outline" icon="lucide:chevron-right" />
+          <UiPaginationLast as-child variant="outline" icon="lucide:chevron-last" />
+        </UiPaginationList>
+      </UiPagination>
+    </div>
   </div>
 </template>
 
@@ -415,6 +416,7 @@ To use these examples you will have to copy the code and adjust it for your own 
   const page1 = ref(1);
   const total = 100;
   const itemsPerPage = ref("10");
+  const id1 = useId();
 
   const selectOptions = ["10", "20", "50", "100"];
 

@@ -1,12 +1,12 @@
 <template>
-  <AlertDialogPortal v-bind="props">
+  <AlertDialogPortal data-slot="alert-dialog-portal" v-bind="props">
     <slot />
   </AlertDialogPortal>
 </template>
 
 <script lang="ts" setup>
-  import { AlertDialogPortal } from "radix-vue";
-  import type { AlertDialogPortalProps } from "radix-vue";
+  import { AlertDialogPortal } from "reka-ui";
+  import type { AlertDialogPortalProps } from "reka-ui";
 
   const props = defineProps<AlertDialogPortalProps>();
 </script>

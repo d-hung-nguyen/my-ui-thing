@@ -1,65 +1,66 @@
 <template>
-  <form @submit="submitReport">
-    <UiCard description="What area are you having problems with?">
-      <template #title>
-        <UiCardTitle class="text-xl"> Report an issue </UiCardTitle>
-      </template>
-      <template #content>
-        <UiCardContent class="grid gap-6">
-          <div class="grid grid-cols-2 gap-4">
-            <UiFormSelect label="Area" name="area" placeholder="Area">
-              <template #content>
-                <UiSelectContent>
-                  <UiSelectItem
-                    v-for="m in areaOptions"
-                    :key="m"
-                    :value="m"
-                    :text-value="m"
-                    :text="m"
-                  />
-                </UiSelectContent>
-              </template>
-            </UiFormSelect>
-            <UiFormSelect label="Security Level" name="securityLevel" placeholder="Level">
-              <template #content>
-                <UiSelectContent>
-                  <UiSelectItem
-                    v-for="m in securityLevels"
-                    :key="m"
-                    :value="m"
-                    :text-value="m"
-                    :text="m"
-                  />
-                </UiSelectContent>
-              </template>
-            </UiFormSelect>
-          </div>
-          <UiVeeInput label="Subject" name="subject" placeholder="I need help with..." />
-          <UiVeeTextarea
-            label="Description"
-            name="description"
-            placeholder="Please include all information relevant to your issue."
-          />
-        </UiCardContent>
-      </template>
-      <template #footer>
-        <UiCardFooter class="justify-between">
-          <UiButton variant="ghost" @click="handleReset()">Cancel</UiButton>
-          <UiButton type="submit">Continue</UiButton>
-        </UiCardFooter>
-      </template>
-    </UiCard>
-  </form>
+  <UiCard
+    as="form"
+    title="Report an issue"
+    description="What area are you having problems with?"
+    @submit="submitReport"
+  >
+    <template #content>
+      <UiCardContent class="flex flex-col gap-6">
+        <div class="grid grid-cols-2 gap-4">
+          <UiFormSelect label="Area" name="area" placeholder="Area">
+            <template #content>
+              <UiSelectContent>
+                <UiSelectItem
+                  v-for="m in areaOptions"
+                  :key="m"
+                  :value="m"
+                  :text-value="m"
+                  :text="m"
+                />
+              </UiSelectContent>
+            </template>
+          </UiFormSelect>
+          <UiFormSelect label="Security Level" name="securityLevel" placeholder="Level">
+            <template #content>
+              <UiSelectContent>
+                <UiSelectItem
+                  v-for="m in securityLevels"
+                  :key="m"
+                  :value="m"
+                  :text-value="m"
+                  :text="m"
+                />
+              </UiSelectContent>
+            </template>
+          </UiFormSelect>
+        </div>
+        <UiVeeInput label="Subject" name="subject" placeholder="I need help with..." />
+        <UiVeeTextarea
+          label="Description"
+          name="description"
+          placeholder="Please include all information relevant to your issue."
+        />
+      </UiCardContent>
+    </template>
+    <template #footer>
+      <UiCardFooter class="justify-end gap-2">
+        <UiButton variant="ghost" @click="handleReset()">Cancel</UiButton>
+        <UiButton type="submit">Continue</UiButton>
+      </UiCardFooter>
+    </template>
+  </UiCard>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { object, string } from "yup";
 
-  const ReportSchema = z.object({
-    area: z.string({ required_error: "Area is required" }),
-    securityLevel: z.string({ required_error: "Security level is required" }),
-    subject: z.string({ required_error: "Subject is required" }),
-    description: z.string({ required_error: "Description is required" }),
+  const ReportSchema = object({
+    area: string().label("Area").required(),
+    securityLevel: string().label("Security Level").required(),
+    subject: string().label("Subject").required(),
+    description: string().label("Description").required().min(10).max(500).trim(),
   });
 
   const { handleSubmit, handleReset } = useForm({
@@ -67,19 +68,11 @@
   });
 
   const submitReport = handleSubmit(async (_) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    await new Promise<void>((res, rej) => {
-      useSonner.promise(promise, {
-        loading: "Submitting your report...",
-        success: (_) => {
-          res();
-          return "Your report has been submitted!";
-        },
-        error: (e) => {
-          rej(e);
-          return "Error! Your report could not be sent to our servers!";
-        },
-      });
+    const id = useSonner.loading("Submitting your report...");
+    await promiseTimeout(2000);
+    useSonner.dismiss(id);
+    useSonner.success("Report Submitted", {
+      description: "Thank you for reporting this. We will look into it soon.",
     });
   });
 

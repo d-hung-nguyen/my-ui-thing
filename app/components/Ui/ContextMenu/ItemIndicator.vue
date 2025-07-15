@@ -1,20 +1,21 @@
 <template>
   <ContextMenuItemIndicator v-bind="forwarded" :class="styles({ class: props.class })">
     <slot>
-      <Icon v-if="icon" :name="icon" class="h-4 w-4" />
+      <Icon v-if="icon" :name="icon" class="size-4" />
     </slot>
   </ContextMenuItemIndicator>
 </template>
 
 <script lang="ts" setup>
-  import { ContextMenuItemIndicator } from "radix-vue";
-  import type { ContextMenuItemIndicatorProps } from "radix-vue";
+  import { ContextMenuItemIndicator } from "reka-ui";
+  import type { ContextMenuItemIndicatorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     ContextMenuItemIndicatorProps & {
       /** The icon to display */
       icon?: string;
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "icon");

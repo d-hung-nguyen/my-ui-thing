@@ -1,31 +1,30 @@
 <template>
   <form class="mx-auto max-w-md" @submit="onSubmit">
     <fieldset :disabled="isSubmitting" class="space-y-5">
-      <UiVeeCurrencyInput label="Toys total" name="toys" hint="The cost for the baby toys" />
-      <UiVeeCurrencyInput label="Food total" name="food" hint="The cost for the baby food" />
-      <UiButton type="submit"> Pay now </UiButton>
+      <UiVeeCurrencyInput
+        placeholder="234"
+        label="Toys total"
+        name="toys"
+        hint="The cost for the baby toys"
+      />
+      <UiVeeCurrencyInput
+        placeholder="567"
+        label="Food total"
+        name="food"
+        hint="The cost for the baby food"
+      />
+      <UiButton :loading="isSubmitting" type="submit"> Pay now </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { number, object } from "yup";
 
-  const schema = z.object({
-    toys: z
-      .number({
-        invalid_type_error: "The toys total must be a number",
-        required_error: "The toys total is required",
-      })
-      .nonnegative()
-      .min(50),
-    food: z
-      .number({
-        invalid_type_error: "The food total must be a number",
-        required_error: "The food total is required",
-      })
-      .nonnegative()
-      .min(150),
+  const schema = object({
+    toys: number().required().label("Toys total").min(50),
+    food: number().required().label("Food total").min(150),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
@@ -33,11 +32,9 @@
   });
 
   const onSubmit = handleSubmit(async (_) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: "Making payment...",
-      success: (_) => "Payment successful!",
-      error: (_) => "Error! Your information could not be sent to our servers!",
+    await promiseTimeout(2000);
+    useSonner.success("Payment successful", {
+      description: "Your payment was processed successfully! ",
     });
   });
 </script>

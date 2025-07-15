@@ -4,7 +4,6 @@
       <UiTree
         v-slot="{ flattenItems }"
         :default-expanded="['app', 'server']"
-        multiple
         :items="structure"
         :get-key="(i) => i.title"
         class="p-2 pr-3"
@@ -15,7 +14,7 @@
             v-slot="{ isExpanded }"
             v-bind="item.bind"
             :style="{ 'padding-left': `${item.level - 0.5}rem` }"
-            class="flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border"
+            class="flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-sm font-medium focus-visible:ring-2 focus-visible:ring-border focus-visible:outline-none"
           >
             <template v-if="item.hasChildren">
               <Icon v-if="isExpanded" :name="item.value.openIcon" class="size-3.5" />

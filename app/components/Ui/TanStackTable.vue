@@ -20,12 +20,12 @@
                   <Icon
                     v-if="header.column.getCanSort() && header.column.getIsSorted() === 'asc'"
                     :name="ascIcon"
-                    class="h-4 w-4"
+                    class="size-4"
                   />
                   <Icon
                     v-else-if="header.column.getCanSort() && header.column.getIsSorted() === 'desc'"
                     :name="descIcon"
-                    class="h-4 w-4"
+                    class="size-4"
                   />
                   <Icon
                     v-else-if="header.column.getCanSort() && !header.column.getIsSorted()"
@@ -59,101 +59,102 @@
       </UiTable>
     </div>
 
-    <div
-      v-if="showPagination"
-      class="my-6 flex flex-col justify-between gap-4 px-2 md:flex-row md:items-center"
-    >
-      <div class="flex items-center justify-between gap-3">
-        <slot name="rowsSelected" :table="table">
-          <div v-if="showSelect" class="whitespace-nowrap text-sm text-muted-foreground">
-            <span>
-              {{ table.getFilteredSelectedRowModel().rows.length }} of {{ " " }}
-              {{ table.getFilteredRowModel().rows.length }} row(s) selected
-            </span>
-          </div>
-        </slot>
-        <slot name="rowsPerPage" :table="table">
-          <div class="flex items-center space-x-2 whitespace-nowrap">
-            <p class="hidden text-sm font-medium text-foreground md:inline-block">
-              {{ rowsPerPageText }}
-            </p>
-            <UiSelect v-model="pageSize">
-              <UiSelectTrigger class="h-9 w-[70px]">
-                {{ table.getState().pagination.pageSize }}
-              </UiSelectTrigger>
-              <UiSelectContent side="top" align="start">
-                <UiSelectGroup>
-                  <!-- eslint-disable vue/no-template-shadow -->
-                  <UiSelectItem
-                    v-for="pageSize in pageSizes"
-                    :key="pageSize"
-                    :value="`${pageSize}`"
-                  >
-                    {{ pageSize }}
-                  </UiSelectItem>
-                </UiSelectGroup>
-              </UiSelectContent>
-            </UiSelect>
-          </div>
-        </slot>
-      </div>
+    <div v-if="showPagination" class="@container">
+      <div
+        class="my-6 flex flex-col justify-between gap-4 px-2 @[700px]:flex-row @[700px]:items-center"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <slot name="rowsSelected" :table="table">
+            <div v-if="showSelect" class="text-sm whitespace-nowrap text-muted-foreground">
+              <span>
+                {{ table.getFilteredSelectedRowModel().rows.length }} of {{ " " }}
+                {{ table.getFilteredRowModel().rows.length }} row(s) selected
+              </span>
+            </div>
+          </slot>
+          <slot name="rowsPerPage" :table="table">
+            <div class="flex items-center space-x-2 whitespace-nowrap">
+              <p class="hidden text-sm font-medium text-foreground md:inline-block">
+                {{ rowsPerPageText }}
+              </p>
+              <UiSelect v-model="pageSize">
+                <UiSelectTrigger class="h-9 w-fit">
+                  {{ table.getState().pagination.pageSize }}
+                </UiSelectTrigger>
+                <UiSelectContent class="min-w-fit" side="top" align="start">
+                  <UiSelectGroup>
+                    <!-- eslint-disable vue/no-template-shadow -->
+                    <UiSelectItem
+                      v-for="pageSize in pageSizes"
+                      :key="pageSize"
+                      :value="`${pageSize}`"
+                    >
+                      {{ pageSize }}
+                    </UiSelectItem>
+                  </UiSelectGroup>
+                </UiSelectContent>
+              </UiSelect>
+            </div>
+          </slot>
+        </div>
 
-      <div class="flex items-center justify-between gap-3">
-        <slot :table="table" name="page">
-          <div
-            class="flex items-center justify-center whitespace-nowrap text-sm font-medium text-foreground"
-          >
-            Page {{ table.getState().pagination.pageIndex + 1 }} of
-            {{ table.getPageCount() }}
-          </div>
-        </slot>
+        <div class="flex items-center justify-between gap-3">
+          <slot :table="table" name="page">
+            <div
+              class="flex items-center justify-center text-sm font-medium whitespace-nowrap text-foreground"
+            >
+              Page {{ table.getState().pagination.pageIndex + 1 }} of
+              {{ table.getPageCount() }}
+            </div>
+          </slot>
 
-        <slot :table="table" name="pageButtons">
-          <div class="flex items-center space-x-2">
-            <UiButton
-              variant="outline"
-              title="First page"
-              class="h-9 w-9 p-0"
-              :disabled="!table.getCanPreviousPage()"
-              @click="table.setPageIndex(0)"
-            >
-              <Icon name="lucide:chevrons-left" class="h-4 w-4" />
-            </UiButton>
-            <UiButton
-              variant="outline"
-              title="Previous page"
-              class="h-9 w-9 p-0"
-              :disabled="!table.getCanPreviousPage()"
-              @click="table.previousPage()"
-            >
-              <Icon name="lucide:chevron-left" class="h-4 w-4" />
-            </UiButton>
-            <UiButton
-              variant="outline"
-              title="Next page"
-              class="h-9 w-9 p-0"
-              :disabled="!table.getCanNextPage()"
-              @click="table.nextPage()"
-            >
-              <Icon name="lucide:chevron-right" class="h-4 w-4" />
-            </UiButton>
-            <UiButton
-              variant="outline"
-              title="Last page"
-              class="h-9 w-9 p-0"
-              :disabled="!table.getCanNextPage()"
-              @click="table.setPageIndex(table.getPageCount() - 1)"
-            >
-              <Icon name="lucide:chevrons-right" class="h-4 w-4" />
-            </UiButton>
-          </div>
-        </slot>
+          <slot :table="table" name="pageButtons">
+            <div class="flex items-center space-x-2">
+              <UiButton
+                variant="outline"
+                title="First page"
+                class="h-9 w-9 p-0"
+                :disabled="!table.getCanPreviousPage()"
+                @click="table.setPageIndex(0)"
+              >
+                <Icon name="lucide:chevrons-left" class="size-4" />
+              </UiButton>
+              <UiButton
+                variant="outline"
+                title="Previous page"
+                class="h-9 w-9 p-0"
+                :disabled="!table.getCanPreviousPage()"
+                @click="table.previousPage()"
+              >
+                <Icon name="lucide:chevron-left" class="size-4" />
+              </UiButton>
+              <UiButton
+                variant="outline"
+                title="Next page"
+                class="h-9 w-9 p-0"
+                :disabled="!table.getCanNextPage()"
+                @click="table.nextPage()"
+              >
+                <Icon name="lucide:chevron-right" class="size-4" />
+              </UiButton>
+              <UiButton
+                variant="outline"
+                title="Last page"
+                class="h-9 w-9 p-0"
+                :disabled="!table.getCanNextPage()"
+                @click="table.setPageIndex(table.getPageCount() - 1)"
+              >
+                <Icon name="lucide:chevrons-right" class="size-4" />
+              </UiButton>
+            </div>
+          </slot>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup generic="T">
+<script lang="ts" setup generic="T extends object">
   import CheckBox from "@/components/Ui/Checkbox/Checkbox.vue";
   import {
     FlexRender,
@@ -164,22 +165,69 @@
     useVueTable,
   } from "@tanstack/vue-table";
   import type { ColumnDef, SortingState, Table } from "@tanstack/vue-table";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<{
+      /**
+       * The data to display in the table.
+       */
       data?: T[];
+      /**
+       * The columns to display in the table.
+       */
       columns?: ColumnDef<T>[];
+      /**
+       * The search term to filter the table data.
+       */
       search?: string;
+      /**
+       * Whether to show the select checkbox column.
+       */
       showSelect?: boolean;
+      /**
+       * The page sizes to display in the pagination dropdown.
+       */
       pageSizes?: number[];
+      /**
+       * The initial page size for the table.
+       */
       pageSize?: number;
+      /**
+       * The initial sorting state of the table.
+       */
       sorting?: SortingState;
-      tableClass?: any;
+      /**
+       * The class(es) to apply to the table.
+       */
+      tableClass?: HTMLAttributes["class"];
+      /**
+       * The icon to display for ascending sorting.
+       */
       ascIcon?: string;
+      /**
+       * The icon to display for descending sorting.
+       */
       descIcon?: string;
+      /**
+       * The icon to display for unsorted columns.
+       */
       unsortedIcon?: string;
-      class?: any;
+      /**
+       * Custom class(es) to add to the parent element.
+       */
+      class?: HTMLAttributes["class"];
+      /**
+       * Whether to show pagination controls.
+       *
+       * @default true
+       */
       showPagination?: boolean;
+      /**
+       * The text to display for the rows per page label.
+       *
+       * @default "Rows per page:"
+       */
       rowsPerPageText?: string;
     }>(),
     {
@@ -188,9 +236,9 @@
       columns: () => [],
       data: () => [],
       sorting: () => [],
-      ascIcon: "heroicons:chevron-up",
-      descIcon: "heroicons:chevron-down",
-      unsortedIcon: "heroicons:chevron-up-down",
+      ascIcon: "lucide:chevron-up",
+      descIcon: "lucide:chevron-down",
+      unsortedIcon: "lucide:chevrons-up-down",
       showPagination: true,
       rowsPerPageText: "Rows per page:",
     }
@@ -209,12 +257,13 @@
         "div",
         { class: "flex items-center justify-center" },
         h(CheckBox, {
-          checked: table.getIsAllRowsSelected()
+          modelValue: table.getIsAllRowsSelected()
             ? true
             : table.getIsSomeRowsSelected()
               ? "indeterminate"
               : false,
-          "onUpdate:checked": (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+          "onUpdate:modelValue": (value: boolean | "indeterminate") =>
+            table.toggleAllPageRowsSelected(!!value),
           ariaLabel: "Select all",
         })
       );
@@ -224,8 +273,8 @@
         "div",
         { class: "flex items-center justify-center " },
         h(CheckBox, {
-          checked: row.getIsSelected(),
-          "onUpdate:checked": (value) => row.toggleSelected(!!value),
+          modelValue: row.getIsSelected(),
+          "onUpdate:modelValue": (value: boolean | "indeterminate") => row.toggleSelected(!!value),
           ariaLabel: "Select row",
         })
       );
@@ -248,6 +297,13 @@
   const globalFilter = ref(props.search);
   const columnVisibility = ref({});
   const rowSelection = ref({});
+
+  const updateFn = (updaterOrValue: any, v: MaybeRefOrGetter) => {
+    if (typeof updaterOrValue === "function") {
+      return updaterOrValue(toValue(v));
+    }
+    return updaterOrValue;
+  };
 
   const table = useVueTable({
     get data() {
@@ -278,16 +334,13 @@
       },
     },
     onSortingChange: (updaterOrValue) => {
-      localSorting.value =
-        typeof updaterOrValue === "function" ? updaterOrValue(localSorting.value) : updaterOrValue;
+      localSorting.value = updateFn(updaterOrValue, localSorting);
     },
     onGlobalFilterChange: (updaterOrValue) => {
-      globalFilter.value =
-        typeof updaterOrValue === "function" ? updaterOrValue(globalFilter.value) : updaterOrValue;
+      globalFilter.value = updateFn(updaterOrValue, globalFilter);
     },
     onRowSelectionChange: (updaterOrValue) => {
-      rowSelection.value =
-        typeof updaterOrValue === "function" ? updaterOrValue(rowSelection.value) : updaterOrValue;
+      rowSelection.value = updateFn(updaterOrValue, rowSelection);
     },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),

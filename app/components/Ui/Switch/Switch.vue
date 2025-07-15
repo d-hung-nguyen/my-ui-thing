@@ -1,20 +1,27 @@
 <template>
-  <SwitchRoot v-bind="forwarded" :class="styles({ class: props.class })">
+  <SwitchRoot
+    v-slot="slotProps"
+    data-slot="switch"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <UiSwitchThumb>
-      <slot />
+      <slot v-bind="slotProps" />
     </UiSwitchThumb>
   </SwitchRoot>
 </template>
 
 <script lang="ts" setup>
-  import { SwitchRoot, useForwardPropsEmits } from "radix-vue";
-  import type { SwitchRootEmits, SwitchRootProps } from "radix-vue";
+  import { SwitchRoot, useForwardPropsEmits } from "reka-ui";
+  import type { SwitchRootEmits, SwitchRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       SwitchRootProps & {
-        class?: any;
-        id?: any;
+        /** Custom class(es) to add to parent element */
+        class?: HTMLAttributes["class"];
+        id?: HTMLAttributes["id"];
       }
     >(),
     {
@@ -25,6 +32,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);
 
   const styles = tv({
-    base: "peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+    base: "peer inline-flex h-6 w-10 shrink-0 items-center rounded-full border-2 border-transparent transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
   });
 </script>

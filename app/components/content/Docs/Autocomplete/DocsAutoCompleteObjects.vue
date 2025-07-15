@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <UiAutocomplete v-model="selected" :display-value="displaySelected">
+  <div class="mx-auto max-w-sm">
+    <UiAutocomplete v-model="selected">
       <UiAutocompleteAnchor>
-        <UiAutocompleteInput placeholder="Select a car..." />
+        <UiAutocompleteInput :display-value="displaySelected" placeholder="Select a car..." />
         <UiAutocompleteTrigger>
           <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>Cars</UiAutocompleteLabel>
           <template v-for="(c, i) in cars" :key="i">

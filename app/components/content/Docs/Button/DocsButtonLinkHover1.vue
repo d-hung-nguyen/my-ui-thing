@@ -1,5 +1,5 @@
 <template>
   <div class="text-center">
-    <UiButton variant="linkHover1">Link Hover 1</UiButton>
+    <UiButton variant="link" effect="underline">Link Underline</UiButton>
   </div>
 </template>

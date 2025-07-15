@@ -2,11 +2,11 @@
 title: Aspect Ratio
 description: Displays content within a desired ratio.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/aspect-ratio.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/aspect-ratio.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/aspect-ratio.html#api-reference
+    href: https://reka-ui.com/docs/components/aspect-ratio.html#api-reference
     icon: "icon-park-solid:api"
 ---
 

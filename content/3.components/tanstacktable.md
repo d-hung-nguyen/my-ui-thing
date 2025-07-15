@@ -41,7 +41,7 @@ npx ui-thing@latest add tanstacktable
         <UiDropdownMenuTrigger as-child>
           <UiButton variant="outline">
             <span>View</span>
-            <Icon name="lucide:chevron-down" class="h-4 w-4" />
+            <Icon name="lucide:chevron-down" class="size-4" />
           </UiButton>
         </UiDropdownMenuTrigger>
         <UiDropdownMenuContent :side-offset="10" align="start" class="w-[300px] md:w-[200px]">
@@ -51,8 +51,8 @@ npx ui-thing@latest add tanstacktable
             <UiDropdownMenuCheckboxItem
               v-for="column in table?.getAllColumns().filter((column) => column.getCanHide())"
               :key="column.id"
-              :checked="column.getIsVisible()"
-              @update:checked="tableRef?.toggleColumnVisibility(column)"
+              :model-value="column.getIsVisible()"
+              @update:model-value="tableRef?.toggleColumnVisibility(column)"
             >
               <span class="text-sm capitalize">{{ column?.id }}</span>
             </UiDropdownMenuCheckboxItem>
@@ -162,7 +162,7 @@ npx ui-thing@latest add tanstacktable
         return h(
           resolveComponent("UiButton"),
           { variant: "ghost", size: "icon", class: "w-9 h-9" },
-          () => [h(resolveComponent("Icon"), { name: "lucide:more-horizontal", class: "h-4 w-4" })]
+          () => [h(resolveComponent("Icon"), { name: "lucide:more-horizontal", class: "size-4" })]
         );
       },
     },
@@ -198,6 +198,7 @@ npx ui-thing@latest add tanstacktable
   import { UiBadge, UiCheckbox } from "#components";
   // Import any type that you may need
   import type { RowSelectionState } from "@tanstack/vue-table";
+  import type { CheckboxRootProps } from "reka-ui";
 
   //3. Fetch your data
   const { data } = await useAsyncData(
@@ -237,20 +238,20 @@ npx ui-thing@latest add tanstacktable
     columnHelper.accessor("select", {
       header({ table }) {
         return h(UiCheckbox, {
-          checked: table.getIsSomeRowsSelected()
+          modelValue: table.getIsSomeRowsSelected()
             ? "indeterminate"
             : table.getIsAllRowsSelected()
               ? true
               : false,
-          "onUpdate:checked": (v) =>
+          "onUpdate:modelValue": (v: CheckboxRootProps["modelValue"]) =>
             table.getToggleAllRowsSelectedHandler()({ target: { checked: v } }),
         });
       },
       cell({ row }) {
         return h(UiCheckbox, {
-          checked: row.getIsSelected(),
+          modelValue: row.getIsSelected(),
           disabled: !row.getCanSelect(),
-          "onUpdate:checked": row.getToggleSelectedHandler(),
+          "onUpdate:modelValue": row.getToggleSelectedHandler(),
         });
       },
     }),
@@ -523,20 +524,20 @@ npx ui-thing@latest add tanstacktable
       enableGlobalFilter: false,
       header({ table }) {
         return h(UiCheckbox, {
-          checked: table.getIsSomeRowsSelected()
+          modelValue: table.getIsSomeRowsSelected()
             ? "indeterminate"
             : table.getIsAllRowsSelected()
               ? true
               : false,
-          "onUpdate:checked": (v) =>
+          "onUpdate:modelValue": (v: boolean | "indeterminate") =>
             table.getToggleAllRowsSelectedHandler()({ target: { checked: v } }),
         });
       },
       cell({ row }) {
         return h(UiCheckbox, {
-          checked: row.getIsSelected(),
+          modelValue: row.getIsSelected(),
           disabled: !row.getCanSelect(),
-          "onUpdate:checked": row.getToggleSelectedHandler(),
+          "onUpdate:modelValue": row.getToggleSelectedHandler(),
         });
       },
     }),
@@ -611,7 +612,7 @@ npx ui-thing@latest add tanstacktable
           {
             href: getValue(),
             target: "_blank",
-            class: tw`inline-flex items-center gap-1 hover:underline`,
+            class: tw`inline-flex items-center gap-1 transition-all hover:text-sky-500 hover:underline`,
           },
           [
             getValue(),
@@ -696,7 +697,7 @@ npx ui-thing@latest add tanstacktable
             :key="header.id"
             :colspan="header.colSpan"
             :class="header.column.getCanSort() ? 'cursor-pointer select-none' : ''"
-            class="relative h-10 select-none border-t"
+            class="relative h-10 border-t select-none"
             @click="header.column.getToggleSortingHandler()?.($event)"
           >
             <div class="flex w-full items-center gap-3 whitespace-nowrap">

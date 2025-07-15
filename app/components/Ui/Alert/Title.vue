@@ -1,28 +1,29 @@
 <template>
-  <Primitive v-bind="forwarded" :class="styles({ class: props.class })">
+  <Primitive data-slot="alert-title" v-bind="forwarded" :class="styles({ class: props.class })">
     <slot>{{ title }}</slot>
   </Primitive>
 </template>
 
 <script lang="ts" setup>
-  import { Primitive } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       PrimitiveProps & {
         /** Custom class to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
         /** The title text that should be displayed */
         title?: string;
       }
     >(),
-    { as: "h5", class: undefined, title: undefined }
+    { as: "h5" }
   );
 
   const forwarded = reactiveOmit(props, "class", "title");
 
   const styles = tv({
-    base: "mb-1 font-medium leading-none tracking-tight",
+    base: "mb-1 line-clamp-1 min-h-4 leading-none font-medium tracking-tight",
   });
 </script>

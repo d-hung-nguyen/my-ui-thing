@@ -56,15 +56,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { bool, object, string } from "yup";
 
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-sign-in",
     validationSchema: toTypedSchema(
-      z.object({
-        email: z.string().email(),
-        password: z.string().min(8).max(50),
-        rememberMe: z.boolean().optional().default(true),
+      object({
+        email: string().label("Email").email().required(),
+        password: string().label("Password").required().min(8).max(50),
+        rememberMe: bool().label("Remember me").optional().default(true),
       })
     ),
   });

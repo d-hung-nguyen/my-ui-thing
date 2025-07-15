@@ -13,28 +13,28 @@ Shout out to [Magic UI](https://magicui.design/docs/components/border-beam) for 
 
 ::Step
 
-### Add Animation
+### Install `motion-vue`
 
-You will need to add this to your `tailwind.config.js` file.
+You can install the `motion-vue` package by running this command
 
-```js
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      animation: {
-        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
-      },
-      keyframes: {
-        "border-beam": {
-          "100%": {
-            "offset-distance": "100%",
-          },
-        },
-      },
-    },
-  },
-};
+```bash
+npm i motion-v
+```
+
+::
+::Step
+
+### Update `nuxt.config`
+
+Add the module to your `nuxt.config` file.
+
+```ts
+export default defineNuxtConfig({
+  modules: [
+    // other modules...
+    "motion-v/nuxt",
+  ],
+});
 ```
 
 ::
@@ -43,48 +43,105 @@ module.exports = {
 
 ### Create Component
 
-Create the component `UiBorderBeam.vue` in the `components` directory.
+Create the component `BorderBeam.vue` in the `components` directory.
 
 <!-- automd:file src="../../app/components/Ui/BorderBeam.vue" code lang="vue" -->
 
 ```vue [BorderBeam.vue]
 <template>
   <div
-    :style="{
-      '--size': size,
-      '--duration': duration,
-      '--anchor': anchor,
-      '--border-width': borderWidth,
-      '--color-from': colorFrom,
-      '--color-to': colorTo,
-      '--delay': `-${delay}s`,
-    }"
-    class="absolute inset-[0] rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent] ![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)] after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]"
-  />
+    class="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)] [mask-composite:intersect] [mask-clip:padding-box,border-box]"
+  >
+    <motion.div
+      :class="styles({ class: props.class })"
+      :style="
+        {
+          width: `${size}px`,
+          offsetPath: `rect(0 auto auto 0 round ${size}px)`,
+          '--color-from': colorFrom,
+          '--color-to': colorTo,
+          ...style,
+        } as MotionStyle
+      "
+      :initial="{ offsetDistance: `${initialOffset}%` }"
+      :animate="{
+        offsetDistance: reverse
+          ? [`${100 - initialOffset}%`, `${-initialOffset}%`]
+          : [`${initialOffset}%`, `${100 + initialOffset}%`],
+      }"
+      :transition="{
+        repeat: Infinity,
+        ease: 'linear',
+        duration,
+        delay: -delay,
+        ...transition,
+      }"
+    />
+  </div>
 </template>
 
 <script lang="ts">
-  export interface BorderBeamProps {
-    class?: string;
+  import { motion } from "motion-v";
+  import type { MotionStyle, Transition } from "motion-v";
+  import type { CSSProperties, HTMLAttributes } from "vue";
+
+  interface BorderBeamProps {
+    /**
+     * The size of the border beam.
+     */
     size?: number;
+    /**
+     * The duration of the border beam.
+     */
     duration?: number;
-    borderWidth?: number;
-    anchor?: number;
-    colorFrom?: string;
-    colorTo?: string;
+    /**
+     * The delay of the border beam.
+     */
     delay?: number;
+    /**
+     * The color of the border beam from.
+     */
+    colorFrom?: string;
+    /**
+     * The color of the border beam to.
+     */
+    colorTo?: string;
+    /**
+     * The motion transition of the border beam.
+     */
+    transition?: Transition;
+    /**
+     * The class name of the border beam.
+     */
+    class?: HTMLAttributes["class"];
+    /**
+     * The style of the border beam.
+     */
+    style?: CSSProperties;
+    /**
+     * Whether to reverse the animation direction.
+     */
+    reverse?: boolean;
+    /**
+     * The initial offset position (0-100).
+     */
+    initialOffset?: number;
   }
 </script>
 
 <script lang="ts" setup>
-  withDefaults(defineProps<BorderBeamProps>(), {
-    size: 200,
-    duration: 15,
-    anchor: 90,
-    borderWidth: 1.5,
+  const props = withDefaults(defineProps<BorderBeamProps>(), {
+    size: 50,
+    delay: 0,
+    duration: 6,
     colorFrom: "#ffaa40",
     colorTo: "#9c40ff",
-    delay: 0,
+    reverse: false,
+    initialOffset: 0,
+  });
+
+  const styles = tv({
+    base: "absolute aspect-square bg-gradient-to-l from-(--color-from) via-(--color-to) to-transparent",
   });
 </script>
 ```
@@ -111,15 +168,171 @@ Just place the border beam component inside a div with relative positioning, wid
 
 ```vue [DocsBorderBeam.vue]
 <template>
-  <div class="relative overflow-hidden rounded-xl">
-    <!-- eslint-disable-next-line vue/html-self-closing -->
-    <img
-      src="https://store-wp.mui.com/wp-content/uploads/2019/08/tabler-react.com_-min-e1565617941333.png"
-      alt="Hero Image"
-      class="w-full rounded-xl border object-cover"
-    />
+  <UiCard class="relative mx-auto w-[350px] overflow-hidden">
+    <UiCardHeader>
+      <UiCardTitle>Login</UiCardTitle>
+      <UiCardDescription> Enter your credentials to access your account. </UiCardDescription>
+    </UiCardHeader>
+    <UiCardContent>
+      <form>
+        <div class="grid w-full items-center gap-4">
+          <div class="flex flex-col space-y-1.5">
+            <UiLabel for="email">Email</UiLabel>
+            <UiInput id="email" type="email" placeholder="Enter your email" />
+          </div>
+          <div class="flex flex-col space-y-1.5">
+            <UiLabel for="password">Password</UiLabel>
+            <UiInput id="password" type="password" placeholder="Enter your password" />
+          </div>
+        </div>
+      </form>
+    </UiCardContent>
+    <UiCardFooter class="flex justify-between">
+      <UiButton variant="outline">Register</UiButton>
+      <UiButton>Login</UiButton>
+    </UiCardFooter>
+    <UiBorderBeam :duration="8" :size="100" />
+  </UiCard>
+</template>
+```
 
-    <UiBorderBeam :size="350" :duration="12" :delay="9" />
+<!-- /automd -->
+
+::
+
+### 2 Border Beams
+
+::ShowCase
+
+:DocsBorderBeamTwo
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/BorderBeam/DocsBorderBeamTwo.vue" code lang="vue" -->
+
+```vue [DocsBorderBeamTwo.vue]
+<template>
+  <UiCard class="relative mx-auto w-[350px] overflow-hidden border-0">
+    <UiCardHeader>
+      <UiCardTitle>Now Playing</UiCardTitle>
+      <UiCardDescription>Stairway to Heaven - Led Zeppelin</UiCardDescription>
+    </UiCardHeader>
+    <UiCardContent>
+      <div class="flex flex-col items-center gap-4">
+        <div class="size-48 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 shadow-xs" />
+        <UiProgress :model-value="26.5" class="h-1" />
+        <div class="flex w-full justify-between text-sm text-muted-foreground">
+          <span>2:45</span>
+          <span>8:02</span>
+        </div>
+      </div>
+    </UiCardContent>
+    <UiCardFooter class="flex justify-center gap-4">
+      <UiButton variant="outline" size="icon" class="rounded-full">
+        <Icon name="lucide:skip-back" class="size-4" />
+      </UiButton>
+      <UiButton size="icon" class="rounded-full">
+        <Icon name="lucide:play" class="size-4" />
+      </UiButton>
+      <UiButton variant="outline" size="icon" class="rounded-full">
+        <Icon name="lucide:skip-forward" class="size-4" />
+      </UiButton>
+    </UiCardFooter>
+    <UiBorderBeam :duration="6" :size="400" class="from-transparent via-red-500 to-transparent" />
+    <UiBorderBeam
+      :size="400"
+      :delay="3"
+      :duration="6"
+      class="from-transparent via-blue-500 to-transparent"
+    />
+  </UiCard>
+</template>
+```
+
+<!-- /automd -->
+
+::
+
+### Reverse
+
+::ShowCase
+
+:DocsBorderBeamReverse
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/BorderBeam/DocsBorderBeamReverse.vue" code lang="vue" -->
+
+```vue [DocsBorderBeamReverse.vue]
+<template>
+  <UiCard class="relative mx-auto w-[350px] overflow-hidden border-border/30">
+    <UiCardHeader>
+      <UiCardTitle>Login</UiCardTitle>
+      <UiCardDescription> Enter your credentials to access your account. </UiCardDescription>
+    </UiCardHeader>
+    <UiCardContent>
+      <form>
+        <div class="grid w-full items-center gap-4">
+          <div class="flex flex-col space-y-1.5">
+            <UiLabel :for="emailId">Email</UiLabel>
+            <UiInput :id="emailId" type="email" placeholder="Enter your email" />
+          </div>
+          <div class="flex flex-col space-y-1.5">
+            <UiLabel :for="passwordId">Password</UiLabel>
+            <UiInput :id="passwordId" type="password" placeholder="Enter your password" />
+          </div>
+        </div>
+      </form>
+    </UiCardContent>
+    <UiCardFooter class="flex justify-between">
+      <UiButton variant="outline">Register</UiButton>
+      <UiButton>Login</UiButton>
+    </UiCardFooter>
+    <UiBorderBeam
+      :duration="4"
+      :size="300"
+      reverse
+      class="from-transparent via-green-500 to-transparent"
+    />
+  </UiCard>
+</template>
+
+<script lang="ts" setup>
+  const emailId = useId();
+  const passwordId = useId();
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Spring Animation
+
+::ShowCase
+
+:DocsBorderBeamSpring
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/BorderBeam/DocsBorderBeamSpring.vue" code lang="vue" -->
+
+```vue [DocsBorderBeamSpring.vue]
+<template>
+  <div class="flex items-center justify-center">
+    <UiButton class="relative overflow-hidden" size="lg" variant="outline">
+      Buy Now
+      <UiBorderBeam
+        :size="40"
+        :initial-offset="20"
+        class="from-transparent via-yellow-500 to-transparent"
+        :transition="{
+          type: 'spring',
+          stiffness: 60,
+          damping: 20,
+        }"
+      />
+    </UiButton>
   </div>
 </template>
 ```

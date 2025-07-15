@@ -1,12 +1,12 @@
 <template>
   <div class="h-[calc(100dvh-58px)] w-full">
     <VueFlow :nodes :edges fit-view-on-init :min-zoom="0.5" :max-zoom="1">
-      <Background variant="dots" :gap="20" :size="3" pattern-color="hsl(var(--muted))" />
+      <Background variant="dots" :gap="20" :size="3" pattern-color="var(--muted)" />
       <MiniMap
-        node-color="hsl(var(--muted))"
-        node-stroke-color="hsl(var(--primary))"
+        node-color="var(--muted)"
+        node-stroke-color="var(--primary)"
         :node-border-radius="30"
-        mask-color="hsl(var(--muted))"
+        mask-color="var(--muted)"
         :mask-border-radius="30"
         pannable
         :height="100"
@@ -16,7 +16,7 @@
         position="bottom-left"
       />
       <Panel position="bottom-right">
-        <div class="shadow-xs inline-flex -space-x-px rounded-md rtl:space-x-reverse">
+        <div class="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
           <UiButton
             v-tippy="'Zoom In'"
             class="rounded-none bg-card text-muted-foreground/80 shadow-none first:rounded-s-lg last:rounded-e-lg hover:text-muted-foreground focus-visible:z-10"

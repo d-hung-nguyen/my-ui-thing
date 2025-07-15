@@ -1,17 +1,22 @@
 <template>
-  <ProgressIndicator v-bind="forwarded" :class="styles({ class: props.class })">
+  <ProgressIndicator
+    data-slot="progress-indicator"
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <slot />
   </ProgressIndicator>
 </template>
 
 <script lang="ts" setup>
-  import { ProgressIndicator } from "radix-vue";
-  import type { ProgressIndicatorProps } from "radix-vue";
+  import { ProgressIndicator } from "reka-ui";
+  import type { ProgressIndicatorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     ProgressIndicatorProps & {
       /** Custom class(es) to add to the parent */
-      class?: any;
+      class?: HTMLAttributes["class"];
     }
   >();
   const forwarded = reactiveOmit(props, "class");

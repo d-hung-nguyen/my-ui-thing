@@ -8,7 +8,7 @@
     </p>
 
     <div
-      class="grid grid-cols-1 place-items-center gap-y-14 rounded-lg bg-muted py-10 text-center dark:bg-muted/30 lg:grid-cols-3 lg:px-8 lg:py-16"
+      class="grid grid-cols-1 place-items-center gap-y-14 rounded-lg bg-muted py-10 text-center lg:grid-cols-3 lg:px-8 lg:py-16 dark:bg-muted/30"
     >
       <template v-for="(s, i) in stats" :key="i">
         <div>

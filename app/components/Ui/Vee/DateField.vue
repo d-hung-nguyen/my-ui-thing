@@ -8,20 +8,45 @@
       ><span>{{ label }} <span v-if="required" class="text-destructive">*</span></span></UiLabel
     >
     <UiDateField v-bind="{ ...$attrs, ...props }" v-model="value" />
-    <TransitionSlide group tag="div">
-      <p v-if="hint && !errorMessage" key="hint" class="mt-1.5 text-sm text-muted-foreground">
-        {{ hint }}
-      </p>
-
-      <p v-if="errorMessage" key="errorMessage" class="mt-1.5 text-sm text-destructive">
-        {{ errorMessage }}
-      </p>
-    </TransitionSlide>
+    <AnimatePresence multiple as="div" mode="wait">
+      <slot name="hint" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="hint && !errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-muted-foreground"
+        >
+          {{ hint }}
+        </motion.p>
+      </slot>
+      <slot name="errorMessage" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-destructive"
+        >
+          {{ errorMessage }}
+        </motion.p>
+      </slot>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import type { DateFieldRootProps } from "radix-vue";
+  import { AnimatePresence, motion } from "motion-v";
+  import type { DateFieldRootProps } from "reka-ui";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   const props = defineProps<
     DateFieldRootProps & {

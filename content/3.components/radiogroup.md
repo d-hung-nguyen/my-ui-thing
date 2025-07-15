@@ -2,11 +2,11 @@
 title: Radio Group
 description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/radio-group.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/radio-group.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/radio-group.html#api-reference
+    href: https://reka-ui.com/docs/components/radio-group.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -118,23 +118,21 @@ npx ui-thing@latest add radio-group
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        type: z.enum(["all", "mentions", "none"], {
-          required_error: "You need to select a notification type.",
-        }),
+      object({
+        type: string()
+          .oneOf(["all", "mentions", "none"], "You need to select a notification type.")
+          .required("You need to select a notification type."),
       })
     ),
   });
 
   const onSubmit = handleSubmit((values) => {
-    toast({
-      title: "Settings updated",
+    useSonner("Settings updated", {
       description: h("pre", { class: "p-2" }, JSON.stringify(values, null, 2)),
-      variant: "success",
     });
   });
 </script>

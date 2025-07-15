@@ -4,7 +4,7 @@
       <UiTable>
         <UiTableHeader>
           <UiTableRow class="bg-muted/50">
-            <UiTableHead v-for="h in headers" :key="h" class="h-9 whitespace-nowrap py-2">{{
+            <UiTableHead v-for="h in headers" :key="h" class="h-9 py-2 whitespace-nowrap">{{
               h
             }}</UiTableHead>
           </UiTableRow>

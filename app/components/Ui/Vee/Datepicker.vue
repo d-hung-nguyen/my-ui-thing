@@ -9,13 +9,13 @@
     <div class="relative">
       <slot name="icon">
         <span v-if="hasIcon" class="absolute inset-y-0 left-3 flex items-center justify-center">
-          <Icon v-if="icon" :name="icon" class="h-4 w-4 text-muted-foreground/70" />
+          <Icon v-if="icon" :name="icon" class="size-4 text-muted-foreground/70" />
         </span>
       </slot>
       <UiDatepicker v-bind="datePickerProps" v-model="value">
         <template #header-title="{ title }">
           <div class="inline-flex items-center gap-1">
-            {{ title }} <Icon name="lucide:chevron-down" class="h-4 w-4" />
+            {{ title }} <Icon name="lucide:chevron-down" class="size-4" />
           </div>
         </template>
         <template #default="{ inputValue, inputEvents }">
@@ -34,19 +34,44 @@
         </template>
       </UiDatepicker>
     </div>
-    <TransitionSlide group tag="div">
-      <p v-if="hint && !errorMessage" key="hint" class="mt-1.5 text-sm text-muted-foreground">
-        {{ hint }}
-      </p>
-
-      <p v-if="errorMessage" key="errorMessage" class="mt-1.5 text-sm text-destructive">
-        {{ errorMessage }}
-      </p>
-    </TransitionSlide>
+    <AnimatePresence multiple as="div" mode="wait">
+      <slot name="hint" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="hint && !errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-muted-foreground"
+        >
+          {{ hint }}
+        </motion.p>
+      </slot>
+      <slot name="errorMessage" :error-message="errorMessage" :value>
+        <motion.p
+          v-if="errorMessage"
+          :variants
+          initial="initial"
+          exit="initial"
+          animate="animate"
+          :transition="{ type: 'keyframes' }"
+          class="mt-1.5 text-sm text-destructive"
+        >
+          {{ errorMessage }}
+        </motion.p>
+      </slot>
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { AnimatePresence, motion } from "motion-v";
+
+  const variants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+  };
   const props = withDefaults(
     defineProps<{
       label?: string;

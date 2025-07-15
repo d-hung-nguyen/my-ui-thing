@@ -1,11 +1,11 @@
 <template>
   <div class="relative flex h-screen items-center justify-center">
     <div
-      class="absolute h-full w-full bg-[radial-gradient(theme(colors.border)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_80%,transparent_100%)]"
+      class="absolute h-full w-full bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_80%,transparent_100%)] [background-size:20px_20px]"
     />
 
     <div
-      class="relative w-full max-w-[380px] border-border/60 bg-card px-8 py-5 shadow-sm dark:border-border min-[480px]:rounded-lg min-[480px]:border"
+      class="relative w-full max-w-[380px] border-border/60 bg-card px-8 py-5 shadow-xs min-[480px]:rounded-lg min-[480px]:border dark:border-border"
     >
       <h1 class="text-2xl font-bold tracking-tight lg:text-3xl">{{ title }}</h1>
       <p class="mt-1 text-muted-foreground">{{ description }}</p>

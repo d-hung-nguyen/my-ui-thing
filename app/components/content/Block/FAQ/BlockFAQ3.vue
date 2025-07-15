@@ -1,7 +1,7 @@
 <template>
   <UiContainer class="pb-16">
     <UiContainer class="py-16 text-center lg:py-24">
-      <h2 class="mb-4 mt-2 text-4xl font-bold lg:mb-6 lg:mt-3 lg:text-5xl">
+      <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">
         Frequently asked questions
       </h2>
 

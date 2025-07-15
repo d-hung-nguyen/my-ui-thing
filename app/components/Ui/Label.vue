@@ -1,8 +1,8 @@
 <template>
-  <Label :class="styles({ class: props.class })" v-bind="forwarded">
+  <Label data-slot="label" :class="styles({ class: props.class })" v-bind="forwarded">
     <slot />
     <slot name="hint">
-      <span v-if="hint" class="text-muted-foreground">
+      <span v-if="hint" data-slot="label-hint" class="text-xs font-normal text-muted-foreground">
         {{ hint }}
       </span>
     </slot>
@@ -10,13 +10,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { Label } from "radix-vue";
-  import type { LabelProps } from "radix-vue";
+  import { Label } from "reka-ui";
+  import type { LabelProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
     LabelProps & {
       /** Custom class(es) to add to the label */
-      class?: any;
+      class?: HTMLAttributes["class"];
       hint?: string;
     }
   >();
@@ -24,6 +25,6 @@
   const forwarded = reactiveOmit(props, "class", "hint");
 
   const styles = tv({
-    base: "flex items-center justify-between text-[15px] font-medium leading-none hover:cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sm:text-sm",
+    base: "flex items-center justify-between gap-2 text-sm leading-none font-medium select-none not-peer-disabled:cursor-pointer group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
   });
 </script>

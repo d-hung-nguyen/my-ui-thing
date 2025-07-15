@@ -1,5 +1,5 @@
 <template>
   <div class="text-center">
-    <UiButton variant="ringHover">Ring Hover</UiButton>
+    <UiButton effect="ringHover">Ring Hover</UiButton>
   </div>
 </template>

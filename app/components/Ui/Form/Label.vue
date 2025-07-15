@@ -12,11 +12,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { Label } from "radix-vue";
-  import type { LabelProps } from "radix-vue";
+  import { Label } from "reka-ui";
+  import type { LabelProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   defineOptions({ inheritAttrs: false });
-  const props = defineProps<LabelProps & { class?: any; label?: string; hint?: string }>();
+  const props = defineProps<
+    LabelProps & { class?: HTMLAttributes["class"]; label?: string; hint?: string }
+  >();
 
   const { error, formItemId } = useFormField();
 

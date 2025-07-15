@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-auto max-w-sm">
     <UiAutocomplete>
       <UiAutocompleteAnchor>
         <UiAutocompleteInput placeholder="Select an item" />
@@ -9,7 +9,9 @@
       </UiAutocompleteAnchor>
 
       <UiAutocompleteContent>
-        <UiAutocompleteEmpty />
+        <UiAutocompleteEmpty
+          class="flex items-center justify-center p-4 text-center text-sm font-medium text-pretty"
+        />
         <UiAutocompleteGroup>
           <UiAutocompleteLabel>Fruits</UiAutocompleteLabel>
           <template v-for="f in fruits" :key="f">

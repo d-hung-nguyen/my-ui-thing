@@ -1,12 +1,14 @@
 <template>
-  <thead :class="styles({ class: props.class })">
+  <thead data-slot="table-header" :class="styles({ class: props.class })">
     <slot />
   </thead>
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
-    class?: any;
+    class?: HTMLAttributes["class"];
   }>();
 
   const styles = tv({

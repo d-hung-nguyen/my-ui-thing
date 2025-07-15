@@ -6,7 +6,7 @@
           Integrations
         </UiBadge>
       </div>
-      <h2 class="mb-4 mt-3 text-center text-3xl font-semibold lg:mb-5 lg:mt-7 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mt-7 lg:mb-5 lg:text-4xl">
         Get more value from your tools
       </h2>
       <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
@@ -24,16 +24,16 @@
               class="h-5 w-5 transition-colors group-hover:text-primary lg:h-6 lg:w-6"
             />
           </div>
-          <h3 class="mt-4 text-balance text-center text-lg font-semibold lg:mt-5 lg:text-xl">
+          <h3 class="mt-4 text-center text-lg font-semibold text-balance lg:mt-5 lg:text-xl">
             {{ f.title }} integration
           </h3>
-          <p class="mt-1 max-w-[650px] text-balance text-center text-muted-foreground lg:mt-2">
+          <p class="mt-1 max-w-[650px] text-center text-balance text-muted-foreground lg:mt-2">
             Work faster and smarter by integrating directly with {{ f.title }}, right in the app.
           </p>
           <NuxtLink
             class="mt-4 inline-block font-semibold text-primary underline-offset-2 hover:underline lg:mt-5"
             to="#"
-            >View integration <Icon name="heroicons:arrow-right" class="h-4 w-4"
+            >View integration <Icon name="heroicons:arrow-right" class="size-4"
           /></NuxtLink>
         </div>
       </template>

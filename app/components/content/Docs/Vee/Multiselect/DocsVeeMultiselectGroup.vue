@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const options = [
     {
@@ -23,17 +23,14 @@
     },
     {
       label: "Marvel",
-      options: ["Spiderman", "Iron Man", "Captain America"],
+      options: ["Spider-man", "Iron Man", "Captain America"],
     },
   ];
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        hero: z.string({
-          required_error: "Please select a hero",
-          invalid_type_error: "Please select a hero",
-        }),
+      object({
+        hero: string().label("Hero").required(),
       })
     ),
   });

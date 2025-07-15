@@ -60,10 +60,10 @@
   <UiDatatable :data="data" :options>
     <template #name="{ cellData }: { cellData: Item }">
       <div class="flex items-center gap-3">
-        <UiAvatar class="size-10" :src="cellData.image" :alt="cellData.name" />
+        <UiAvatar :src="cellData.image" :alt="cellData.name" />
         <div>
           <div class="font-medium">{{ cellData.name }}</div>
-          <span class="mt-0.5 text-xs text-muted-foreground">@{{ cellData.username }}</span>
+          <span class="text-xs text-muted-foreground">@{{ cellData.username }}</span>
         </div>
       </div>
     </template>

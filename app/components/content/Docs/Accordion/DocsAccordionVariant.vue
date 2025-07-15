@@ -1,20 +1,26 @@
 <template>
-  <UiAccordion :default-value="[accordionItems[1].value]" type="multiple" :items="accordionItems">
-    <template v-for="(i, k) in accordionItems" :key="k">
-      <UiAccordionItem v-slot="{ open }" class="border-b-0" :value="i.value">
-        <UiAccordionHeader>
-          <UiAccordionTrigger
-            :class="[open ? 'bg-muted underline hover:!underline' : 'bg-muted/50 no-underline']"
-            class="mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:bg-muted hover:no-underline"
-            >{{ i.title }}</UiAccordionTrigger
-          >
-        </UiAccordionHeader>
-        <UiAccordionContent>
-          <div class="px-3 py-2 leading-8" v-html="i.content" />
-        </UiAccordionContent>
-      </UiAccordionItem>
-    </template>
-  </UiAccordion>
+  <div class="mx-auto max-w-lg">
+    <UiAccordion
+      :default-value="[accordionItems[1]!.value]"
+      type="multiple"
+      :items="accordionItems"
+    >
+      <template v-for="(i, k) in accordionItems" :key="k">
+        <UiAccordionItem v-slot="{ open }" class="border-b-0" :value="i.value">
+          <UiAccordionHeader>
+            <UiAccordionTrigger
+              :class="[open ? 'bg-muted underline hover:!underline' : 'bg-muted/50 no-underline']"
+              class="mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:bg-muted hover:no-underline"
+              >{{ i.title }}</UiAccordionTrigger
+            >
+          </UiAccordionHeader>
+          <UiAccordionContent>
+            <div class="px-3 py-2 leading-8" v-html="i.content" />
+          </UiAccordionContent>
+        </UiAccordionItem>
+      </template>
+    </UiAccordion>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -27,9 +33,9 @@
     },
     {
       value: "item-2",
-      title: "Is it easy to create a design system with Radix-Vue?",
+      title: "Is it easy to create a design system with Reka UI?",
       content:
-        "Yes! Radix-Vue is a collection of low-level UI components that you can use to create a design system.",
+        "Yes! Reka UI is a collection of low-level UI components that you can use to create a design system.",
     },
     {
       value: "item-3",

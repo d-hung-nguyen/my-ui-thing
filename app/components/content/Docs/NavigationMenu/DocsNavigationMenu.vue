@@ -18,7 +18,7 @@
                   :key="i"
                   class="rounded-md p-3 text-sm hover:bg-muted"
                 >
-                  <p class="mb-1 font-semibold leading-none text-foreground">{{ item.title }}</p>
+                  <p class="mb-1 leading-none font-semibold text-foreground">{{ item.title }}</p>
                   <p class="line-clamp-2 text-muted-foreground">{{ item.description }}</p>
                 </li>
               </ul>
@@ -43,10 +43,10 @@
         <UiNavigationMenuItem>
           <UiNavigationMenuTrigger title="Learn more" />
           <UiNavigationMenuContent>
-            <div class="grid w-[500px] grid-cols-2 place-items-center gap-5 p-3">
+            <div class="grid h-[300px] w-[500px] grid-cols-2 place-items-center gap-5 p-3">
               <!-- eslint-disable-next-line vue/html-self-closing -->
               <img
-                src="https://www.radix-vue.com/logo.svg"
+                src="https://www.reka-ui.com/logo.svg"
                 alt="Radix Vue Logo"
                 class="h-full w-full"
               />

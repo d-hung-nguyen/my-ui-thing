@@ -54,7 +54,7 @@
           <!-- Avatar -->
           <div class="-mt-10 px-6">
             <div
-              class="relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-muted shadow-sm shadow-black/10"
+              class="relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-muted shadow-xs shadow-black/10"
             >
               <img
                 v-if="currentAvatarImage"
@@ -75,7 +75,7 @@
               </button>
             </div>
           </div>
-          <div class="px-6 pb-6 pt-4">
+          <div class="px-6 pt-4 pb-6">
             <form @submit="submit">
               <fieldset class="space-y-4" :disabled="isSubmitting">
                 <div class="flex flex-col gap-4 sm:flex-row">
@@ -129,7 +129,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const defaultBanner =
     "https://images.unsplash.com/photo-1474779751981-5d6bb8cb0a35?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -182,31 +182,23 @@
   const { handleSubmit, isSubmitting } = useForm({
     name: "dialog-edit-profile",
     validationSchema: toTypedSchema(
-      z.object({
-        firstName: z
-          .string()
-          .nonempty("First name too short")
-          .max(50, "Too long")
-          .default("James")
-          .describe("First name"),
-        lastName: z.string().nonempty("Last name too short").max(50, "Too long").default("Bond"),
-        username: z
-          .string()
-          .nonempty("Username too short")
-          .max(30, "Too long")
-          .default("agent-007"),
-        website: z
-          .string()
-          .nonempty("Website invalid")
-          .default("www.007.com")
-          .refine(
-            (v) => {
-              // regex to check if a website is valid
-              return /^(https?:\/\/)?([\da-z\\.-]+)\.([a-z\\.]{2,6})([\\/\w \\.-]*)*\/?$/.test(v);
-            },
-            { message: "Invalid URL" }
-          ),
-        bio: z.string().nonempty().max(200).default("The name is Bond, James Bond."),
+      object({
+        firstName: string().label("First name").required().min(2).max(50).default("James").trim(),
+        lastName: string().label("Last name").required().min(2).max(50).default("Bond").trim(),
+        username: string()
+          .label("Username")
+          .required()
+          .max(30)
+          .default("agent-007")
+          .trim()
+          .lowercase(),
+        website: string().label("Website").required().default("www.007.com").url(),
+        bio: string()
+          .label("Biography")
+          .required()
+          .max(200)
+          .default("The name is Bond, James Bond.")
+          .trim(),
       })
     ),
   });

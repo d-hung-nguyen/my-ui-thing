@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full justify-center">
-    <form class="w-full" @submit="onSubmit">
+    <form @submit="onSubmit">
       <Field v-slot="{ componentField }" name="email">
         <UiFormItem label="Primary email" description="This will be shown to the public">
           <UiSelect v-bind="componentField">
@@ -21,27 +21,25 @@
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const emails = ["m@support.com", "m@google.com", "m@example.com"];
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        email: z
-          .string({
-            required_error: "Please select an email",
-          })
+      object({
+        email: string()
+          .label("Email")
+          .oneOf(emails, "Please select a valid email")
+          .required()
           .email(),
       })
     ),
   });
 
   const onSubmit = handleSubmit((data) => {
-    toast({
-      title: "Profile updated",
+    useSonner("Profile updated", {
       description: h("pre", { class: "p-2" }, JSON.stringify(data, null, 2)),
-      variant: "success",
     });
   });
 </script>

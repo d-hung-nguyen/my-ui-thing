@@ -1,5 +1,5 @@
 <template>
-  <DrawerTitle v-bind="props" :class="styles({ class: props.class })">
+  <DrawerTitle data-slot="drawer-title" v-bind="props" :class="styles({ class: props.class })">
     <slot>
       {{ props.text }}
     </slot>
@@ -8,16 +8,23 @@
 
 <script lang="ts" setup>
   import { DrawerTitle } from "vaul-vue";
+  import type { DrawerTitleProps } from "vaul-vue";
+  import type { HTMLAttributes } from "vue";
 
-  interface Props
-    extends /* @vue-ignore */ Partial<Pick<InstanceType<typeof DrawerTitle>, "$props">> {
-    class?: any;
-    text?: string;
-  }
-
-  const props = defineProps<Props>();
+  const props = defineProps<
+    DrawerTitleProps & {
+      /**
+       * Custom class(es) to add to the parent.
+       */
+      class?: HTMLAttributes["class"];
+      /**
+       * The text content of the title.
+       */
+      text?: string;
+    }
+  >();
 
   const styles = tv({
-    base: "text-lg font-semibold leading-none tracking-tight",
+    base: "text-lg leading-none font-semibold tracking-tight",
   });
 </script>

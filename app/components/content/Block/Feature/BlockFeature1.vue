@@ -1,7 +1,7 @@
 <template>
   <UiContainer class="py-16 lg:py-24">
     <p class="text-center font-semibold text-primary">Features</p>
-    <h2 class="mb-4 mt-3 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
+    <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
       Beautiful analytics to grow smarter
     </h2>
     <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
@@ -33,7 +33,7 @@
         <img
           :src="f.imageUrl"
           :alt="f.title"
-          class="h-[300px] w-full rounded-lg object-cover shadow-sm lg:h-[520px]"
+          class="h-[300px] w-full rounded-lg object-cover shadow-xs lg:h-[520px]"
         />
       </section>
     </template>

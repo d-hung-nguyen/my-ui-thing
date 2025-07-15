@@ -1,5 +1,5 @@
 <template>
   <div class="text-center">
-    <UiButton variant="shine">Shining ✨</UiButton>
+    <UiButton effect="shine">Shining ✨</UiButton>
   </div>
 </template>

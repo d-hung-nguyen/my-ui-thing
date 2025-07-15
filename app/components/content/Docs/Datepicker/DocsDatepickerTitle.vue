@@ -1,10 +1,10 @@
 <template>
   <div class="flex w-full items-center justify-center">
-    <UiDatepicker show-weeknumbers>
+    <UiDatepicker :model-value="new Date()" show-weeknumbers="left-outside">
       <template #header-title="{ title }">
         <div class="flex items-center gap-2">
           <p>{{ title }}</p>
-          <Icon class="h-4 w-4 text-muted-foreground" name="lucide:chevron-down" />
+          <Icon class="size-4 text-muted-foreground" name="lucide:chevron-down" />
         </div>
       </template>
     </UiDatepicker>

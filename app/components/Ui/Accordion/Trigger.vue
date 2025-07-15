@@ -1,28 +1,40 @@
 <template>
-  <AccordionTrigger v-bind="forwarded" :class="styles({ class: props.class })">
+  <AccordionTrigger
+    data-slot="accordion-trigger"
+    v-bind="forwarded"
+    :class="accordionTriggerStyle({ class: props.class })"
+  >
     <slot :props="props">
       {{ title }}
     </slot>
     <slot name="icon" :props="props">
       <Icon
         v-if="icon"
+        data-slot="accordion-trigger-icon"
         mode="svg"
         :name="icon"
-        class="h-4 w-4 shrink-0 transition-transform duration-200"
+        class="pointer-events-none size-4 shrink-0 text-muted-foreground transition-transform duration-200"
       />
     </slot>
   </AccordionTrigger>
 </template>
 
-<script lang="ts" setup>
-  import { AccordionTrigger } from "radix-vue";
-  import type { AccordionTriggerProps } from "radix-vue";
+<script lang="ts">
+  import { AccordionTrigger } from "reka-ui";
+  import type { AccordionTriggerProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
+  export const accordionTriggerStyle = tv({
+    base: "flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
+  });
+</script>
+
+<script lang="ts" setup>
   const props = withDefaults(
     defineProps<
       AccordionTriggerProps & {
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
         /** The title of the accordion trigger */
         title?: string;
         /** The icon to show next to the title */
@@ -37,8 +49,4 @@
   );
 
   const forwarded = reactiveOmit(props, "class", "icon", "title");
-
-  const styles = tv({
-    base: "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [&[data-state=open]>svg]:rotate-180",
-  });
 </script>

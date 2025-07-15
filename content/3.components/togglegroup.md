@@ -2,11 +2,11 @@
 title: Toggle Group
 description: A set of two-state buttons that can be toggled on or off.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/toggle-group.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/toggle-group.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/toggle-group.html#api-reference
+    href: https://reka-ui.com/docs/components/toggle-group.html#api-reference
     icon: "icon-park-solid:api"
 ---
 

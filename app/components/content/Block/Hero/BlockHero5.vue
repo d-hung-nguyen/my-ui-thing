@@ -3,7 +3,7 @@
     class="relative flex flex-col gap-y-5 py-10 md:flex-row md:gap-10 md:py-0 lg:h-[720px]"
   >
     <div
-      class="absolute inset-0 z-[-2] h-full w-full bg-transparent bg-[radial-gradient(circle,_theme(colors.border)_3px,_transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(circle,#000,_transparent_80%)]"
+      class="absolute inset-0 z-[-2] h-full w-full bg-transparent bg-[radial-gradient(circle,_var(--color-border)_3px,_transparent_1px)] [mask-image:radial-gradient(circle,#000,_transparent_80%)] bg-[size:30px_30px]"
     />
     <div
       class="absolute inset-y-0 right-5 -z-[1] hidden h-full md:block md:w-[450px] lg:w-[700px] xl:w-[800px]"
@@ -21,7 +21,7 @@
     </div>
     <div class="flex h-full items-center justify-center md:w-[550px] lg:w-[768px]">
       <div>
-        <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mb-6 lg:mt-5 xl:text-6xl">
+        <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           Customer service software for customer-first teams
         </h1>
         <p class="max-w-[560px] text-lg text-muted-foreground lg:text-xl">
@@ -62,7 +62,7 @@
               <template v-for="s in 5" :key="s">
                 <Icon
                   name="material-symbols:kid-star"
-                  class="h-5 w-5 fill-yellow-400 text-yellow-400"
+                  class="inline size-5 fill-yellow-400 text-yellow-400"
                 />
               </template>
             </div>
@@ -74,7 +74,7 @@
     <div class="h-[300px] md:hidden">
       <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
-        class="h-full w-full rounded-bl-[70px] rounded-tr-[70px] object-cover"
+        class="h-full w-full rounded-tr-[70px] rounded-bl-[70px] object-cover"
         src="https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Hero section four styles"
         loading="eager"

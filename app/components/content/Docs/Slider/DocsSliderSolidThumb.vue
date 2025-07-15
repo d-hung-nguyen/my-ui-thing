@@ -4,7 +4,7 @@
       <UiLabel>Slider with solid thumb</UiLabel>
       <UiSlider
         v-model="value"
-        class="[&>:first-child>span]:opacity-70 [&_div[role=slider]]:bg-primary"
+        class="[&_[data-slot=slider-thumb]]:bg-primary [&>:first-child>span]:opacity-70"
         aria-label="Slider with solid thumb"
       />
     </div>

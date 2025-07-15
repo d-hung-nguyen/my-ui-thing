@@ -77,6 +77,8 @@
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(.dataTable) {
     .dtcr-moving-first {
       @apply border-l border-primary;

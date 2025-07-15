@@ -3,24 +3,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { Separator } from "radix-vue";
-  import type { SeparatorProps } from "radix-vue";
+  import { Separator } from "reka-ui";
+  import type { SeparatorProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<
-      SeparatorProps & {
-        /** Custom class(es) to add to parent element */
-        class?: any;
-      }
-    >(),
-    {
-      as: "hr",
+  const props = defineProps<
+    SeparatorProps & {
+      /** Custom class(es) to add to parent element */
+      class?: HTMLAttributes["class"];
     }
-  );
+  >();
 
   const forwarded = reactiveOmit(props, "class");
 
   const styles = tv({
-    base: 'h-px w-full border-t-0 bg-[linear-gradient(90deg,theme("colors.input/10%"),_theme("colors.input"),_theme("colors.input/10%"))]',
+    base: "h-px w-full border-t-0 bg-[linear-gradient(90deg,--alpha(var(--input)/10%),_var(--input),_--alpha(var(--input)/10%))]",
   });
 </script>

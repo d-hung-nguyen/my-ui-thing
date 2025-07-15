@@ -3,14 +3,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { HoverCardArrow } from "radix-vue";
-  import type { HoverCardArrowProps } from "radix-vue";
+  import { HoverCardArrow } from "reka-ui";
+  import type { HoverCardArrowProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       HoverCardArrowProps & {
         /** Custom class(es) to add to the parent */
-        class?: any;
+        class?: HTMLAttributes["class"];
       }
     >(),
     {

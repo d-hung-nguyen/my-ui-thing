@@ -2,11 +2,11 @@
 title: Splitter
 description: A component that divides your layout into resizable sections.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/splitter.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/splitter.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/splitter.html#api-reference
+    href: https://reka-ui.com/docs/components/splitter.html#api-reference
     icon: "icon-park-solid:api"
 ---
 

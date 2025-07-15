@@ -1,5 +1,5 @@
 <template>
-  <div class="py-5 min-[1440px]:container max-[1440px]:px-4">
+  <div class="py-5 max-[1440px]:px-4 min-[1440px]:container">
     <div class="rounded-md border bg-background shadow">
       <div class="flex flex-col">
         <ExamplesDashboardHeader />
@@ -15,9 +15,9 @@
                       :class="['w-[260px] justify-start text-left']"
                       @click="togglePopover"
                     >
-                      <Icon name="lucide:calendar" class="h-4 w-4" />
-                      {{ format(date.start, "MMM dd, yyyy") }} -
-                      {{ format(date.end, "MMM dd, yyyy") }}
+                      <Icon name="lucide:calendar" class="size-4" />
+                      {{ useDateFormat(date.start, "MMM DD, YYYY").value }} -
+                      {{ useDateFormat(date.end, "MMM DD, YYYY").value }}
                     </UiButton>
                   </template>
                 </UiDatepicker>
@@ -42,7 +42,7 @@
                   <UiCard>
                     <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
                       <UiCardTitle class="text-sm font-medium"> {{ s.title }} </UiCardTitle>
-                      <Icon :name="s.icon" class="h-4 w-4 text-muted-foreground" />
+                      <Icon :name="s.icon" class="size-4 text-muted-foreground" />
                     </UiCardHeader>
                     <UiCardContent>
                       <div class="text-2xl font-bold">{{ s.amount }}</div>
@@ -54,8 +54,8 @@
               <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <UiCard class="col-span-4" title="Overview">
                   <template #content>
-                    <UiCardContent class="h-full px-4">
-                      <div ref="chart" class="h-[80%]" />
+                    <UiCardContent class="h-[434px] px-4">
+                      <div ref="chart" class="h-full" />
                     </UiCardContent>
                   </template>
                 </UiCard>
@@ -76,7 +76,7 @@
                               :fallback="r.initials"
                             />
                             <div class="ml-4 space-y-1">
-                              <p class="text-sm font-medium leading-none">{{ r.name }}</p>
+                              <p class="text-sm leading-none font-medium">{{ r.name }}</p>
                               <p class="text-sm text-muted-foreground">{{ r.email }}</p>
                             </div>
                             <div class="ml-auto font-medium">{{ r.amount }}</div>
@@ -96,14 +96,64 @@
 </template>
 
 <script lang="ts" setup>
-  import { _colors } from "#tailwind-config/theme";
-  import { addDays, format } from "date-fns";
+  import dayjs from "dayjs";
 
-  definePageMeta({ layout: "examples" });
+  definePageMeta({ layout: "blank" });
   useSeoMeta({ title: "Dashboard" });
 
   type DataRecord = { name: string; total: number };
   const chart = ref<HTMLDivElement | null>(null);
+
+  const data: DataRecord[] = [
+    {
+      name: "Jan",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Feb",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Mar",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Apr",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "May",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Jun",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Jul",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Aug",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Sep",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Oct",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Nov",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+    {
+      name: "Dec",
+      total: Math.floor(Math.random() * 5000) + 1000,
+    },
+  ];
 
   onMounted(async () => {
     const XYContainer = (await import("@unovis/ts")).XYContainer;
@@ -115,67 +165,20 @@
       horizontalPlacement: "right",
       triggers: {
         [GroupedBar.selectors.bar]: (d: DataRecord) =>
-          `<span class='text-sm font-medium'>${d.name}: ${new Intl.NumberFormat("en-US", {
-            currency: "USD",
-            style: "currency",
-          }).format(d.total)}</span>`,
+          `<div class='text-xs bg-popover text-popover-foreground px-3 py-4 shadow rounded-lg border font-medium'>${d.name}: ${new Intl.NumberFormat(
+            "en-US",
+            {
+              currency: "USD",
+              style: "currency",
+            }
+          ).format(d.total)}</div>`,
       },
     });
-    const data: DataRecord[] = [
-      {
-        name: "Jan",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Feb",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Mar",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Apr",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "May",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Jun",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Jul",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Aug",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Sep",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Oct",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Nov",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-      {
-        name: "Dec",
-        total: Math.floor(Math.random() * 5000) + 1000,
-      },
-    ];
 
     const bar = new GroupedBar<DataRecord>({
       x: (d, i) => i,
       y: (d) => d.total,
-      color: "#adfa1d",
+      color: "var(--color-primary)",
       barPadding: 0.05,
       roundedCorners: 4,
     });
@@ -186,7 +189,7 @@
           height: "100%",
           components: [bar],
           xAxis: new Axis<DataRecord>({
-            tickFormat: (d, _, __) => data[d as number].name,
+            tickFormat: (d, _, __) => data?.[d as number]!.name,
             numTicks: data.length,
             gridLine: false,
             domainLine: false,
@@ -206,7 +209,7 @@
 
   const date = ref({
     start: new Date(),
-    end: addDays(new Date(), 30),
+    end: dayjs().add(7, "day").toDate(),
   });
 
   const tabItems = [

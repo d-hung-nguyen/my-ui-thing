@@ -6,15 +6,15 @@
           variant="outline"
           role="combobox"
           :aria-expanded="open"
-          class="w-[250px] justify-between"
+          class="w-[200px] justify-between"
         >
           {{ value ? selectedFramework : "Select framework..." }}
 
-          <Icon name="lucide:chevrons-up-down" class="ml-auto h-4 w-4 shrink-0 opacity-50" />
+          <Icon name="lucide:chevrons-up-down" class="ml-auto size-4 shrink-0 opacity-50" />
         </UiButton>
       </UiPopoverTrigger>
-      <UiPopoverContent class="w-[250px] p-0">
-        <UiCommand v-model="value" :filter-function="filterFunction">
+      <UiPopoverContent class="w-(--reka-popover-trigger-width) p-0">
+        <UiCommand v-model="value" by="label">
           <UiCommandInput placeholder="Search framework..." />
           <UiCommandList>
             <UiCommandEmpty>No framework found.</UiCommandEmpty>
@@ -25,14 +25,14 @@
                 :value="framework"
                 @select="open = false"
               >
+                {{ framework.label }}
                 <Icon
                   name="lucide:check"
                   :class="[
-                    'mr-2 h-4 w-4',
+                    'ml-auto size-4',
                     value?.value === framework.value ? 'opacity-100' : 'opacity-0',
                   ]"
                 />
-                {{ framework.label }}
               </UiCommandItem>
             </UiCommandGroup>
           </UiCommandList>
@@ -57,7 +57,4 @@
   const selectedFramework = computed(
     () => frameworks.find((framework) => framework.value === value?.value?.value)?.label
   );
-
-  const filterFunction = (list: typeof frameworks, search: string) =>
-    list.filter((i) => i.value.toLowerCase().includes(search.toLowerCase()));
 </script>

@@ -4,12 +4,12 @@
     :aria-describedby="!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`"
     :aria-invalid="!!error"
   >
-    <slot />
+    <slot :id="formItemId" />
   </Slot>
 </template>
 
 <script lang="ts" setup>
-  import { Slot } from "radix-vue";
+  import { Slot } from "reka-ui";
 
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 </script>

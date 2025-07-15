@@ -11,31 +11,38 @@
         name="startDate"
         hint="This will be displayed to the public"
       />
-      <UiButton type="submit"> Submit </UiButton>
+      <UiButton :loading="isSubmitting" type="submit"> Submit </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import dayjs from "dayjs";
+  import { date, object } from "yup";
 
-  const schema = z.object({
-    startDate: z.date({
-      invalid_type_error: "Please enter a valid date",
-      required_error: "Please enter a date",
-    }),
+  const schema = object({
+    startDate: date()
+      .label("Start date")
+      .required()
+      .test({
+        message: "Select a date after today",
+        test(v) {
+          const selectedDate = dayjs(v);
+          const today = dayjs().startOf("day");
+          return selectedDate.isAfter(today);
+        },
+      }),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: toTypedSchema(schema),
   });
 
-  const onSubmit = handleSubmit(async (values) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    useSonner.promise(promise, {
-      loading: `Updating to ${values.startDate}`,
-      success: (_) => "We updated your information.",
-      error: (_) => "Error! Your information could not be sent to our servers!",
+  const onSubmit = handleSubmit(async () => {
+    await promiseTimeout(2500);
+    useSonner.success("Start Date Set", {
+      description: "Your start date is set!",
     });
   });
 </script>

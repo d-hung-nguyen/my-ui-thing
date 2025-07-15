@@ -8,9 +8,11 @@
   </p>
 </template>
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   defineOptions({ inheritAttrs: false });
 
   const { formDescriptionId } = useFormField();
-  const props = defineProps<{ class?: any; description?: string }>();
+  const props = defineProps<{ class?: HTMLAttributes["class"]; description?: string }>();
   const styles = tv({ base: "text-sm text-muted-foreground" });
 </script>

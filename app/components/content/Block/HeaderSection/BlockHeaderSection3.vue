@@ -4,7 +4,7 @@
       <p class="font-semibold text-primary">{{ headline }}</p>
     </slot>
     <slot name="title">
-      <h2 class="mb-4 mt-2 text-4xl font-bold lg:mb-6 lg:mt-3 lg:text-5xl">{{ title }}</h2>
+      <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">{{ title }}</h2>
     </slot>
     <slot name="description">
       <p class="mx-auto max-w-[800px] text-lg text-muted-foreground lg:text-xl">

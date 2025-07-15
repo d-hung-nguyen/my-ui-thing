@@ -2,6 +2,7 @@
   <div
     role="group"
     aria-roledescription="slide"
+    data-slot="carousel-item"
     :class="styles({ orientation, class: `${props.class} ${grabbingClass}` })"
     @mousedown="isGrabbing = true"
     @mouseup="isGrabbing = false"

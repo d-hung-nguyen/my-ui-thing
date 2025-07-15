@@ -2,11 +2,11 @@
 title: Progress
 description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/progress.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/progress.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/progress.html#api-reference
+    href: https://reka-ui.com/docs/components/progress.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -84,7 +84,7 @@ npx ui-thing@latest add progress
       <span>{{ counter == 100 ? "Complete" : "Loading..." }}</span>
       <span class="text-muted-foreground">{{ counter }}%</span>
     </div>
-    <UiProgress class="h-2 [&>div]:bg-blue-500" :model-value="counter" />
+    <UiProgress class="h-2 [--primary:var(--color-blue-500)]" :model-value="counter" />
   </div>
 </template>
 

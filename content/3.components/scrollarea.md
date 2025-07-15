@@ -2,11 +2,11 @@
 title: Scroll Area
 description: Augments native scroll functionality for custom, cross-browser styling.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/scroll-area.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/scroll-area.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/scroll-area.html#api-reference
+    href: https://reka-ui.com/docs/components/scroll-area.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -49,7 +49,7 @@ npx ui-thing@latest add scroll-area
   <div class="flex w-full justify-center">
     <UiScrollArea class="h-72 w-48 rounded-md border">
       <div class="p-4">
-        <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
+        <h4 class="mb-4 text-sm leading-none font-medium">Tags</h4>
         <template v-for="(tag, i) in tags" :key="i">
           <div class="text-sm">{{ tag }}</div>
           <UiSeparator class="my-2" />
@@ -61,6 +61,70 @@ npx ui-thing@latest add scroll-area
 
 <script lang="ts" setup>
   const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Horizontal scroll
+
+::ShowCase
+
+:DocsScrollAreaHorizontal
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/ScrollArea/DocsScrollAreaHorizontal.vue" code lang="vue" -->
+
+```vue [DocsScrollAreaHorizontal.vue]
+<template>
+  <UiScrollArea orientation="horizontal" class="rounded-md border whitespace-nowrap">
+    <div class="flex w-max gap-4 p-4">
+      <figure v-for="artwork in works" :key="artwork.artist" class="shrink-0">
+        <div class="overflow-hidden rounded-md">
+          <img
+            :src="artwork.art"
+            :alt="`Photo by ${artwork.artist}`"
+            class="aspect-[3/4] h-[400px] w-[300px] object-cover"
+            width="300px"
+            height="400px"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="pt-2 text-xs text-muted-foreground">
+          Photo by
+          <span class="font-semibold text-foreground">
+            {{ artwork.artist }}
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </UiScrollArea>
+</template>
+
+<script lang="ts" setup>
+  export interface Artwork {
+    artist: string;
+    art: string;
+  }
+
+  const works: Artwork[] = [
+    {
+      artist: "Ornella Binni",
+      art: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      artist: "Tom Byrom",
+      art: "https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      artist: "Vladimir Malyavko",
+      art: "https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80",
+    },
+  ];
 </script>
 ```
 

@@ -2,7 +2,7 @@
   <UiContainer class="py-16 lg:py-24">
     <div class="max-w-[760px]">
       <p class="font-semibold text-primary">Features</p>
-      <h2 class="mb-4 mt-3 text-3xl font-semibold lg:mb-5 lg:text-4xl">
+      <h2 class="mt-3 mb-4 text-3xl font-semibold lg:mb-5 lg:text-4xl">
         Beautiful analytics to grow smarter
       </h2>
       <p class="text-lg text-muted-foreground lg:text-xl">
@@ -22,12 +22,12 @@
               class="h-5 w-5 transition-colors group-hover:text-primary lg:h-6 lg:w-6"
             />
           </div>
-          <h3 class="mt-4 text-balance text-lg font-semibold lg:mt-5 lg:text-xl" v-html="f.title" />
+          <h3 class="mt-4 text-lg font-semibold text-balance lg:mt-5 lg:text-xl" v-html="f.title" />
           <p class="mt-1 text-balance text-muted-foreground lg:mt-2" v-html="f.description" />
           <NuxtLink
             class="mt-4 inline-block font-semibold text-primary underline-offset-2 hover:underline lg:mt-5"
             :to="f.link.to"
-            >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="h-4 w-4"
+            >{{ f.link.text }} <Icon name="heroicons:arrow-right" class="size-4"
           /></NuxtLink>
         </div>
       </template>

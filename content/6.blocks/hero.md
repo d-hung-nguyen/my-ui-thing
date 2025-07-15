@@ -3,10 +3,6 @@ title: Hero
 description: On this page you will find different ways in which you can create a hero section for your website.
 ---
 
-## Note
-
-In order to see the full(Desktop) view, please click on the `External View` button ( :icon{name="lucide:square-arrow-out-up-right"} ) at the top of the style.
-
 ## Style One
 
 :BlockShowcase{blockPath="Hero/BlockHero1" containerClass="h-screen" component="BlockHero1" iframeHeight="600px"}

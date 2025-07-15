@@ -75,9 +75,11 @@ Create a new CSS file and add the following code to it.
 <!-- automd:file src="../../app/assets/css/tippy.css" code lang="css" -->
 
 ```css [tippy.css]
+@reference "./tailwind.css";
+
 [data-tippy-root] {
   .tippy-box {
-    @apply rounded-md bg-background px-2 py-1 text-foreground shadow ring-1 ring-border;
+    @apply rounded-md bg-popover px-2 py-1 text-popover-foreground shadow ring-1 ring-border;
     .tippy-content {
       @apply text-[13px];
     }
@@ -167,7 +169,7 @@ You can visit the [Component Docs](https://vue-tippy.netlify.app/flavor/componen
           <UiButton
             variant="ghost"
             size="icon-xs"
-            class="absolute right-0 top-2 size-5 p-1"
+            class="absolute top-2 right-0 size-5 p-1"
             @click="props.hide()"
           >
             <Icon class="size-3" name="lucide:x" />

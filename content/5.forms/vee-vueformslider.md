@@ -156,13 +156,15 @@ You can visit the [VueForm Slider page](https://github.com/vueform/slider?tab=re
 
 ```vue [DocsVeeVueFormSliderVertical.vue]
 <template>
-  <div class="flex justify-center">
-    <UiVeeVueFormSlider
-      v-model="value"
-      :step="5"
-      orientation="vertical"
-      :format="Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format"
-    />
+  <div class="mx-auto flex justify-center">
+    <div class="w-fit">
+      <UiVeeVueFormSlider
+        v-model="value"
+        :step="5"
+        orientation="vertical"
+        :format="Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format"
+      />
+    </div>
   </div>
 </template>
 
@@ -195,26 +197,21 @@ You can visit the [VueForm Slider page](https://github.com/vueform/slider?tab=re
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { array, number, object } from "yup";
 
   const value = ref([18, 60]);
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        slider: z.array(
-          z
-            .number({ coerce: true })
-            .min(18, "First value must be greater than 18")
-            .max(60, "Second value must be less than 60")
-        ),
+      object({
+        slider: array().of(number().label("Age range").min(18).max(60)),
       })
     ),
   });
 
   const submit = handleSubmit((values) => {
     useSonner.success("Range Set", {
-      description: `The age range has been set to ${values.slider[0]}-${values.slider[1]}.`,
+      description: `The age range has been set to ${values.slider?.[0]}-${values.slider?.[1]}.`,
     });
   });
 </script>

@@ -53,6 +53,8 @@
 </template>
 
 <style scoped>
+  @reference "~/assets/css/tailwind.css";
+
   :deep(table.dataTable td) {
     border-bottom-width: 0px;
     border-top-width: 0px;

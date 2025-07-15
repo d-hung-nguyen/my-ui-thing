@@ -1,12 +1,14 @@
 <template>
-  <tfoot :class="styles({ class: props.class })">
+  <tfoot data-slot="table-footer" :class="styles({ class: props.class })">
     <slot />
   </tfoot>
 </template>
 
 <script lang="ts" setup>
+  import type { HTMLAttributes } from "vue";
+
   const props = defineProps<{
-    class?: any;
+    class?: HTMLAttributes["class"];
   }>();
 
   const styles = tv({

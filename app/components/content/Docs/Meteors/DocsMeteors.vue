@@ -1,12 +1,12 @@
 <template>
   <div
-    class="relative mx-auto flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border bg-background p-20 md:shadow-xl"
+    class="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border"
   >
     <UiMeteors :number="30" />
-    <p
-      class="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white"
+    <span
+      class="pointer-events-none bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-white dark:to-slate-900/10"
     >
       Meteors
-    </p>
+    </span>
   </div>
 </template>

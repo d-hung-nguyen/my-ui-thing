@@ -30,7 +30,7 @@
                         <UiNavigationMenuLink as-child>
                           <NuxtLink
                             to="#"
-                            class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:hover:bg-muted/20"
+                            class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                           >
                             <Icon :name="item.icon" class="mt-px h-5 w-5 shrink-0 text-primary" />
                             <div class="flex flex-col gap-1.5 leading-none">
@@ -85,7 +85,7 @@
                             class="w-full justify-start text-base capitalize *:data-[state=open]:-rotate-180"
                             to="#"
                             >{{ l.title }}
-                            <Icon name="lucide:chevron-down" class="ml-auto h-4 w-4 transition"
+                            <Icon name="lucide:chevron-down" class="ml-auto size-4 transition"
                           /></UiButton>
                         </UiCollapsibleTrigger>
                         <UiCollapsibleContent
@@ -96,7 +96,7 @@
                               <li v-for="item in l.items" :key="item.name">
                                 <NuxtLink
                                   :to="item.href"
-                                  class="flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                                  class="flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
                                 >
                                   <Icon
                                     :name="item.icon"

@@ -2,6 +2,7 @@
   <UiButton
     :title="label"
     data-sidebar="trigger"
+    data-slot="sidebar-trigger"
     variant="ghost"
     size="icon"
     :class="sideBarTriggerStyles({ class: props.class })"

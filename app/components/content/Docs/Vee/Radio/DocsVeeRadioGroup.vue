@@ -1,5 +1,5 @@
 <template>
-  <form class="mx-auto max-w-md" @submit="onSubmit">
+  <form class="mx-auto w-fit max-w-md" @submit="onSubmit">
     <fieldset :disabled="isSubmitting" class="space-y-5">
       <UiVeeRadioGroup name="notify" label="Select how you want to be notified">
         <template v-for="(opt, i) in options" :key="i">
@@ -9,13 +9,14 @@
           </div>
         </template>
       </UiVeeRadioGroup>
-      <UiButton type="submit"> Update settings </UiButton>
+      <UiButton :loading="isSubmitting" type="submit"> Update settings </UiButton>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { promiseTimeout } from "@vueuse/core";
+  import { object, string } from "yup";
 
   const options = [
     { text: "Send me emails only", value: "email" },
@@ -24,10 +25,15 @@
     { text: "Don't notify me", value: "none" },
   ] as const;
 
-  const schema = z.object({
-    notify: z.enum(["email", "sms", "call", "none"], {
-      required_error: "Please select a notification method",
-    }),
+  const schema = object({
+    notify: string()
+      .label("Notification Method")
+      .trim()
+      .required()
+      .oneOf(
+        options.map((opt) => opt.value),
+        "Invalid notification method"
+      ),
   });
 
   const { handleSubmit, isSubmitting } = useForm({
@@ -35,21 +41,17 @@
   });
 
   const onSubmit = handleSubmit(async (values) => {
-    const promise = () => new Promise((resolve) => setTimeout(resolve, 3000));
-    await new Promise<void>((res, rej) => {
-      useSonner.promise(promise, {
-        loading: "Updating your settings...",
-        success: (_) => {
-          res();
-          return values.notify === "none"
-            ? "You will no longer receive notifications"
-            : `You will be notified by ${values.notify}`;
-        },
-        error: (e) => {
-          rej(e);
-          return "Error! Your information could not be sent to our servers!";
-        },
+    await promiseTimeout(2000); // Simulate a network request
+
+    if (values.notify === "none") {
+      useSonner.success("Settings Updated", {
+        description: "You will no longer receive notifications",
       });
-    });
+      return;
+    } else {
+      useSonner.success("Settings Updated", {
+        description: `You will be notified by ${values.notify}`,
+      });
+    }
   });
 </script>

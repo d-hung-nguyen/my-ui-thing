@@ -1,8 +1,8 @@
 <template>
   <div class="not-prose">
     <UiBreadcrumbs :items="items" class="mb-6" />
-    <h1 class="text-4xl font-bold leading-none">{{ page?.title }}</h1>
-    <p v-if="page?.description" class="mb-6 mt-3 text-lg text-muted-foreground">
+    <h1 class="text-4xl leading-none font-bold">{{ page?.title }}</h1>
+    <p v-if="page?.description" class="mt-3 mb-6 text-lg text-muted-foreground">
       {{ page?.description }}
     </p>
     <div v-if="page?.links && page?.links?.length" class="not-prose flex flex-wrap gap-2">

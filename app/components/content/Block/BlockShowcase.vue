@@ -6,7 +6,7 @@
     }"
   >
     <div class="mb-5 flex items-center justify-between gap-5">
-      <div class="flex h-8 items-center rounded-md border p-0.5 shadow-sm">
+      <div class="flex h-8 items-center rounded-md border p-0.5 shadow-xs">
         <UiToggleGroup
           type="single"
           default-value="100"
@@ -27,56 +27,69 @@
           </UiToggleGroupItem>
         </UiToggleGroup>
       </div>
-      <div class="flex items-center gap-3">
+      <div class="flex h-8 items-center gap-0.5 rounded-md border bg-background p-0.5 shadow-xs">
         <UiButton
           v-if="externalViewLink"
           v-tippy="'External View'"
           target="_blank"
           :href="externalViewLink"
-          class="size-8 rounded-md"
+          class="h-6 rounded-sm"
           size="icon-sm"
-          variant="outline"
+          variant="ghost"
         >
           <Icon name="lucide:square-arrow-out-up-right" class="size-3.5" />
           <span class="sr-only">External View</span>
         </UiButton>
-
         <UiButton
           v-if="codeBlock"
           v-tippy="'Copy Source Code'"
-          class="size-8 rounded-md"
+          class="h-6 rounded-sm"
           size="icon-sm"
-          variant="outline"
+          variant="ghost"
           @click="copy(codeBlock)"
         >
           <Icon :name="copied ? 'lucide:check' : 'lucide:copy'" class="size-3.5" />
           <span class="sr-only">Copy Source Code</span>
         </UiButton>
+        <BlockCodeShowcase
+          v-if="codeBlock"
+          :code="codeBlock"
+          language="vue"
+          language-icon="logos:vue"
+          :title="trim(startCase(component)) || 'Block Code'"
+        >
+          <UiButton v-tippy="'View Code'" class="h-6 rounded-sm" size="icon-sm" variant="ghost">
+            <Icon name="lucide:code" class="size-3.5" />
+            <span class="sr-only">View Code</span>
+          </UiButton>
+        </BlockCodeShowcase>
       </div>
     </div>
 
-    <div class="relative h-[--container-height] rounded-lg bg-muted">
+    <div class="relative h-(--container-height) rounded-lg bg-muted">
       <ClientOnly>
         <UiSplitter id="block-resizable" direction="horizontal" class="relative z-10">
           <UiSplitterPanel
             id="block-resizable-panel-1"
-            class="relative rounded-lg border bg-background transition-all"
+            class="relative overflow-hidden rounded-lg border bg-background transition-all"
             :default-size="100"
             :min-size="40"
             @ready="resizableRef = $event"
           >
-            <TransitionFade>
-              <div v-if="isLoading" class="flex h-full items-center justify-center">
-                <Icon class="size-20" name="svg-spinners:blocks-wave" />
-              </div>
+            <div v-if="isLoading" class="flex h-full items-center justify-center">
+              <Icon class="size-20" name="svg-spinners:blocks-wave" />
+            </div>
+            <div
+              v-else-if="!isLoading && externalViewLink"
+              class="absolute inset-0 hidden bg-background md:block"
+            >
               <iframe
-                v-if="!isLoading"
-                class="relative z-20 h-[--container-height] w-full bg-background"
+                class="relative z-20 h-(--container-height) w-full bg-background"
                 :src="externalViewLink"
                 :class="props.frameClass"
                 @load="isLoading = false"
               />
-            </TransitionFade>
+            </div>
           </UiSplitterPanel>
           <UiSplitterHandle class="bg-transparent" />
           <UiSplitterPanel id="block-resizable-panel-2" :default-size="0" :min-size="0" />
@@ -87,15 +100,17 @@
 </template>
 
 <script lang="ts" setup>
-  import type { SplitterPanel } from "radix-vue";
+  import { startCase, trim } from "lodash-es";
+  import type { SplitterPanel } from "reka-ui";
+  import type { HtmlHTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<{
       blockPath?: string;
       component?: string;
       iframeHeight?: string;
-      frameClass?: any;
-      containerClass?: any;
+      frameClass?: HtmlHTMLAttributes["class"];
+      containerClass?: HtmlHTMLAttributes["class"];
     }>(),
     {
       blockPath: "",
@@ -121,13 +136,14 @@
 
   const resizableRef = ref<InstanceType<typeof SplitterPanel>>();
 
-  await importPath();
   watch(
     () => colorMode.value,
     async () => {
-      await importPath();
+      importPath();
     }
   );
+
+  onMounted(importPath);
 
   const { copied, copy } = useClipboard({ copiedDuring: 2500, legacy: true });
 

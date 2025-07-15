@@ -1,10 +1,6 @@
 <template>
-  <UiTabs
-    default-value="Projects"
-    orientation="vertical"
-    class="mx-auto flex w-full max-w-lg justify-center"
-  >
-    <UiTabsList :pill="false" class="h-auto flex-col gap-1 py-0">
+  <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
+    <UiTabsList :pill="false" class="flex-col gap-1 bg-transparent py-0">
       <UiTabsTrigger
         v-for="t in tabs"
         :key="t.title"
@@ -16,9 +12,9 @@
       </UiTabsTrigger>
     </UiTabsList>
 
-    <div className="grow rounded-lg border border-border text-start">
+    <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="text-pretty px-3 text-sm text-muted-foreground">
+        <p class="px-4 py-3 text-xs text-muted-foreground">
           {{ t.content }}
         </p>
       </UiTabsContent>

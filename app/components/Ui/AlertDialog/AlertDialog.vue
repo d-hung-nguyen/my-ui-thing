@@ -1,5 +1,5 @@
 <template>
-  <AlertDialogRoot v-bind="forwarded">
+  <AlertDialogRoot data-slot="alert-dialog" v-bind="forwarded">
     <slot>
       <slot name="trigger">
         <UiAlertDialogTrigger v-if="triggerText" as-child>
@@ -35,8 +35,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { AlertDialogRoot, useForwardPropsEmits } from "radix-vue";
-  import type { AlertDialogEmits, AlertDialogProps } from "radix-vue";
+  import { AlertDialogRoot, useForwardPropsEmits } from "reka-ui";
+  import type { AlertDialogEmits, AlertDialogProps } from "reka-ui";
 
   const props = defineProps<
     AlertDialogProps & {

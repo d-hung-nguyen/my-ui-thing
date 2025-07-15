@@ -14,10 +14,12 @@
         <UiTableRow v-for="item in data" :key="item.id">
           <UiTableCell>
             <div class="flex items-center gap-3">
-              <UiAvatar class="size-10" :src="item.image" :alt="item.name" />
-              <div>
+              <UiAvatar class="size-8" :src="item.image" :alt="item.name" />
+              <div class="leading-none">
                 <div class="font-medium">{{ item.name }}</div>
-                <span class="mt-0.5 text-xs text-muted-foreground">@{{ item.username }}</span>
+                <span class="mt-1 inline-block text-xs text-muted-foreground"
+                  >@{{ item.username }}</span
+                >
               </div>
             </div>
           </UiTableCell>

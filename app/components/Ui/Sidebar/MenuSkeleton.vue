@@ -1,5 +1,6 @@
 <template>
   <div
+    data-slot="sidebar-menu-skeleton"
     data-sidebar="menu-skeleton"
     :class="sideBarMenuSkeletonStyles().wrapper({ class: props.class })"
   >
@@ -23,7 +24,7 @@
     slots: {
       wrapper: "flex h-8 items-center gap-2 rounded-md px-2",
       skeleton1: "size-4 rounded-md",
-      skeleton2: "h-4 max-w-[--skeleton-width] flex-1",
+      skeleton2: "h-4 max-w-(--skeleton-width) flex-1",
     },
   });
 </script>

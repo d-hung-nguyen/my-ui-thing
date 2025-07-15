@@ -1,39 +1,96 @@
 <template>
   <div
-    :style="{
-      '--size': size,
-      '--duration': duration,
-      '--anchor': anchor,
-      '--border-width': borderWidth,
-      '--color-from': colorFrom,
-      '--color-to': colorTo,
-      '--delay': `-${delay}s`,
-    }"
-    class="absolute inset-[0] rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent] ![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)] after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]"
-  />
+    class="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)] [mask-composite:intersect] [mask-clip:padding-box,border-box]"
+  >
+    <motion.div
+      :class="styles({ class: props.class })"
+      :style="
+        {
+          width: `${size}px`,
+          offsetPath: `rect(0 auto auto 0 round ${size}px)`,
+          '--color-from': colorFrom,
+          '--color-to': colorTo,
+          ...style,
+        } as MotionStyle
+      "
+      :initial="{ offsetDistance: `${initialOffset}%` }"
+      :animate="{
+        offsetDistance: reverse
+          ? [`${100 - initialOffset}%`, `${-initialOffset}%`]
+          : [`${initialOffset}%`, `${100 + initialOffset}%`],
+      }"
+      :transition="{
+        repeat: Infinity,
+        ease: 'linear',
+        duration,
+        delay: -delay,
+        ...transition,
+      }"
+    />
+  </div>
 </template>
 
 <script lang="ts">
-  export interface BorderBeamProps {
-    class?: string;
+  import { motion } from "motion-v";
+  import type { MotionStyle, Transition } from "motion-v";
+  import type { CSSProperties, HTMLAttributes } from "vue";
+
+  interface BorderBeamProps {
+    /**
+     * The size of the border beam.
+     */
     size?: number;
+    /**
+     * The duration of the border beam.
+     */
     duration?: number;
-    borderWidth?: number;
-    anchor?: number;
-    colorFrom?: string;
-    colorTo?: string;
+    /**
+     * The delay of the border beam.
+     */
     delay?: number;
+    /**
+     * The color of the border beam from.
+     */
+    colorFrom?: string;
+    /**
+     * The color of the border beam to.
+     */
+    colorTo?: string;
+    /**
+     * The motion transition of the border beam.
+     */
+    transition?: Transition;
+    /**
+     * The class name of the border beam.
+     */
+    class?: HTMLAttributes["class"];
+    /**
+     * The style of the border beam.
+     */
+    style?: CSSProperties;
+    /**
+     * Whether to reverse the animation direction.
+     */
+    reverse?: boolean;
+    /**
+     * The initial offset position (0-100).
+     */
+    initialOffset?: number;
   }
 </script>
 
 <script lang="ts" setup>
-  withDefaults(defineProps<BorderBeamProps>(), {
-    size: 200,
-    duration: 15,
-    anchor: 90,
-    borderWidth: 1.5,
+  const props = withDefaults(defineProps<BorderBeamProps>(), {
+    size: 50,
+    delay: 0,
+    duration: 6,
     colorFrom: "#ffaa40",
     colorTo: "#9c40ff",
-    delay: 0,
+    reverse: false,
+    initialOffset: 0,
+  });
+
+  const styles = tv({
+    base: "absolute aspect-square bg-gradient-to-l from-(--color-from) via-(--color-to) to-transparent",
   });
 </script>

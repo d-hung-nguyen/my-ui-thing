@@ -37,9 +37,9 @@ npm i @fullcalendar/daygrid @fullcalendar/interaction @fullcalendar/timegrid @fu
 
 In order to make the calendar match the UI Thing theme, I had to create the `full-calendar.css` file and import it in the `nuxt.config.ts` file.
 
-<!-- automd:file src="../../app/assets/css/full-calendar.css" code lang="css -->
+<!-- automd:file src="../../app/assets/css/full-calendar.css" code lang="css" -->
 
-```"css [full-calendar.css]
+```css [full-calendar.css]
 /*
 for css vars only.
 these values are automatically known in all stylesheets.
@@ -50,24 +50,26 @@ so only write standard css!
 NOTE: for old browsers, will need to restart watcher after changing a variable
 */
 
+@reference "./tailwind.css";
+
 :root {
-  --fc-small-font-size: theme(fontSize.sm);
-  --fc-page-bg-color: theme(colors.background);
-  --fc-neutral-bg-color: theme(colors.muted.DEFAULT);
-  --fc-neutral-text-color: theme(colors.foreground);
-  --fc-border-color: theme(colors.border);
+  --fc-small-font-size: var(--text-sm);
+  --fc-page-bg-color: var(--color-background);
+  --fc-neutral-bg-color: var(--color-muted);
+  --fc-neutral-text-color: var(--color-foreground);
+  --fc-border-color: var(--color-border);
 
-  --fc-button-text-color: theme(colors.foreground);
-  --fc-button-bg-color: theme(colors.background);
-  --fc-button-border-color: theme(colors.input);
-  --fc-button-hover-bg-color: theme(colors.accent.DEFAULT);
-  --fc-button-hover-border-color: theme(colors.input);
-  --fc-button-active-bg-color: theme(colors.accent.DEFAULT);
-  --fc-button-active-border-color: theme(colors.input);
+  --fc-button-text-color: var(--color-foreground);
+  --fc-button-bg-color: var(--color-background);
+  --fc-button-border-color: var(--color-input);
+  --fc-button-hover-bg-color: var(--color-accent);
+  --fc-button-hover-border-color: var(--color-input);
+  --fc-button-active-bg-color: var(--color-accent);
+  --fc-button-active-border-color: var(--color-input);
 
-  --fc-event-bg-color: theme(colors.primary.DEFAULT);
-  --fc-event-border-color: theme(colors.input);
-  --fc-event-text-color: theme(colors.primary.foreground);
+  --fc-event-bg-color: var(--color-primary);
+  --fc-event-border-color: var(--color-input);
+  --fc-event-text-color: var(--color-primary-foreground);
   --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
 
   --fc-more-link-bg-color: #d0d0d0;
@@ -80,25 +82,25 @@ NOTE: for old browsers, will need to restart watcher after changing a variable
   --fc-non-business-color: rgba(215, 215, 215, 0.3);
   --fc-bg-event-color: rgb(143, 223, 130);
   --fc-bg-event-opacity: 0.3;
-  --fc-highlight-color: theme(colors.primary.DEFAULT / 10%);
-  --fc-today-bg-color: theme(colors.primary.DEFAULT / 10%);
+  --fc-highlight-color: --alpha(var(--colors-primary) / 10%);
+  --fc-today-bg-color: --alpha(var(--colors-primary) / 10%);
   --fc-now-indicator-color: red;
 
-  --fc-list-event-hover-bg-color: theme(colors.primary.DEFAULT / 10%);
+  --fc-list-event-hover-bg-color: --alpha(var(--colors-primary) / 10%);
 }
 
 /* Toolbar buttons */
 .fc {
   .fc-button {
-    @apply inline-flex h-10 items-center justify-center rounded-md px-3 text-sm font-medium capitalize;
+    @apply inline-flex h-9 min-w-9 items-center justify-center rounded-md px-3 text-sm font-medium capitalize;
     .fc-icon {
       @apply text-sm/none;
     }
   }
   .fc-button-primary {
-    @apply focus:!shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+    @apply z-10 focus:shadow-none focus:ring-[3px] focus:ring-ring/50;
     &.fc-button-active {
-      @apply focus:shadow-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+      @apply z-10 focus:shadow-none focus:ring-[3px] focus:ring-ring/50;
     }
   }
 }
@@ -111,7 +113,7 @@ NOTE: for old browsers, will need to restart watcher after changing a variable
 }
 /* Toolbar title */
 .fc .fc-toolbar-title {
-  @apply text-2xl font-bold tracking-tight;
+  @apply text-xl font-bold tracking-tight;
 }
 /* Calendar header cell */
 .fc .fc-col-header-cell-cushion,

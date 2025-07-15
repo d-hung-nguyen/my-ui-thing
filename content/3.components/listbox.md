@@ -2,11 +2,11 @@
 title: Listbox
 description: A control that allows the user to toggle between checked and not checked from a list of options.
 links:
-  - title: Radix-Vue
-    href: https://www.radix-vue.com/components/listbox.html
+  - title: Reka UI
+    href: https://reka-ui.com/docs/components/listbox.html
     icon: "simple-icons:radixui"
   - title: API Reference
-    href: https://www.radix-vue.com/components/listbox.html#api-reference
+    href: https://reka-ui.com/docs/components/listbox.html#api-reference
     icon: "icon-park-solid:api"
 ---
 
@@ -36,23 +36,25 @@ npx ui-thing@latest add listbox
 <template>
   <div>
     <UiListbox v-model="selected">
-      <UiListboxFilter v-model="search" placeholder="Search..." />
-      <UiListboxContent>
-        <UiListboxGroup>
-          <template v-if="filteredPeople?.length > 0">
-            <UiListboxGroupLabel>People</UiListboxGroupLabel>
-            <template v-for="p in filteredPeople" :key="p.id">
-              <UiListboxItem :value="p">
-                <span>{{ p }}</span>
-              </UiListboxItem>
+      <UiListboxFilter v-model="searchTerm" placeholder="Search..." />
+      <UiListboxContent class="max-h-full px-0">
+        <UiScrollArea class="h-[300px]">
+          <UiListboxGroup class="px-3">
+            <template v-if="filteredPeople.length === 0">
+              <div class="flex items-center justify-center py-5 text-sm font-medium">
+                <span>No results found</span>
+              </div>
             </template>
-          </template>
-          <template v-else>
-            <div class="flex items-center justify-center py-5 text-sm font-medium">
-              <p>No results found</p>
-            </div>
-          </template>
-        </UiListboxGroup>
+            <template v-else>
+              <UiListboxGroupLabel>People</UiListboxGroupLabel>
+              <template v-for="p in filteredPeople" :key="p">
+                <UiListboxItem :value="p">
+                  <span>{{ p }}</span>
+                </UiListboxItem>
+              </template>
+            </template>
+          </UiListboxGroup>
+        </UiScrollArea>
       </UiListboxContent>
     </UiListbox>
   </div>
@@ -60,6 +62,7 @@ npx ui-thing@latest add listbox
 
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
+  import { useFilter } from "reka-ui";
 
   const genPeople = async () => {
     return Array.from({ length: 20 }, () => faker.person.fullName());
@@ -69,20 +72,11 @@ npx ui-thing@latest add listbox
     default: () => [],
   });
 
-  const search = ref("");
   const selected = ref(people.value?.[3]);
+  const searchTerm = ref("");
 
-  const filteredPeople = ref<string[]>([]);
-  watchDebounced(
-    search,
-    (v) => {
-      if (!v) {
-        filteredPeople.value = useCloned(people).cloned.value;
-      }
-      filteredPeople.value = people.value.filter((p) => p.toLowerCase().includes(v.toLowerCase()));
-    },
-    { debounce: 300, maxWait: 2000, immediate: true }
-  );
+  const { contains } = useFilter({ sensitivity: "base" });
+  const filteredPeople = computed(() => people.value.filter((p) => contains(p, searchTerm.value)));
 </script>
 ```
 
@@ -134,6 +128,7 @@ npx ui-thing@latest add listbox
 
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
+  import { useFilter } from "reka-ui";
 
   const genPeople = async () => {
     return Array.from({ length: 10 }, () => ({
@@ -150,10 +145,11 @@ npx ui-thing@latest add listbox
 
   const search = ref("");
   const selected = ref(people.value?.[3]);
+  const { contains } = useFilter({ sensitivity: "base" });
 
-  const filteredPeople = computed(() => {
-    return people.value?.filter((p) => p.name.toLowerCase().includes(search.value.toLowerCase()));
-  });
+  const filteredPeople = computed(() =>
+    people.value.filter((p) => contains(p.name, search.value) || contains(p.email, search.value))
+  );
 </script>
 ```
 
@@ -315,7 +311,7 @@ npx ui-thing@latest add listbox
   <div>
     <UiListbox>
       <UiListboxContent>
-        <UiListboxVirtualizer v-slot="{ option }" :options="people">
+        <UiListboxVirtualizer v-slot="{ option }" :estimate-size="36" :options="people">
           <UiListboxItem :value="option">
             <span>{{ option }}</span>
           </UiListboxItem>
@@ -335,6 +331,194 @@ npx ui-thing@latest add listbox
   const { data: people } = await useAsyncData("virtualListOfStrings", async () => genPeople(), {
     default: () => [],
   });
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Origin UI
+
+::ShowCase
+
+:DocsListboxOrigin
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Listbox/DocsListboxOrigin.vue" code lang="vue" -->
+
+```vue [DocsListboxOrigin.vue]
+<template>
+  <div class="mx-auto grid max-w-xs grid-cols-1 gap-10">
+    <div class="flex flex-col gap-2">
+      <UiLabel>Listbox with single option</UiLabel>
+      <UiListbox highlight-on-hover default-value="react" selection-behavior="replace">
+        <UiListboxContent class="bg-background p-1">
+          <UiListboxItem
+            v-for="(item, index) in frameworks"
+            :key="index"
+            :value="item.id"
+            :disabled="item.disabled"
+          >
+            {{ item.name }}
+          </UiListboxItem>
+        </UiListboxContent>
+      </UiListbox>
+    </div>
+    <div class="flex flex-col gap-2">
+      <UiLabel>Listbox with multiple option</UiLabel>
+      <UiListbox multiple highlight-on-hover :default-value="['react', 'vue']">
+        <UiListboxContent class="bg-background p-1">
+          <UiListboxItem v-for="(item, index) in frameworks" :key="index" :value="item.id">
+            {{ item.name }}
+          </UiListboxItem>
+        </UiListboxContent>
+      </UiListbox>
+    </div>
+    <div class="flex flex-col gap-2">
+      <UiLabel>Listbox with option groups</UiLabel>
+      <UiListbox multiple highlight-on-hover :default-value="['react', 'vue']">
+        <UiListboxContent class="bg-background p-1">
+          <template v-for="(group, index) in groups" :key="index">
+            <UiListboxGroup>
+              <UiListboxGroupLabel class="px-2 py-1.5 text-xs font-medium text-muted-foreground">{{
+                group.title
+              }}</UiListboxGroupLabel>
+              <UiListboxItem v-for="(item, k) in group.items" :key="k" :value="item.id">
+                {{ item.name }}
+              </UiListboxItem>
+            </UiListboxGroup>
+            <UiSeparator v-if="groups.length - 1 != index" class="my-2" />
+          </template>
+        </UiListboxContent>
+      </UiListbox>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  const frameworks = [
+    { id: "react", name: "React" },
+    { id: "vue", name: "Vue" },
+    { id: "angular", name: "Angular", disabled: true },
+    { id: "svelte", name: "Svelte" },
+  ];
+
+  const groups = [
+    {
+      title: "Veggies",
+      items: [
+        { id: "carrot", name: "Carrot" },
+        { id: "broccoli", name: "Broccoli" },
+        { id: "spinach", name: "Spinach" },
+      ],
+    },
+    {
+      title: "Proteins",
+      items: [
+        { id: "chicken", name: "Chicken" },
+        { id: "tofu", name: "Tofu" },
+        { id: "beans", name: "Beans" },
+      ],
+    },
+    {
+      title: "Condiments",
+      items: [
+        { id: "mayonaise", name: "Mayonaise" },
+        { id: "mustard", name: "Mustard" },
+      ],
+    },
+  ];
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Transfer
+
+::ShowCase
+
+:DocsListboxTransfer
+
+#code
+
+<!-- automd:file src="../../app/components/content/Docs/Listbox/DocsListboxTransfer.vue" code lang="vue" -->
+
+```vue [DocsListboxTransfer.vue]
+<template>
+  <div class="flex h-[310px] w-full gap-5">
+    <UiListbox v-model="selectedList1" class="w-full" multiple highlight-on-hover>
+      <UiListboxContent class="h-full max-h-full">
+        <UiListboxGroup>
+          <UiListboxGroupLabel>List 1</UiListboxGroupLabel>
+          <UiGradientDivider class="mt-1 mb-2" />
+          <template v-for="(item, i) in list1" :key="i">
+            <UiListboxItem :value="item">{{ item }}</UiListboxItem>
+          </template>
+        </UiListboxGroup>
+      </UiListboxContent>
+    </UiListbox>
+    <div class="flex shrink-0 items-center gap-2">
+      <UiButton
+        :disabled="!selectedList2.length"
+        size="icon"
+        variant="outline"
+        @click="transferAction('2to1')"
+      >
+        <Icon name="lucide:chevron-left" class="size-4" />
+      </UiButton>
+      <UiButton
+        :disabled="!selectedList1.length"
+        size="icon"
+        variant="outline"
+        @click="transferAction('1to2')"
+      >
+        <Icon name="lucide:chevron-right" class="size-4" />
+      </UiButton>
+    </div>
+
+    <UiListbox v-model="selectedList2" class="w-full" multiple highlight-on-hover>
+      <UiListboxContent class="h-full max-h-full">
+        <UiListboxGroup>
+          <UiListboxGroupLabel>List 2</UiListboxGroupLabel>
+          <UiGradientDivider class="mt-1 mb-2" />
+          <template v-for="(item, i) in list2" :key="i">
+            <UiListboxItem :value="item">{{ item }}</UiListboxItem>
+          </template>
+        </UiListboxGroup>
+      </UiListboxContent>
+    </UiListbox>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  const states = [
+    "California",
+    "Illinois",
+    "Maryland",
+    "Texas",
+    "Florida",
+    "Colorado",
+    "Connecticut ",
+  ];
+
+  const list1 = ref([...states]);
+  const list2 = ref<string[]>([]);
+
+  const selectedList1 = ref<string[]>([]);
+  const selectedList2 = ref<string[]>([]);
+
+  function transferAction(action: "1to2" | "2to1") {
+    const [fromList, toList, selectedList] =
+      action === "1to2" ? [list1, list2, selectedList1] : [list2, list1, selectedList2];
+
+    fromList.value = fromList.value.filter((item) => !selectedList.value.includes(item));
+    toList.value.push(...selectedList.value);
+    selectedList.value = [];
+  }
 </script>
 ```
 

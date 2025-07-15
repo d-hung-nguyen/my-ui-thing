@@ -31,7 +31,7 @@ npx ui-thing@latest add textarea
 
 ```vue [DocsTextarea.vue]
 <template>
-  <div>
+  <div class="mx-auto max-w-xs">
     <UiTextarea placeholder="Bio" />
   </div>
 </template>
@@ -53,7 +53,7 @@ npx ui-thing@latest add textarea
 
 ```vue [DocsTextareaLabel.vue]
 <template>
-  <div>
+  <div class="mx-auto max-w-xs">
     <div class="mt-7 grid w-full items-center gap-2.5">
       <UiLabel for="contact-message">Why are you here today?</UiLabel>
       <UiTextarea id="contact-message" />
@@ -78,7 +78,7 @@ npx ui-thing@latest add textarea
 
 ```vue [DocsTextareaForm.vue]
 <template>
-  <form @submit="onSubmit">
+  <form class="mx-auto max-w-xs" @submit="onSubmit">
     <Field v-slot="{ componentField }" name="bio">
       <UiFormItem label="Tell us about yourself" description="Feel free to @mention others">
         <UiTextarea v-bind="componentField" />
@@ -91,27 +91,19 @@ npx ui-thing@latest add textarea
 </template>
 
 <script lang="ts" setup>
-  import { z } from "zod";
+  import { object, string } from "yup";
 
   const { handleSubmit } = useForm({
     validationSchema: toTypedSchema(
-      z.object({
-        bio: z
-          .string({
-            required_error: "Please tell us about yourself",
-          })
-          .min(10, "At least 10 characters please")
-          .max(1000),
+      object({
+        bio: string().label("Bio").required().min(10).max(1000).trim(),
       })
     ),
   });
 
-  const onSubmit = handleSubmit((values) => {
-    toast({
-      title: "Success!",
-      description: h("pre", null, JSON.stringify(values, null, 2)),
-      variant: "success",
-      duration: 5000,
+  const onSubmit = handleSubmit(() => {
+    useSonner.success("Bio Updated", {
+      description: "Your bio has been successfully updated.",
     });
   });
 </script>
@@ -135,7 +127,7 @@ Restrict the number of characters that can be entered into the textarea.
 
 ```vue [DocsTextareaMaxLength.vue]
 <template>
-  <div class="mx-auto flex max-w-md flex-col gap-3">
+  <div class="mx-auto flex max-w-xs flex-col gap-3">
     <UiTextarea :maxlength="5" placeholder="Quick chat..." />
     <p class="text-sm text-muted-foreground">No more than 5 letters</p>
   </div>
@@ -162,7 +154,7 @@ You don't need to use `/` at the beginning and end of the pattern as the RegExp 
 
 ```vue [DocsTextareaPattern.vue]
 <template>
-  <div class="mx-auto flex max-w-md flex-col gap-3">
+  <div class="mx-auto flex max-w-xs flex-col gap-3">
     <UiTextarea pattern="^[a-z\s]" placeholder="Say something" />
     <p class="text-sm text-muted-foreground">Only lower case letters</p>
   </div>

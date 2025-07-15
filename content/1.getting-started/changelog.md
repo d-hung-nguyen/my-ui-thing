@@ -174,9 +174,9 @@ In this update the [`Breadcrumbs`](/components/breadcrumbs) component got a litt
 </template>
 
 <script lang="ts" setup>
-  import type { Crumbs } from "~/components/Ui/Breadcrumbs.vue";
+  import type { BreadcrumbItem } from "~/components/Ui/Breadcrumbs.vue";
 
-  const items: Crumbs[] = [{ label: "Databases" }, { slot: "select" }];
+  const items: BreadcrumbItem[] = [{ label: "Databases" }, { slot: "select" }];
 </script>
 ```
 
@@ -277,7 +277,7 @@ Let me start by giving credit to the [VueForm Slider](https://github.com/vueform
 
 In this release, I added the [`VeeVueFormSlider`](/forms/vee-vueformslider) component to the forms section.
 
-Yes, there is an existing `Slider` component provided [here](/components/slider). The problem with this component is that the `v-model` directive returns an array. ALWAYS! This is coming from the implementation provided by Radix-Vue.
+Yes, there is an existing `Slider` component provided [here](/components/slider). The problem with this component is that the `v-model` directive returns an array. ALWAYS! This is coming from the implementation provided by Reka UI.
 
 Based on the issue raised here [#38](https://github.com/BayBreezy/ui-thing/issues/38), I decided to create a new slider component that returns a single value. This is the [`VeeVueFormSlider`](/forms/vee-vueformslider) component.
 

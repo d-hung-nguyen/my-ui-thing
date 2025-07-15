@@ -1,5 +1,6 @@
 <template>
   <Primitive
+    data-slot="description-list"
     v-bind="reactiveOmit(props, 'class')"
     :class="descriptionListDetailsStyles({ class: props.class })"
   >
@@ -8,15 +9,19 @@
 </template>
 <script lang="ts">
   import { reactiveOmit } from "@vueuse/core";
-  import { Primitive } from "radix-vue";
-  import type { PrimitiveProps } from "radix-vue";
+  import { Primitive } from "reka-ui";
+  import type { PrimitiveProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   export type DescriptionDetailsProps = PrimitiveProps & {
-    class?: any;
+    /**
+     * Custom class(es) to add to the element
+     */
+    class?: HTMLAttributes["class"];
   };
 
   export const descriptionListDetailsStyles = tv({
-    base: "grid grid-cols-1 text-base/6 sm:grid-cols-2 sm:text-sm/6",
+    base: "grid grid-cols-1 text-sm/6 sm:grid-cols-2",
   });
 </script>
 

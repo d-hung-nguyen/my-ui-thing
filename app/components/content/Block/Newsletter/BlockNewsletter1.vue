@@ -2,7 +2,7 @@
   <UiContainer class="flex flex-col gap-y-16 py-10 lg:h-[720px] lg:flex-row lg:gap-10">
     <div class="flex h-full items-center justify-center lg:w-2/3 xl:w-1/2">
       <div>
-        <h1 class="mb-4 mt-7 text-4xl font-semibold lg:mb-6 lg:mt-5 lg:text-5xl xl:text-6xl">
+        <h1 class="mt-7 mb-4 text-4xl font-semibold lg:mt-5 lg:mb-6 lg:text-5xl xl:text-6xl">
           Be the first to know when we launch
         </h1>
         <p class="text-lg text-muted-foreground lg:text-xl">

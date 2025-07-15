@@ -17,7 +17,7 @@
       <DateFieldInput
         v-else
         :part="item.part"
-        class="inline-flex cursor-text items-center rounded px-1 transition focus:outline-none focus:ring-1 focus:ring-ring aria-[valuetext=Empty]:text-muted-foreground"
+        class="inline-flex cursor-text items-center rounded px-1 transition focus:ring-1 focus:ring-ring focus:outline-none aria-[valuetext=Empty]:text-muted-foreground"
       >
         {{ item.value }}
       </DateFieldInput>
@@ -26,15 +26,27 @@
 </template>
 
 <script lang="ts" setup>
-  import { DateFieldInput, DateFieldRoot } from "radix-vue";
+  import { DateFieldInput, DateFieldRoot } from "reka-ui";
   import type { DateValue } from "@internationalized/date";
-  import type { DateFieldRootProps } from "radix-vue";
+  import type { DateFieldRootProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
   const props = withDefaults(
     defineProps<
       DateFieldRootProps & {
-        class?: any;
+        /**
+         * Any additional class that should be added to the date field
+         */
+        class?: HTMLAttributes["class"];
+        /**
+         * The separator to use between date segments
+         *
+         * @default "/"
+         */
         separator?: string;
+        /**
+         * The icon to use as a separator
+         */
         separatorIcon?: string;
       }
     >(),
@@ -45,6 +57,6 @@
   const localModel = defineModel<DateValue>();
 
   const styles = tv({
-    base: "h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground file:hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled]:cursor-not-allowed data-[invalid]:border-destructive data-[disabled]:opacity-50 sm:text-sm",
+    base: "h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background selection:bg-primary selection:text-primary-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground file:hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[invalid]:border-destructive dark:bg-input/30",
   });
 </script>

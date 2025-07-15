@@ -4,7 +4,7 @@
       <span>{{ counter == 100 ? "Complete" : "Loading..." }}</span>
       <span class="text-muted-foreground">{{ counter }}%</span>
     </div>
-    <UiProgress class="h-2 [&>div]:bg-blue-500" :model-value="counter" />
+    <UiProgress class="h-2 [--primary:var(--color-blue-500)]" :model-value="counter" />
   </div>
 </template>
 
