@@ -210,11 +210,11 @@ The one used here looks like this. Like I said earlier, you have to install a lo
   import ListItem from "@tiptap/extension-list-item";
   import SubScript from "@tiptap/extension-subscript";
   import Superscript from "@tiptap/extension-superscript";
-  import Table from "@tiptap/extension-table";
+  import { Table } from "@tiptap/extension-table";
   import TableCell from "@tiptap/extension-table-cell";
   import TableHeader from "@tiptap/extension-table-header";
   import TableRow from "@tiptap/extension-table-row";
-  import TextStyle from "@tiptap/extension-text-style";
+  import { TextStyle } from "@tiptap/extension-text-style";
   import Typography from "@tiptap/extension-typography";
   import StarterKit from "@tiptap/starter-kit";
   import { EditorContent, useEditor } from "@tiptap/vue-3";
