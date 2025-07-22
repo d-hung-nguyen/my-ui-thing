@@ -156,7 +156,6 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    "/": { redirect: "/getting-started/introduction" },
     "/getting-started": { redirect: "/getting-started/introduction" },
     "/goodies": { redirect: "/goodies/border-beam" },
     "/components": { redirect: "/components/accordion" },

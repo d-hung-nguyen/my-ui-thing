@@ -18,6 +18,12 @@
       PrimitiveProps & {
         /** Custom class(es) to add to the parent */
         class?: HTMLAttributes["class"];
+        /**
+         * The variant of the item.
+         *
+         * @default "default"
+         */
+        variant?: "default" | "destructive";
       }
     >(),
     {
@@ -26,6 +32,12 @@
   );
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "ml-auto text-xs tracking-widest text-muted-foreground",
+    base: "ml-auto text-xs tracking-widest",
+    variants: {
+      variant: {
+        default: "text-muted-foreground",
+        destructive: "text-destructive",
+      },
+    },
   });
 </script>

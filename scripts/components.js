@@ -321,8 +321,12 @@ export default [
   {
     name: "Input",
     value: "input",
-
     files: ["Input.vue"],
+  },
+  {
+    name: "Icon",
+    value: "icon",
+    files: ["Icon.vue"],
   },
   {
     name: "Keyboard Key",
