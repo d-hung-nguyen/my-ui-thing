@@ -161,7 +161,7 @@ export default defineNuxtConfig({
     "/components": { redirect: "/components/accordion" },
     "/examples": { redirect: "/examples/cards" },
     "/blocks": { redirect: "/blocks/app-empty-state" },
-    "/block-renderer": { ssr: false, static: true },
+    "/block-renderer": { static: true },
   },
   colorMode: { classSuffix: "", fallback: "dark", preference: "system" },
 
