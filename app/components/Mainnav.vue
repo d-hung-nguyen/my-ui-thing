@@ -65,16 +65,18 @@
       </div>
 
       <div class="flex items-center">
-        <UiButton
-          size="sm"
-          class="mr-2 hidden min-w-[300px] font-normal text-muted-foreground md:flex"
-          variant="outline"
-          @click="isOpen = true"
-        >
-          <Icon name="lucide:search" />
-          Search...
-          <UiKbd class="ml-auto">{{ metaSymbol }}+K</UiKbd>
-        </UiButton>
+        <ClientOnly>
+          <UiButton
+            size="sm"
+            class="mr-2 hidden min-w-[300px] font-normal text-muted-foreground md:flex"
+            variant="outline"
+            @click="isOpen = true"
+          >
+            <Icon name="lucide:search" />
+            Search...
+            <UiKbd class="ml-auto">{{ metaSymbol }}+K</UiKbd>
+          </UiButton>
+        </ClientOnly>
         <UiButton
           size="icon"
           class="text-muted-foreground md:hidden"

@@ -41,46 +41,48 @@
 
     <!-- Table -->
 
-    <ui-datatable class="display" :data="localTasks" :options>
-      <template #column-title="{ cellData, rowData }">
-        <div class="flex items-center gap-2">
-          <ui-badge variant="outline" class="capitalize">{{ rowData.label }}</ui-badge>
-          <p :title="cellData" class="max-w-[400px] truncate font-medium">{{ cellData }}</p>
-        </div>
-      </template>
-      <template #column-status="{ cellData, rowData }">
-        <div class="flex items-center gap-2">
-          <UiIcon :name="getStatusIcon(rowData.status)" class="size-4 text-muted-foreground" />
-          <p class="whitespace-nowrap capitalize">{{ cellData }}</p>
-        </div>
-      </template>
-      <template #column-priority="{ cellData }">
-        <div class="flex items-center gap-2">
-          <UiIcon :name="getPriorityIcon(cellData)" class="size-4 text-muted-foreground" />
-          <p class="whitespace-nowrap capitalize">{{ cellData }}</p>
-        </div>
-      </template>
-      <template #action>
-        <UiDropdownMenu>
-          <UiDropdownMenuTrigger as-child>
-            <UiButton variant="ghost" class="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
-              <UiIcon name="radix-icons:dots-horizontal" class="size-4" />
-              <span class="sr-only">Open menu</span>
-            </UiButton>
-          </UiDropdownMenuTrigger>
-          <UiDropdownMenuContent align="end" class="w-[160px]">
-            <UiDropdownMenuItem>Edit</UiDropdownMenuItem>
-            <UiDropdownMenuItem>Make a copy</UiDropdownMenuItem>
-            <UiDropdownMenuItem>Favorite</UiDropdownMenuItem>
-            <UiDropdownMenuSeparator />
-            <UiDropdownMenuItem variant="destructive">
-              Delete
-              <UiDropdownMenuShortcut>⌘⌫</UiDropdownMenuShortcut>
-            </UiDropdownMenuItem>
-          </UiDropdownMenuContent>
-        </UiDropdownMenu>
-      </template>
-    </ui-datatable>
+    <ClientOnly>
+      <ui-datatable class="display" :data="localTasks" :options>
+        <template #column-title="{ cellData, rowData }">
+          <div class="flex items-center gap-2">
+            <ui-badge variant="outline" class="capitalize">{{ rowData.label }}</ui-badge>
+            <p :title="cellData" class="max-w-[400px] truncate font-medium">{{ cellData }}</p>
+          </div>
+        </template>
+        <template #column-status="{ cellData, rowData }">
+          <div class="flex items-center gap-2">
+            <UiIcon :name="getStatusIcon(rowData.status)" class="size-4 text-muted-foreground" />
+            <p class="whitespace-nowrap capitalize">{{ cellData }}</p>
+          </div>
+        </template>
+        <template #column-priority="{ cellData }">
+          <div class="flex items-center gap-2">
+            <UiIcon :name="getPriorityIcon(cellData)" class="size-4 text-muted-foreground" />
+            <p class="whitespace-nowrap capitalize">{{ cellData }}</p>
+          </div>
+        </template>
+        <template #action>
+          <UiDropdownMenu>
+            <UiDropdownMenuTrigger as-child>
+              <UiButton variant="ghost" class="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
+                <UiIcon name="radix-icons:dots-horizontal" class="size-4" />
+                <span class="sr-only">Open menu</span>
+              </UiButton>
+            </UiDropdownMenuTrigger>
+            <UiDropdownMenuContent align="end" class="w-[160px]">
+              <UiDropdownMenuItem>Edit</UiDropdownMenuItem>
+              <UiDropdownMenuItem>Make a copy</UiDropdownMenuItem>
+              <UiDropdownMenuItem>Favorite</UiDropdownMenuItem>
+              <UiDropdownMenuSeparator />
+              <UiDropdownMenuItem variant="destructive">
+                Delete
+                <UiDropdownMenuShortcut>⌘⌫</UiDropdownMenuShortcut>
+              </UiDropdownMenuItem>
+            </UiDropdownMenuContent>
+          </UiDropdownMenu>
+        </template>
+      </ui-datatable>
+    </ClientOnly>
   </div>
 </template>
 

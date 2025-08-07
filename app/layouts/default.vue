@@ -19,11 +19,14 @@
 
   const route = useRoute();
   const { data: page } = await useAsyncData(kebabCase(route.path), () => {
-    return queryCollection("content").path(route.path).first();
+    return queryCollection("content").path(route.path).first() || "page";
   });
+  if (!page.value) {
+    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
+  }
   const { data: navigation } = await useAsyncData(
     "navigation",
-    () => queryCollectionNavigation("content", ["icon", "label", "links", "layout"]),
+    () => queryCollectionNavigation("content", ["icon", "label", "links", "layout"]) || "route",
     { default: () => [] }
   );
 

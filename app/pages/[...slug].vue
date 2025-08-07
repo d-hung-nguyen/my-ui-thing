@@ -39,8 +39,11 @@
 
   const route = useRoute();
   const { data: page } = await useAsyncData(snakeCase(route.path), () => {
-    return queryCollection("content").path(route.path).first();
+    return queryCollection("content").path(route.path).first() || "page";
   });
+  if (!page.value) {
+    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
+  }
   const toc = computed(() => {
     if (!page.value) return;
     return page.value?.body?.toc;
