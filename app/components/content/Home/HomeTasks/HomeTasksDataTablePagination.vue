@@ -4,14 +4,14 @@
       {{ table.getFilteredSelectedRowModel().rows.length }} of
       {{ table.getFilteredRowModel().rows.length }} row(s) selected.
     </div>
-    <div class="grid gap-y-2 md:flex md:items-center md:space-x-6 lg:space-x-8">
-      <div class="flex items-center space-x-2">
+    <div class="grid gap-y-2 md:flex md:items-center md:gap-x-6 lg:gap-x-8">
+      <div class="flex items-center gap-x-2">
         <p class="text-sm font-medium whitespace-nowrap">Rows per page</p>
         <UiSelect
           :model-value="`${table.getState().pagination.pageSize}`"
           @update:model-value="table.setPageSize as any"
         >
-          <UiSelectTrigger class="h-8 w-[70px]">
+          <UiSelectTrigger class="h-8 w-fit md:w-[70px]">
             <UiSelectValue :placeholder="`${table.getState().pagination.pageSize}`" />
           </UiSelectTrigger>
           <UiSelectContent side="top">
@@ -25,14 +25,14 @@
           </UiSelectContent>
         </UiSelect>
       </div>
-      <div class="flex w-[100px] items-center justify-center text-sm font-medium">
+      <div class="text-sm font-medium md:flex md:w-[100px] md:items-center md:justify-center">
         Page {{ table.getState().pagination.pageIndex + 1 }} of
         {{ table.getPageCount() }}
       </div>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center gap-x-2">
         <UiButton
           variant="outline"
-          class="hidden h-8 w-8 p-0 lg:flex"
+          class="hidden size-8 p-0 lg:flex"
           :disabled="!table.getCanPreviousPage()"
           @click="table.setPageIndex(0)"
         >
@@ -41,7 +41,7 @@
         </UiButton>
         <UiButton
           variant="outline"
-          class="h-8 w-8 p-0"
+          class="size-8 p-0"
           :disabled="!table.getCanPreviousPage()"
           @click="table.previousPage()"
         >
@@ -50,7 +50,7 @@
         </UiButton>
         <UiButton
           variant="outline"
-          class="h-8 w-8 p-0"
+          class="size-8 p-0"
           :disabled="!table.getCanNextPage()"
           @click="table.nextPage()"
         >
@@ -59,7 +59,7 @@
         </UiButton>
         <UiButton
           variant="outline"
-          class="hidden h-8 w-8 p-0 lg:flex"
+          class="hidden size-8 p-0 lg:flex"
           :disabled="!table.getCanNextPage()"
           @click="table.setPageIndex(table.getPageCount() - 1)"
         >
