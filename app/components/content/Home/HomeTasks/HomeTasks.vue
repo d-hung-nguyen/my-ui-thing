@@ -1,10 +1,12 @@
 <template>
   <div>
     <!-- Greeting top section -->
-    <div class="mb-10 flex items-center justify-between">
+    <div class="mb-10 flex items-start justify-between gap-8 lg:items-center">
       <div class="flex flex-col">
-        <h1 class="text-2xl font-bold tracking-tight">Welcome back!</h1>
-        <p class="text-muted-foreground">Below is a list of your most recent tasks</p>
+        <h1 class="text-lg font-bold tracking-tight lg:text-2xl">Welcome back!</h1>
+        <p class="text-sm text-muted-foreground lg:text-base">
+          Below is a list of your most recent tasks
+        </p>
       </div>
       <!-- User dropdown menu -->
       <UiDropdownMenu>

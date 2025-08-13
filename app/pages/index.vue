@@ -1,5 +1,5 @@
 <template>
-  <div class="container pb-10">
+  <div class="px-5 pb-10 lg:container">
     <ui-gradient-divider class="mb-10" />
     <tabs-root default-value="tasks">
       <tabs-list class="mb-5 flex items-center overflow-x-auto">
@@ -9,7 +9,7 @@
           >Tasks</tabs-trigger
         >
       </tabs-list>
-      <tabs-content value="tasks" class="rounded-lg border bg-background p-6">
+      <tabs-content value="tasks" class="rounded-lg border bg-background px-4 py-6 lg:p-6">
         <home-tasks />
       </tabs-content>
     </tabs-root>
