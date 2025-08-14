@@ -173,10 +173,10 @@
     --sidebar-ring: oklch(0.705 0.015 286.067);
 
     /* Gradient slide show Colors */
-    --gradient-lime: #91a100;
-    --gradient-ocean: #0e5987;
-    --gradient-wine: #61092b;
-    --gradient-rust: #ce3000;
+    --gradient-lime: oklch(67.287% 0.1546 116.644);
+    --gradient-ocean: oklch(44.56% 0.10114 242.813);
+    --gradient-wine: oklch(32.332% 0.12034 5.266);
+    --gradient-rust: oklch(55.695% 0.19944 34.155);
 
     --surface: oklch(0.98 0 0);
     --surface-foreground: var(--foreground);
@@ -276,6 +276,10 @@ h6 > a {
 
 code {
   @apply inline-block rounded px-1 py-px font-mono;
+}
+
+code:not(pre code):not(a > code) {
+  @apply inline-block rounded-sm border bg-muted px-1 py-1 leading-none;
 }
 
 a > code {
