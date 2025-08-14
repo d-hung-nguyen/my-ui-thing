@@ -1,6 +1,8 @@
 <template>
-  <UiLabel>Enter your name</UiLabel>
-  <UiInput v-model="query" name="queryInput" />
+  <div class="flex flex-col gap-3">
+    <UiLabel>Enter your name</UiLabel>
+    <UiInput v-model="query" name="queryInput" />
+  </div>
 </template>
 
 <script setup lang="ts">
