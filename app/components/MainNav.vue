@@ -144,7 +144,7 @@
 
   const isOpen = ref(false);
 
-  const { metaSymbol } = useShortcuts();
+  const metaSymbol = computed(() => useKbd().getKbdKey("meta"));
 
   defineShortcuts({
     meta_k: () => {
