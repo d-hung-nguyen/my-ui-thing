@@ -1276,6 +1276,21 @@ export default [
     plugins: [],
   },
   {
+    name: "Heading",
+    value: "heading",
+    files: [
+      {
+        fileName: "Heading.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive :as="hTag" v-bind="forwarded" :class="headingStyles({ level, class: props.class })">\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  /**\n   * Styles for the heading component\n   */\n  export const headingStyles = tv({\n    base: "font-sans text-foreground",\n    variants: {\n      level: {\n        1: "text-xl font-semibold sm:text-2xl",\n        2: "text-lg font-semibold sm:text-xl",\n        3: "text-base font-semibold sm:text-lg",\n        4: "text-base font-semibold",\n        5: "text-base font-medium",\n        6: "text-base",\n      },\n    },\n    defaultVariants: {\n      level: 1,\n    },\n  });\n\n  /**\n   * Props for the heading component\n   */\n  export type HeadingProps = Omit<PrimitiveProps, "as"> & {\n    /**\n     * The heading level to use, which will determine the HTML tag used.\n     *\n     * @default 1\n     */\n    level?: VariantProps<typeof headingStyles>["level"];\n    /**\n     * Custom class(es) to apply to the heading element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<HeadingProps>(), {\n    level: 1,\n  });\n  // The element to use\n  const hTag = computed(() => `h${props.level}`);\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+    ],
+    utils: [],
+    composables: [],
+    plugins: [],
+  },
+  {
     name: "Hover Card",
     value: "hover-card",
     files: [
@@ -2119,7 +2134,7 @@ export default [
         fileName: "Separator.vue",
         dirPath: "app/components/Ui",
         fileContent:
-          '<template>\n  <Separator\n    data-slot="separator"\n    v-bind="forwarded"\n    :class="styles({ orientation, class: props.class })"\n  />\n</template>\n\n<script lang="ts" setup>\n  import { Separator, useForwardProps } from "reka-ui";\n  import type { SeparatorProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = withDefaults(\n    defineProps<\n      SeparatorProps & {\n        /**\n         * Custom class(es) to add to the separator\n         */\n        class?: HTMLAttributes["class"];\n      }\n    >(),\n    {\n      orientation: "horizontal",\n      decorative: true,\n    }\n  );\n\n  const forwarded = useForwardProps(reactiveOmit(props, "class"));\n\n  const styles = tv({\n    base: "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",\n    variants: {\n      orientation: {\n        horizontal: "h-[1px] w-full",\n        vertical: "h-full w-[1px]",\n      },\n    },\n  });\n</script>\n',
+          '<template>\n  <Separator\n    data-slot="separator"\n    v-bind="forwarded"\n    :class="styles({ orientation, class: props.class })"\n  />\n</template>\n\n<script lang="ts" setup>\n  import { Separator, useForwardProps } from "reka-ui";\n  import type { SeparatorProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = withDefaults(\n    defineProps<\n      SeparatorProps & {\n        /**\n         * Custom class(es) to add to the separator\n         */\n        class?: HTMLAttributes["class"];\n      }\n    >(),\n    {\n      orientation: "horizontal",\n      decorative: true,\n    }\n  );\n\n  const forwarded = useForwardProps(reactiveOmit(props, "class"));\n\n  const styles = tv({\n    base: "shrink-0 bg-border",\n    variants: {\n      orientation: {\n        horizontal: "h-px w-full",\n        vertical: "h-full w-px",\n      },\n    },\n  });\n</script>\n',
       },
     ],
     utils: [],

@@ -307,6 +307,11 @@ export default [
     files: ["GradientDivider.vue"],
   },
   {
+    name: "Heading",
+    value: "heading",
+    files: ["Heading.vue"],
+  },
+  {
     name: "Hover Card",
     value: "hover-card",
 
