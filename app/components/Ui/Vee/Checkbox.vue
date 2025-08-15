@@ -54,7 +54,7 @@
   import type { HTMLAttributes } from "vue";
 
   const variants = {
-    initial: { opacity: 0, y: -10 },
+    initial: { opacity: 0, y: -2 },
     animate: { opacity: 1, y: 0 },
   };
 

@@ -69,7 +69,7 @@
   import { AnimatePresence, motion } from "motion-v";
 
   const variants = {
-    initial: { opacity: 0, y: -10 },
+    initial: { opacity: 0, y: -2 },
     animate: { opacity: 1, y: 0 },
   };
   const props = withDefaults(

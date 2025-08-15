@@ -48,7 +48,7 @@
   import type { PinInputRootProps } from "reka-ui";
 
   const variants = {
-    initial: { opacity: 0, y: -10 },
+    initial: { opacity: 0, y: -2 },
     animate: { opacity: 1, y: 0 },
   };
 
