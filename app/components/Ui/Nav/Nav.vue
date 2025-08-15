@@ -1,11 +1,16 @@
 <template>
-  <div v-if="injectedValues.isMobile">
+  <div v-if="injectedValues.isMobile.value">
     <span class="sr-only" aria-hidden :data-navbar="intent" :data-navbar-sticky="isSticky" />
-    <UiSheet v-model:open="injectedValues.open.value">
-      <UiSheetContent :side="side" aria-label="Mobile Navbar" class="[&>button]:hidden">
-        <UiSheetContent class="p-[calc(var(--gutter)---spacing(2))]">
-          <slot />
-        </UiSheetContent>
+    <UiSheet
+      :open="injectedValues.open.value"
+      @update:open="(value) => (injectedValues.open.value = value)"
+    >
+      <UiSheetContent :side="side" aria-label="Mobile Navbar" class="p-4">
+        <VisuallyHidden>
+          <DialogTitle>Mobile Navbar</DialogTitle>
+          <DialogDescription>Navigation menu for mobile devices</DialogDescription>
+        </VisuallyHidden>
+        <slot />
       </UiSheetContent>
     </UiSheet>
   </div>
@@ -44,6 +49,7 @@
 
 <script lang="ts" setup>
   const injectedValues = inject(navProviderKey);
+
   if (!injectedValues) {
     throw createError({
       statusCode: 500,

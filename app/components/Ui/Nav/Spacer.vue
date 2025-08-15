@@ -1,5 +1,7 @@
 <template>
-  <Primitive v-bind="forwarded" :class="styles({ class: props.class })" />
+  <Primitive v-bind="forwarded" :class="styles({ class: props.class })">
+    <slot />
+  </Primitive>
 </template>
 
 <script lang="ts" setup>

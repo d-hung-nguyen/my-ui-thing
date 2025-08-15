@@ -1,5 +1,9 @@
 <template>
-  <NuxtLink data-slot="navbar-item" :class="styles().wrapper({ class: props.class })">
+  <NuxtLink
+    v-bind="forwarded"
+    data-slot="navbar-item"
+    :class="styles().wrapper({ class: props.class })"
+  >
     <slot />
     <span data-navbar="current-indicator" :class="styles().indicator()" />
   </NuxtLink>
@@ -10,10 +14,13 @@
   import type { HTMLAttributes } from "vue";
 
   const props = defineProps<
-    NuxtLinkProps & {
+    Omit<NuxtLinkProps, "noPrefetch"> & {
+      /** custom t\class(es) to add to the link */
       class?: HTMLAttributes["class"];
     }
   >();
+
+  const forwarded = reactiveOmit(props, "class");
 
   const styles = tv({
     slots: {
@@ -31,10 +38,10 @@
         "text-left disabled:cursor-default disabled:opacity-50",
       ],
       indicator: [
-        "hidden aria-[current=page]:inline-block",
+        "hidden group-aria-[current=page]/sidebar-item:inline-block",
         "absolute rounded-full bg-foreground [--gutter:--spacing(0.5)]",
-        "inset-y-2 -left-4 w-(--gutter)",
-        "sm:inset-x-2 sm:-bottom-[--spacing(3.4)] sm:h-(--gutter) sm:group-data-[navbar=inset]/navbar-intent:-bottom-[--spacing(3.1)]",
+        "inset-y-2 -left-4 w-(--gutter) md:inset-y-auto md:w-auto",
+        "md:inset-x-2 md:-bottom-[--spacing(3.4)] md:h-(--gutter) md:group-data-[navbar=inset]/navbar-intent:-bottom-[--spacing(3.1)]",
       ],
     },
   });

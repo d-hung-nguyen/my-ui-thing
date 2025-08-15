@@ -1,12 +1,12 @@
 <template>
   <UiButton
     data-slot="navbar-trigger"
-    variant="outline"
+    variant="ghost"
     :aria-label="ariaLabel"
     size="icon-sm"
     :class="styles({ class: props.class })"
     @click="
-      ($event) => {
+      ($event: MouseEvent) => {
         injectedValues?.toggleNav();
         props.onClick?.($event);
       }
@@ -23,6 +23,7 @@
   import { navProviderKey } from "./Provider.vue";
 
   const injectedValues = inject(navProviderKey);
+
   if (!injectedValues) {
     throw createError({
       statusCode: 500,

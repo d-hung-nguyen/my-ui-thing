@@ -12,13 +12,23 @@
   import type { PrimitiveProps } from "reka-ui";
   import type { HTMLAttributes, ModelRef } from "vue";
 
+  export interface NavContextProps {
+    open: Ref<boolean>;
+    isMobile: Ref<boolean>;
+    toggleNavbar: () => void;
+  }
+
   export type NavProviderProps = PrimitiveProps & {
     /** Custom class(es) to add to the element */
     class?: HTMLAttributes["class"];
-    /** Model value for the component */
+    /**
+     * The controlled open state of the nav component.
+     */
     modelValue?: boolean;
-    /** Event emitted when the model value changes */
-    onModelChange?: (value: boolean) => void;
+    /**
+     * A function to call when the nav is opened
+     */
+    onOpenChange?: (open: boolean) => void;
   };
 
   /**
@@ -35,7 +45,7 @@
 
   export const navProviderStyles = tv({
     base: [
-      "peer/navbar group/navbar relative isolate z-10 flex w-full flex-col",
+      "peer/navbar group/navbar @container/nav-provider relative isolate z-10 flex w-full flex-col",
       "has-data-navbar-inset:min-h-svh has-data-navbar-inset:bg-background dark:has-data-navbar-inset:bg-background",
     ],
   });
@@ -44,21 +54,20 @@
 <script lang="ts" setup>
   const props = withDefaults(defineProps<NavProviderProps>(), {
     as: "div",
-    modelValue: false,
+    onOpenChange: () => {},
   });
 
-  const forwarded = reactiveOmit(props, "class", "modelValue", "onModelChange");
+  const forwarded = reactiveOmit(props, "class", "modelValue", "onOpenChange");
   /** Open state for the navigation */
   const open = defineModel<boolean>({ default: false });
   /** Mobile state for the navigation */
-  const isMobile = useMediaQuery("(max-width: 767px)");
-  /** Toggle the navigation state */
+  const isMobile = useMediaQuery("(max-width: 767px)"); /** Toggle the navigation state */
   const toggleNav = () => (open.value = !open.value);
   // Watch for changes in the open state and emit the model change event
-  // if the onModelChange prop is provided.
+  // if the onOpenChange prop is provided.
   watch(open, (v) => {
-    if (props.onModelChange) {
-      props.onModelChange(v);
+    if (props.onOpenChange) {
+      props.onOpenChange(v);
     }
   });
 
