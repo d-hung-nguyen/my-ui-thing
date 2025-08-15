@@ -43,7 +43,6 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "nuxt-llms",
     "@nuxtjs/color-mode",
-    "@morev/vue-transitions/nuxt",
     "@nuxt/eslint",
     "nuxt-swiper",
     "v-wave/nuxt",
