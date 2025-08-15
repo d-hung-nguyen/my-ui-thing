@@ -1,11 +1,11 @@
 <template>
   <UiSheetPortal :to="to">
     <slot name="overlay">
-      <UiSheetOverlay />
+      <UiSheetOverlay :is-blurred />
     </slot>
     <DialogContent
       data-slot="sheet-content"
-      :class="styles({ side, class: props.class })"
+      :class="styles({ side, isBlurred, class: props.class })"
       v-bind="{ ...forwarded, ...$attrs }"
     >
       <slot>
@@ -36,19 +36,23 @@
 
   defineOptions({ inheritAttrs: false });
 
-  const props = defineProps<
-    DialogContentProps & {
-      icon?: string;
-      title?: string;
-      description?: string;
-      class?: HTMLAttributes["class"];
-      side?: VariantProps<typeof styles>["side"];
-      to?: string | HTMLElement;
-    }
-  >();
+  const props = withDefaults(
+    defineProps<
+      DialogContentProps & {
+        icon?: string;
+        title?: string;
+        description?: string;
+        class?: HTMLAttributes["class"];
+        side?: VariantProps<typeof styles>["side"];
+        to?: string | HTMLElement;
+        isBlurred?: boolean;
+      }
+    >(),
+    { isBlurred: true }
+  );
   const emits = defineEmits<DialogContentEmits>();
   const forwarded = useForwardPropsEmits(
-    reactiveOmit(props, "icon", "title", "description", "class", "to", "side"),
+    reactiveOmit(props, "icon", "title", "description", "class", "to", "side", "isBlurred"),
     emits
   );
 
@@ -62,6 +66,10 @@
         left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
         right:
           "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+      },
+      isBlurred: {
+        true: "backdrop-blur-sm",
+        false: "backdrop-blur-none",
       },
     },
     defaultVariants: {
