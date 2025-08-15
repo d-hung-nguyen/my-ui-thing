@@ -146,6 +146,7 @@ export default defineNuxtConfig({
             "vue",
             "vue-html",
             "bash",
+            "sh",
             "typescript",
             "javascript",
           ],
