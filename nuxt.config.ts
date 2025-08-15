@@ -74,7 +74,7 @@ export default defineNuxtConfig({
     "~/assets/css/tailwind.css",
   ],
   llms: {
-    domain: process.env.PUBLIC_URL || "https://ui-thing.behonbaker.com",
+    domain: process.env.PUBLIC_URL || "https://uithing.com",
     description: SEO.SITE_DESCRIPTION,
     title: SEO.SITE_TITLE,
     full: {
