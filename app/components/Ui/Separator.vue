@@ -29,11 +29,11 @@
   const forwarded = useForwardProps(reactiveOmit(props, "class"));
 
   const styles = tv({
-    base: "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+    base: "shrink-0 bg-border",
     variants: {
       orientation: {
-        horizontal: "h-[1px] w-full",
-        vertical: "h-full w-[1px]",
+        horizontal: "h-px w-full",
+        vertical: "h-full w-px",
       },
     },
   });
