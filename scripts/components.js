@@ -372,8 +372,6 @@ export default [
     name: "Loader",
     value: "loader",
     files: ["Loader.vue"],
-    deps: ["@morev/vue-transitions"],
-    nuxtModules: ["@morev/vue-transitions/nuxt"],
     devDeps: ["@iconify-json/svg-spinners"],
   },
   {
