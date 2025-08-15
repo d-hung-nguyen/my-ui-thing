@@ -34,7 +34,7 @@
       </UiDropdownMenu>
     </DefineUserMenu>
     <UiNavProvider>
-      <UiNav>
+      <UiNav intent="float">
         <UiNavStart>
           <NuxtLink
             class="flex items-center gap-x-2 text-base font-black"
@@ -50,29 +50,7 @@
           <UiNavItem :to="route.path">Home</UiNavItem>
           <UiNavItem class="@max-[768px]/nav-provider:hidden" href="#">Shop</UiNavItem>
           <UiNavItem class="@max-[768px]/nav-provider:hidden" href="#">Offers</UiNavItem>
-          <UiNavItem class="@max-[768px]/nav-provider:hidden" href="#">Orders</UiNavItem>
-          <UiDropdownMenu>
-            <UiDropdownMenuTrigger as-child>
-              <UiNavItem>
-                Categories
-                <Icon name="lucide:chevron-down" class="col-start-3" />
-              </UiNavItem>
-            </UiDropdownMenuTrigger>
-            <UiDropdownMenuContent class="min-w-(--reka-dropdown-menu-trigger-width) sm:min-w-56">
-              <UiDropdownMenuGroup>
-                <UiDropdownMenuItem
-                  v-for="(item, i) in categories"
-                  :key="i"
-                  :text-value="item.label"
-                  as-child
-                >
-                  <NuxtLink :to="item.url">
-                    {{ item.label }}
-                  </NuxtLink>
-                </UiDropdownMenuItem>
-              </UiDropdownMenuGroup>
-            </UiDropdownMenuContent>
-          </UiDropdownMenu>
+          <UiNavItem href="#">Orders</UiNavItem>
         </UiNavSection>
         <UiNavSpacer />
         <UiNavSection class="max-md:hidden">
@@ -99,8 +77,9 @@
         <UserMenu />
       </UiNavMobile>
     </UiNavProvider>
+
     <UiContainer class="py-6 sm:py-12">
-      <UiHeading>Default Nav</UiHeading>
+      <UiHeading>Floating Nav</UiHeading>
     </UiContainer>
   </div>
 </template>
@@ -108,57 +87,4 @@
 <script lang="ts" setup>
   const route = useRoute();
   const [DefineUserMenu, UserMenu] = createReusableTemplate();
-
-  const categories = [
-    {
-      id: 1,
-      label: "Electronics",
-      url: "#",
-    },
-    {
-      id: 2,
-      label: "Fashion",
-      url: "#",
-    },
-    {
-      id: 3,
-      label: "Home & Kitchen",
-      url: "#",
-    },
-    {
-      id: 4,
-      label: "Sports",
-      url: "#",
-    },
-    {
-      id: 5,
-      label: "Books",
-      url: "#",
-    },
-    {
-      id: 6,
-      label: "Beauty & Personal Care",
-      url: "#",
-    },
-    {
-      id: 7,
-      label: "Grocery",
-      url: "#",
-    },
-    {
-      id: 8,
-      label: "Toys & Games",
-      url: "#",
-    },
-    {
-      id: 9,
-      label: "Automotive",
-      url: "#",
-    },
-    {
-      id: 10,
-      label: "Health & Wellness",
-      url: "#",
-    },
-  ];
 </script>
