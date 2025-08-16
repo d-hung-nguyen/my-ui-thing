@@ -1,89 +1,57 @@
 # UI Thing
 
-Set of components created with Reka UI. Inspired by shadcn/ui & shadcn-vue.
+A modern set of Nuxt components built with Reka UI & TailwindCSS
+
+Inspired by [shadcn/ui](https://ui.shadcn.com/) & [shadcn-vue](https://www.shadcn-vue.com/).
 
 ![Cover Image](/public/cover.png)
 
-## Documentation
+## 📖 Documentation
 
-The documentation can be found here: https://ui-thing.behonbaker.com/
+[🔗 **You can read the full docs here**](https://uithing.com/)
 
-## Credits
+## 🚀 Quick Start
 
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Reka UI](https://www.reka-ui.com/)
-- [TailwindCSS for Nuxt](https://tailwindcss.nuxtjs.org/)
-- [Nuxt](https://nuxt.com/)
-- [Nuxt UI](https://ui.nuxt.com/getting-started)
-
-Thanks to the maintainers of the other third party libraries used in this project.
-
-## 💸 Support Me
-
-If you can 😊
-
-<a href="https://buymeacoffee.com/llehXIrI8g" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important" ></a>
-
-## Getting Started
-
-- Create a Nuxt 3 project
-- Install the dependencies
-- Run the init command
+Initialize UI Thing in your Nuxt project with one command:
 
 ```bash
 npx ui-thing@latest init
 ```
 
-- Start the dev server
+Start the dev server:
 
 ```bash
 npm run dev
 ```
 
-- Add components to your project with the `add` command
+Add components on the fly:
 
 ```bash
 npx ui-thing@latest add
 ```
 
-## Commands
+## ⚡️ Commands
 
-### `init`
+| Command     | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `init`      | Install dependencies and configure your project. |
+| `add`       | Add selected components to your project.         |
+| `theme`     | Apply a theme to your project.                   |
+| `prettier`  | Add Prettier config for consistent formatting.   |
+| `shortcuts` | Add keyboard shortcut composables.               |
 
-```bash
-npx ui-thing@latest init
-```
+## 🎨 Credits
 
-This command will install the dependencies and add the required configuration to your project.
+Huge thanks to the projects that inspired or power this library:
 
-### `add`
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Reka UI](https://www.reka-ui.com/)
+- [TailwindCSS for Nuxt](https://tailwindcss.nuxtjs.org/)
+- [Nuxt](https://nuxt.com/)
+- [Nuxt UI](https://ui.nuxt.com)
 
-```bash
-npx ui-thing@latest add
-```
+## 💸 Support Me
 
-This command will add the components to your project.
+If this project helps you, consider supporting:
 
-### `theme`
-
-```bash
-npx ui-thing@latest theme
-```
-
-This command will add the theme to your project.
-
-### `prettier`
-
-```bash
-npx ui-thing@latest prettier
-```
-
-This command will add the prettier configuration to your project.
-
-### `shortcuts`
-
-```bash
-npx ui-thing@latest shortcuts
-```
-
-This command will add the `defineShortcuts` & `useShortcuts` composables to your project.
+<a href="https://buymeacoffee.com/llehXIrI8g" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important" ></a>
