@@ -43,11 +43,9 @@
   const dialog = ref(false);
 
   const closeDialog = (save: boolean) => {
-    useToast().toast({
-      title: save ? "Profile updated" : "Changes discarded",
+    useSonner(save ? "Profile updated" : "Changes discarded", {
       description: `Your changes has been ${save ? "saved" : "discarded"}.`,
-      duration: 5000,
-      icon: save ? "lucide:check" : "lucide:x",
+      duration: 7000,
     });
     dialog.value = false;
   };
