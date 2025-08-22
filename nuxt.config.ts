@@ -19,8 +19,12 @@ export default defineNuxtConfig({
         "lodash-es",
         "vaul-vue",
         "tailwind-merge",
+        "tailwind-variants",
+        "vue-tippy",
         "motion-v",
         "@tanstack/vue-table",
+        "vue-sonner",
+        "reka-ui",
       ],
     },
   },
@@ -43,6 +47,7 @@ export default defineNuxtConfig({
     "vue-sonner/nuxt",
     "motion-v/nuxt",
     "@nuxt/content",
+    "@morev/vue-transitions/nuxt",
   ],
 
   css: [
