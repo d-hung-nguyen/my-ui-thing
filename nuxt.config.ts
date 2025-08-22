@@ -1,19 +1,9 @@
-import { createResolver } from "@nuxt/kit";
 import tailwindcss from "@tailwindcss/vite";
 
 import * as SEO from "./app/utils/seo";
 
-const { resolve } = createResolver(import.meta.url);
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        allowSyntheticDefaultImports: true,
-      },
-    },
-  },
   vite: {
     plugins: [tailwindcss()],
     build: { sourcemap: false },
@@ -53,16 +43,6 @@ export default defineNuxtConfig({
     "vue-sonner/nuxt",
     "motion-v/nuxt",
     "@nuxt/content",
-    (_, nuxt) => {
-      nuxt.hook("components:dirs", (dirs) => {
-        dirs.unshift({
-          path: resolve("./app/components/content"),
-          pathPrefix: false,
-          prefix: "",
-          global: true,
-        });
-      });
-    },
   ],
 
   css: [
@@ -159,6 +139,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/getting-started": { redirect: "/getting-started/introduction" },
+    "/magic": { redirect: "/magic/getting-started" },
     "/goodies": { redirect: "/goodies/border-beam" },
     "/components": { redirect: "/components/accordion" },
     "/examples": { redirect: "/examples/cards" },

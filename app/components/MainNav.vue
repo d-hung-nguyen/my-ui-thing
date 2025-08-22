@@ -14,14 +14,14 @@
         </div>
         <nav class="hidden items-center space-x-6 text-sm font-medium lg:flex">
           <NuxtLink
-            :class="[route.path.includes('/getting-started/') ? '!text-primary' : '']"
+            :class="[route.path.startsWith('/getting-started/') ? '!text-primary' : '']"
             to="/getting-started/introduction"
             class="text-foreground/60 transition-colors hover:text-foreground"
             >Documentation</NuxtLink
           >
           <NuxtLink
             :class="[
-              route.path.includes('/components/') || route.path.includes('/forms/')
+              route.path.startsWith('/components/') || route.path.includes('/forms/')
                 ? '!text-primary'
                 : '',
             ]"
@@ -56,10 +56,16 @@
             </UiDropdownMenuContent>
           </UiDropdownMenu>
           <NuxtLink
-            :class="[route.path.includes('/colors/') ? '!text-primary' : '']"
+            :class="[route.path.startsWith('/colors') ? '!text-primary' : '']"
             to="/colors"
             class="text-foreground/60 transition-colors hover:text-foreground"
             >Colors</NuxtLink
+          >
+          <NuxtLink
+            :class="[route.path.startsWith('/magic') ? '!text-primary' : '']"
+            to="/magic"
+            class="text-foreground/60 transition-colors hover:text-foreground"
+            >Magic</NuxtLink
           >
         </nav>
       </div>

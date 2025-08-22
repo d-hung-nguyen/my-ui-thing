@@ -29,6 +29,29 @@
   import { getColors } from "~/utils/registry/colors";
 
   definePageMeta({ layout: "blank" });
-
+  const route = useRoute();
   const colors = getColors();
+  const title = "Tailwind Colors";
+  const description =
+    "The complete Tailwind color palette in HEX, RGB, HSL, CSS variables, and classes. Ready to copy and paste into your project.";
+
+  useSeoMeta({
+    title,
+    titleTemplate: `%s | ${SITE_NAME}`,
+    description,
+    keywords: SITE_KEYWORDS.join(", "),
+    ogTitle: title,
+    ogDescription: description,
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterCard: "summary_large_image",
+    ogUrl: `${SITE_URL}${route.path}`,
+  });
+
+  if (import.meta.server) {
+    defineOgImageComponent("Magic", {
+      title,
+      description,
+    });
+  }
 </script>
