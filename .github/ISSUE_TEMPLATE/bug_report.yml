@@ -61,7 +61,7 @@ body:
       description: Add screenshots, videos, or code snippets that help explain the problem.
       placeholder: Drag and drop images, paste links, or add code blocks here.
 
-  - type: input
+  - type: textarea
     id: environment
     attributes:
       label: Environment
