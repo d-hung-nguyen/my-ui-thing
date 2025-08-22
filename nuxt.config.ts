@@ -7,7 +7,6 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  future: { compatibilityVersion: 4 },
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -39,7 +38,7 @@ export default defineNuxtConfig({
   modules: [
     "@vueuse/nuxt",
     "reka-ui/nuxt",
-    "@samk-dev/nuxt-vcalendar",
+    "@yuta-inoue-ph/nuxt-vcalendar",
     "@vee-validate/nuxt",
     "nuxt-llms",
     "@nuxtjs/color-mode",

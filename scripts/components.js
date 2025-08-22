@@ -73,8 +73,8 @@ export default [
   {
     name: "Calendar",
     value: "calendar",
-    devDeps: ["@samk-dev/nuxt-vcalendar"],
-    nuxtModules: ["@samk-dev/nuxt-vcalendar"],
+    devDeps: ["@yuta-inoue-ph/nuxt-vcalendar"],
+    nuxtModules: ["@yuta-inoue-ph/nuxt-vcalendar"],
     instructions: ["You can customize the calendar by adding options to your nuxt.config.js file"],
     files: ["Calendar.vue"],
   },
@@ -186,8 +186,8 @@ export default [
   {
     name: "Datepicker",
     value: "datepicker",
-    devDeps: ["@samk-dev/nuxt-vcalendar"],
-    nuxtModules: ["@samk-dev/nuxt-vcalendar"],
+    devDeps: ["@yuta-inoue-ph/nuxt-vcalendar"],
+    nuxtModules: ["@yuta-inoue-ph/nuxt-vcalendar"],
     instructions: [
       "You can customize the datepicker by adding options to your nuxt.config.js file",
     ],
