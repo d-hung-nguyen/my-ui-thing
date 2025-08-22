@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NuxtRouteAnnouncer />
     <NuxtPwaManifest />
     <NuxtLoadingIndicator color="var(--primary)" />
     <NuxtLayout>

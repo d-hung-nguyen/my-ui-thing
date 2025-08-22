@@ -154,9 +154,7 @@ export default defineNuxtConfig({
   colorMode: { classSuffix: "", fallback: "dark", preference: "system" },
 
   pwa: {
-    client: { installPrompt: "" },
     includeAssets: ["favicon.ico", "robots.txt"],
-    registerType: "autoUpdate",
     manifest: {
       background_color: "#ffffff",
       description: SEO.SITE_DESCRIPTION,
@@ -190,6 +188,7 @@ export default defineNuxtConfig({
       name: SEO.SITE_NAME,
       short_name: SEO.SITE_NAME,
       theme_color: SEO.SITE_THEME_COLOR,
+      display: "standalone",
     },
   },
 
