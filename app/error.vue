@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex min-h-dvh items-center">
     <div
-      class="absolute h-full w-full bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] [background-size:20px_20px]"
+      class="absolute h-full w-full bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_closest-side_at_50%_50%,#000_60%,transparent_100%)] [background-size:20px_20px]"
     />
     <div
       class="relative z-[1] container flex flex-col items-center justify-center py-20 text-center"
