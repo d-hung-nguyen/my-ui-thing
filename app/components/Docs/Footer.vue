@@ -36,9 +36,19 @@
 </template>
 
 <script lang="ts" setup>
+  import type { Collections } from "@nuxt/content";
+
+  const props = withDefaults(
+    defineProps<{
+      collection?: keyof Collections;
+    }>(),
+    {
+      collection: "content",
+    }
+  );
   const route = useRoute();
 
-  const surround = await queryCollectionItemSurroundings("content", route.path, {
+  const surround = await queryCollectionItemSurroundings(props.collection, route.path, {
     fields: ["title", "description", "path"],
   }).where("path", "NOT LIKE", "%/.navigation");
 

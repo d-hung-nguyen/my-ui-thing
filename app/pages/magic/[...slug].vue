@@ -13,7 +13,7 @@
     >
       <DocsHeader v-if="page" :page />
       <ContentRenderer v-if="page" :value="page" />
-      <DocsFooter />
+      <DocsFooter collection="magic" />
     </div>
     <!-- Table of contents for current page -->
     <ClientOnly>
