@@ -77,6 +77,7 @@ Paste the following CSS into your `tailwind.css` file
   <DefineReviewCard v-slot="{ body, img, name, username }">
     <figure class="relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4">
       <div class="flex flex-row items-center gap-2">
+        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span role="figcaption" class="text-sm font-medium dark:text-white">
@@ -85,16 +86,16 @@ Paste the following CSS into your `tailwind.css` file
           <p class="text-xs font-medium dark:text-white/40">{{ username }}</p>
         </div>
       </div>
-      <blockquote class="mt-2 text-sm">{{ body }}</blockquote>
+      <blockquote class="mt-2 line-clamp-2 text-sm">{{ body }}</blockquote>
     </figure>
   </DefineReviewCard>
   <div class="relative flex w-full flex-col items-center justify-center overflow-hidden">
-    <MagicMarquee pause-on-hover class="[--duration:20s]">
+    <MagicMarquee pause-on-hover wrapper-class="[--duration:20s]">
       <template v-for="(review, i) in firstRow" :key="i">
         <ReviewCard v-bind="review" />
       </template>
     </MagicMarquee>
-    <MagicMarquee reverse pause-on-hover class="[--duration:20s]">
+    <MagicMarquee reverse pause-on-hover wrapper-class="[--duration:20s]">
       <template v-for="(review, i) in secondRow" :key="i">
         <ReviewCard v-bind="review" />
       </template>
@@ -109,47 +110,220 @@ Paste the following CSS into your `tailwind.css` file
 </template>
 
 <script lang="ts" setup>
-  const reviews = [
-    {
-      name: "Jack",
-      username: "@jack",
-      body: "I've never seen anything like this before. It's amazing. I love it.",
-      img: "https://avatar.vercel.sh/jack",
-    },
-    {
-      name: "Jill",
-      username: "@jill",
-      body: "I don't know what to say. I'm speechless. This is amazing.",
-      img: "https://avatar.vercel.sh/jill",
-    },
-    {
-      name: "John",
-      username: "@john",
-      body: "I'm at a loss for words. This is amazing. I love it.",
-      img: "https://avatar.vercel.sh/john",
-    },
-    {
-      name: "Jane",
-      username: "@jane",
-      body: "I'm at a loss for words. This is amazing. I love it.",
-      img: "https://avatar.vercel.sh/jane",
-    },
-    {
-      name: "Jenny",
-      username: "@jenny",
-      body: "I'm at a loss for words. This is amazing. I love it.",
-      img: "https://avatar.vercel.sh/jenny",
-    },
-    {
-      name: "James",
-      username: "@james",
-      body: "I'm at a loss for words. This is amazing. I love it.",
-      img: "https://avatar.vercel.sh/james",
-    },
-  ];
+  import { faker } from "@faker-js/faker";
 
-  const firstRow = reviews.slice(0, reviews.length / 2);
-  const secondRow = reviews.slice(reviews.length / 2);
+  const length = 7;
+
+  const { data: reviews } = await useAsyncData(
+    "magic-marquee",
+    async () => {
+      return Array.from({ length }, () => ({
+        name: faker.person.firstName(),
+        username: faker.internet.username().toLowerCase(),
+        body: faker.lorem.sentence({ min: 6, max: 8 }),
+        img: faker.image.avatar(),
+      }));
+    },
+    { default: () => [] }
+  );
+
+  const firstRow = reviews.value.slice(0, length / 2);
+  const secondRow = reviews.value.slice(length / 2);
+
+  const [DefineReviewCard, ReviewCard] = createReusableTemplate<{
+    name: string;
+    username: string;
+    body: string;
+    img: string;
+  }>();
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### Vertical
+
+::ShowCase
+
+:MagicDocsMarqueeVertical
+
+#code
+
+<!-- automd:file src="../../../app/components/content/Magic/Marquee/MagicDocsMarqueeVertical.vue" code lang="vue" -->
+
+```vue [MagicDocsMarqueeVertical.vue]
+<template>
+  <DefineReviewCard v-slot="{ body, img, name, username }">
+    <figure
+      class="relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-4 sm:w-36"
+    >
+      <div class="flex flex-row items-center gap-2">
+        <!-- eslint-disable-next-line vue/html-self-closing -->
+        <img class="rounded-full" width="32" height="32" alt="" :src="img" />
+        <div class="flex flex-col">
+          <span class="text-sm font-medium">
+            {{ name }}
+          </span>
+          <p class="text-xs font-medium text-muted-foreground">{{ username }}</p>
+        </div>
+      </div>
+      <blockquote class="mt-2 text-sm">{{ body }}</blockquote>
+    </figure>
+  </DefineReviewCard>
+  <div class="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden">
+    <MagicMarquee pause-on-hover vertical class="[--duration:20s]">
+      <template v-for="(review, i) in firstRow" :key="i">
+        <ReviewCard v-bind="review" />
+      </template>
+    </MagicMarquee>
+    <MagicMarquee reverse pause-on-hover vertical class="[--duration:20s]">
+      <template v-for="(review, i) in secondRow" :key="i">
+        <ReviewCard v-bind="review" />
+      </template>
+    </MagicMarquee>
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"
+    />
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import { faker } from "@faker-js/faker";
+
+  const length = 5;
+
+  const { data: reviews } = await useAsyncData(
+    "magic-marquee-3d",
+    async () => {
+      return Array.from({ length }, () => ({
+        name: faker.person.firstName(),
+        username: faker.internet.username().toLowerCase(),
+        body: faker.lorem.sentence({ min: 6, max: 8 }),
+        img: faker.image.avatar(),
+      }));
+    },
+    { default: () => [] }
+  );
+
+  const firstRow = reviews.value.slice(0, length / 2);
+  const secondRow = reviews.value.slice(length / 2);
+
+  const [DefineReviewCard, ReviewCard] = createReusableTemplate<{
+    name: string;
+    username: string;
+    body: string;
+    img: string;
+  }>();
+</script>
+```
+
+<!-- /automd -->
+
+::
+
+### 3D
+
+::ShowCase
+
+:MagicDocsMarqueeThreeD
+
+#code
+
+<!-- automd:file src="../../../app/components/content/Magic/Marquee/MagicDocsMarqueeThreeD.vue" code lang="vue" -->
+
+```vue [MagicDocsMarqueeThreeD.vue]
+<template>
+  <DefineReviewCard v-slot="{ body, img, name, username }">
+    <figure
+      class="relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-4 sm:w-36"
+    >
+      <div class="flex flex-row items-center gap-2">
+        <!-- eslint-disable-next-line vue/html-self-closing -->
+        <img class="rounded-full" width="32" height="32" alt="" :src="img" />
+        <div class="flex flex-col">
+          <span class="text-sm font-medium">
+            {{ name }}
+          </span>
+          <p class="text-xs font-medium text-muted-foreground">{{ username }}</p>
+        </div>
+      </div>
+      <blockquote class="mt-2 text-sm">{{ body }}</blockquote>
+    </figure>
+  </DefineReviewCard>
+  <div
+    class="relative flex h-96 w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:300px]"
+  >
+    <div
+      class="flex flex-row items-center gap-4"
+      style="
+        transform: translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg)
+          rotateY(-10deg) rotateZ(20deg);
+      "
+    >
+      <MagicMarquee pause-on-hover vertical class="[--duration:20s]">
+        <template v-for="(review, i) in firstRow" :key="i">
+          <ReviewCard v-bind="review" />
+        </template>
+      </MagicMarquee>
+      <MagicMarquee reverse pause-on-hover class="[--duration:20s]" vertical>
+        <template v-for="(review, i) in secondRow" :key="i">
+          <ReviewCard v-bind="review" />
+        </template>
+      </MagicMarquee>
+      <MagicMarquee reverse pause-on-hover class="[--duration:20s]" vertical>
+        <template v-for="(review, i) in thirdRow" :key="i">
+          <ReviewCard v-bind="review" />
+        </template>
+      </MagicMarquee>
+      <MagicMarquee pause-on-hover class="[--duration:20s]" vertical>
+        <template v-for="(review, i) in fourthRow" :key="i">
+          <ReviewCard v-bind="review" />
+        </template>
+      </MagicMarquee>
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"
+    />
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background"
+    />
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"
+    />
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import { faker } from "@faker-js/faker";
+
+  const length = 5;
+
+  const { data: reviews } = await useAsyncData(
+    "magic-marquee-3d",
+    async () => {
+      return Array.from({ length }, () => ({
+        name: faker.person.firstName(),
+        username: faker.internet.username().toLowerCase(),
+        body: faker.lorem.sentence({ min: 6, max: 8 }),
+        img: faker.image.avatar(),
+      }));
+    },
+    { default: () => [] }
+  );
+
+  const firstRow = reviews.value.slice(0, length / 2);
+  const secondRow = reviews.value.slice(length / 2);
+  const thirdRow = reviews.value.slice(0, length / 2);
+  const fourthRow = reviews.value.slice(length / 2);
 
   const [DefineReviewCard, ReviewCard] = createReusableTemplate<{
     name: string;
