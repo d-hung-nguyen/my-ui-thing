@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-
+  experimental: { payloadExtraction: true },
   modules: [
     "@vueuse/nuxt",
     "reka-ui/nuxt",
@@ -154,7 +154,8 @@ export default defineNuxtConfig({
   colorMode: { classSuffix: "", fallback: "dark", preference: "system" },
 
   pwa: {
-    includeAssets: ["favicon.ico", "robots.txt"],
+    includeAssets: ["favicon.ico", "robots.txt", "icons/apple-touch-icon.png"],
+    registerType: "autoUpdate",
     manifest: {
       background_color: "#ffffff",
       description: SEO.SITE_DESCRIPTION,
