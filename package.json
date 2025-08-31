@@ -148,9 +148,6 @@
   "engines": {
     "node": ">=20"
   },
-  "overrides": {
-    "vite": "npm:rolldown-vite@latest"
-  },
   "lint-staged": {
     "*": [
       "npm run lint:fix",
