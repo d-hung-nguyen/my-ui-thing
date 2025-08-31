@@ -22,9 +22,11 @@
         class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-l xl:block"
       >
         <UiScrollArea type="auto" class="h-full">
-          <div class="p-5">
-            <p class="mb-5 text-sm font-semibold">Page contents</p>
+          <div class="flex flex-col gap-5 p-5">
+            <p class="text-sm font-semibold">On this page</p>
             <DocsToclink :set-active="setActive" :active-id="activeId" :links="toc.links" />
+            <p class="text-sm font-semibold">Extra stuff</p>
+            <DocsExtraStuff />
           </div>
         </UiScrollArea>
       </aside>
@@ -33,21 +35,21 @@
 </template>
 
 <script lang="ts" setup>
-  import { snakeCase } from "lodash-es";
+  import { kebabCase } from "lodash-es";
   import { useActiveScroll } from "vue-use-active-scroll";
   import type { Targets } from "vue-use-active-scroll";
 
   definePageMeta({ layout: "magic" });
   const route = useRoute();
 
-  const { data: page } = await useAsyncData(snakeCase(route.path), () => {
+  const { data: page } = await useAsyncData(kebabCase(route.path), () => {
     return queryCollection("magic").path(route.path).first() || "page";
   });
   if (!page.value) {
     throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
   }
   const toc = computed(() => {
-    if (!page.value) return;
+    if (!page?.value) return;
     return page.value?.body?.toc;
   });
 
@@ -69,20 +71,22 @@
   useSeoMeta({
     title: page?.value?.title,
     titleTemplate: `%s - Magic UI | ${SITE_NAME}`,
-    description: page.value?.description,
+    description: page?.value?.description,
     keywords: SITE_KEYWORDS.join(", "),
-    ogTitle: page.value?.title,
-    ogDescription: page.value?.description,
-    twitterTitle: page.value?.title,
-    twitterDescription: page.value?.description,
+    ogTitle: page?.value?.title,
+    ogDescription: page?.value?.description,
+    twitterTitle: page?.value?.title,
+    twitterDescription: page?.value?.description,
     twitterCard: "summary_large_image",
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
   if (import.meta.server) {
     defineOgImageComponent("Magic", {
-      title: page.value?.title,
-      description: page.value?.description,
+      title: page?.value?.title,
+      description: page?.value?.description,
     });
   }
+
+  provide("page", page);
 </script>

@@ -22,9 +22,11 @@
         class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-l xl:block"
       >
         <UiScrollArea type="auto" class="h-full">
-          <div class="p-5">
-            <p class="mb-5 text-sm font-semibold">Page contents</p>
+          <div class="flex flex-col gap-5 p-5">
+            <p class="text-sm font-semibold">On this page</p>
             <DocsToclink :set-active="setActive" :active-id="activeId" :links="toc.links" />
+            <p class="text-sm font-semibold">Extra stuff</p>
+            <DocsExtraStuff />
           </div>
         </UiScrollArea>
       </aside>
