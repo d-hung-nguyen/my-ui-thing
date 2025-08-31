@@ -207,5 +207,5 @@ export default defineNuxtConfig({
       alt: SEO.SITE_NAME,
     },
   },
-  compatibilityDate: "2025-06-30",
+  compatibilityDate: "latest",
 });
