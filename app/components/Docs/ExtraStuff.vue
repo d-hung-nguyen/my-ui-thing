@@ -28,12 +28,17 @@
       href: `${repoBase}/edit/v2/content/${page?.value?.stem}.md`,
     },
     { icon: "lucide:star", label: "Star on Github", external: true, href: repoBase },
-    { icon: "lucide:bug", label: "Report an issue", external: true, href: `${repoBase}/issues` },
+    {
+      icon: "lucide:bug",
+      label: "Report an issue",
+      external: true,
+      href: `${repoBase}/issues/new?template=bug_report.yml`,
+    },
     {
       icon: "lucide:lightbulb",
       label: "Feature request",
       external: true,
-      href: `${repoBase}/issues`,
+      href: `${repoBase}/issues/new?template=feature-request.yml`,
     },
     {
       icon: "lucide:coffee",
