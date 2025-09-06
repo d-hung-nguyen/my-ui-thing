@@ -207,7 +207,7 @@ export default defineNuxtConfig({
       alt: SEO.SITE_NAME,
       height: 800,
       width: 1440,
-      screenshot: { colorScheme: "dark", height: 800, width: 1440 },
+      screenshot: { colorScheme: "dark", height: 800, width: 1440, delay: 1500 },
     },
   },
   compatibilityDate: "latest",
