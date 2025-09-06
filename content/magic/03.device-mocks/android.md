@@ -7,22 +7,6 @@ links:
     icon: "lucide:wand"
 ---
 
-## Source code
-
-Click :SourceCodeLink{component="Android.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
-
-Feel free to copy it and adjust it for your own use.
-
-## Installation
-
-```bash
-npx ui-thing@latest magic android
-```
-
-## Usage
-
-### Simple
-
 ::ShowCase
 
 :MagicDocsAndroid
@@ -42,6 +26,14 @@ npx ui-thing@latest magic android
 <!-- /automd -->
 
 ::
+
+## Source code
+
+Click :SourceCodeLink{component="Android.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+
+Feel free to copy it and adjust it for your own use.
+
+## Usage
 
 ### Image
 

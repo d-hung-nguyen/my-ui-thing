@@ -7,22 +7,6 @@ links:
     icon: "lucide:wand"
 ---
 
-## Source code
-
-Click :SourceCodeLink{component="Pointer.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
-
-Feel free to copy it and adjust it for your own use.
-
-## Installation
-
-```bash
-npx ui-thing@latest magic pointer
-```
-
-## Usage
-
-### Basic
-
 ::ShowCase
 
 :MagicDocsPointer
@@ -165,3 +149,9 @@ npx ui-thing@latest magic pointer
 <!-- /automd -->
 
 ::
+
+## Source code
+
+Click :SourceCodeLink{component="Pointer.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+
+Feel free to copy it and adjust it for your own use.

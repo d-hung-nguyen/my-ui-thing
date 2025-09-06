@@ -1,5 +1,5 @@
 <template>
-  <div class="not-prose">
+  <div class="not-prose mb-10">
     <UiBreadcrumbs :items="items" class="mb-6" />
     <h1 class="text-4xl leading-none font-bold">{{ page?.title }}</h1>
     <p v-if="page?.description" class="mt-3 mb-6 text-lg text-muted-foreground">

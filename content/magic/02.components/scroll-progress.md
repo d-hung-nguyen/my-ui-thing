@@ -7,22 +7,6 @@ links:
     icon: "lucide:wand"
 ---
 
-## Source code
-
-Click :SourceCodeLink{component="ScrollProgress.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
-
-Feel free to copy it and adjust it for your own use.
-
-## Installation
-
-```bash
-npx ui-thing@latest magic scroll-progress
-```
-
-## Usage
-
-### Basic
-
 ::ShowCase
 
 :MagicDocsScrollProgress
@@ -35,7 +19,9 @@ npx ui-thing@latest magic scroll-progress
 <template>
   <div class="z-10 rounded-lg p-4">
     <magic-scroll-progress class="top-[56px]" />
-    <h2 class="pb-4 font-bold">Note: The scroll progress is shown below the navbar of the page.</h2>
+    <h2 class="pb-4 text-center font-bold">
+      Note: The scroll progress is shown below the navbar of the page.
+    </h2>
   </div>
 </template>
 
@@ -45,3 +31,9 @@ npx ui-thing@latest magic scroll-progress
 <!-- /automd -->
 
 ::
+
+## Source code
+
+Click :SourceCodeLink{component="ScrollProgress.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+
+Feel free to copy it and adjust it for your own use.

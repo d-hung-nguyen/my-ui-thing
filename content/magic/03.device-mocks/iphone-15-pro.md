@@ -7,22 +7,6 @@ links:
     icon: "lucide:wand"
 ---
 
-## Source code
-
-Click :SourceCodeLink{component="Iphone15Pro.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
-
-Feel free to copy it and adjust it for your own use.
-
-## Installation
-
-```bash
-npx ui-thing@latest magic iphone-15-pro
-```
-
-## Usage
-
-### Simple
-
 ::ShowCase
 
 :MagicDocsIphone15Pro
@@ -42,6 +26,14 @@ npx ui-thing@latest magic iphone-15-pro
 <!-- /automd -->
 
 ::
+
+## Source code
+
+Click :SourceCodeLink{component="Iphone15Pro.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+
+Feel free to copy it and adjust it for your own use.
+
+## Usage
 
 ### Image
 

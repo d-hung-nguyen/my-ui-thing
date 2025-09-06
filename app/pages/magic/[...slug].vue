@@ -68,9 +68,8 @@
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  defineOgImageComponent("Magic", {
-    title: page?.title,
-    description: page?.description,
+  defineOgImageScreenshot({
+    alt: page?.title || "Magic UI for UI Thing",
   });
 
   provide("page", page);

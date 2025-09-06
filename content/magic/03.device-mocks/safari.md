@@ -7,22 +7,6 @@ links:
     icon: "lucide:wand"
 ---
 
-## Source code
-
-Click :SourceCodeLink{component="Safari.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
-
-Feel free to copy it and adjust it for your own use.
-
-## Installation
-
-```bash
-npx ui-thing@latest magic safari
-```
-
-## Usage
-
-### Image
-
 ::ShowCase
 
 :MagicDocsSafariImage
@@ -46,6 +30,14 @@ npx ui-thing@latest magic safari
 <!-- /automd -->
 
 ::
+
+## Source code
+
+Click :SourceCodeLink{component="Safari.vue" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+
+Feel free to copy it and adjust it for your own use.
+
+## Usage
 
 ### Video
 
