@@ -48,10 +48,5 @@
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  if (import.meta.server) {
-    defineOgImageComponent("Magic", {
-      title,
-      description,
-    });
-  }
+  defineOgImageScreenshot();
 </script>

@@ -16,16 +16,14 @@
 </template>
 
 <script lang="ts" setup>
-  import type { ContentCollectionItem } from "@nuxt/content";
-
-  const page = inject<Ref<ContentCollectionItem | null | undefined>>("page");
+  const { mergedPages: page } = await useDocPage();
   const repoBase = "https://github.com/BayBreezy/ui-thing";
   const links = computed(() => [
     {
       icon: "lucide:pen",
       label: "Edit this page",
       external: true,
-      href: `${repoBase}/edit/v2/content/${page?.value?.stem}.md`,
+      href: `${repoBase}/edit/v2/content/${page?.stem}.md`,
     },
     { icon: "lucide:star", label: "Star on Github", external: true, href: repoBase },
     {

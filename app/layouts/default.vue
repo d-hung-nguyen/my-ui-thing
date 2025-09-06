@@ -5,7 +5,7 @@
       <!-- Left sidebar with page links -->
       <div class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-r lg:block">
         <UiScrollArea class="h-[calc(100dvh-57px)] py-5 pr-6">
-          <DocsNav :links="navigation" />
+          <DocsNav :links="content" />
         </UiScrollArea>
       </div>
       <!-- Page content -->
@@ -15,21 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { kebabCase } from "lodash-es";
-
-  const route = useRoute();
-  const { data: page } = await useAsyncData(kebabCase(route.path), () => {
-    return queryCollection("content").path(route.path).first() || "page";
-  });
-  if (!page.value) {
-    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-  }
-  const { data: navigation } = await useAsyncData(
-    kebabCase(route.path) + "navigation",
-    () => queryCollectionNavigation("content", ["icon", "label", "links", "layout"]) || "route",
-    { default: () => [] }
-  );
-
-  provide("navigation", navigation);
-  provide("page", page);
+  const { content } = await useDocNavigation();
+  const { contentPage } = await useDocPage();
+  provide("navigation", content);
+  provide("page", contentPage);
 </script>

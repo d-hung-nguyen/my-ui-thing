@@ -6,31 +6,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { kebabCase } from "lodash-es";
-
   definePageMeta({ layout: "blank" });
-  const route = useRoute();
-  const { data: page } = await useAsyncData(kebabCase(route.path), () => {
-    return queryCollection("content").path(route.path).first();
-  });
 
-  if (!page.value) {
-    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-  }
+  const { contentPage: page } = await useDocPage();
 
   useSeoMeta({
-    title: page.value.title,
+    title: page?.title,
     titleTemplate: `%s | ${SITE_TITLE}`,
-    description: page.value.description,
+    description: page?.description,
     keywords: SITE_KEYWORDS.join(", "),
-    ogTitle: page.value.title,
-    ogDescription: page.value.description,
-    twitterTitle: page.value.title,
-    twitterDescription: page.value.description,
+    ogTitle: page?.title,
+    ogDescription: page?.description,
+    twitterTitle: page?.title,
+    twitterDescription: page?.description,
     twitterCard: "summary_large_image",
   });
-  defineOgImageComponent("UIThing", {
-    title: page.value?.title,
-    description: page.value?.description,
-  });
+  defineOgImageScreenshot();
 </script>

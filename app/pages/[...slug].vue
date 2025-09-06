@@ -35,20 +35,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { snakeCase } from "lodash-es";
   import { useActiveScroll } from "vue-use-active-scroll";
   import type { Targets } from "vue-use-active-scroll";
 
   const route = useRoute();
-  const { data: page } = await useAsyncData(snakeCase(route.path), () => {
-    return queryCollection("content").path(route.path).first() || "page";
-  });
-  if (!page.value) {
-    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-  }
+  const { contentPage: page } = await useDocPage();
+
   const toc = computed(() => {
-    if (!page.value) return;
-    return page.value?.body?.toc;
+    if (!page) return;
+    return page?.body?.toc;
   });
 
   const targets = computed(() =>
@@ -67,22 +62,20 @@
   const isBlocksPage = computed(() => route.path.startsWith("/blocks/"));
 
   useSeoMeta({
-    title: page?.value?.title,
+    title: page?.title,
     titleTemplate: `%s | ${SITE_NAME}`,
-    description: page.value?.description,
+    description: page?.description,
     keywords: SITE_KEYWORDS.join(", "),
-    ogTitle: page.value?.title,
-    ogDescription: page.value?.description,
-    twitterTitle: page.value?.title,
-    twitterDescription: page.value?.description,
+    ogTitle: page?.title,
+    ogDescription: page?.description,
+    twitterTitle: page?.title,
+    twitterDescription: page?.description,
     twitterCard: "summary_large_image",
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  if (import.meta.server) {
-    defineOgImageComponent("UIThing", {
-      title: page.value?.title,
-      description: page.value?.description,
-    });
-  }
+  defineOgImageComponent("UIThing", {
+    title: page?.title,
+    description: page?.description,
+  });
 </script>

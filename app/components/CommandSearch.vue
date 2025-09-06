@@ -11,8 +11,29 @@
       <UiCommandList>
         <UiScrollArea class="h-[300px] w-full">
           <UiCommandEmpty>No results found.</UiCommandEmpty>
-          <template v-for="(nav, i) in navigation" :key="i">
+          <template v-for="(nav, i) in content" :key="i">
             <UiCommandGroup :heading="nav.title">
+              <UiCommandItem
+                v-for="(child, k) in nav.children"
+                :key="k"
+                class="px-4 py-2 first:mt-2"
+                :value="child.title"
+                @select="
+                  $event.preventDefault();
+                  navigateTo(child.path);
+                  localModel = false;
+                "
+              >
+                <Icon v-if="nav.icon" :name="nav.icon" class="size-4 text-muted-foreground/80" />
+                <span>{{ child.title }}</span>
+                <UiBadge v-if="child.label" class="ml-4 px-2 py-0 text-[10px] dark:bg-lime-500">{{
+                  child.label
+                }}</UiBadge>
+              </UiCommandItem>
+            </UiCommandGroup>
+          </template>
+          <template v-for="(nav, i) in magic?.[0]?.children" :key="i">
+            <UiCommandGroup :heading="`Magic - ${nav.title}`">
               <UiCommandItem
                 v-for="(child, k) in nav.children"
                 :key="k"
@@ -51,11 +72,7 @@
 </template>
 
 <script lang="ts" setup>
-  import type { ContentNavigationItem } from "@nuxt/content";
-
-  type L = ContentNavigationItem & { icon?: string };
-
-  const props = defineProps<{
+  defineProps<{
     modelValue?: boolean;
   }>();
   const modes = [
@@ -64,12 +81,8 @@
     { icon: "lucide:laptop", title: "System", value: "system" },
   ];
 
-  const emits = defineEmits<{
-    "update:modelValue": [value: boolean];
-  }>();
-  const localModel = useVModel(props, "modelValue", emits, { passive: true });
-
-  const navigation = inject<Ref<L[]>>("navigation", ref([]));
+  const localModel = defineModel<boolean>({ default: false });
+  const { content, magic } = await useDocNavigation();
 
   const colorMode = useColorMode();
   const setTheme = (e: Event, val: string) => {

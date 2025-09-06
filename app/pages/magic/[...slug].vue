@@ -1,10 +1,6 @@
 <template>
   <div
-    :class="[
-      toc && toc.links && toc.links.length && !isBlocksPage
-        ? 'xl:grid-cols-[1fr_250px]'
-        : 'xl:grid-cols-1',
-    ]"
+    :class="[toc && toc.links && toc.links.length ? 'xl:grid-cols-[1fr_250px]' : 'xl:grid-cols-1']"
     class="xl:grid xl:gap-5"
   >
     <!-- Page content -->
@@ -18,7 +14,7 @@
     <!-- Table of contents for current page -->
     <ClientOnly>
       <aside
-        v-if="toc && toc.links && toc.links.length && !isBlocksPage"
+        v-if="toc && toc.links && toc.links.length"
         class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-l xl:block"
       >
         <UiScrollArea type="auto" class="h-full">
@@ -35,22 +31,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { kebabCase } from "lodash-es";
   import { useActiveScroll } from "vue-use-active-scroll";
   import type { Targets } from "vue-use-active-scroll";
 
   definePageMeta({ layout: "magic" });
   const route = useRoute();
+  const { magicPage: page } = await useDocPage();
 
-  const { data: page } = await useAsyncData(kebabCase(route.path), () => {
-    return queryCollection("magic").path(route.path).first() || "page";
-  });
-  if (!page.value) {
-    throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-  }
   const toc = computed(() => {
-    if (!page?.value) return;
-    return page.value?.body?.toc;
+    if (!page) return;
+    return page.body?.toc;
   });
 
   const targets = computed(() =>
@@ -65,28 +55,23 @@
     overlayHeight: 80,
   });
 
-  // Check if a page starts with `/blocks/` The sidenave will be removed if this is true
-  const isBlocksPage = computed(() => route.path.startsWith("/blocks/"));
-
   useSeoMeta({
-    title: page?.value?.title,
+    title: page?.title,
     titleTemplate: `%s - Magic UI | ${SITE_NAME}`,
-    description: page?.value?.description,
+    description: page?.description,
     keywords: SITE_KEYWORDS.join(", "),
-    ogTitle: page?.value?.title,
-    ogDescription: page?.value?.description,
-    twitterTitle: page?.value?.title,
-    twitterDescription: page?.value?.description,
+    ogTitle: page?.title,
+    ogDescription: page?.description,
+    twitterTitle: page?.title,
+    twitterDescription: page?.description,
     twitterCard: "summary_large_image",
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  if (import.meta.server) {
-    defineOgImageComponent("Magic", {
-      title: page?.value?.title,
-      description: page?.value?.description,
-    });
-  }
+  defineOgImageComponent("Magic", {
+    title: page?.title,
+    description: page?.description,
+  });
 
   provide("page", page);
 </script>

@@ -5,7 +5,7 @@
       <!-- Left sidebar with page links -->
       <div class="sticky top-14 z-20 hidden h-[calc(100dvh-57px)] border-r lg:block">
         <UiScrollArea class="h-[calc(100dvh-57px)] py-5 pr-6">
-          <DocsNav :links="navigation?.[0]?.children" />
+          <DocsNav :links="magic?.[0]?.children" />
         </UiScrollArea>
       </div>
       <!-- Page content -->
@@ -15,14 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { kebabCase } from "lodash-es";
-
-  const route = useRoute();
-  const { data: navigation } = await useAsyncData(
-    kebabCase(route.path) + "navigation",
-    () => queryCollectionNavigation("magic", ["icon", "label", "links", "layout"]) || "route",
-    { default: () => [] }
-  );
-
-  provide("navigation", navigation.value?.[0]?.children);
+  const { magic } = await useDocNavigation();
+  provide("navigation", magic?.[0]?.children);
 </script>

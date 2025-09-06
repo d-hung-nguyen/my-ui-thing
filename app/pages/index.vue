@@ -18,4 +18,5 @@
 
 <script lang="ts" setup>
   definePageMeta({ layout: "home" });
+  defineOgImageScreenshot();
 </script>
