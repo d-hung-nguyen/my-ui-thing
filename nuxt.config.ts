@@ -205,6 +205,9 @@ export default defineNuxtConfig({
   ogImage: {
     defaults: {
       alt: SEO.SITE_NAME,
+      height: 800,
+      width: 1440,
+      screenshot: { colorScheme: "dark", height: 800, width: 1440 },
     },
   },
   compatibilityDate: "latest",
