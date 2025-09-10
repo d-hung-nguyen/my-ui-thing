@@ -33,12 +33,6 @@ export default [
       "AlertDialog/Trigger.vue",
     ],
   },
-  {
-    name: "ApexCharts",
-    value: "apexcharts",
-    files: ["Apexchart.client.vue"],
-    deps: ["apexcharts", "vue3-apexcharts"],
-  },
   { name: "Aspect Ratio", value: "aspect-ratio", files: ["AspectRatio.vue"] },
   {
     name: "Autocomplete",
@@ -893,11 +887,6 @@ export default [
     deps: ["apexcharts", "vue3-apexcharts"],
     components: ["card"],
     files: ["Apexchart.client.vue"],
-  },
-  {
-    name: "Border Beam",
-    value: "border-beam",
-    files: ["BorderBeam.vue"],
   },
   {
     name: "Neon Gradient Card",
