@@ -25,6 +25,7 @@ export default defineNuxtConfig({
         "@tanstack/vue-table",
         "vue-sonner",
         "reka-ui",
+        "@faker-js/faker",
       ],
     },
   },
