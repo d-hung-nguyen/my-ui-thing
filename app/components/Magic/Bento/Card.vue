@@ -56,8 +56,8 @@
   export interface BentoCardProps extends PrimitiveProps {
     name: string;
     class?: string;
-    background?: VNode; //ReactNode;
-    icon?: VNode | string; //React.ElementType;
+    background?: VNode;
+    icon?: VNode | string;
     description: string;
     href: string;
     cta: string;
