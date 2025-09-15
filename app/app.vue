@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div vaul-drawer-wrapper>
     <NuxtRouteAnnouncer />
     <NuxtPwaManifest />
     <NuxtLoadingIndicator color="var(--primary)" />
