@@ -76,15 +76,9 @@
             :min-size="40"
             @ready="resizableRef = $event"
           >
-            <div v-if="isLoading" class="flex h-full items-center justify-center">
-              <Icon class="size-20" name="svg-spinners:blocks-wave" />
-            </div>
-            <div
-              v-else-if="!isLoading && externalViewLink"
-              class="absolute inset-0 hidden bg-background md:block"
-            >
-              <iframe
-                class="relative z-20 h-(--container-height) w-full bg-background"
+            <div v-if="!isLoading && externalViewLink" class="absolute inset-0 bg-background">
+              <IframeLazy
+                class="z-20 h-(--container-height) w-full bg-background"
                 :src="externalViewLink"
                 :class="props.frameClass"
                 @load="isLoading = false"
@@ -100,6 +94,7 @@
 </template>
 
 <script lang="ts" setup>
+  import IframeLazy from "~/components/Ui/IframeLazy.vue";
   import { startCase, trim } from "lodash-es";
   import type { SplitterPanel } from "reka-ui";
   import type { HtmlHTMLAttributes } from "vue";
@@ -114,22 +109,28 @@
     }>(),
     {
       blockPath: "",
+      component: "Block Code",
     }
   );
+
+  if (!props.blockPath)
+    throw createError({
+      statusCode: 400,
+      statusMessage: "[BlockShowcase.vue] Block path is required.",
+    });
 
   const isLoading = ref(true);
   const colorMode = useColorMode();
 
   const codeBlock = ref<string | null>(null);
 
+  const _blockImports = import.meta.glob<string>("./**/*.vue", {
+    query: "?raw",
+    import: "default",
+  });
   const importPath = async () => {
     isLoading.value = true;
-    if (!props.blockPath) return console.error("Block path is required.");
-    const blockImports = import.meta.glob<string>("./**/*.vue", {
-      query: "?raw",
-      import: "default",
-    });
-    const path = blockImports[`./${props.blockPath}.vue`];
+    const path = _blockImports[`./${props.blockPath}.vue`];
     codeBlock.value = (await path?.()) ?? null;
     isLoading.value = false;
   };
@@ -148,6 +149,6 @@
   const { copied, copy } = useClipboard({ copiedDuring: 2500, legacy: true });
 
   const externalViewLink = computed(() => {
-    return `/block-renderer?component=${props.component}&path=${props.blockPath}&containerClass=${props.containerClass ?? ""}`;
+    return `/block-renderer?component=${encodeURIComponent(props.component)}&path=${encodeURIComponent(props.blockPath)}&containerClass=${encodeURIComponent(props.containerClass ?? "")}`;
   });
 </script>

@@ -1,16 +1,11 @@
 <template>
   <ClientOnly>
-    <div>
-      <component
-        :is="dynamicComponent"
-        v-if="dynamicComponent"
-        :class="[route?.query?.containerClass]"
-        class="size-full"
-      />
+    <Motion v-if="dynamicComponent" :animate="{ opacity: 1 }" :initial="{ opacity: 0 }">
+      <component :is="dynamicComponent" :class="[route?.query?.containerClass]" class="size-full" />
       <div class="fixed right-5 bottom-5 z-20 rounded-md border bg-background">
         <ThemePopover />
       </div>
-    </div>
+    </Motion>
     <template #fallback>
       <div class="flex h-dvh w-full items-center justify-center">
         <Icon name="lucide:loader-circle" class="animate-spin" />
@@ -36,11 +31,7 @@
     twitterDescription: "Copy and paste blocks of code into your project.",
     twitterCard: "summary_large_image",
   });
-
-  defineOgImageComponent("UIThing", {
-    title: route?.query?.component || "Blocks",
-    description: "Copy and paste blocks of code into your project.",
-  });
+  defineOgImageScreenshot();
 
   const dynamicComponent = shallowRef();
 
@@ -49,11 +40,17 @@
     if (!component || !path) return;
     try {
       const components = import.meta.glob("../components/content/Block/**/*.vue");
-      const match = components[`../components/content/Block/${path}.vue`];
-      if (!match) throw new Error("Component not found");
+      const match =
+        components[`../components/content/Block/${decodeURIComponent(path as string)}.vue`];
+      if (!match)
+        throw createError({
+          statusCode: 404,
+          message: `Block not found: ${decodeURIComponent(path as string)}`,
+        });
       dynamicComponent.value = ((await match()) as { default: any }).default;
     } catch (err) {
       console.error("Error loading block:", err);
+      dynamicComponent.value = null;
     }
   };
 
