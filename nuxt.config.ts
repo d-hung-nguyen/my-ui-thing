@@ -31,6 +31,7 @@ export default defineNuxtConfig({
   },
   experimental: { payloadExtraction: true },
   modules: [
+    "@nuxtjs/mdc",
     "@vueuse/nuxt",
     "reka-ui/nuxt",
     "@yuta-inoue-ph/nuxt-vcalendar",
@@ -113,6 +114,29 @@ export default defineNuxtConfig({
     },
   },
 
+  mdc: {
+    highlight: {
+      langs: [
+        "json",
+        "js",
+        "ts",
+        "css",
+        "html",
+        "md",
+        "yaml",
+        "vue",
+        "vue-html",
+        "bash",
+        "sh",
+        "typescript",
+        "javascript",
+      ],
+      theme: {
+        default: "github-light",
+        dark: "github-dark",
+      },
+    },
+  },
   content: {
     build: {
       markdown: {
