@@ -9,7 +9,6 @@
       :src="visible ? src : undefined"
       :class="styles().iframe({ class: iframeClass })"
       :loading
-      :sandbox
       frameborder="0"
       allowfullscreen
       @load="$emit('load', $event)"
@@ -45,14 +44,6 @@
      */
     loading?: "lazy" | "eager";
     /**
-     * A space-separated list of extra restrictions to apply to the content in the iframe.
-     *
-     * For more information, see: [docs here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe#sandbox)
-     *
-     * @default "allow-scripts allow-same-origin"
-     */
-    sandbox?: string;
-    /**
      * Whether to show a placeholder before the iframe is loaded.
      *
      * @default true
@@ -73,7 +64,6 @@
 
   const props = withDefaults(defineProps<IFrameLazyProps>(), {
     loading: "lazy",
-    sandbox: "allow-scripts allow-same-origin",
     rootMargin: "150px",
     placeholder: true,
   });
