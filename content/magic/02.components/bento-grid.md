@@ -80,6 +80,6 @@ links:
 
 ## Source code
 
-Click :SourceCodeLink{component="BentoGrid" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
+Click :SourceCodeLink{component="Bento" folder="Magic" collection="magic"} to see the source code for this component on GitHub.
 
 Feel free to copy it and adjust it for your own use.
