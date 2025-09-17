@@ -75,7 +75,7 @@
                   </UiSidebarMenuButton>
                 </UiDropdownMenuTrigger>
                 <UiDropdownMenuContent
-                  class="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                  class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                   :side="isMobile ? 'bottom' : 'right'"
                   :side-offset="4"
                   align="end"

@@ -24,7 +24,7 @@
                   <Icon name="lucide:chevrons-up-down" class="ml-auto" />
                 </UiSidebarMenuButton>
               </UiDropdownMenuTrigger>
-              <UiDropdownMenuContent class="w-[--radix-dropdown-menu-trigger-width]" align="start">
+              <UiDropdownMenuContent class="w-(--reka-dropdown-menu-trigger-width)" align="start">
                 <UiDropdownMenuItem
                   v-for="version in data.versions"
                   :key="version"
