@@ -28,7 +28,6 @@
       </div>
     </div>
     <div class="h-[350px] lg:h-full lg:w-1/3 xl:w-1/2">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         class="h-full w-full object-cover"
         src="https://images.unsplash.com/photo-1599422314077-f4dfdaa4cd09?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

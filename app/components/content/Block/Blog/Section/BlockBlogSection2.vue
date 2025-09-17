@@ -10,7 +10,6 @@
     <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:mt-16">
       <div v-for="item in 4" :key="item">
         <NuxtLink :to="link">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             v-if="image"
             :src="image"

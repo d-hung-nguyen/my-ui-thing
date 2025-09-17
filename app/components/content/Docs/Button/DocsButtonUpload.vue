@@ -12,7 +12,6 @@
           name="lucide:circle-user"
         />
 
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img
           v-if="previewUrl"
           :src="previewUrl"

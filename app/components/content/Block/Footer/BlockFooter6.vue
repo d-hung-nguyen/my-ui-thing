@@ -1,7 +1,6 @@
 <template>
   <UiContainer as="footer" class="pb-10 lg:pb-16">
     <UiContainer class="py-16 text-center lg:py-24">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         src="/icon.png"
         fit="contain"

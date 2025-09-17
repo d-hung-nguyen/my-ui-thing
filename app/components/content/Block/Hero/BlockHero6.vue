@@ -18,7 +18,6 @@
     <div class="flex h-full items-center justify-center text-center md:w-1/2 md:text-left">
       <div>
         <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           Super simplified <br />
           customer service
         </h1>
@@ -54,7 +53,6 @@
       <div
         class="w-full rounded-md bg-muted/50 px-4 py-10 ring-1 ring-muted/30 md:px-10 lg:w-[440px] lg:px-10 dark:bg-muted/5"
       >
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img
           src="/icon.png"
           fit="contain"

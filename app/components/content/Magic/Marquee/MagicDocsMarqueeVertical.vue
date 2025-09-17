@@ -4,7 +4,6 @@
       class="relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-4 sm:w-36"
     >
       <div class="flex flex-row items-center gap-2">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span class="text-sm font-medium">

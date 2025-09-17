@@ -5,7 +5,7 @@ description: On this page you will find different ways in which you can create a
 
 ## Note
 
-In order to see the full(Desktop view) navigation bar, please click on the `External View` button ( :icon{name="lucide:square-arrow-out-up-right"} ) at the top of the style.
+In order to see the full navigation bar, please click on the `Full Screen View` button ( :icon{name="lucide:gallery-vertical" class="inline"} ) at the top of the style.
 
 This is because the full Navigation is not displayed unless you are above the `lg` breakpoint.
 

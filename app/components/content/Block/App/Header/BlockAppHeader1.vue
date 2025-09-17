@@ -1,7 +1,6 @@
 <template>
   <div>
     <slot name="image">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         v-if="props.image"
         :src="props.image"

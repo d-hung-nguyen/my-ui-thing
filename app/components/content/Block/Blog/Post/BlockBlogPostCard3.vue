@@ -1,7 +1,6 @@
 <template>
   <div>
     <NuxtLink :to="link">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         v-if="image"
         :src="image"

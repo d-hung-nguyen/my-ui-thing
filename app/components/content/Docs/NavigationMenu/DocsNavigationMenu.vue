@@ -6,7 +6,6 @@
           <UiNavigationMenuTrigger title="Beach day" />
           <UiNavigationMenuContent>
             <div class="grid w-[600px] grid-cols-2 gap-5 p-4">
-              <!-- eslint-disable-next-line vue/html-self-closing -->
               <img
                 src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80"
                 alt="Beach"
@@ -44,7 +43,6 @@
           <UiNavigationMenuTrigger title="Learn more" />
           <UiNavigationMenuContent>
             <div class="grid h-[300px] w-[500px] grid-cols-2 place-items-center gap-5 p-3">
-              <!-- eslint-disable-next-line vue/html-self-closing -->
               <img
                 src="https://www.reka-ui.com/logo.svg"
                 alt="Radix Vue Logo"

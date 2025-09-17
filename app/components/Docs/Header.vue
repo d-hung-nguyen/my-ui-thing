@@ -15,7 +15,7 @@
             link?.title
           }}</a
         >
-        <!-- eslint-disable-next-line vue/html-self-closing -->
+
         <br />
       </template>
     </div>

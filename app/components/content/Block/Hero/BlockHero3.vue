@@ -51,7 +51,6 @@
       </div>
     </div>
     <div class="h-[350px] md:h-full md:w-1/3 xl:w-1/2">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         class="h-full w-full rounded-tl-[60px] object-cover lg:rounded-tl-[160px]"
         src="https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

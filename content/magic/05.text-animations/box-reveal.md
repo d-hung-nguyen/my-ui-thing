@@ -36,9 +36,9 @@ links:
           <span class="font-semibold text-primary">Typescript</span>,
           <span class="font-semibold text-primary">Tailwind CSS</span>, and
           <span class="font-semibold text-primary">Motion</span>
-          <!-- eslint-disable-next-line vue/html-self-closing -->
+
           . <br />
-          <!-- eslint-disable-next-line vue/html-self-closing -->
+
           -&gt; 100% open-source, and customizable. <br />
         </p>
       </div>

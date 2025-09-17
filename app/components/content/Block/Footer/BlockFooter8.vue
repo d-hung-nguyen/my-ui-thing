@@ -4,7 +4,6 @@
     class="flex flex-col items-center justify-between gap-7 py-12 lg:flex-row"
   >
     <NuxtLink to="#" class="flex items-center gap-3">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         src="/icon.png"
         fit="contain"

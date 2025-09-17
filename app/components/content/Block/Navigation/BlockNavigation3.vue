@@ -3,13 +3,12 @@
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="#" class="flex items-center gap-3">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             src="/icon.png"
             fit="contain"
             alt="Company Logo"
             title="Company Logo"
-            class="h-6 object-contain lg:h-8"
+            class="h-6 rounded object-contain lg:h-8"
           />
           <span class="font-semibold lg:text-lg">UI Thing</span>
         </NuxtLink>
@@ -22,7 +21,7 @@
             </UiNavigationMenuItem>
             <UiNavigationMenuItem>
               <UiNavigationMenuTrigger class="h-9 px-3 text-sm capitalize" title="Blogs" />
-              <UiNavigationMenuContent>
+              <UiNavigationMenuContent class="p-0">
                 <div class="bg-background lg:w-[750px] xl:w-[1000px]">
                   <ul class="grid w-full grid-cols-3 flex-col gap-5 p-4 xl:grid-cols-3">
                     <li v-for="b in 9" :key="b">
@@ -31,15 +30,14 @@
                           to="#"
                           class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                         >
-                          <div class="h-[80px] w-[800px] overflow-hidden rounded-lg shadow-xs">
-                            <!-- eslint-disable-next-line vue/html-self-closing -->
+                          <div class="h-[80px] overflow-hidden rounded-lg shadow-xs">
                             <img
                               loading="lazy"
                               :src="`http://unsplash.it/400/90?random=${b}&gravity=center.webp`"
                               alt="Random blog image"
                               width="400"
                               height="90"
-                              class="h-full w-[400px] object-cover transition group-hover:scale-110 hover:scale-110"
+                              class="h-full object-cover transition group-hover:scale-110 hover:scale-110"
                             />
                           </div>
                           <div class="flex flex-col gap-1.5 leading-none">
@@ -57,8 +55,13 @@
                   <div
                     class="col-span-full flex items-center justify-center bg-muted/20 py-5 dark:bg-muted/5"
                   >
-                    <NuxtLink class="font-semibold text-primary hover:underline" to="#"
-                      >View all blog posts <icon name="lucide:arrow-right"
+                    <NuxtLink
+                      class="group flex items-center gap-2 font-semibold text-primary hover:underline"
+                      to="#"
+                      >View all blog posts
+                      <Icon
+                        name="lucide:arrow-right"
+                        class="size-4 transition group-hover:translate-x-1"
                     /></NuxtLink>
                   </div>
                 </div>
@@ -109,7 +112,6 @@
                                 class="flex flex-col gap-5 rounded-md transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                               >
                                 <div class="h-[200px] w-full overflow-hidden rounded-lg shadow-xs">
-                                  <!-- eslint-disable-next-line vue/html-self-closing -->
                                   <img
                                     :src="`http://unsplash.it/400/210?random=${b}&gravity=center.webp`"
                                     alt="Random blog image"

@@ -39,7 +39,6 @@
         </template>
       </div>
       <div class="order-last col-span-full lg:order-none lg:col-span-1">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img
           src="/phone-mockup.png"
           alt="Features section nine image"

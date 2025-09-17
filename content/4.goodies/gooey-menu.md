@@ -35,7 +35,6 @@ This may not be a component that can be reused across multiple projects, but it'
             'linear(0, 0.88117 15.492%, 1.09261 23.232%, 1.10421 28.713%, 0.99031 49.585%,0.99995)',
         }"
       >
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <input id="menu" type="checkbox" class="peer hidden" name="menu" />
         <label
           class="absolute right-10 bottom-10 z-10 flex size-14 scale-125 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-1000 [transition-timing-function:var(--spring-easing)] peer-checked:scale-100 peer-checked:rotate-[135deg]"

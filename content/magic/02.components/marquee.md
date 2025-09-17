@@ -20,7 +20,6 @@ links:
   <DefineReviewCard v-slot="{ body, img, name, username }">
     <figure class="relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4">
       <div class="flex flex-row items-center gap-2">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span role="figcaption" class="text-sm font-medium dark:text-white">
@@ -249,7 +248,6 @@ Paste the following CSS into your `tailwind.css` file
       class="relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-4 sm:w-36"
     >
       <div class="flex flex-row items-center gap-2">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span class="text-sm font-medium">
@@ -332,7 +330,6 @@ Paste the following CSS into your `tailwind.css` file
       class="relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-4 sm:w-36"
     >
       <div class="flex flex-row items-center gap-2">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span class="text-sm font-medium">

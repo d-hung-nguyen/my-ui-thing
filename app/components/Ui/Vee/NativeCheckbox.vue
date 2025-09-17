@@ -1,7 +1,6 @@
 <template>
   <div>
     <div :class="nativeCheckboxStyles().wrapper({ class: props.wrapperClass })">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <input
         :id="inputId"
         :checked="checked"

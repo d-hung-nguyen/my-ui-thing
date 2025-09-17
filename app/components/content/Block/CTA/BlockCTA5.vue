@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <!-- eslint-disable-next-line vue/html-self-closing -->
+
     <img
       src="/phone-mockup.png"
       alt="Mobile phone mockup"

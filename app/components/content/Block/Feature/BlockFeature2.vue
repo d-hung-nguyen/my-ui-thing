@@ -30,7 +30,7 @@
             </template>
           </div>
         </div>
-        <!-- eslint-disable-next-line vue/html-self-closing -->
+
         <img
           :src="f.imageUrl"
           :alt="f.title"

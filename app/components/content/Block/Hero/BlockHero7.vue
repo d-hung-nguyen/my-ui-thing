@@ -8,7 +8,6 @@
     </div>
 
     <h1 class="mt-7 mb-4 text-4xl font-bold lg:mt-5 lg:mb-6 lg:text-center lg:text-5xl xl:text-6xl">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       High-performing remote teams.<br />The future of work.
     </h1>
     <p class="mx-auto max-w-[760px] text-lg text-muted-foreground lg:text-center lg:text-xl">

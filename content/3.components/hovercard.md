@@ -45,7 +45,6 @@ npx ui-thing@latest add hover-card
       </UiHoverCardTrigger>
       <UiHoverCardContent class="h-[460px] w-80 overflow-hidden rounded-lg p-0">
         <div class="group relative flex h-full w-full flex-col justify-end overflow-hidden">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2787&q=80"
             class="absolute inset-0 h-full w-full object-cover"

@@ -15,7 +15,6 @@
 
     <section class="mt-12 flex flex-col justify-between gap-5 border-t pt-8 lg:mt-16 lg:flex-row">
       <NuxtLink to="#" class="flex items-center gap-3">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img
           src="/icon.png"
           fit="contain"

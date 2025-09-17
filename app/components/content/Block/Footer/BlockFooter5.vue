@@ -3,7 +3,6 @@
     <div class="flex flex-col justify-between gap-5 border-b pb-10 lg:flex-row lg:pb-16">
       <div>
         <NuxtLink to="#" class="flex items-center gap-3">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             src="/icon.png"
             fit="contain"

@@ -11,7 +11,6 @@
       <div v-for="item in 4" :key="item">
         <div class="flex flex-col gap-5 md:flex-row">
           <NuxtLink :to="link" class="shrink-0">
-            <!-- eslint-disable-next-line vue/html-self-closing -->
             <img
               v-if="image"
               :src="image"

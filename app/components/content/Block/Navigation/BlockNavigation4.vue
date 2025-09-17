@@ -3,13 +3,12 @@
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="#" class="flex items-center gap-3">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             src="/icon.png"
             fit="contain"
             alt="Company Logo"
             title="Company Logo"
-            class="h-6 object-contain lg:h-8"
+            class="h-6 rounded object-contain lg:h-8"
           />
           <span class="font-semibold lg:text-lg">UI Thing</span>
         </NuxtLink>
@@ -23,14 +22,14 @@
             <template v-for="l in links" :key="l.title">
               <UiNavigationMenuItem>
                 <UiNavigationMenuTrigger class="h-9 px-3 text-sm capitalize" :title="l.title" />
-                <UiNavigationMenuContent>
+                <UiNavigationMenuContent class="p-0">
                   <div class="w-[360px] bg-background shadow">
                     <ul class="flex flex-col gap-3 p-3">
                       <li v-for="(item, k) in l.items" :key="k">
                         <UiNavigationMenuLink as-child>
                           <NuxtLink
                             to="#"
-                            class="group flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
+                            class="group flex flex-row gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                           >
                             <Icon :name="item.icon" class="mt-px h-5 w-5 shrink-0 text-primary" />
                             <div class="flex flex-col gap-1.5 leading-none">
@@ -44,8 +43,10 @@
                     <div
                       class="col-span-full flex items-center justify-center bg-muted/20 py-5 dark:bg-muted/5"
                     >
-                      <NuxtLink class="text-sm font-semibold text-primary hover:underline" to="#"
-                        >Learn more <icon name="lucide:arrow-right"
+                      <NuxtLink
+                        class="flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                        to="#"
+                        >Learn more <Icon class="shrink-0" name="lucide:arrow-right"
                       /></NuxtLink>
                     </div>
                   </div>

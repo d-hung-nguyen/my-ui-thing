@@ -2,7 +2,6 @@
   <DefineReviewCard v-slot="{ body, img, name, username }">
     <figure class="relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4">
       <div class="flex flex-row items-center gap-2">
-        <!-- eslint-disable-next-line vue/html-self-closing -->
         <img class="rounded-full" width="32" height="32" alt="" :src="img" />
         <div class="flex flex-col">
           <span role="figcaption" class="text-sm font-medium dark:text-white">

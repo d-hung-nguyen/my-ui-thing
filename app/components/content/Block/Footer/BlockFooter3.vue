@@ -3,7 +3,6 @@
     <section class="grid grid-cols-2 gap-8 lg:grid-cols-6">
       <div class="col-span-full pb-10 lg:col-span-2">
         <NuxtLink to="#" class="flex items-center gap-3">
-          <!-- eslint-disable-next-line vue/html-self-closing -->
           <img
             src="/icon.png"
             fit="contain"

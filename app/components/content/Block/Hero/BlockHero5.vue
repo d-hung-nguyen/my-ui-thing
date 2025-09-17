@@ -8,7 +8,6 @@
     <div
       class="absolute inset-y-0 right-5 -z-[1] hidden h-full md:block md:w-[450px] lg:w-[700px] xl:w-[800px]"
     >
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         class="h-full w-full rounded-lg object-cover shadow"
         src="https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -72,7 +71,6 @@
       </div>
     </div>
     <div class="h-[300px] md:hidden">
-      <!-- eslint-disable-next-line vue/html-self-closing -->
       <img
         class="h-full w-full rounded-tr-[70px] rounded-bl-[70px] object-cover"
         src="https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

@@ -15,7 +15,6 @@
             <UiAspectRatio :ratio="16 / 9" class="mt-6">
               <UiContextMenu>
                 <UiContextMenuTrigger as-child>
-                  <!-- eslint-disable-next-line vue/html-self-closing -->
                   <img
                     src="https://cdn.pixabay.com/photo/2023/05/02/21/08/river-7966163_1280.png"
                     alt="Snow Lake"
