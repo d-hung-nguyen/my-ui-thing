@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
   const btn = useTemplateRef("btn");
-  const isDark = useDark();
-  const toggleDark = useToggle(isDark);
+  const isDark = computed(() => useColorMode().value === "dark");
+  const toggleDark = () => (useColorMode().preference = isDark.value ? "light" : "dark");
 
   async function changeTheme() {
     if (!btn.value) return;
