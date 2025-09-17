@@ -31,7 +31,7 @@
                           <UiNavigationMenuLink class="data-[active]:bg-muted/80" as-child>
                             <NuxtLink
                               :to="child.href"
-                              class="flex gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
+                              class="flex flex-row gap-4 rounded-md p-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none dark:hover:bg-muted/20"
                             >
                               <div
                                 class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-xs"
@@ -110,7 +110,7 @@
                               <li v-for="(child, k) in item" :key="k">
                                 <NuxtLink
                                   :to="child.href"
-                                  class="flex gap-4 rounded-md py-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+                                  class="flex flex-row gap-4 rounded-md py-3 transition hover:bg-muted/80 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
                                 >
                                   <div
                                     class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border shadow-xs"
