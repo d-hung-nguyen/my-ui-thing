@@ -83,6 +83,16 @@
   --animate-background-position-spin: background-position-spin 3000ms infinite alternate;
   --animate-grid: grid 15s linear infinite;
   --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
+  --animate-rainbow: rainbow-button var(--speed, 2s) infinite linear;
+
+  @keyframes rainbow-button {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
 
   @keyframes orbit {
     0% {
@@ -149,6 +159,14 @@
 }
 
 @layer base {
+  /* Vars used for the Rainbow button component */
+  :root {
+    --color-1: oklch(66.161% 0.22493 25.863);
+    --color-2: oklch(60.401% 0.26076 301.747);
+    --color-3: oklch(69.689% 0.1644 251.258);
+    --color-4: oklch(80.239% 0.13431 224.86);
+    --color-5: oklch(90.766% 0.23083 132.857);
+  }
   :root {
     --radius: 0.625rem;
     --background: oklch(1 0 0);
