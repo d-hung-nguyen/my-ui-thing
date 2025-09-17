@@ -21,39 +21,7 @@
           <UiSidebarGroupLabel label="Files" />
           <UiSidebarGroupContent>
             <UiSidebarMenu>
-              <!-- This should be a recursive component -->
-              <!-- Because this has to be copied as one whole file, you will have to create the other component in a separate .vue file in your codebase -->
-
-              <!-- Inside this template tag is the recursive component -->
-              <template v-for="(item, index) in data.tree" :key="index">
-                <template v-if="item.length">
-                  <UiSidebarMenuButton class="data-[active=true]:bg-transparent">
-                    <Icon mode="svg" name="lucide:file" />
-
-                    {{ item[0] }}
-                  </UiSidebarMenuButton>
-                </template>
-                <template v-else>
-                  <UiSidebarMenuItem>
-                    <UiCollapsible
-                      class="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90"
-                    >
-                      <UiCollapsibleTrigger as-child>
-                        <UiSidebarMenuButton>
-                          <Icon mode="svg" name="lucide:chevron-right" />
-                          <Icon mode="svg" name="lucide:folder" />
-                          {{ item }}
-                        </UiSidebarMenuButton>
-                      </UiCollapsibleTrigger>
-                      <UiCollapsibleContent>
-                        <UiSidebarMenuSub>
-                          <!-- This is where you would call back the recursive component and pass the item to it -->
-                        </UiSidebarMenuSub>
-                      </UiCollapsibleContent>
-                    </UiCollapsible>
-                  </UiSidebarMenuItem>
-                </template>
-              </template>
+              <TreeComp v-for="(file, index) in data.tree" :key="index" :item="file" />
             </UiSidebarMenu>
           </UiSidebarGroupContent>
         </UiSidebarGroup>
@@ -79,6 +47,16 @@
 </template>
 
 <script lang="ts" setup>
+  import {
+    Icon,
+    UiCollapsible,
+    UiCollapsibleContent,
+    UiCollapsibleTrigger,
+    UiSidebarMenuButton,
+    UiSidebarMenuItem,
+    UiSidebarMenuSub,
+  } from "#components";
+
   const breadcrumbItems = [{ label: "components" }, { label: "ui" }, { label: "button.vue" }];
   useSeoMeta({ title: "A sidebar with a collapsible file tree." });
   const data = {
@@ -100,4 +78,75 @@
       "README.md",
     ],
   };
+
+  const TreeComp = defineComponent({
+    props: {
+      item: {
+        type: [String, Array] as PropType<string | any[]>,
+        required: true,
+      },
+    },
+    computed: {
+      itemData() {
+        const [name, ...items] = Array.isArray(this.item) ? this.item : [this.item];
+        return { name, items };
+      },
+    },
+    render() {
+      const { name, items } = this.itemData;
+      if (!items.length) {
+        return h(
+          UiSidebarMenuButton,
+          {
+            class: "data-[active=true]:bg-transparent",
+          },
+          () => [h(Icon, { mode: "svg", name: "lucide:file" }), name]
+        );
+      }
+
+      return h(
+        UiSidebarMenuItem,
+        {},
+        {
+          default: () =>
+            h(
+              UiCollapsible,
+              {
+                class: "group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90",
+                defaultOpen: name === "components" || name === "ui",
+              },
+              {
+                default: () => [
+                  h(UiCollapsibleTrigger, { asChild: true }, () =>
+                    h(UiSidebarMenuButton, () => [
+                      h(Icon, {
+                        mode: "svg",
+                        name: "lucide:chevron-right",
+                      }),
+                      h(Icon, { mode: "svg", name: "lucide:folder" }),
+                      name,
+                    ])
+                  ),
+                  h(UiCollapsibleContent, () =>
+                    h(
+                      UiSidebarMenuSub,
+                      {},
+                      {
+                        default: () =>
+                          items.map((child, index) =>
+                            h(TreeComp, {
+                              key: index,
+                              item: child,
+                            })
+                          ),
+                      }
+                    )
+                  ),
+                ],
+              }
+            ),
+        }
+      );
+    },
+  });
 </script>
