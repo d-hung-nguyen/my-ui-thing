@@ -459,22 +459,22 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       >
         <img
           v-if="previewUrl"
-          @click="showImageDialog = true"
           class="size-full cursor-pointer object-cover"
           :src="previewUrl"
           alt="Preview of uploaded image"
           width="32"
           height="32"
+          @click="showImageDialog = true"
         />
         <div v-else aria-hidden="true" class="flex items-center justify-center">
           <Icon name="lucide:circle-user-round" class="opacity-60" :size="16" />
         </div>
       </div>
       <div class="relative inline-block">
-        <UiButton @click="openFileDialog()" aria-haspopup="dialog">
+        <UiButton aria-haspopup="dialog" @click="openFileDialog()">
           {{ file && file.file?.name ? "Change image" : "Upload image" }}
         </UiButton>
-        <input hidden type="file" ref="inputRef" />
+        <input ref="inputRef" hidden type="file" />
       </div>
     </div>
     <div v-if="file" class="mt-2">
@@ -483,9 +483,9 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
           {{ file?.file?.name }}
         </p>
         <button
-          @click="() => removeFile(file?.id)"
           class="font-medium text-red-500 hover:underline"
           :aria-label="`Remove ${file.file?.name}`"
+          @click="() => removeFile(file?.id)"
         >
           Remove
         </button>
@@ -497,8 +497,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
 
     <AnimatePresence mode="wait">
       <Motion
-        role="dialog"
         v-if="showImageDialog"
+        role="dialog"
         :initial="{ opacity: 0, scale: 0.95 }"
         :animate="{ opacity: 1, scale: 1, transition: { duration: 0.2 } }"
         :exit="{ opacity: 0, y: 20, transition: { duration: 0.15 } }"
@@ -512,8 +512,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
             </UiButton>
           </div>
           <img
-            ref="imageDialog"
             v-if="previewUrl"
+            ref="imageDialog"
             class="max-h-full max-w-full rounded-lg border border-input bg-background"
             :src="previewUrl"
             alt="Preview of uploaded image"
@@ -573,10 +573,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       <div
         ref="dropzoneRef"
         role="button"
-        @click="openFileDialog"
         class="relative flex size-26 items-center justify-center overflow-hidden rounded-full border border-dashed border-input transition-colors hover:bg-accent/50 has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
+        @click="openFileDialog"
       >
-        <input hidden ref="inputRef" aria-label="Upload image file" />
+        <input ref="inputRef" hidden aria-label="Upload image file" />
         <img
           v-if="currentFile"
           :src="currentFile.preview"
@@ -592,10 +592,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       </div>
       <UiButton
         v-if="currentFile"
-        @click="removeFile(currentFile.id)"
         size="icon"
         class="absolute -top-1 -right-1 size-6 rounded-full border-2 border-background shadow-none focus-visible:border-background"
         aria-label="Remove image"
+        @click="removeFile(currentFile.id)"
       >
         <Icon name="lucide:x" class="size-3.5" />
       </UiButton>
@@ -640,10 +640,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       <div
         ref="dropzoneRef"
         role="button"
-        @click="openFileDialog"
         class="relative flex min-h-52 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-input p-4 transition-colors hover:bg-accent/50 has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50 lg:min-h-72"
+        @click="openFileDialog"
       >
-        <input hidden ref="inputRef" aria-label="Upload file" />
+        <input ref="inputRef" hidden aria-label="Upload file" />
         <div v-if="currentFile" class="absolute inset-0">
           <img
             :src="currentFile.preview"
@@ -666,8 +666,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
         <button
           type="button"
           class="z-50 flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white transition-[color,box-shadow] outline-none hover:bg-black/80 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
-          @click="removeFile(currentFile.id)"
           aria-label="Remove image"
+          @click="removeFile(currentFile.id)"
         >
           <Icon name="lucide:x" class="size-4" aria-hidden="true" />
         </button>
@@ -725,7 +725,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
         ref="dropzoneRef"
         class="relative flex min-h-52 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-input p-4 transition-colors has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50 lg:min-h-64"
       >
-        <input hidden ref="inputRef" aria-label="Upload image file" />
+        <input ref="inputRef" hidden aria-label="Upload image file" />
         <div v-if="currentFile" class="absolute inset-0 flex items-center justify-center p-4">
           <img
             :src="currentFile.preview"
@@ -753,8 +753,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
         <button
           type="button"
           class="z-50 flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white transition-[color,box-shadow] outline-none hover:bg-black/80 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
-          @click="removeFile(currentFile.id)"
           aria-label="Remove image"
+          @click="removeFile(currentFile.id)"
         >
           <Icon name="lucide:x" class="size-4" aria-hidden="true" />
         </button>
@@ -812,11 +812,11 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       :data-files="files.length > 0 || undefined"
       class="relative flex min-h-52 flex-col items-center overflow-hidden rounded-xl border border-dashed border-input p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
     >
-      <input hidden ref="inputRef" aria-label="Upload image file" />
+      <input ref="inputRef" hidden aria-label="Upload image file" />
       <div v-if="files.length > 0" class="flex w-full flex-col gap-3">
         <div class="flex items-center justify-between gap-2">
           <h3 class="truncate text-sm font-medium">Uploaded Files ({{ files.length }})</h3>
-          <UiButton variant="outline" @click="openFileDialog" :disabled="files.length >= maxFiles">
+          <UiButton variant="outline" :disabled="files.length >= maxFiles" @click="openFileDialog">
             <Icon name="lucide:upload" class="-ms-0.5 size-3.5 opacity-60" aria-hidden="true" />
             Add more
           </UiButton>
@@ -834,10 +834,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
               class="size-full rounded-[inherit] object-cover"
             />
             <UiButton
-              @click="removeFile(file.id)"
               size="icon"
               class="absolute -top-2 -right-2 size-6 rounded-full border-2 border-background shadow-none focus-visible:border-background"
               aria-label="Remove image"
+              @click="removeFile(file.id)"
             >
               <Icon name="lucide:x" class="size-3.5" />
             </UiButton>
@@ -945,7 +945,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       :data-files="files.length > 0 || undefined"
       class="relative flex min-h-52 flex-col items-center overflow-hidden rounded-xl border border-dashed border-input p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
     >
-      <input hidden ref="inputRef" aria-label="Upload image file" />
+      <input ref="inputRef" hidden aria-label="Upload image file" />
       <div class="flex flex-col items-center justify-center px-4 py-3 text-center">
         <div
           class="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background"
@@ -1000,8 +1000,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
           size="icon"
           variant="ghost"
           class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
-          @click="removeFile(file.id)"
           aria-label="Remove file"
+          @click="removeFile(file.id)"
         >
           <Icon name="lucide:x" aria-hidden="true" />
         </UiButton>
@@ -1100,10 +1100,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
         <div
           ref="dropzoneRef"
           role="button"
-          @click="openFileDialog"
           class="flex min-h-40 flex-col items-center justify-center rounded-xl border border-dashed border-input p-4 transition-colors hover:bg-accent/50 has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
+          @click="openFileDialog"
         >
-          <input hidden ref="inputRef" aria-label="Upload file" :disabled="Boolean(currentFile)" />
+          <input ref="inputRef" hidden aria-label="Upload file" :disabled="Boolean(currentFile)" />
 
           <div class="flex flex-col items-center justify-center text-center">
             <Motion
@@ -1168,8 +1168,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
             size="icon"
             variant="ghost"
             class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
-            @click="removeFile(currentFile.id)"
             aria-label="Remove file"
+            @click="removeFile(currentFile.id)"
           >
             <Icon name="lucide:x" class="size-4" aria-hidden="true" />
           </UiButton>
@@ -1297,10 +1297,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
         <div
           ref="dropzoneRef"
           role="button"
-          @click="openFileDialog"
           class="flex min-h-40 flex-col items-center justify-center rounded-xl border border-dashed border-input p-4 transition-colors hover:bg-accent/50 has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
+          @click="openFileDialog"
         >
-          <input hidden ref="inputRef" aria-label="Upload files" />
+          <input ref="inputRef" hidden aria-label="Upload files" />
 
           <div class="flex flex-col items-center justify-center text-center">
             <Motion
@@ -1343,17 +1343,17 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       <LayoutGroup id="file-list">
         <AnimatePresence>
           <Motion
+            v-if="files.length > 0"
             layout="position"
             :variants="fileListContainer"
-            v-if="files.length > 0"
             class="space-y-2"
           >
             <AnimatePresence>
               <Motion
-                layout="position"
-                :variants="fileListItem"
                 v-for="file in files"
                 :key="file.id"
+                layout="position"
+                :variants="fileListItem"
                 class="flex items-center justify-between gap-2 rounded-lg border bg-background p-2 pe-3"
               >
                 <div class="flex items-center gap-3 overflow-hidden">
@@ -1376,8 +1376,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
                   size="icon"
                   variant="ghost"
                   class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
-                  @click="removeFile(file.id)"
                   aria-label="Remove file"
+                  @click="removeFile(file.id)"
                 >
                   <Icon name="lucide:x" class="size-4" aria-hidden="true" />
                 </UiButton>
@@ -1386,7 +1386,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
 
             <!-- Remove all files button -->
             <AnimatePresence>
-              <Motion layout="position" :variants="fileListItem" v-if="files.length > 1">
+              <Motion v-if="files.length > 1" layout="position" :variants="fileListItem">
                 <UiButton size="sm" variant="outline" @click="clearFiles">
                   Remove all files
                 </UiButton>
@@ -1562,14 +1562,14 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
           :data-files="files.length > 0 || undefined"
           class="flex min-h-56 flex-col items-center rounded-xl border border-dashed border-input p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
         >
-          <input hidden ref="inputRef" aria-label="Upload files" />
+          <input ref="inputRef" hidden aria-label="Upload files" />
 
           <AnimatePresence mode="wait">
             <Motion
-              :variants="fileListContainer"
-              layout="position"
               v-if="files.length > 0"
               key="file-list"
+              :variants="fileListContainer"
+              layout="position"
               class="flex w-full flex-col gap-3"
             >
               <div class="flex items-center justify-between gap-2">
@@ -1590,10 +1590,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
               <Motion :variants="fileListItem" class="w-full space-y-2">
                 <AnimatePresence>
                   <Motion
-                    layout="position"
-                    :variants="fileListItemChild"
                     v-for="file in files"
                     :key="file.id"
+                    layout="position"
+                    :variants="fileListItemChild"
                     class="flex items-center justify-between gap-2 rounded-lg border bg-background p-2 pe-3"
                   >
                     <div class="flex items-center gap-3 overflow-hidden">
@@ -1616,8 +1616,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
                       size="icon"
                       variant="ghost"
                       class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
-                      @click="removeFile(file.id)"
                       aria-label="Remove file"
+                      @click="removeFile(file.id)"
                     >
                       <Icon name="lucide:x" class="size-4" aria-hidden="true" />
                     </UiButton>
@@ -1637,10 +1637,10 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
             </Motion>
 
             <Motion
-              layout="position"
-              :variants="emptyContainer"
               v-else
               key="empty-state"
+              layout="position"
+              :variants="emptyContainer"
               class="flex flex-col items-center justify-center text-center"
             >
               <Motion
@@ -1658,7 +1658,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
                 Max {{ maxFiles }} files ∙ Up to {{ formatBytes(maxSize) }}
               </Motion>
               <Motion :variants="emptyItem">
-                <UiButton size="sm" variant="outline" @click="openFileDialog" class="mt-4">
+                <UiButton size="sm" variant="outline" class="mt-4" @click="openFileDialog">
                   <Icon name="lucide:file-up" class="-ms-1 opacity-60" aria-hidden="true" />
                   Select files
                 </UiButton>
@@ -1908,7 +1908,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
   >
     <!-- Drop area -->
     <AnimatePresence mode="wait">
-      <Motion :variants="lvl2Variants" v-if="files.length > 0" class="flex flex-col gap-2">
+      <Motion v-if="files.length > 0" :variants="lvl2Variants" class="flex flex-col gap-2">
         <!-- Table header with actions -->
         <div class="flex items-center justify-between gap-2">
           <h3 class="text-sm font-medium">Files ({{ files.length }})</h3>
@@ -1997,7 +1997,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
               Max {{ maxFiles }} files ∙ Up to {{ formatBytes(maxSize) }}
             </Motion>
             <Motion :variants="lvl2EmptyItemVariants">
-              <UiButton size="sm" variant="outline" @click="openFileDialog" class="mt-4">
+              <UiButton size="sm" variant="outline" class="mt-4" @click="openFileDialog">
                 <Icon name="lucide:file-up" class="-ms-1 opacity-60" aria-hidden="true" />
                 Select files
               </UiButton>
@@ -2027,7 +2027,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
       Multiple files uploader w/ table
     </Motion>
 
-    <input hidden ref="inputRef" aria-label="Upload files" />
+    <input ref="inputRef" hidden aria-label="Upload files" />
   </Motion>
 </template>
 
@@ -2152,7 +2152,7 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
 ```vue [DocsFileUploadMixedContentCard.vue]
 <template>
   <div class="flex flex-col gap-2">
-    <input hidden ref="inputRef" aria-label="Upload image file" />
+    <input ref="inputRef" hidden aria-label="Upload image file" />
     <!-- Drop area -->
     <div
       ref="dropzoneRef"
@@ -2198,8 +2198,8 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
             <UiButton
               size="icon"
               class="absolute -top-2 -right-2 size-6 rounded-full border-2 border-background shadow-none focus-visible:border-background"
-              @click="removeFile(file.id)"
               aria-label="Remove file"
+              @click="removeFile(file.id)"
             >
               <Icon name="lucide:x" class="size-3.5" />
             </UiButton>
