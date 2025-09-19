@@ -55,6 +55,7 @@
     "@unovis/vue": "^1.6.1",
     "@vee-validate/nuxt": "^4.15.1",
     "@vee-validate/yup": "^4.15.1",
+    "@vue-dnd-kit/core": "^1.7.0",
     "@vue-flow/background": "^1.3.2",
     "@vue-flow/controls": "^1.1.3",
     "@vue-flow/core": "^1.46.4",
