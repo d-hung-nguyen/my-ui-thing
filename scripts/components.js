@@ -497,6 +497,11 @@ export default [
     files: ["RadioGroup/Indicator.vue", "RadioGroup/Item.vue", "RadioGroup/RadioGroup.vue"],
   },
   {
+    name: "Rating",
+    value: "rating",
+    files: ["Rating.vue"],
+  },
+  {
     name: "Scroll Area",
     value: "scroll-area",
     files: [
