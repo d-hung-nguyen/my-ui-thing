@@ -513,6 +513,12 @@ export default [
     ],
   },
   {
+    name: "Scrollspy",
+    value: "scrollspy",
+    files: ["Scrollspy.vue"],
+    composables: ["useScrollspy.ts"],
+  },
+  {
     name: "Select",
     value: "select",
     files: [
