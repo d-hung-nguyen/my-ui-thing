@@ -27,6 +27,9 @@
       throttleTime?: number;
       /** Optional callback on change (also emits 'change'). */
       onUpdate?: (id: string) => void;
+      /**
+       * Additional classes to apply to the wrapper element.
+       */
       class?: HTMLAttributes["class"];
     }>(),
     {
