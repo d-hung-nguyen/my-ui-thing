@@ -62,11 +62,10 @@
             >Colors</NuxtLink
           >
           <NuxtLink
-            :class="[route.path.startsWith('/magic') ? '!text-primary' : '']"
-            to="/magic"
-            class="text-foreground/60 transition-colors hover:text-foreground"
-            >Magic</NuxtLink
-          >
+            to="https://inspira-ui.com/"
+            class="group text-foreground/60 transition-colors hover:text-foreground"
+            >Inspira UI
+          </NuxtLink>
         </nav>
       </div>
 

@@ -1,4 +1,4 @@
-import { cloneDeep, kebabCase, merge } from "lodash-es";
+import { kebabCase } from "lodash-es";
 
 export const useDocNavigation = async () => {
   const route = useRoute();
@@ -9,9 +9,7 @@ export const useDocNavigation = async () => {
       "links",
       "layout",
     ]);
-    const magic = await queryCollectionNavigation("magic", ["icon", "label", "links", "layout"]);
-    return { content, magic };
+    return { content };
   });
-  const mergedNavigation = merge(cloneDeep(data.value?.content), cloneDeep(data.value?.magic));
-  return { magic: data.value?.magic, content: data.value?.content, mergedNavigation };
+  return { content: data.value?.content };
 };

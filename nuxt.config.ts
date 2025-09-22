@@ -168,7 +168,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/getting-started": { redirect: "/getting-started/introduction" },
-    "/magic": { redirect: "/magic/getting-started" },
+    "/magic/**": { redirect: "https://inspira-ui.com" },
     "/goodies": { redirect: "/goodies/border-beam" },
     "/components": { redirect: "/components/accordion" },
     "/examples": { redirect: "/examples/cards" },
