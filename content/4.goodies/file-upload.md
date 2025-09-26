@@ -19,27 +19,8 @@ description: Components used to allow users to upload files to your application.
 Add the following packages to your project
 
 ```bash
-npx ni @vueuse/core @vue-dnd-kit/core
+npx ni @vueuse/core
 ```
-
-::
-::Step
-
-### Add Plugin
-
-Add the following plugin to your `plugins` directory
-
-<!-- automd:file src="../../app/plugins/vue-dnd-kit.ts" code lang="ts" -->
-
-```ts [vue-dnd-kit.ts]
-import VueDnDKitPlugin from "@vue-dnd-kit/core";
-
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(VueDnDKitPlugin);
-});
-```
-
-<!-- /automd -->
 
 ::
 ::Step
