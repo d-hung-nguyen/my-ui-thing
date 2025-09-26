@@ -219,6 +219,12 @@ export default [
     files: ["Divider.vue"],
   },
   {
+    name: "Draggable",
+    value: "draggable",
+    deps: ["vuedraggable@next"],
+    files: ["Draggable.vue"],
+  },
+  {
     name: "Drawer",
     value: "drawer",
     deps: ["vaul-vue"],

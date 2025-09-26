@@ -10,6 +10,7 @@ export default withNuxt({
     "@typescript-eslint/ban-types": "off",
     "vue/no-multiple-template-root": "off",
     "vue/html-self-closing": "off",
+    "@typescript-eslint/unified-signatures": "off",
   },
   ignores: [".nuxt", "node_modules"],
 });
