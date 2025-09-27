@@ -50,7 +50,11 @@ export default defineNuxtConfig({
     "motion-v/nuxt",
     "@nuxt/content",
     "@morev/vue-transitions/nuxt",
+    "nuxt-gtag",
   ],
+  gtag: {
+    id: process.env.GA_ID,
+  },
 
   css: [
     "~/assets/css/tippy.css",
