@@ -13,7 +13,7 @@
         </UiDrawerDescription>
 
         <div class="relative h-[calc(100dvh-230px)] overflow-y-auto pr-2 pl-6">
-          <DocsNav :links="navigation" @clicked="mobileNavState = false" />
+          <DocsNav :links="content" @clicked="mobileNavState = false" />
         </div>
 
         <UiDrawerClose class="absolute top-3 right-4 h-7 w-7" as-child>
@@ -27,8 +27,6 @@
 </template>
 
 <script lang="ts" setup>
-  import type { ContentNavigationItem } from "@nuxt/content";
-
-  const navigation = inject<Ref<ContentNavigationItem[]>>("navigation", ref([]));
+  const { content } = await useDocNavigation();
   const mobileNavState = useMobileNavState();
 </script>
