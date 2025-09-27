@@ -64,7 +64,7 @@
             class="h-6 rounded-sm"
             size="icon-sm"
             variant="ghost"
-            @click="copy(codeBlock)"
+            @click="onCopy"
           >
             <Icon :name="copied ? 'lucide:check' : 'lucide:clipboard'" class="size-3.5" />
             <span class="sr-only">Copy Source Code</span>
@@ -163,6 +163,26 @@
   onMounted(importPath);
 
   const { copied, copy } = useClipboard({ copiedDuring: 2500, legacy: true });
+
+  const { contentPage } = await useDocPage();
+  const route = useRoute();
+
+  const onCopy = () => {
+    if (!codeBlock.value) return;
+    copy(codeBlock.value);
+    useSonner("Copied to clipboard!");
+    // Track copied code event
+    useTrackEvent("copy_code", {
+      code_source: "block",
+      code_language: "vue",
+      file_name: "N/A",
+      block_path: props.blockPath,
+      component: props.component,
+      page_title: contentPage?.title || "unknown",
+      page_path: route.path,
+      page_location: window.location.href,
+    });
+  };
 
   const externalViewLink = computed(() => {
     return `/block-renderer?component=${encodeURIComponent(props.component)}&path=${encodeURIComponent(props.blockPath)}&containerClass=${encodeURIComponent(props.containerClass ?? "")}`;

@@ -7,10 +7,7 @@
         size="icon-xs"
         :aria-label="copied ? 'Copied' : 'Copy to clipboard'"
         :disabled="copied"
-        @click="
-          copy(code || '');
-          useSonner('Copied to clipboard!');
-        "
+        @click="onCopy"
       >
         <AnimatePresence mode="wait">
           <Motion
@@ -45,7 +42,10 @@
 <script lang="ts" setup>
   import { Motion } from "motion-v";
 
-  defineProps<{
+  const { contentPage } = await useDocPage();
+  const route = useRoute();
+
+  const props = defineProps<{
     code?: string;
     language?: string;
     filename?: string;
@@ -54,4 +54,21 @@
   }>();
 
   const { copied, copy } = useClipboard();
+
+  const onCopy = () => {
+    if (!props.code) return;
+    copy(props.code);
+    useSonner("Copied to clipboard!");
+    // Track copied code event
+    useTrackEvent("copy_code", {
+      code_source: "inline",
+      code_language: props.language,
+      file_name: props.filename,
+      block_path: "N/A",
+      component: props.filename,
+      page_title: contentPage?.title || "unknown",
+      page_path: route.path,
+      page_location: window.location.href,
+    });
+  };
 </script>
