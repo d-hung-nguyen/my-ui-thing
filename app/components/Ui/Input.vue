@@ -10,39 +10,40 @@
   />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
   import type { HTMLAttributes, InputHTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<{
-      /** Additional classes to add to the input */
-      class?: HTMLAttributes["class"];
-      /** The id of the input */
-      id?: string;
-      /** The name of the input */
-      name?: string;
-      /** The placeholder of the input */
-      placeholder?: string;
-      /** Whether the input is disabled */
-      disabled?: boolean;
-      /** Whether the input is required */
-      required?: boolean;
-      /** The type of the input */
-      type?: InputHTMLAttributes["type"];
-      /** The value of the input */
-      modelValue?: any;
-      /** The maximum length of the input */
-      maxlength?: number;
-      /** The `RegExp` pattern of the input */
-      pattern?: string;
-      /** When `true`, the input will be focused when mounted */
-      autofocus?: boolean;
-    }>(),
-    {
-      type: "text",
-      modelValue: "",
-    }
-  );
+  export type InputProps = {
+    /** Additional classes to add to the input */
+    class?: HTMLAttributes["class"];
+    /** The id of the input */
+    id?: string;
+    /** The name of the input */
+    name?: string;
+    /** The placeholder of the input */
+    placeholder?: string;
+    /** Whether the input is disabled */
+    disabled?: boolean;
+    /** Whether the input is required */
+    required?: boolean;
+    /** The type of the input */
+    type?: InputHTMLAttributes["type"];
+    /** The value of the input */
+    modelValue?: any;
+    /** The maximum length of the input */
+    maxlength?: number;
+    /** The `RegExp` pattern of the input */
+    pattern?: string;
+    /** When `true`, the input will be focused when mounted */
+    autofocus?: boolean;
+  };
+</script>
+
+<script lang="ts" setup>
+  const props = withDefaults(defineProps<InputProps>(), {
+    type: "text",
+    modelValue: "",
+  });
 
   const inputRef = useTemplateRef("input");
 
