@@ -8,7 +8,7 @@
         variant: variant,
         size: size,
         class: props.class,
-        effect,
+        effect: props.effect,
       })
     "
     :disabled="disabled || loading"
