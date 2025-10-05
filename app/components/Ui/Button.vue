@@ -100,50 +100,46 @@
       size: "default",
     },
   });
-  export type ButtonProps = VariantProps<typeof buttonStyles>;
+  export type ButtonVariants = VariantProps<typeof buttonStyles>;
+  export type ButtonProps = NuxtLinkProps & {
+    /** The type for the button */
+    type?: "button" | "submit" | "reset";
+    /** Whether the button is disabled */
+    disabled?: boolean;
+    /** Whether the button is loading */
+    loading?: boolean;
+    /** The action to perform when the button is clicked */
+    onClick?: any;
+    /** The element to render the button as */
+    as?: string;
+    /** Custom class(es) to add to parent element */
+    class?: HtmlHTMLAttributes["class"];
+    /** The variant of the button */
+    variant?: ButtonVariants["variant"];
+    /** The size of the button */
+    size?: ButtonVariants["size"];
+    /**
+     * The effect to apply to the button.
+     */
+    effect?: ButtonVariants["effect"];
+    /** The text to display in the button */
+    text?: string;
+    /** Should the icon be displayed on the `left` or the `right`? */
+    iconPlacement?: "left" | "right";
+    /** The icon to display in the button */
+    icon?: string;
+    /** The icon to display when the button is loading */
+    loadingIcon?: string;
+  };
 </script>
 
 <script setup lang="ts">
-  const props = withDefaults(
-    defineProps<
-      NuxtLinkProps & {
-        /** The type for the button */
-        type?: "button" | "submit" | "reset";
-        /** Whether the button is disabled */
-        disabled?: boolean;
-        /** Whether the button is loading */
-        loading?: boolean;
-        /** The action to perform when the button is clicked */
-        onClick?: any;
-        /** The element to render the button as */
-        as?: string;
-        /** Custom class(es) to add to parent element */
-        class?: HtmlHTMLAttributes["class"];
-        /** The variant of the button */
-        variant?: ButtonProps["variant"];
-        /** The size of the button */
-        size?: ButtonProps["size"];
-        /**
-         * The effect to apply to the button.
-         */
-        effect?: ButtonProps["effect"];
-        /** The text to display in the button */
-        text?: string;
-        /** Should the icon be displayed on the `left` or the `right`? */
-        iconPlacement?: "left" | "right";
-        /** The icon to display in the button */
-        icon?: string;
-        /** The icon to display when the button is loading */
-        loadingIcon?: string;
-      }
-    >(),
-    {
-      type: "button",
-      loadingIcon: "line-md:loading-loop",
-      iconPlacement: "left",
-      loading: false,
-    }
-  );
+  const props = withDefaults(defineProps<ButtonProps>(), {
+    type: "button",
+    loadingIcon: "line-md:loading-loop",
+    iconPlacement: "left",
+    loading: false,
+  });
 
   const elementType = computed(() => {
     if (props.as) return props.as;
