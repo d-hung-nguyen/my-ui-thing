@@ -329,6 +329,19 @@ export default [
     files: ["Input.vue"],
   },
   {
+    name: "Input Group",
+    value: "input-group",
+    files: [
+      "InputGroup/Addon.vue",
+      "InputGroup/Button.vue",
+      "InputGroup/Input.vue",
+      "InputGroup/InputGroup.vue",
+      "InputGroup/Text.vue",
+      "InputGroup/Textarea.vue",
+    ],
+    components: ["input", "button", "textarea"],
+  },
+  {
     name: "Icon",
     value: "icon",
     files: ["Icon.vue"],
