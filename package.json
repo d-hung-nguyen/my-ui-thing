@@ -156,6 +156,7 @@
   },
   "lint-staged": {
     "*": [
+      "npm run generate:components",
       "npx -y automd@latest --input **/*.md",
       "npm run lint:fix",
       "npm run format"
