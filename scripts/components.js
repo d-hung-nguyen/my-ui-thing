@@ -289,6 +289,18 @@ export default [
     ],
   },
   {
+    name: "Empty",
+    value: "empty",
+    files: [
+      "Empty/Content.vue",
+      "Empty/Description.vue",
+      "Empty/Empty.vue",
+      "Empty/Header.vue",
+      "Empty/Media.vue",
+      "Empty/Title.vue",
+    ],
+  },
+  {
     name: "Fancy Icon",
     value: "fancy-icon",
     files: ["FancyIcon.vue"],
