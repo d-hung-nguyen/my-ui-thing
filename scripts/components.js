@@ -65,6 +65,12 @@ export default [
   { name: "Breadcrumbs", value: "breadcrumbs", files: ["Breadcrumbs.vue"] },
   { name: "Button", value: "button", files: ["Button.vue"] },
   {
+    name: "Button Group",
+    value: "button-group",
+    files: ["ButtonGroup/ButtonGroup.vue", "ButtonGroup/Separator.vue", "ButtonGroup/Text.vue"],
+    components: ["button", "separator"],
+  },
+  {
     name: "Calendar",
     value: "calendar",
     devDeps: ["@yuta-inoue-ph/nuxt-vcalendar"],
