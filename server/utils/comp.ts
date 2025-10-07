@@ -1271,6 +1271,76 @@ export default [
     plugins: [],
   },
   {
+    name: "Field",
+    value: "field",
+    files: [
+      {
+        fileName: "Field/Content.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    data-slot="field-content"\n    :class="fieldContentStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldContentStyles = tv({\n    base: ["group/field-content flex flex-1 flex-col gap-1.5 leading-snug"],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<\n    PrimitiveProps & {\n      /**\n       * Additional classes to apply to the element.\n       */\n      class?: HTMLAttributes["class"];\n    }\n  >();\n</script>\n',
+      },
+      {
+        fileName: "Field/Description.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    data-slot="field-description"\n    :class="fieldDescriptionStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldDescriptionStyles = tv({\n    base: [\n      "text-sm leading-normal font-normal text-muted-foreground group-has-[[data-orientation=horizontal]]/field:text-balance",\n      "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",\n      "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",\n    ],\n  });\n</script>\n<script lang="ts" setup>\n  const props = withDefaults(\n    defineProps<\n      PrimitiveProps & {\n        /**\n         * Additional classes to apply to the element.\n         */\n        class?: HTMLAttributes["class"];\n      }\n    >(),\n    {\n      as: "p",\n    }\n  );\n</script>\n',
+      },
+      {
+        fileName: "Field/Error.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    role="alert"\n    data-slot="field-error"\n    :class="fieldErrorStyles({ class: props.class })"\n  >\n    <slot>\n      <template v-if="errors">\n        <template v-if="Array.isArray(errors)">\n          <ul class="ml-4 flex list-disc flex-col gap-1">\n            <template v-for="(item, i) in errors" :key="i">\n              <li>\n                {{\n                  typeof item === "object" && item !== null && "message" in item\n                    ? item.message\n                    : item\n                }}\n              </li>\n            </template>\n          </ul>\n        </template>\n        <template v-else>\n          <span>{{ errors }}</span>\n        </template>\n      </template>\n    </slot>\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldErrorStyles = tv({\n    base: ["text-sm font-normal text-destructive"],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<\n    PrimitiveProps & {\n      /**\n       * Additional classes to apply to the element.\n       */\n      class?: HTMLAttributes["class"];\n      /**\n       * Error message(s) to display.\n       */\n      errors?: string | string[] | Array<{ message: string }>;\n    }\n  >();\n</script>\n',
+      },
+      {
+        fileName: "Field/Field.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    role="group"\n    data-slot="field"\n    :data-orientation="orientation"\n    :class="fieldStyles({ class: props.class, orientation })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { VariantProps } from "tailwind-variants";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldStyles = tv({\n    base: "group/field flex w-full gap-3 data-[invalid=true]:text-destructive",\n    variants: {\n      orientation: {\n        vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],\n        horizontal: [\n          "flex-row items-center",\n          "[&>[data-slot=field-label]]:flex-auto",\n          "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",\n        ],\n        responsive: [\n          "flex-col @md/field-group:flex-row @md/field-group:items-center [&>*]:w-full @md/field-group:[&>*]:w-auto [&>.sr-only]:w-auto",\n          "@md/field-group:[&>[data-slot=field-label]]:flex-auto",\n          "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",\n        ],\n      },\n    },\n    defaultVariants: {\n      orientation: "vertical",\n    },\n  });\n\n  export type FieldProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the fieldset element.\n     */\n    class?: HTMLAttributes["class"];\n    /**\n     * The orientation of the field, either "vertical", "horizontal", or "responsive".\n     * @default "vertical"\n     */\n    orientation?: VariantProps<typeof fieldStyles>["orientation"];\n  };\n</script>\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<FieldProps>(), {\n    orientation: "vertical",\n  });\n</script>\n',
+      },
+      {
+        fileName: "Field/Group.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    data-slot="field-group"\n    :class="fieldGroupStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldGroupStyles = tv({\n    base: [\n      "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4",\n    ],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<\n    PrimitiveProps & {\n      /**\n       * Additional classes to apply to the fieldset element.\n       */\n      class?: HTMLAttributes["class"];\n    }\n  >();\n</script>\n',
+      },
+      {
+        fileName: "Field/Label.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <UiLabel v-bind="props" data-slot="field-label" :class="fieldLabelStyles({ class: props.class })">\n    <slot />\n  </UiLabel>\n</template>\n<script lang="ts">\n  import type { LabelProps } from "@/components/Ui/Label.vue";\n\n  export const fieldLabelStyles = tv({\n    base: [\n      "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50",\n      "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",\n      "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5 dark:has-data-[state=checked]:bg-primary/10",\n    ],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<LabelProps>();\n</script>\n',
+      },
+      {
+        fileName: "Field/Legend.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    data-slot="field-legend"\n    :data-variant="variant"\n    :class="fieldLegendStyles({ class: props.class, variant })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { VariantProps } from "tailwind-variants";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldLegendStyles = tv({\n    base: ["mb-3 font-medium", "data-[variant=legend]:text-base", "data-[variant=label]:text-sm"],\n    variants: {\n      variant: {\n        legend: "text-base",\n        label: "text-sm",\n      },\n    },\n    defaultVariants: {\n      variant: "legend",\n    },\n  });\n\n  export type FieldLegendProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the fieldset element.\n     */\n    class?: HTMLAttributes["class"];\n    /**\n     * The variant of the legend, either "legend" or "label".\n     * @default "legend"\n     */\n    variant?: VariantProps<typeof fieldLegendStyles>["variant"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<FieldLegendProps>(), {\n    as: "legend",\n    variant: "legend",\n  });\n</script>\n',
+      },
+      {
+        fileName: "Field/Separator.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <div\n    data-slot="field-separator"\n    :data-content="!!$slots.default"\n    :class="fieldSeparatorStyles({ class: props.class })"\n  >\n    <UiSeparator class="absolute inset-0 top-1/2" />\n    <span\n      v-if="$slots.default"\n      className="bg-background text-muted-foreground relative mx-auto block w-fit px-2"\n      data-slot="field-separator-content"\n    >\n      <slot />\n    </span>\n  </div>\n</template>\n<script lang="ts">\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldSeparatorStyles = tv({\n    base: ["relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2"],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<{\n    /**\n     * Additional classes to apply to the element.\n     */\n    class?: HTMLAttributes["class"];\n  }>();\n</script>\n',
+      },
+      {
+        fileName: "Field/Set.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive :as :as-child data-slot="field-set" :class="fieldSetStyles({ class: props.class })">\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldSetStyles = tv({\n    base: [\n      "flex flex-col gap-6",\n      "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",\n    ],\n  });\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(\n    defineProps<\n      PrimitiveProps & {\n        /**\n         * Additional classes to apply to the fieldset element.\n         */\n        class?: HTMLAttributes["class"];\n      }\n    >(),\n    {\n      as: "fieldset",\n    }\n  );\n</script>\n',
+      },
+      {
+        fileName: "Field/Title.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    :as\n    :as-child\n    data-slot="field-label"\n    :class="fieldTitleStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const fieldTitleStyles = tv({\n    base: [\n      "flex w-fit items-center gap-2 text-sm leading-snug font-medium group-data-[disabled=true]/field:opacity-50",\n    ],\n  });\n</script>\n<script lang="ts" setup>\n  const props = defineProps<\n    PrimitiveProps & {\n      /**\n       * Additional classes to apply to the element.\n       */\n      class?: HTMLAttributes["class"];\n    }\n  >();\n</script>\n',
+      },
+    ],
+    components: ["label", "separator"],
+    utils: [],
+    composables: [],
+    plugins: [],
+  },
+  {
     name: "Form",
     value: "form",
     deps: ["@vee-validate/nuxt"],
@@ -1486,7 +1556,7 @@ export default [
         fileName: "Label.vue",
         dirPath: "app/components/Ui",
         fileContent:
-          '<template>\n  <Label data-slot="label" :class="styles({ class: props.class })" v-bind="forwarded">\n    <slot />\n    <slot name="hint">\n      <span v-if="hint" data-slot="label-hint" class="text-xs font-normal text-muted-foreground">\n        {{ hint }}\n      </span>\n    </slot>\n  </Label>\n</template>\n\n<script lang="ts" setup>\n  import { Label } from "reka-ui";\n  import type { LabelProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = defineProps<\n    LabelProps & {\n      /** Custom class(es) to add to the label */\n      class?: HTMLAttributes["class"];\n      hint?: string;\n    }\n  >();\n\n  const forwarded = reactiveOmit(props, "class", "hint");\n\n  const styles = tv({\n    base: "flex items-center justify-between gap-2 text-sm leading-none font-medium select-none not-peer-disabled:cursor-pointer group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",\n  });\n</script>\n',
+          '<template>\n  <Label data-slot="label" :class="styles({ class: props.class })" v-bind="forwarded">\n    <slot />\n    <slot name="hint">\n      <span v-if="hint" data-slot="label-hint" class="text-xs font-normal text-muted-foreground">\n        {{ hint }}\n      </span>\n    </slot>\n  </Label>\n</template>\n\n<script lang="ts">\n  import { Label } from "reka-ui";\n  import type { LabelProps as LP } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export type LabelProps = LP & {\n    /** Custom class(es) to add to the label */\n    class?: HTMLAttributes["class"];\n    /**\n     * Optional hint text to display alongside the label.\n     */\n    hint?: string;\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = defineProps<LabelProps>();\n\n  const forwarded = reactiveOmit(props, "class", "hint");\n\n  const styles = tv({\n    base: "flex items-center justify-between gap-2 text-sm leading-none font-medium select-none not-peer-disabled:cursor-pointer group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",\n  });\n</script>\n',
       },
     ],
     utils: [],
@@ -2750,13 +2820,13 @@ export default [
         fileName: "Switch/Switch.vue",
         dirPath: "app/components/Ui",
         fileContent:
-          '<template>\n  <SwitchRoot\n    v-slot="slotProps"\n    data-slot="switch"\n    v-bind="forwarded"\n    :class="styles({ class: props.class })"\n  >\n    <UiSwitchThumb>\n      <slot v-bind="slotProps" />\n    </UiSwitchThumb>\n  </SwitchRoot>\n</template>\n\n<script lang="ts" setup>\n  import { SwitchRoot, useForwardPropsEmits } from "reka-ui";\n  import type { SwitchRootEmits, SwitchRootProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = withDefaults(\n    defineProps<\n      SwitchRootProps & {\n        /** Custom class(es) to add to parent element */\n        class?: HTMLAttributes["class"];\n        id?: HTMLAttributes["id"];\n      }\n    >(),\n    {\n      as: "button",\n    }\n  );\n  const emits = defineEmits<SwitchRootEmits>();\n  const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);\n\n  const styles = tv({\n    base: "peer inline-flex h-6 w-10 shrink-0 items-center rounded-full border-2 border-transparent transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",\n  });\n</script>\n',
+          '<template>\n  <SwitchRoot\n    v-slot="slotProps"\n    data-slot="switch"\n    v-bind="forwarded"\n    :class="styles({ class: props.class })"\n  >\n    <UiSwitchThumb>\n      <slot v-bind="slotProps" />\n    </UiSwitchThumb>\n  </SwitchRoot>\n</template>\n\n<script lang="ts" setup>\n  import { SwitchRoot, useForwardPropsEmits } from "reka-ui";\n  import type { SwitchRootEmits, SwitchRootProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = withDefaults(\n    defineProps<\n      SwitchRootProps & {\n        /** Custom class(es) to add to parent element */\n        class?: HTMLAttributes["class"];\n        id?: HTMLAttributes["id"];\n      }\n    >(),\n    {\n      as: "button",\n    }\n  );\n  const emits = defineEmits<SwitchRootEmits>();\n  const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);\n\n  const styles = tv({\n    base: "peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80",\n  });\n</script>\n',
       },
       {
         fileName: "Switch/Thumb.vue",
         dirPath: "app/components/Ui",
         fileContent:
-          '<template>\n  <SwitchThumb data-slot="switch-thumb" :class="styles({ class: props.class })" v-bind="forwarded">\n    <slot />\n  </SwitchThumb>\n</template>\n\n<script lang="ts" setup>\n  import { SwitchThumb } from "reka-ui";\n  import type { SwitchThumbProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = defineProps<\n    SwitchThumbProps & {\n      /** Custom class(es) to add to parent element */\n      class?: HTMLAttributes["class"];\n    }\n  >();\n  const forwarded = reactiveOmit(props, "class");\n  const styles = tv({\n    base: "pointer-events-none block size-5 rounded-full bg-background shadow-xs ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0 data-[state=checked]:rtl:-translate-x-4",\n  });\n</script>\n',
+          '<template>\n  <SwitchThumb data-slot="switch-thumb" :class="styles({ class: props.class })" v-bind="forwarded">\n    <slot />\n  </SwitchThumb>\n</template>\n\n<script lang="ts" setup>\n  import { SwitchThumb } from "reka-ui";\n  import type { SwitchThumbProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = defineProps<\n    SwitchThumbProps & {\n      /** Custom class(es) to add to parent element */\n      class?: HTMLAttributes["class"];\n    }\n  >();\n  const forwarded = reactiveOmit(props, "class");\n  const styles = tv({\n    base: "pointer-events-none block size-4 rounded-full bg-background ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0 dark:data-[state=checked]:bg-primary-foreground dark:data-[state=unchecked]:bg-foreground",\n  });\n</script>\n',
       },
     ],
     utils: [],

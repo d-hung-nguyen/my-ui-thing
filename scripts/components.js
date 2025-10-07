@@ -306,6 +306,23 @@ export default [
     files: ["FancyIcon.vue"],
   },
   {
+    name: "Field",
+    value: "field",
+    files: [
+      "Field/Content.vue",
+      "Field/Description.vue",
+      "Field/Error.vue",
+      "Field/Field.vue",
+      "Field/Group.vue",
+      "Field/Label.vue",
+      "Field/Legend.vue",
+      "Field/Separator.vue",
+      "Field/Set.vue",
+      "Field/Title.vue",
+    ],
+    components: ["label", "separator"],
+  },
+  {
     name: "Form",
     value: "form",
     deps: ["@vee-validate/nuxt"],
