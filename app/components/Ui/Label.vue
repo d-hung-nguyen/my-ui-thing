@@ -9,18 +9,23 @@
   </Label>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { Label } from "reka-ui";
-  import type { LabelProps } from "reka-ui";
+  import type { LabelProps as LP } from "reka-ui";
   import type { HTMLAttributes } from "vue";
 
-  const props = defineProps<
-    LabelProps & {
-      /** Custom class(es) to add to the label */
-      class?: HTMLAttributes["class"];
-      hint?: string;
-    }
-  >();
+  export type LabelProps = LP & {
+    /** Custom class(es) to add to the label */
+    class?: HTMLAttributes["class"];
+    /**
+     * Optional hint text to display alongside the label.
+     */
+    hint?: string;
+  };
+</script>
+
+<script lang="ts" setup>
+  const props = defineProps<LabelProps>();
 
   const forwarded = reactiveOmit(props, "class", "hint");
 
