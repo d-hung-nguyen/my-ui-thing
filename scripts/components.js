@@ -349,7 +349,6 @@ export default [
   {
     name: "Hover Card",
     value: "hover-card",
-
     files: [
       "HoverCard/Arrow.vue",
       "HoverCard/Content.vue",
@@ -375,6 +374,23 @@ export default [
       "InputGroup/Textarea.vue",
     ],
     components: ["input", "button", "textarea"],
+  },
+  {
+    name: "Item",
+    value: "item",
+    files: [
+      "Item/Actions.vue",
+      "Item/Content.vue",
+      "Item/Description.vue",
+      "Item/Footer.vue",
+      "Item/Group.vue",
+      "Item/Header.vue",
+      "Item/Item.vue",
+      "Item/Media.vue",
+      "Item/Separator.vue",
+      "Item/Title.vue",
+    ],
+    components: ["separator"],
   },
   {
     name: "Icon",

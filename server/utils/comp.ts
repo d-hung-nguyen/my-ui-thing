@@ -1534,6 +1534,76 @@ export default [
     plugins: [],
   },
   {
+    name: "Item",
+    value: "item",
+    files: [
+      {
+        fileName: "Item/Actions.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-actions"\n    v-bind="forwarded"\n    :class="itemActionsStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemActionsStyles = tv({\n    base: "flex items-center gap-2",\n  });\n\n  export type ItemActionsProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemActionsProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Content.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-content"\n    v-bind="forwarded"\n    :class="itemContentStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemContentStyles = tv({\n    base: "flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none",\n  });\n\n  export type ItemContentProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemContentProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Description.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-description"\n    v-bind="forwarded"\n    :class="itemDescriptionStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemDescriptionStyles = tv({\n    base: [\n      "line-clamp-2 text-sm leading-normal font-normal text-balance text-muted-foreground",\n      "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",\n    ],\n  });\n\n  export type ItemDescriptionProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemDescriptionProps>(), {\n    as: "p",\n  });\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Footer.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-footer"\n    v-bind="forwarded"\n    :class="itemFooterStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemFooterStyles = tv({\n    base: "flex basis-full items-center justify-between gap-2",\n  });\n\n  export type ItemFooterProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemFooterProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Group.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    role="list"\n    data-slot="item-group"\n    v-bind="forwarded"\n    :class="itemGroupStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemGroupStyles = tv({\n    base: "group/item-group flex flex-col",\n  });\n\n  export type ItemGroupProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemGroupProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Header.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-header"\n    v-bind="forwarded"\n    :class="itemHeaderStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemHeaderStyles = tv({\n    base: "flex basis-full items-center justify-between gap-2",\n  });\n\n  export type ItemHeaderProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemHeaderProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Item.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item"\n    :data-variant="variant"\n    :data-size="size"\n    v-bind="forwarded"\n    :class="itemStyles({ variant, size, class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { VariantProps } from "tailwind-variants";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemStyles = tv({\n    base: "group/item flex flex-wrap items-center rounded-md border border-transparent text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-accent/50",\n\n    variants: {\n      variant: {\n        default: "bg-transparent",\n        outline: "border-border",\n        muted: "bg-muted/50",\n      },\n      size: {\n        default: "gap-4 p-4",\n        sm: "gap-2.5 px-4 py-3",\n      },\n    },\n    defaultVariants: {\n      variant: "default",\n      size: "default",\n    },\n  });\n\n  export type ItemProps = PrimitiveProps & {\n    /**\n     * The variant of the item.\n     * @default \'default\'\n     */\n    variant?: VariantProps<typeof itemStyles>["variant"];\n    /**\n     * The size of the item.\n     * @default \'default\'\n     */\n    size?: VariantProps<typeof itemStyles>["size"];\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemProps>(), {\n    variant: "default",\n    size: "default",\n  });\n\n  const forwarded = reactiveOmit(props, ["variant", "size", "class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Media.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-media"\n    :data-variant="variant"\n    v-bind="forwarded"\n    :class="itemMediaStyles({ variant, class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { VariantProps } from "tailwind-variants";\n  import type { HTMLAttributes } from "vue";\n\n  const itemMediaStyles = tv({\n    base: "flex shrink-0 items-center justify-center gap-2 group-has-[[data-slot=item-description]]/item:translate-y-0.5 group-has-[[data-slot=item-description]]/item:self-start [&_svg]:pointer-events-none",\n\n    variants: {\n      variant: {\n        default: "bg-transparent",\n        icon: "size-8 rounded-sm border bg-muted [&_svg:not([class*=\'size-\'])]:size-4",\n        image: "size-10 overflow-hidden rounded-sm [&_img]:size-full [&_img]:object-cover",\n      },\n    },\n    defaultVariants: {\n      variant: "default",\n    },\n  });\n\n  export type ItemMediaProps = PrimitiveProps & {\n    /**\n     * The variant of the item media.\n     * @default \'default\'\n     */\n    variant?: VariantProps<typeof itemMediaStyles>["variant"];\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemMediaProps>(), {\n    variant: "default",\n  });\n\n  const forwarded = reactiveOmit(props, ["variant", "class"]);\n</script>\n',
+      },
+      {
+        fileName: "Item/Separator.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <UiSeparator\n    orientation="horizontal"\n    data-slot="item-separator"\n    :decorative="props.decorative"\n    :class="itemSeparatorStyles({ class: props.class })"\n  />\n</template>\n\n<script lang="ts">\n  import type { UiSeparatorProps } from "@/components/Ui/Separator.vue";\n\n  export const itemSeparatorStyles = tv({\n    base: "my-0",\n  });\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<Omit<UiSeparatorProps, "orientation">>(), {});\n</script>\n',
+      },
+      {
+        fileName: "Item/Title.vue",
+        dirPath: "app/components/Ui",
+        fileContent:
+          '<template>\n  <Primitive\n    data-slot="item-title"\n    v-bind="forwarded"\n    :class="itemTitleStyles({ class: props.class })"\n  >\n    <slot />\n  </Primitive>\n</template>\n\n<script lang="ts">\n  import type { PrimitiveProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export const itemTitleStyles = tv({\n    base: "flex w-fit items-center gap-2 text-sm leading-snug font-medium",\n  });\n\n  export type ItemTitleProps = PrimitiveProps & {\n    /**\n     * Additional classes to apply to the parent element.\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<ItemTitleProps>(), {});\n\n  const forwarded = reactiveOmit(props, ["class"]);\n</script>\n',
+      },
+    ],
+    components: ["separator"],
+    utils: [],
+    composables: [],
+    plugins: [],
+  },
+  {
     name: "Keyboard Key",
     value: "kbd",
     files: [
@@ -2425,7 +2495,7 @@ export default [
         fileName: "Separator.vue",
         dirPath: "app/components/Ui",
         fileContent:
-          '<template>\n  <Separator\n    data-slot="separator"\n    v-bind="forwarded"\n    :class="styles({ orientation, class: props.class })"\n  />\n</template>\n\n<script lang="ts" setup>\n  import { Separator, useForwardProps } from "reka-ui";\n  import type { SeparatorProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  const props = withDefaults(\n    defineProps<\n      SeparatorProps & {\n        /**\n         * Custom class(es) to add to the separator\n         */\n        class?: HTMLAttributes["class"];\n      }\n    >(),\n    {\n      orientation: "horizontal",\n      decorative: true,\n    }\n  );\n\n  const forwarded = useForwardProps(reactiveOmit(props, "class"));\n\n  const styles = tv({\n    base: "shrink-0 bg-border",\n    variants: {\n      orientation: {\n        horizontal: "h-px w-full",\n        vertical: "h-full w-px",\n      },\n    },\n  });\n</script>\n',
+          '<template>\n  <Separator\n    data-slot="separator"\n    v-bind="forwarded"\n    :class="styles({ orientation, class: props.class })"\n  />\n</template>\n\n<script lang="ts">\n  import { Separator, useForwardProps } from "reka-ui";\n  import type { SeparatorProps } from "reka-ui";\n  import type { HTMLAttributes } from "vue";\n\n  export type UiSeparatorProps = SeparatorProps & {\n    /**\n     * Custom class(es) to add to the separator\n     */\n    class?: HTMLAttributes["class"];\n  };\n</script>\n\n<script lang="ts" setup>\n  const props = withDefaults(defineProps<UiSeparatorProps>(), {\n    orientation: "horizontal",\n    decorative: true,\n  });\n\n  const forwarded = useForwardProps(reactiveOmit(props, "class"));\n\n  const styles = tv({\n    base: "shrink-0 bg-border",\n    variants: {\n      orientation: {\n        horizontal: "h-px w-full",\n        vertical: "h-full w-px",\n      },\n    },\n  });\n</script>\n',
       },
     ],
     utils: [],
