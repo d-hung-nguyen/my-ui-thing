@@ -400,7 +400,7 @@ export default [
   {
     name: "Keyboard Key",
     value: "kbd",
-    files: ["Kbd.vue"],
+    files: ["Kbd/Kbd.vue", "Kbd/Group.vue"],
   },
   {
     name: "Label",

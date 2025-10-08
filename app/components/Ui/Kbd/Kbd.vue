@@ -15,11 +15,17 @@
   const props = withDefaults(
     defineProps<
       PrimitiveProps & {
-        /** The size of the component */
+        /**
+         * The size of the component
+         * @default "sm"
+         * */
         size?: VariantProps<typeof styles>["size"];
         /** Custom class(es) to add to the parent */
         class?: HTMLAttributes["class"];
-        /** The variant of the component */
+        /**
+         * The variant of the component
+         * @default "solid"
+         * */
         variant?: VariantProps<typeof styles>["variant"];
       }
     >(),
@@ -32,16 +38,19 @@
   const forwarded = reactiveOmit(props, "class", "size");
 
   const styles = tv({
-    base: "pointer-events-none inline-flex items-center gap-1 rounded-sm border border-border bg-muted font-sans font-medium shadow-xs select-none",
+    base: [
+      "pointer-events-none inline-flex w-fit min-w-5 items-center justify-center gap-1 rounded-sm font-sans font-medium select-none",
+      "[&_svg:not([class*='size-'])]:size-3",
+    ],
     variants: {
       size: {
-        xs: "h-5 min-h-[16px] px-1 text-[10px]",
-        sm: "h-6 min-h-[20px] px-1.5 text-[11px]",
-        md: "h-7 min-h-[24px] px-2 text-[12px]",
+        xs: "h-4 px-1 text-[11px]",
+        sm: "h-5 px-1 text-xs",
+        md: "h-[22px] px-1 text-sm",
       },
       variant: {
-        solid: "bg-muted",
-        outline: "bg-transparent",
+        solid: "bg-muted text-foreground/80",
+        outline: "border bg-transparent",
       },
     },
     defaultVariants: {
