@@ -6,25 +6,24 @@
   />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { Separator, useForwardProps } from "reka-ui";
   import type { SeparatorProps } from "reka-ui";
   import type { HTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<
-      SeparatorProps & {
-        /**
-         * Custom class(es) to add to the separator
-         */
-        class?: HTMLAttributes["class"];
-      }
-    >(),
-    {
-      orientation: "horizontal",
-      decorative: true,
-    }
-  );
+  export type UiSeparatorProps = SeparatorProps & {
+    /**
+     * Custom class(es) to add to the separator
+     */
+    class?: HTMLAttributes["class"];
+  };
+</script>
+
+<script lang="ts" setup>
+  const props = withDefaults(defineProps<UiSeparatorProps>(), {
+    orientation: "horizontal",
+    decorative: true,
+  });
 
   const forwarded = useForwardProps(reactiveOmit(props, "class"));
 
