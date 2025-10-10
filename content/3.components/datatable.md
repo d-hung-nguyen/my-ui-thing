@@ -8,6 +8,7 @@ links:
   - title: Vue DataTables Docs
     href: https://datatables.net/blog/2022-06-22-vue
     icon: "logos:vue"
+label: Updated
 ---
 
 ## Source code
@@ -98,7 +99,7 @@ Take note of how the [`dom`](https://datatables.net/reference/option/dom) option
     }
   );
 
-  const tableRef = shallowRef<InstanceType<typeof DataTableRef<any[]>> | null>(null);
+  const tableRef = shallowRef<InstanceType<typeof DataTableRef<any[]>> | undefined>();
 </script>
 ```
 
@@ -142,35 +143,22 @@ With the new version of DataTables.net, you can now use custom Vue components in
   import { faker } from "@faker-js/faker";
   import type { Config, ConfigColumns } from "datatables.net";
 
-  interface Staff {
-    name: string;
-    position: string;
-    office: string;
-    age: number;
-    start_date: string;
-    salary: string;
-  }
-
-  const { data: users } = await useAsyncData<Staff[]>(
-    "fakerUsers",
-    () => {
-      return new Promise((resolve) => {
-        // create 1000 fake users
-        const users = Array.from({ length: 1000 }, () => {
-          return {
-            name: faker.person.fullName(),
-            position: faker.person.jobTitle(),
-            office: faker.location.city(),
-            age: faker.number.int(100),
-            start_date: useDateFormat(faker.date.past().toISOString(), "MMMM DD, YYYY").value,
-            salary: faker.finance.amount({ symbol: "$" }),
-          };
-        });
-        resolve(users);
-      });
-    },
+  const { data: users } = await useAsyncData(
+    async () =>
+      Array.from({ length: 1000 }, () => {
+        return {
+          name: faker.person.fullName(),
+          position: faker.person.jobTitle(),
+          office: faker.location.city(),
+          age: faker.number.int(100),
+          start_date: useDateFormat(faker.date.past().toISOString(), "MMMM DD, YYYY").value,
+          salary: faker.finance.amount({ symbol: "$" }),
+        };
+      }),
     { default: () => [] }
   );
+
+  type Staff = (typeof users.value)[0];
 
   const columns: ConfigColumns[] = [
     { data: "name", title: "Name" },
@@ -266,7 +254,6 @@ For this, you will actually need to add some custom classes for things to look h
   }
 
   const { data: users } = await useAsyncData<Staff[]>(
-    "fakerUsers",
     () => {
       return new Promise((resolve) => {
         // create 1000 fake users
@@ -433,7 +420,6 @@ For this, you will actually need to add some custom classes for things to look h
 ```vue [DocsDatatableImages.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import type { Config } from "datatables.net";
 
   const { data } = await useAsyncData(
     async () => {
@@ -461,32 +447,34 @@ For this, you will actually need to add some custom classes for things to look h
       currency: "USD",
     }).format(value);
   };
-
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    columns: [
-      { title: "ID", data: "id", visible: false },
-      {
-        title: "Name",
-        data: null,
-        render: {
-          _: "name",
-          display: "#name",
+  const options = ref({});
+  onMounted(() => {
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      columns: [
+        { title: "ID", data: "id", visible: false },
+        {
+          title: "Name",
+          data: null,
+          render: {
+            _: "name",
+            display: "#name",
+          },
+          searchable: false,
         },
-        searchable: false,
-      },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
-      },
-    ],
-  };
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+    };
+  });
 </script>
 
 <template>
@@ -867,22 +855,24 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableRowSelection.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableRowSelection.vue" code lang="vue" -->
 
-```vue [DocsDatatableRowSelection.client.vue]
+```vue [DocsDatatableRowSelection.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
-  import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 5 }, (item, index) => ({
-    id: index + 1,
-    name: faker.person.fullName(),
-    email: faker.internet.email().toLowerCase(),
-    location: faker.location.city(),
-    status: faker.helpers.arrayElement(["Active", "Inactive"]),
-    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-  }));
+  const { data } = await useAsyncData(
+    async () =>
+      Array.from({ length: 5 }, (item, index) => ({
+        id: index + 1,
+        name: faker.person.fullName(),
+        email: faker.internet.email().toLowerCase(),
+        location: faker.location.city(),
+        status: faker.helpers.arrayElement(["Active", "Inactive"]),
+        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+      })),
+    { default: () => [] }
+  );
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -891,32 +881,36 @@ For this, you will actually need to add some custom classes for things to look h
     }).format(value);
   };
 
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-  };
+    };
+  });
 </script>
 
 <template>
-  <UiDatatable :data="data" :options />
+  <UiDatatable v-if="options" :data="data" :options />
   <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
     <p>Total</p>
     <p>
@@ -938,22 +932,24 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableCard.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableCard.vue" code lang="vue" -->
 
-```vue [DocsDatatableCard.client.vue]
+```vue [DocsDatatableCard.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
-  import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 5 }, (item, index) => ({
-    id: index + 1,
-    name: faker.person.fullName(),
-    email: faker.internet.email().toLowerCase(),
-    location: faker.location.city(),
-    status: faker.helpers.arrayElement(["Active", "Inactive"]),
-    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-  }));
+  const { data } = await useAsyncData(
+    async () =>
+      Array.from({ length: 5 }, (item, index) => ({
+        id: index + 1,
+        name: faker.person.fullName(),
+        email: faker.internet.email().toLowerCase(),
+        location: faker.location.city(),
+        status: faker.helpers.arrayElement(["Active", "Inactive"]),
+        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+      })),
+    { default: () => [] }
+  );
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -962,33 +958,38 @@ For this, you will actually need to add some custom classes for things to look h
     }).format(value);
   };
 
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-  };
+    };
+  });
 </script>
 
 <template>
   <div class="overflow-hidden rounded-lg border border-border bg-background">
-    <UiDatatable :data="data" :options />
+    <UiDatatable v-if="options" :data="data" :options />
     <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
       <p>Total</p>
       <p>
@@ -1011,22 +1012,24 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableScrollY.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableScrollY.vue" code lang="vue" -->
 
-```vue [DocsDatatableScrollY.client.vue]
+```vue [DocsDatatableScrollY.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
-  import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 30 }, (item, index) => ({
-    id: index + 1,
-    name: faker.person.fullName(),
-    email: faker.internet.email().toLowerCase(),
-    location: faker.location.city(),
-    status: faker.helpers.arrayElement(["Active", "Inactive"]),
-    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-  }));
+  const { data } = await useAsyncData(
+    async () =>
+      Array.from({ length: 30 }, (item, index) => ({
+        id: index + 1,
+        name: faker.person.fullName(),
+        email: faker.internet.email().toLowerCase(),
+        location: faker.location.city(),
+        status: faker.helpers.arrayElement(["Active", "Inactive"]),
+        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+      })),
+    { default: () => [] }
+  );
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1035,35 +1038,40 @@ For this, you will actually need to add some custom classes for things to look h
     }).format(value);
   };
 
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    paging: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      paging: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-    scrollY: "300px",
-  };
+      scrollY: "300px",
+    };
+  });
 </script>
 
 <template>
   <div class="overflow-hidden rounded-lg border border-border bg-background">
-    <UiDatatable :data="data" :options />
+    <UiDatatable v-if="options" :data="data" :options />
     <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
       <p>Total</p>
       <p>
@@ -1094,28 +1102,31 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableBadge.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableBadge.vue" code lang="vue" -->
 
-```vue [DocsDatatableBadge.client.vue]
+```vue [DocsDatatableBadge.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
-  import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 30 }, (item, index) => ({
-    id: index + 1,
-    name: faker.person.fullName(),
-    email: faker.internet.email().toLowerCase(),
-    location: {
-      city: faker.location.city(),
-      country: faker.location.country(),
-      flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
+  const { data } = await useAsyncData(
+    async () => {
+      return Array.from({ length: 30 }, (item, index) => ({
+        id: index + 1,
+        name: faker.person.fullName(),
+        email: faker.internet.email().toLowerCase(),
+        location: {
+          city: faker.location.city(),
+          country: faker.location.country(),
+          flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
+        },
+        status: faker.helpers.arrayElement(["Active", "Inactive"]),
+        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+      }));
     },
-    status: faker.helpers.arrayElement(["Active", "Inactive"]),
-    balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-  }));
+    { default: () => [] }
+  );
 
-  type Item = (typeof data)[0];
+  type Item = (typeof data.value)[number];
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1124,49 +1135,54 @@ For this, you will actually need to add some custom classes for things to look h
     }).format(value);
   };
 
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    paging: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      {
-        title: "Location",
-        data: null,
-        render: {
-          _: "location.city",
-          display: "#location",
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      paging: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        {
+          title: "Location",
+          data: null,
+          render: {
+            _: "location.city",
+            display: "#location",
+          },
         },
-      },
-      {
-        title: "Status",
-        data: null,
-        render: {
-          _: "status",
-          display: "#status",
+        {
+          title: "Status",
+          data: null,
+          render: {
+            _: "status",
+            display: "#status",
+          },
         },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
-      },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-    scrollY: "300px",
-  };
+      scrollY: "300px",
+    };
+  });
 </script>
 
 <template>
   <div class="overflow-hidden rounded-lg border border-border bg-background">
-    <UiDatatable :data="data" :options>
+    <UiDatatable v-if="options" :data="data" :options>
       <template #status="{ cellData }">
         <UiBadge :variant="cellData.status == 'Inactive' ? 'outline' : 'default'">{{
           cellData.status
@@ -1209,33 +1225,38 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableSearchSort.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableSearchSort.vue" code lang="vue" -->
 
-```vue [DocsDatatableSearchSort.client.vue]
+```vue [DocsDatatableSearchSort.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 8 }, (item, index) => ({
-    id: index + 1,
-    keyword: faker.lorem.sentence({ min: 3, max: 5 }),
-    intents: faker.helpers.arrayElements(
-      ["Informational", "Navigational", "Commercial", "Transactional"],
-      { min: 1, max: 2 }
-    ),
-    volume: faker.number.int({ max: 2000, min: 100 }),
-    cpc: faker.number.float({ min: 0.1, max: 10, fractionDigits: 2 }),
-    traffic: faker.number.int({ max: 100, min: 10 }),
-    link: faker.internet.url({ protocol: "https" }),
-  }));
+  const { data } = await useAsyncData(
+    async () =>
+      Array.from({ length: 8 }, (item, index) => ({
+        id: index + 1,
+        keyword: faker.lorem.sentence({ min: 3, max: 5 }),
+        intents: faker.helpers.arrayElements(
+          ["Informational", "Navigational", "Commercial", "Transactional"],
+          { min: 1, max: 2 }
+        ),
+        volume: faker.number.int({ max: 2000, min: 100 }),
+        cpc: faker.number.float({ min: 0.1, max: 10, fractionDigits: 2 }),
+        traffic: faker.number.int({ max: 100, min: 10 }),
+        link: faker.internet.url({ protocol: "https" }),
+      })),
+    { default: () => [] }
+  );
 
-  type Item = (typeof data)[0];
+  type Item = (typeof data.value)[number];
   const search = ref("");
 
   const filteredData = computed(() => {
-    if (!search.value) return data;
-    return data.filter((item) => item.keyword.toLowerCase().includes(search.value.toLowerCase()));
+    if (!search.value) return data.value;
+    return data.value.filter((item) =>
+      item.keyword.toLowerCase().includes(search.value.toLowerCase())
+    );
   });
 
   const styles = {
@@ -1251,53 +1272,57 @@ For this, you will actually need to add some custom classes for things to look h
       currency: "USD",
     }).format(value);
   };
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
 
-  const options: Config = {
-    dom: `<'overflow-hidden rounded-lg border border-border bg-background'<'${tw`overflow-auto`}'t>>`,
-    paging: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "Keyword", data: "keyword", className: "font-semibold" },
-      {
-        title: "Intents",
-        searchable: false,
-        orderable: false,
-        data: null,
-        render: {
-          _: "intents",
-          display: "#intents",
+    options.value = {
+      dom: `<'overflow-hidden rounded-lg border border-border bg-background'<'${tw`overflow-auto`}'t>>`,
+      paging: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "Keyword", data: "keyword", className: "font-semibold" },
+        {
+          title: "Intents",
+          searchable: false,
+          orderable: false,
+          data: null,
+          render: {
+            _: "intents",
+            display: "#intents",
+          },
         },
-      },
-      { data: "volume", title: "Volume" },
-      {
-        data: "cpc",
-        title: "CPC",
-        render(d) {
-          return formatCurrency(d);
+        { data: "volume", title: "Volume" },
+        {
+          data: "cpc",
+          title: "CPC",
+          render(d) {
+            return formatCurrency(d);
+          },
         },
-      },
-      { data: "traffic", title: "Traffic" },
-      {
-        title: "Link",
-        orderable: false,
-        data: null,
-        render: {
-          _: "link",
-          display: "#link",
+        { data: "traffic", title: "Traffic" },
+        {
+          title: "Link",
+          orderable: false,
+          data: null,
+          render: {
+            _: "link",
+            display: "#link",
+          },
         },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-    order: [[1, "asc"]],
-    language: {
-      search: "",
-      searchPlaceholder: "Search by keyword",
-    },
-  };
+      order: [[1, "asc"]],
+      language: {
+        search: "",
+        searchPlaceholder: "Search by keyword",
+      },
+    } as Config;
+  });
 </script>
 
 <template>
@@ -1314,7 +1339,7 @@ For this, you will actually need to add some custom classes for things to look h
       </div>
     </div>
 
-    <UiDatatable :data="filteredData" :options>
+    <UiDatatable v-if="options" :data="filteredData" :options>
       <template #intents="{ cellData }: { cellData: Item }">
         <div class="flex gap-2">
           <span
@@ -1351,31 +1376,34 @@ For this, you will actually need to add some custom classes for things to look h
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableFixedColumn.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatableFixedColumn.vue" code lang="vue" -->
 
-```vue [DocsDatatableFixedColumn.client.vue]
+```vue [DocsDatatableFixedColumn.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
   import type { Config } from "datatables.net";
 
-  const data = Array.from({ length: 8 }, (item, index) => {
-    const firstName = faker.person.firstName();
-    const lastName = faker.person.lastName();
-    const email = faker.internet.email({ firstName, lastName }).toLowerCase();
-    return {
-      id: index + 1,
-      firstName,
-      lastName,
-      email,
-      location: `${faker.location.city()} ${faker.location.country()}`,
-      status: faker.helpers.arrayElement(["Active", "Inactive"]),
-      balance: faker.number.float({ min: 100, max: 1000, fractionDigits: 2 }),
-      department: faker.person.jobTitle(),
-      joinDate: faker.date.past({ years: 2 }),
-      lastActive: faker.date.recent({ days: 30 }),
-    };
-  });
+  const { data } = await useAsyncData(
+    async () =>
+      Array.from({ length: 8 }, (item, index) => {
+        const firstName = faker.person.firstName();
+        const lastName = faker.person.lastName();
+        const email = faker.internet.email({ firstName, lastName }).toLowerCase();
+        return {
+          id: index + 1,
+          firstName,
+          lastName,
+          email,
+          location: `${faker.location.city()} ${faker.location.country()}`,
+          status: faker.helpers.arrayElement(["Active", "Inactive"]),
+          balance: faker.number.float({ min: 100, max: 1000, fractionDigits: 2 }),
+          department: faker.person.jobTitle(),
+          joinDate: faker.date.past({ years: 2 }),
+          lastActive: faker.date.recent({ days: 30 }),
+        };
+      }),
+    { default: () => [] }
+  );
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -1384,52 +1412,57 @@ For this, you will actually need to add some custom classes for things to look h
     }).format(value);
   };
 
-  const options: Config = {
-    dom: `<'overflow-hidden rounded-lg border border-border bg-background'<'${tw`overflow-auto`}'t>>`,
-    paging: false,
-    ordering: false,
-    columns: [
-      { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
-      { title: "ID", data: "id", visible: false },
-      { title: "First name", data: "firstName" },
-      { title: "Last name", data: "lastName" },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        render: (d) => formatCurrency(d),
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
+    options.value = {
+      dom: `<'overflow-hidden rounded-lg border border-border bg-background'<'${tw`overflow-auto`}'t>>`,
+      paging: false,
+      ordering: false,
+      columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
+        { title: "ID", data: "id", visible: false },
+        { title: "First name", data: "firstName" },
+        { title: "Last name", data: "lastName" },
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          render: (d) => formatCurrency(d),
+        },
+        { title: "Department", data: "department" },
+        {
+          title: "Join date",
+          data: "joinDate",
+          render: (d) => useDateFormat(d, "YYYY-MM-DD").value,
+        },
+        {
+          title: "Last active",
+          data: "lastActive",
+          render: (d) => useDateFormat(d, "YYYY-MM-DD").value,
+        },
+      ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-      { title: "Department", data: "department" },
-      {
-        title: "Join date",
-        data: "joinDate",
-        render: (d) => useDateFormat(d, "YYYY-MM-DD").value,
+      order: [[2, "asc"]],
+      fixedColumns: {
+        left: 2,
       },
-      {
-        title: "Last active",
-        data: "lastActive",
-        render: (d) => useDateFormat(d, "YYYY-MM-DD").value,
-      },
-    ],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-    order: [[2, "asc"]],
-    fixedColumns: {
-      left: 2,
-    },
-    scrollCollapse: true,
-    scrollX: true,
-    scrollY: "300px",
-  };
+      scrollCollapse: true,
+      scrollX: true,
+      scrollY: "300px",
+    } as Config;
+  });
 </script>
 
 <template>
   <div>
-    <UiDatatable :data="data" :options />
+    <UiDatatable v-if="options" :data="data" :options />
   </div>
 </template>
 
@@ -1477,9 +1510,8 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
   import type DT from "datatables.net";
-  import type { Config } from "datatables.net";
 
-  const tableRef = shallowRef<InstanceType<typeof DT<any[]>> | null>(null);
+  const tableRef = shallowRef<InstanceType<typeof DT<any[]>> | undefined>();
 
   const { data } = await useAsyncData(
     async () => {
@@ -1501,26 +1533,28 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
       currency: "USD",
     }).format(value);
   };
-
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    paging: false,
-    colReorder: true,
-    columns: [
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
-      },
-    ],
-  };
+  const options = ref({});
+  onMounted(() => {
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      paging: false,
+      colReorder: true,
+      columns: [
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+    };
+  });
 </script>
 
 <template>
@@ -1581,13 +1615,11 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 
 #code
 
-<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatablePagination.client.vue" code lang="vue" -->
+<!-- automd:file src="../../app/components/content/Docs/Datatable/DocsDatatablePagination.vue" code lang="vue" -->
 
-```vue [DocsDatatablePagination.client.vue]
+```vue [DocsDatatablePagination.vue]
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import DataTable from "datatables.net";
-  import type { Config } from "datatables.net";
 
   type Item = {
     id: number;
@@ -1601,7 +1633,7 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
     status: string;
     balance: number;
   };
-  const tableRef = shallowRef<InstanceType<typeof DataTable<Item[]>> | null>(null);
+  const tableRef = shallowRef();
   const userDialog = ref(false);
   const submit = () => {
     userDialog.value = false;
@@ -1626,110 +1658,115 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
     },
   };
 
-  const options: Config = {
-    dom: `<'relative'r<'flex flex-col gap-4 md:flex-row md:items-center justify-between mb-5'fB><'overflow-auto border rounded-md't><'mt-4 px-2 flex flex-col md:flex-row md:items-center md:justify-between gap-4'<l><'flex flex-col gap-4 md:flex-row md:items-center md:gap-8'<i><p>>>>`,
-    pagingType: "full",
-    language: {
-      info: "<p class='inline-flex gap-1'><span class='font-medium text-foreground'>_START_-_END_</span> of <span class='font-medium text-foreground'>_TOTAL_</span></p>",
-      lengthMenu: "<span class='font-medium text-foreground'>Rows per page</span> _MENU_",
-      search: "",
-      searchPlaceholder: "Search...",
-    },
-    lengthMenu: [7, 25, 50, 75, 100],
-    select: {
-      style: "multi",
-      selector: "td:first-child",
-    },
-    order: [[2, "asc"]],
-    buttons: [
-      {
-        extend: "colvis",
-        text: "View",
-        columns: ":not(.no-column)",
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
+    options.value = {
+      dom: `<'relative'r<'flex flex-col gap-4 md:flex-row md:items-center justify-between mb-5'fB><'overflow-auto border rounded-md't><'mt-4 px-2 flex flex-col md:flex-row md:items-center md:justify-between gap-4'<l><'flex flex-col gap-4 md:flex-row md:items-center md:gap-8'<i><p>>>>`,
+      pagingType: "full",
+      language: {
+        info: "<p class='inline-flex gap-1'><span class='font-medium text-foreground'>_START_-_END_</span> of <span class='font-medium text-foreground'>_TOTAL_</span></p>",
+        lengthMenu: "<span class='font-medium text-foreground'>Rows per page</span> _MENU_",
+        search: "",
+        searchPlaceholder: "Search...",
       },
-      {
-        extend: "print",
-        text: "Print",
-        title: `Users - ${useDateFormat(new Date(), "MMM DD, YYYY").value}`,
-        exportOptions: sharedExport,
+      lengthMenu: [7, 25, 50, 75, 100],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
       },
-      {
-        text: "Add User",
-        action: () => {
-          userDialog.value = true;
+      order: [[2, "asc"]],
+      buttons: [
+        {
+          extend: "colvis",
+          text: "View",
+          columns: ":not(.no-column)",
         },
-      },
-    ],
-    columns: [
-      {
-        data: null,
-        searchable: false,
-        className: "no-column no-print",
-        orderable: false,
-        render: DataTable?.render?.select(),
-      },
-      { title: "ID", data: "id", visible: false },
-      { title: "Name", data: "name" },
-      { title: "Email", data: "email" },
-      {
-        title: "Location",
-        searchable: false,
-        orderable: false,
-        data: null,
-        render: {
-          _: "location.city",
-          display: "#location",
+        {
+          extend: "print",
+          text: "Print",
+          title: `Users - ${useDateFormat(new Date(), "MMM DD, YYYY").value}`,
+          exportOptions: sharedExport,
         },
-      },
-      {
-        title: "Status",
-        data: null,
-        render: {
-          _: "status",
-          display: "#status",
+        {
+          text: "Add User",
+          action: () => {
+            userDialog.value = true;
+          },
         },
-      },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
-      },
-    ],
-    serverSide: true,
-    processing: true,
-    async ajax(data: any, callback: any) {
-      // sleep for 1 second to simulate network latency
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // fetch data from API
-      const res = Array.from({ length: 100 }, (item, index) => ({
-        id: index + 1,
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        location: {
-          city: faker.location.city(),
-          country: faker.location.country(),
-          flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
+      ],
+      columns: [
+        {
+          data: null,
+          searchable: false,
+          className: "no-column no-print",
+          orderable: false,
+          render: DataTable?.render?.select(),
         },
-        status: faker.helpers.arrayElement(["Active", "Inactive"]),
-        balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
-      callback({
-        // always pass back draw from data
-        draw: Number(data.draw),
-        // the data to be displayed (paginated from sever)
-        data: res.slice(data.start, data.start + data.length),
-        // the total number of records in the dataset, not just the number returned
-        recordsTotal: res.length,
-        // the total number of records after filtering (if any filtering)
-        recordsFiltered: res.length,
-      });
-    },
-  };
+        { title: "ID", data: "id", visible: false },
+        { title: "Name", data: "name" },
+        { title: "Email", data: "email" },
+        {
+          title: "Location",
+          searchable: false,
+          orderable: false,
+          data: null,
+          render: {
+            _: "location.city",
+            display: "#location",
+          },
+        },
+        {
+          title: "Status",
+          data: null,
+          render: {
+            _: "status",
+            display: "#status",
+          },
+        },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+      serverSide: true,
+      processing: true,
+      async ajax(data: any, callback: any) {
+        // sleep for 1 second to simulate network latency
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // fetch data from API
+        const res = Array.from({ length: 100 }, (item, index) => ({
+          id: index + 1,
+          name: faker.person.fullName(),
+          email: faker.internet.email().toLowerCase(),
+          location: {
+            city: faker.location.city(),
+            country: faker.location.country(),
+            flag: faker.helpers.arrayElement(["🇺🇸", "🇨🇦", "🇬🇧", "🇦🇺", "🇳🇿"]),
+          },
+          status: faker.helpers.arrayElement(["Active", "Inactive"]),
+          balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
+        }));
+        callback({
+          // always pass back draw from data
+          draw: Number(data.draw),
+          // the data to be displayed (paginated from sever)
+          data: res.slice(data.start, data.start + data.length),
+          // the total number of records in the dataset, not just the number returned
+          recordsTotal: res.length,
+          // the total number of records after filtering (if any filtering)
+          recordsFiltered: res.length,
+        });
+      },
+    };
+  });
 </script>
 
 <template>
-  <UiDatatable :options @ready="tableRef = $event">
+  <UiDatatable v-if="options" :options @ready="tableRef = $event">
     <template #status="{ cellData }">
       <UiBadge :variant="cellData.status == 'Inactive' ? 'outline' : 'default'">{{
         cellData.status

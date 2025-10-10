@@ -31,7 +31,6 @@
   }
 
   const { data: users } = await useAsyncData<Staff[]>(
-    "fakerUsers",
     () => {
       return new Promise((resolve) => {
         // create 1000 fake users

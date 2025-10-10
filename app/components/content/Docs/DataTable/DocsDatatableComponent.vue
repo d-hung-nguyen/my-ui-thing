@@ -21,35 +21,22 @@
   import { faker } from "@faker-js/faker";
   import type { Config, ConfigColumns } from "datatables.net";
 
-  interface Staff {
-    name: string;
-    position: string;
-    office: string;
-    age: number;
-    start_date: string;
-    salary: string;
-  }
-
-  const { data: users } = await useAsyncData<Staff[]>(
-    "fakerUsers",
-    () => {
-      return new Promise((resolve) => {
-        // create 1000 fake users
-        const users = Array.from({ length: 1000 }, () => {
-          return {
-            name: faker.person.fullName(),
-            position: faker.person.jobTitle(),
-            office: faker.location.city(),
-            age: faker.number.int(100),
-            start_date: useDateFormat(faker.date.past().toISOString(), "MMMM DD, YYYY").value,
-            salary: faker.finance.amount({ symbol: "$" }),
-          };
-        });
-        resolve(users);
-      });
-    },
+  const { data: users } = await useAsyncData(
+    async () =>
+      Array.from({ length: 1000 }, () => {
+        return {
+          name: faker.person.fullName(),
+          position: faker.person.jobTitle(),
+          office: faker.location.city(),
+          age: faker.number.int(100),
+          start_date: useDateFormat(faker.date.past().toISOString(), "MMMM DD, YYYY").value,
+          salary: faker.finance.amount({ symbol: "$" }),
+        };
+      }),
     { default: () => [] }
   );
+
+  type Staff = (typeof users.value)[0];
 
   const columns: ConfigColumns[] = [
     { data: "name", title: "Name" },

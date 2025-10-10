@@ -90,7 +90,6 @@
     {
       data: () => [],
       class: "nowrap hover order-column row-border stripe display",
-      options: () => ({}),
     }
   );
 
@@ -215,7 +214,15 @@
   table.dataTable thead > tr > th.dt-orderable-desc:before,
   table.dataTable thead > tr > td.dt-orderable-asc:before,
   table.dataTable thead > tr > td.dt-orderable-desc:before {
-    @apply bottom-[43%] size-[14px] shrink-0 [background-image:url('https://api.iconify.design/lucide:chevron-up.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:[background-image:url('https://api.iconify.design/lucide:chevron-up.svg?color=white')];
+    @apply bottom-[43%] size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-up.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:!bg-[url('https://api.iconify.design/lucide:chevron-up.svg?color=white')];
+  }
+  .dark {
+    table.dataTable thead > tr > th.dt-orderable-asc:before,
+    table.dataTable thead > tr > th.dt-orderable-desc:before,
+    table.dataTable thead > tr > td.dt-orderable-asc:before,
+    table.dataTable thead > tr > td.dt-orderable-desc:before {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-up.svg?color=white')];
+    }
   }
   table.dataTable thead > tr > th.sorting:after,
   table.dataTable thead > tr > th.sorting_asc:after,
@@ -232,7 +239,15 @@
   table.dataTable thead > tr > th.dt-orderable-desc:after,
   table.dataTable thead > tr > td.dt-orderable-asc:after,
   table.dataTable thead > tr > td.dt-orderable-desc:after {
-    @apply top-[43%] size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-down.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+    @apply top-[43%] size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-down.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:!bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+  }
+  .dark {
+    table.dataTable thead > tr > th.dt-orderable-asc:after,
+    table.dataTable thead > tr > th.dt-orderable-desc:after,
+    table.dataTable thead > tr > td.dt-orderable-asc:after,
+    table.dataTable thead > tr > td.dt-orderable-desc:after {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+    }
   }
   table.dataTable thead > tr > th.sorting_asc:before,
   table.dataTable thead > tr > th.sorting_desc:after,
@@ -800,6 +815,12 @@
   table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
     @apply mr-2 inline-flex size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-right.svg')] bg-contain bg-center bg-no-repeat pb-[3px] content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-right.svg?color=white')];
   }
+  .dark {
+    table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+    table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-right.svg?color=white')];
+    }
+  }
   table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control.arrow-right::before,
   table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control.arrow-right::before {
     content: "◄";
@@ -809,6 +830,14 @@
   table.dataTable.dtr-inline.collapsed > tbody > tr.dtr-expanded > td.dtr-control:before,
   table.dataTable.dtr-inline.collapsed > tbody > tr.dtr-expanded > th.dtr-control:before {
     @apply mr-2 inline-block size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-down.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+  }
+  .dark {
+    table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before,
+    table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before,
+    table.dataTable.dtr-inline.collapsed > tbody > tr.dtr-expanded > td.dtr-control:before,
+    table.dataTable.dtr-inline.collapsed > tbody > tr.dtr-expanded > th.dtr-control:before {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+    }
   }
   table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td.dtr-control,
   table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th.dtr-control {
@@ -826,6 +855,14 @@
   table.dataTable.dtr-column > tbody > tr > th.control:before {
     @apply mr-2 inline-flex size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-right.svg')] bg-contain bg-center bg-no-repeat pb-[3px] content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-right.svg?color=white')];
   }
+  .dark {
+    table.dataTable.dtr-column > tbody > tr > td.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr > th.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr > td.control:before,
+    table.dataTable.dtr-column > tbody > tr > th.control:before {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-right.svg?color=white')];
+    }
+  }
   table.dataTable.dtr-column > tbody > tr > td.dtr-control.arrow-right::before,
   table.dataTable.dtr-column > tbody > tr > th.dtr-control.arrow-right::before,
   table.dataTable.dtr-column > tbody > tr > td.control.arrow-right::before,
@@ -841,6 +878,18 @@
   table.dataTable.dtr-column > tbody > tr.dtr-expanded td.control:before,
   table.dataTable.dtr-column > tbody > tr.dtr-expanded th.control:before {
     @apply mr-2 inline-block size-[14px] shrink-0 bg-[url('https://api.iconify.design/lucide:chevron-down.svg')] bg-contain bg-center bg-no-repeat content-[''] dark:bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+  }
+  .dark {
+    table.dataTable.dtr-column > tbody > tr.parent td.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr.parent th.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr.parent td.control:before,
+    table.dataTable.dtr-column > tbody > tr.parent th.control:before,
+    table.dataTable.dtr-column > tbody > tr.dtr-expanded td.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr.dtr-expanded th.dtr-control:before,
+    table.dataTable.dtr-column > tbody > tr.dtr-expanded td.control:before,
+    table.dataTable.dtr-column > tbody > tr.dtr-expanded th.control:before {
+      @apply bg-[url('https://api.iconify.design/lucide:chevron-down.svg?color=white')];
+    }
   }
 
   table.dataTable > tbody td.child {

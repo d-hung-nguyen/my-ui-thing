@@ -1,20 +1,16 @@
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import type DT from "datatables.net";
-
-  const tableRef = shallowRef<InstanceType<typeof DT<any[]>> | undefined>();
 
   const { data } = await useAsyncData(
-    async () => {
-      return Array.from({ length: 8 }, (item, index) => ({
+    async () =>
+      Array.from({ length: 5 }, (item, index) => ({
         id: index + 1,
         name: faker.person.fullName(),
         email: faker.internet.email().toLowerCase(),
         location: faker.location.city(),
         status: faker.helpers.arrayElement(["Active", "Inactive"]),
         balance: faker.number.float({ fractionDigits: 2, min: 0, max: 1200 }),
-      }));
-    },
+      })),
     { default: () => [] }
   );
 
@@ -24,14 +20,16 @@
       currency: "USD",
     }).format(value);
   };
-  const options = ref({});
-  onMounted(() => {
+
+  const options = ref();
+  onMounted(async () => {
+    const DataTable = await import("datatables.net").then((mod) => mod.default || mod);
+
     options.value = {
       dom: `<'${tw`overflow-auto`}'t>`,
       ordering: false,
-      paging: false,
-      colReorder: true,
       columns: [
+        { data: null, searchable: false, orderable: false, render: DataTable?.render?.select() },
         { title: "ID", data: "id", visible: false },
         { title: "Name", data: "name" },
         { title: "Email", data: "email" },
@@ -44,30 +42,17 @@
           render: (data: number) => formatCurrency(data),
         },
       ],
+      select: {
+        style: "multi",
+        selector: "td:first-child",
+      },
     };
   });
 </script>
 
 <template>
-  <div>
-    <div>
-      <h3 class="text-lg font-semibold">Column Reorder</h3>
-      <p class="mb-2 text-sm text-muted-foreground">
-        You can reorder the columns by dragging and dropping the column header.
-      </p>
-      <div class="mb-4 flex gap-2">
-        <UiButton variant="outline" size="sm" @click="tableRef?.colReorder?.enable()">
-          <Icon name="lucide:lock-open" class="size-4 shrink-0" />
-          Enable</UiButton
-        >
-        <UiButton variant="outline" size="sm" @click="tableRef?.colReorder?.disable()">
-          <Icon name="lucide:lock" class="size-4 shrink-0" />
-          Disable</UiButton
-        >
-      </div>
-    </div>
-
-    <UiDatatable :data="data" :options @ready="tableRef = $event" />
+  <div class="overflow-hidden rounded-lg border border-border bg-background">
+    <UiDatatable v-if="options" :data="data" :options />
     <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
       <p>Total</p>
       <p>
@@ -76,19 +61,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  @reference "~/assets/css/tailwind.css";
-
-  :deep(.dataTable) {
-    .dtcr-moving-first {
-      @apply border-l border-primary;
-    }
-    .dtcr-moving-last {
-      @apply border-r border-primary;
-    }
-    thead > tr {
-      @apply bg-muted/50;
-    }
-  }
-</style>

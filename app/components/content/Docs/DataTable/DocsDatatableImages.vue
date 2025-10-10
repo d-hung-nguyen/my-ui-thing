@@ -1,6 +1,5 @@
 <script lang="ts" setup>
   import { faker } from "@faker-js/faker";
-  import type { Config } from "datatables.net";
 
   const { data } = await useAsyncData(
     async () => {
@@ -28,32 +27,34 @@
       currency: "USD",
     }).format(value);
   };
-
-  const options: Config = {
-    dom: `<'${tw`overflow-auto`}'t>`,
-    ordering: false,
-    columns: [
-      { title: "ID", data: "id", visible: false },
-      {
-        title: "Name",
-        data: null,
-        render: {
-          _: "name",
-          display: "#name",
+  const options = ref({});
+  onMounted(() => {
+    options.value = {
+      dom: `<'${tw`overflow-auto`}'t>`,
+      ordering: false,
+      columns: [
+        { title: "ID", data: "id", visible: false },
+        {
+          title: "Name",
+          data: null,
+          render: {
+            _: "name",
+            display: "#name",
+          },
+          searchable: false,
         },
-        searchable: false,
-      },
-      { title: "Email", data: "email" },
-      { title: "Location", data: "location" },
-      { title: "Status", data: "status" },
-      {
-        title: "Balance",
-        data: "balance",
-        className: `text-right`,
-        render: (data: number) => formatCurrency(data),
-      },
-    ],
-  };
+        { title: "Email", data: "email" },
+        { title: "Location", data: "location" },
+        { title: "Status", data: "status" },
+        {
+          title: "Balance",
+          data: "balance",
+          className: `text-right`,
+          render: (data: number) => formatCurrency(data),
+        },
+      ],
+    };
+  });
 </script>
 
 <template>

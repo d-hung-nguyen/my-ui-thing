@@ -61,5 +61,5 @@
     }
   );
 
-  const tableRef = shallowRef<InstanceType<typeof DataTableRef<any[]>> | null>(null);
+  const tableRef = shallowRef<InstanceType<typeof DataTableRef<any[]>> | undefined>();
 </script>
