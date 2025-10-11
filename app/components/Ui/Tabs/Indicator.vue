@@ -4,6 +4,10 @@
       data-slot="tabs-indicator"
       v-bind="{ ...forwarded, ...$attrs }"
       :class="styles({ class: props.class })"
+      :style="{
+        width: 'var(--reka-tabs-indicator-size)',
+        transform: 'translateX(var(--reka-tabs-indicator-position))',
+      }"
     >
       <slot>
         <div class="h-full w-full rounded-md bg-primary" />
@@ -27,6 +31,6 @@
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "absolute bottom-0 left-0 h-[3px] w-(--reka-tabs-indicator-size) translate-x-(--reka-tabs-indicator-position) rounded-full px-1 transition-[width,transform] duration-300",
+    base: "absolute bottom-0 left-0 h-[3px] rounded-full px-2 transition-[width,transform] duration-300",
   });
 </script>

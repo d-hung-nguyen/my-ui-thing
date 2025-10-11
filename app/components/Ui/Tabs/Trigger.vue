@@ -32,7 +32,7 @@
     variants: {
       pill: {
         true: "",
-        false: "",
+        false: "focus-visible:border-none focus-visible:ring-1",
       },
     },
   });
