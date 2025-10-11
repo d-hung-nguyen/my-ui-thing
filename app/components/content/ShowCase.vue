@@ -1,5 +1,5 @@
 <template>
-  <TabsRoot default-value="preview">
+  <TabsRoot v-model="tab">
     <TabsList class="inline-flex items-center">
       <TabsTrigger as-child value="preview">
         <UiButton
@@ -18,23 +18,41 @@
         >
       </TabsTrigger>
     </TabsList>
-    <TabsContent value="preview">
-      <div
-        class="mt-3 flex min-h-[300px] items-center justify-center rounded-md border p-3 lg:p-10"
+    <AnimatePresence mode="wait">
+      <Motion
+        v-if="tab == 'preview'"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :exit="{ opacity: 0 }"
+        :transition="{ duration: 0.2 }"
       >
-        <div class="not-prose mx-auto w-full">
-          <slot />
-        </div>
-      </div>
-    </TabsContent>
-    <TabsContent value="code">
-      <div v-if="$slots?.code" class="-mt-4">
-        <slot name="code" mdc-unwrap="p" />
-      </div>
-    </TabsContent>
+        <TabsContent force-mount value="preview">
+          <div
+            class="mt-3 flex min-h-[300px] items-center justify-center rounded-lg border p-3 lg:p-10"
+          >
+            <div class="not-prose mx-auto w-full">
+              <slot />
+            </div>
+          </div>
+        </TabsContent>
+      </Motion>
+      <Motion
+        v-else
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :exit="{ opacity: 0 }"
+        :transition="{ duration: 0.2 }"
+      >
+        <TabsContent force-mount value="code">
+          <slot name="code" mdc-unwrap="p" />
+        </TabsContent>
+      </Motion>
+    </AnimatePresence>
   </TabsRoot>
 </template>
 
 <script lang="ts" setup>
   import { TabsContent, TabsList, TabsRoot, TabsTrigger } from "reka-ui";
+
+  const tab = ref("preview");
 </script>

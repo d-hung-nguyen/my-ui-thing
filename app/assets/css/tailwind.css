@@ -176,7 +176,7 @@
     --gradient-wine: oklch(32.332% 0.12034 5.266);
     --gradient-rust: oklch(55.695% 0.19944 34.155);
 
-    --surface: oklch(0.98 0 0);
+    --surface: oklch(100% 0.00011 271.152);
     --surface-foreground: var(--foreground);
     --code: var(--surface);
     --code-foreground: var(--surface-foreground);
@@ -273,7 +273,10 @@ h6 > a {
 }
 
 code {
-  @apply inline-block rounded px-1 py-px font-mono;
+  @apply block rounded py-px font-mono;
+  > span {
+    @apply px-3;
+  }
 }
 
 code:not(pre code):not(a > code) {
@@ -302,5 +305,12 @@ pre {
   scrollbar-color: --alpha(var(--muted) / 40%) transparent;
   @variant dark {
     scrollbar-color: var(--muted) transparent;
+  }
+}
+
+.shiki .line {
+  display: block;
+  &.highlight {
+    background-color: var(--muted);
   }
 }

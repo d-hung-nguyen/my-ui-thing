@@ -1,8 +1,7 @@
 <template>
-  <div class="relative">
-    <div class="absolute top-[11px] right-3.5 flex items-center justify-center">
+  <UiTooltip>
+    <UiTooltipTrigger as-child>
       <UiButton
-        v-tippy="'Copy to clipboard'"
         variant="ghost"
         size="icon-xs"
         :aria-label="copied ? 'Copied' : 'Copy to clipboard'"
@@ -34,41 +33,32 @@
           </Motion>
         </AnimatePresence>
       </UiButton>
-    </div>
-    <pre :class="[$attrs?.class]"><slot /></pre>
-  </div>
+    </UiTooltipTrigger>
+    <UiTooltipContent>
+      <p>Copy to clipboard</p>
+      <UiTooltipArrow />
+    </UiTooltipContent>
+  </UiTooltip>
 </template>
 
 <script lang="ts" setup>
-  import { Motion } from "motion-v";
-
-  const { contentPage } = await useDocPage();
-  const route = useRoute();
-
   const props = defineProps<{
+    /**
+     * The code that should be copied
+     */
     code?: string;
-    language?: string;
-    filename?: string;
-    highlights?: Array<number>;
-    meta?: string;
   }>();
 
   const { copied, copy } = useClipboard();
+
+  const emit = defineEmits<{
+    codeCopied: [];
+  }>();
 
   const onCopy = () => {
     if (!props.code) return;
     copy(props.code);
     useSonner("Copied to clipboard!");
-    // Track copied code event
-    useTrackEvent("copy_code", {
-      code_source: "inline",
-      code_language: props.language,
-      file_name: props.filename,
-      block_path: "N/A",
-      component: props.filename,
-      page_title: contentPage?.title || "unknown",
-      page_path: route.path,
-      page_location: window.location.href,
-    });
+    emit("codeCopied");
   };
 </script>

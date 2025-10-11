@@ -99,12 +99,7 @@
         </div>
       </UiTabsContent>
       <UiTabsContent value="code" class="[&_pre]:!mt-0">
-        <ClientOnly>
-          <template #fallback>
-            <UiLoader />
-          </template>
-          <MDC :value="formattedCode" />
-        </ClientOnly>
+        <MDC :value="formattedCode" />
       </UiTabsContent>
     </UiTabs>
   </div>

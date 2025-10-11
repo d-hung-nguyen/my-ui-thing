@@ -18,7 +18,7 @@ Click :SourceCodeLink{component="Accordion"} to see the source code for this com
 
 Pass a list of `items` to the component.
 
-```vue
+```vue [Accordion Anatomy.vue]{2,6} lines
 <template>
   <UiAccordion :items />
 </template>
@@ -30,7 +30,7 @@ Pass a list of `items` to the component.
 
 Or use each part individually
 
-```vue
+```vue [Accordion Anatomy.vue]{2-9} lines
 <template>
   <UiAccordion>
     <UiAccordionItem>
