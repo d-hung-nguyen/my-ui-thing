@@ -6,6 +6,7 @@
         size="icon-xs"
         :aria-label="copied ? 'Copied' : 'Copy to clipboard'"
         :disabled="copied"
+        v-bind="$attrs"
         @click="onCopy"
       >
         <AnimatePresence mode="wait">
@@ -48,6 +49,8 @@
      */
     code?: string;
   }>();
+
+  defineOptions({ inheritAttrs: false });
 
   const { copied, copy } = useClipboard();
 
