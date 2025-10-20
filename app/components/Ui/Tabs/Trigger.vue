@@ -32,7 +32,8 @@
     variants: {
       pill: {
         true: "",
-        false: "focus-visible:border-none focus-visible:ring-1",
+        false:
+          "hover:text-foreground focus-visible:border-none focus-visible:ring-1 data-[state=active]:shadow-none",
       },
     },
   });
