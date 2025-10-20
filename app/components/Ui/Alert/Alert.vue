@@ -2,17 +2,17 @@
   <div
     v-if="shown"
     data-slot="alert"
-    :class="styles().base({ variant, filled, class: props.class })"
+    :class="alertStyles().base({ variant, filled, class: props.class })"
   >
     <slot :props="props" name="icon">
       <Icon
         v-if="icon"
         data-slot="alert-icon"
         :name="icon"
-        :class="styles().icon({ variant, filled, class: props.iconClass })"
+        :class="alertStyles().icon({ variant, filled, class: props.iconClass })"
       />
     </slot>
-    <div data-slot="alert-content" :class="styles().content({ variant, filled })">
+    <div data-slot="alert-content" :class="alertStyles().content({ variant, filled })">
       <slot :props="props">
         <slot name="title">
           <UiAlertTitle v-if="title" :title="title" />
@@ -25,40 +25,32 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
   import type { HTMLAttributes } from "vue";
 
-  const props = withDefaults(
-    defineProps<{
-      /** Custom class to add to the `Alert` parent */
-      class?: HTMLAttributes["class"];
-      /** Classes to add to the icon */
-      iconClass?: HTMLAttributes["class"];
-      /** Whether the alert should have a filled/colored background */
-      filled?: boolean;
-      /**
-       * Whether or not the `Alert` is shown.
-       * @default true
-       */
-      modelValue?: boolean;
-      /** The variant of the `Alert` */
-      variant?: VariantProps<typeof styles>["variant"];
-      /** The title that is passed to the `AlertTitle` component */
-      title?: string;
-      /** The description that is passed to the `AlertDescription` component */
-      description?: string;
-      /** The icon that should be displayed*/
-      icon?: string;
-    }>(),
-    {
-      modelValue: true,
-      variant: "default",
-    }
-  );
+  export type AlertProps = {
+    /** Custom class to add to the `Alert` parent */
+    class?: HTMLAttributes["class"];
+    /** Classes to add to the icon */
+    iconClass?: HTMLAttributes["class"];
+    /** Whether the alert should have a filled/colored background */
+    filled?: boolean;
+    /**
+     * Whether or not the `Alert` is shown.
+     * @default true
+     */
+    modelValue?: boolean;
+    /** The variant of the `Alert` */
+    variant?: VariantProps<typeof alertStyles>["variant"];
+    /** The title that is passed to the `AlertTitle` component */
+    title?: string;
+    /** The description that is passed to the `AlertDescription` component */
+    description?: string;
+    /** The icon that should be displayed*/
+    icon?: string;
+  };
 
-  const shown = defineModel<boolean>({ default: true });
-
-  const styles = tv({
+  export const alertStyles = tv({
     slots: {
       base: "relative flex w-full gap-3 rounded-lg border p-4",
       icon: "size-4 shrink-0",
@@ -126,4 +118,13 @@
       },
     ],
   });
+</script>
+
+<script lang="ts" setup>
+  const props = withDefaults(defineProps<AlertProps>(), {
+    modelValue: true,
+    variant: "default",
+  });
+
+  const shown = defineModel<boolean>({ default: true });
 </script>
