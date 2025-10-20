@@ -13,7 +13,12 @@
     >{{ name }}</span
   >
   <!-- Link -->
-  <NuxtImg v-else :src="name" :style="`width: ${size}px; height: ${size}px;`" class="inline" />
+  <NuxtImg
+    v-else
+    :src="name"
+    :style="`width: ${size}px; height: ${size}px;`"
+    :class="['not-prose inline', $attrs.class]"
+  />
 </template>
 
 <script lang="ts">
@@ -43,7 +48,7 @@
    * Check if the provided name is a valid Iconify icon name
    */
   function checkIcon(name: string): boolean {
-    if (name.includes("http")) return false;
+    if (name.includes("http") || name.startsWith("data:image/")) return false;
     return validateIconName(stringToIcon(name));
   }
 </script>
