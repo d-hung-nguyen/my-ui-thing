@@ -1,58 +1,53 @@
 <template>
   <TabsRoot v-model="tab">
-    <TabsList class="inline-flex items-center">
-      <TabsTrigger as-child value="preview">
-        <UiButton
-          class="-mb-px rounded-none border-b-2 border-transparent text-sm hover:bg-transparent data-[state=active]:border-primary"
-          variant="ghost"
-        >
-          Preview</UiButton
-        >
-      </TabsTrigger>
-      <TabsTrigger value="code" as-child>
-        <UiButton
-          class="-mb-px rounded-none border-b-2 border-transparent text-sm hover:bg-transparent data-[state=active]:border-primary"
-          variant="ghost"
-        >
-          Code</UiButton
-        >
-      </TabsTrigger>
+    <TabsList class="relative inline-flex items-center">
+      <UiTabsTrigger aria-label="Preview" :pill="false" value="preview"> Preview </UiTabsTrigger>
+      <UiTabsTrigger aria-label="Code" :pill="false" value="code"> Code </UiTabsTrigger>
+      <UiTabsIndicator class="px-3" />
     </TabsList>
-    <AnimatePresence mode="wait">
-      <Motion
-        v-if="tab == 'preview'"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
-        :exit="{ opacity: 0 }"
-        :transition="{ duration: 0.2 }"
-      >
-        <TabsContent force-mount value="preview">
-          <div
-            class="mt-3 flex min-h-[300px] items-center justify-center rounded-lg border p-3 lg:p-10"
-          >
-            <div class="not-prose mx-auto w-full">
-              <slot />
+    <LayoutGroup>
+      <AnimatePresence mode="wait">
+        <Motion
+          v-if="tab == 'preview'"
+          layout="position"
+          :initial="false"
+          :animate="{ opacity: 1 }"
+          :exit="{ opacity: 0 }"
+          :transition="{ duration: 0.2 }"
+        >
+          <TabsContent force-mount value="preview">
+            <div
+              class="mt-4 flex min-h-[300px] items-center justify-center rounded-lg border p-3 lg:p-10"
+            >
+              <div class="mx-auto w-full" :class="[!props.prose ? 'not-prose' : '']">
+                <slot />
+              </div>
             </div>
-          </div>
-        </TabsContent>
-      </Motion>
-      <Motion
-        v-else
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
-        :exit="{ opacity: 0 }"
-        :transition="{ duration: 0.2 }"
-      >
-        <TabsContent force-mount value="code">
-          <slot name="code" mdc-unwrap="p" />
-        </TabsContent>
-      </Motion>
-    </AnimatePresence>
+          </TabsContent>
+        </Motion>
+        <Motion
+          v-else
+          layout="position"
+          :initial="{ opacity: 0 }"
+          :animate="{ opacity: 1 }"
+          :exit="{ opacity: 0 }"
+          :transition="{ duration: 0.2 }"
+        >
+          <TabsContent force-mount value="code">
+            <slot name="code" mdc-unwrap="p" />
+          </TabsContent>
+        </Motion>
+      </AnimatePresence>
+    </LayoutGroup>
   </TabsRoot>
 </template>
 
 <script lang="ts" setup>
-  import { TabsContent, TabsList, TabsRoot, TabsTrigger } from "reka-ui";
+  import { TabsContent, TabsList, TabsRoot } from "reka-ui";
 
   const tab = ref("preview");
+
+  const props = defineProps<{
+    prose?: boolean;
+  }>();
 </script>
