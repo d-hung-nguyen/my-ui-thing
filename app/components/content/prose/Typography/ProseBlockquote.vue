@@ -1,0 +1,24 @@
+<template>
+  <blockquote data-slot="prose-blockquote" :class="proseBlockquoteStyles({ class: _class })">
+    <slot />
+  </blockquote>
+</template>
+
+<script lang="ts">
+  import type { HTMLAttributes } from "vue";
+
+  export type ProseBlockquoteProps = {
+    /**
+     * Additional classes for the parent element
+     */
+    class?: HTMLAttributes["class"];
+  };
+
+  export const proseBlockquoteStyles = tv({
+    base: "border-l-2 pl-6 text-pretty italic [&:not(:first-child)]:mt-6",
+  });
+</script>
+
+<script setup lang="ts">
+  const { class: _class } = defineProps<ProseBlockquoteProps>();
+</script>
