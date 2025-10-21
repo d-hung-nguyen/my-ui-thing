@@ -6,12 +6,26 @@
   >
     <UiTabs v-model="selectedTab">
       <div class="mb-3 flex items-center justify-between gap-5">
-        <UiTabsList class="h-auto">
-          <UiTabsTrigger class="h-7 px-2 text-sm" value="preview">Preview</UiTabsTrigger>
-          <UiTabsTrigger class="h-7 px-2 text-sm" value="code">Code</UiTabsTrigger>
-          <UiTabsTrigger v-if="$slots.components" class="h-7 px-2 text-sm" value="components"
+        <UiTabsList class="relative h-auto border bg-transparent">
+          <UiTabsTrigger
+            class="relative z-10 h-7 bg-transparent px-2 text-sm data-[state=active]:bg-transparent"
+            value="preview"
+            >Preview</UiTabsTrigger
+          >
+          <UiTabsTrigger
+            class="relative z-10 h-7 bg-transparent px-2 text-sm data-[state=active]:bg-transparent"
+            value="code"
+            >Code</UiTabsTrigger
+          >
+          <UiTabsTrigger
+            v-if="$slots.components"
+            class="relative z-10 h-7 bg-transparent px-2 text-sm data-[state=active]:bg-transparent"
+            value="components"
             >Components</UiTabsTrigger
           >
+          <UiTabsIndicator
+            class="inset-0 size-full rounded px-0 py-0.5 [&>div]:rounded [&>div]:bg-muted"
+          />
         </UiTabsList>
         <div class="flex h-8 items-center rounded-md border bg-background p-0.5 shadow-xs">
           <AnimatePresence>
