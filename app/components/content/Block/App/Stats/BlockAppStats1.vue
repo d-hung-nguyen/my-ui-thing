@@ -17,18 +17,14 @@
       </div>
     </slot>
     <UiCardContent>
-      <UiFancyIcon v-if="props.icon" class="mb-6" :icon="props.icon" />
+      <UiFancyIcon v-if="props.icon" class="mb-6 bg-transparent" :icon="props.icon" />
       <p
         v-if="props.subHeader"
         class="mb-2 text-sm font-medium text-muted-foreground"
         v-html="props.subHeader"
       />
       <div class="flex items-end justify-between gap-5">
-        <h3
-          v-if="props.header"
-          class="text-3xl font-bold tracking-tight md:text-4xl"
-          v-html="props.header"
-        />
+        <h3 v-if="props.header" class="text-3xl font-bold tracking-tight" v-html="props.header" />
         <UiBadge v-if="props.badge">{{ $props.badge }}</UiBadge>
       </div>
       <p
