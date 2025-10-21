@@ -7,13 +7,16 @@
     <UiTabs v-model="selectedTab">
       <div class="mb-3 flex items-center justify-between gap-5">
         <UiTabsList class="h-auto">
-          <UiTabsTrigger class="h-7 px-2 text-xs" value="preview">Preview</UiTabsTrigger>
-          <UiTabsTrigger class="h-7 px-2 text-xs" value="code">Code</UiTabsTrigger>
+          <UiTabsTrigger class="h-7 px-2 text-sm" value="preview">Preview</UiTabsTrigger>
+          <UiTabsTrigger class="h-7 px-2 text-sm" value="code">Code</UiTabsTrigger>
+          <UiTabsTrigger v-if="$slots.components" class="h-7 px-2 text-sm" value="components"
+            >Components</UiTabsTrigger
+          >
         </UiTabsList>
         <div class="flex h-8 items-center rounded-md border bg-background p-0.5 shadow-xs">
           <AnimatePresence>
             <Motion
-              v-if="selectedTab === 'preview' && !isLoading"
+              v-if="selectedTab === 'preview'"
               :initial="{ opacity: 0, width: 0, scale: 0 }"
               :animate="{ opacity: 1, width: 'auto', scale: 1 }"
               :exit="{ opacity: 0, width: 0, scale: 0 }"
@@ -23,7 +26,7 @@
                 type="single"
                 default-value="100"
                 @update:model-value="
-                  (value) => {
+                  (value: any) => {
                     resizableRef?.resize(parseInt(value as string));
                   }
                 "
@@ -83,12 +86,11 @@
                 :min-size="40"
                 @ready="resizableRef = $event"
               >
-                <div v-if="!isLoading && externalViewLink" class="absolute inset-0 bg-background">
+                <div v-if="externalViewLink" class="absolute inset-0 bg-background">
                   <UiIframeLazy
                     class="z-20 h-(--container-height) w-full bg-background"
                     :src="externalViewLink"
                     :class="props.frameClass"
-                    @load="isLoading = false"
                   />
                 </div>
               </UiSplitterPanel>
@@ -98,8 +100,23 @@
           </ClientOnly>
         </div>
       </UiTabsContent>
-      <UiTabsContent value="code" class="[&_pre]:!mt-0">
-        <MDC :value="formattedCode" />
+      <UiTabsContent value="code" class="**:data-[slot='prose-pre-wrapper']:mt-0">
+        <slot mdc-unwrap="p">
+          <div class="flex h-[400px] items-center justify-center text-center font-semibold">
+            No code snippet provided.
+          </div>
+        </slot>
+      </UiTabsContent>
+      <!-- add class to remove mt from first child -->
+      <UiTabsContent
+        value="components"
+        class="flex flex-col gap-3 **:data-[slot='prose-pre-wrapper']:mt-0"
+      >
+        <slot name="components" mdc-unwrap="p">
+          <div class="flex h-[400px] items-center justify-center text-center font-semibold">
+            No components used.
+          </div>
+        </slot>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -130,39 +147,51 @@
     });
 
   const selectedTab = ref("preview");
-  const isLoading = ref(true);
-  const colorMode = useColorMode();
-
-  const codeBlock = ref<string | undefined>(undefined);
 
   const _blockImports = import.meta.glob<string>("./**/*.vue", {
     query: "?raw",
     import: "default",
+    eager: false, // Lazy load to improve initial performance
   });
-  const importPath = async () => {
-    isLoading.value = true;
-    const path = _blockImports[`./${props.blockPath}.vue`];
-    codeBlock.value = (await path?.()) ?? undefined;
-    isLoading.value = false;
-  };
 
   const resizableRef = ref<InstanceType<typeof SplitterPanel>>();
 
-  watch(
-    () => colorMode.value,
-    async () => {
-      importPath();
-    }
-  );
+  // Lazy load code only when needed (when switching to code tab)
+  const codeBlock = ref<string | undefined>(undefined);
+  const codeLoaded = ref(false);
 
-  onMounted(importPath);
+  const loadCode = async () => {
+    if (codeLoaded.value) return; // Only load once
+
+    const path = _blockImports[`./${props.blockPath}.vue`];
+    if (path) {
+      try {
+        codeBlock.value = (await path()) ?? undefined;
+        codeLoaded.value = true;
+      } catch (error) {
+        console.error(`Failed to load block code: ${props.blockPath}`, error);
+      }
+    }
+  };
+
+  // Load code when switching to code tab
+  watch(selectedTab, async (newTab) => {
+    if (newTab === "code" && !codeLoaded.value) {
+      await loadCode();
+    }
+  });
 
   const { copied, copy } = useClipboard({ copiedDuring: 2500, legacy: true });
 
   const { contentPage } = await useDocPage();
   const route = useRoute();
 
-  const onCopy = () => {
+  const onCopy = async () => {
+    // Load code if not already loaded
+    if (!codeLoaded.value) {
+      await loadCode();
+    }
+
     if (!codeBlock.value) return;
     copy(codeBlock.value);
     useSonner("Copied to clipboard!");
@@ -181,9 +210,5 @@
 
   const externalViewLink = computed(() => {
     return `/block-renderer?component=${encodeURIComponent(props.component)}&path=${encodeURIComponent(props.blockPath)}&containerClass=${encodeURIComponent(props.containerClass ?? "")}`;
-  });
-
-  const formattedCode = computed(() => {
-    return `\`\`\`vue\n${codeBlock.value}\n\`\`\``;
   });
 </script>
