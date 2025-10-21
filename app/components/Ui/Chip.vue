@@ -1,5 +1,5 @@
 <template>
-  <div data-slot="chip" class="relative inline-flex flex-shrink-0 items-center justify-center">
+  <div data-slot="chip" class="relative inline-flex shrink-0 items-center justify-center">
     <slot />
     <span
       v-if="localModel"
