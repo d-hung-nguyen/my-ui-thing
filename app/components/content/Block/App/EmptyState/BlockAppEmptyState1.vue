@@ -1,7 +1,7 @@
 <template>
   <UiContainer class="relative">
     <div
-      class="absolute inset-0 bg-[radial-gradient(--alpha(var(--color-border)/90%)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_closest-side_at_50%_50%,#000_50%,transparent_100%)] [background-size:20px_20px]"
+      class="absolute inset-0 bg-[radial-gradient(--alpha(var(--color-border)/90%)_1px,transparent_1px)] mask-[radial-gradient(ellipse_closest-side_at_50%_50%,#000_50%,transparent_100%)] bg-size-[20px_20px]"
     />
     <div class="relative z-10 flex flex-col items-center justify-center py-16 text-center lg:py-24">
       <slot name="icon">

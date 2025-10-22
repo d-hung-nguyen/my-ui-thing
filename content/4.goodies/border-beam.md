@@ -50,7 +50,7 @@ Create the component `BorderBeam.vue` in the `components` directory.
 ```vue [BorderBeam.vue]
 <template>
   <div
-    class="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)] [mask-composite:intersect] [mask-clip:padding-box,border-box]"
+    class="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]"
   >
     <motion.div
       :class="styles({ class: props.class })"
@@ -141,7 +141,7 @@ Create the component `BorderBeam.vue` in the `components` directory.
   });
 
   const styles = tv({
-    base: "absolute aspect-square bg-gradient-to-l from-(--color-from) via-(--color-to) to-transparent",
+    base: "absolute aspect-square bg-linear-to-l from-(--color-from) via-(--color-to) to-transparent",
   });
 </script>
 ```
