@@ -18,7 +18,7 @@
             >Code</UiTabsTrigger
           >
           <UiTabsTrigger
-            v-if="$slots.components"
+            v-if="$slots.components || components"
             class="relative z-10 h-7 bg-transparent px-2 text-sm data-[state=active]:bg-transparent"
             value="components"
             >Components</UiTabsTrigger
@@ -121,13 +121,16 @@
           </div>
         </slot>
       </UiTabsContent>
-      <!-- add class to remove mt from first child -->
       <UiTabsContent
         value="components"
         class="flex flex-col gap-3 **:data-[slot='prose-pre-wrapper']:mt-0"
       >
         <slot name="components" mdc-unwrap="p">
-          <div class="flex h-[400px] items-center justify-center text-center font-semibold">
+          <div v-if="components" class="flex flex-col gap-3">
+            <span>These are the components used in this example:</span>
+            <ProsePmX :command="`ui-thing@latest add ${components}`" />
+          </div>
+          <div v-else class="flex h-[400px] items-center justify-center text-center font-semibold">
             No components used.
           </div>
         </slot>
@@ -144,6 +147,7 @@
     defineProps<{
       blockPath?: string;
       component?: string;
+      components?: string;
       iframeHeight?: string;
       frameClass?: HtmlHTMLAttributes["class"];
       containerClass?: HtmlHTMLAttributes["class"];
