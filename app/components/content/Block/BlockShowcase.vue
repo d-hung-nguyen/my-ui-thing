@@ -27,7 +27,7 @@
             class="inset-0 size-full rounded px-0 py-0.5 [&>div]:rounded [&>div]:bg-muted"
           />
         </UiTabsList>
-        <div class="flex h-8 items-center rounded-md border bg-background p-0.5 shadow-xs">
+        <div class="flex h-auto items-center rounded-md border bg-background p-0.5 shadow-xs">
           <AnimatePresence>
             <Motion
               v-if="selectedTab === 'preview'"
@@ -47,17 +47,17 @@
               >
                 <UiToggleGroupItem
                   v-tippy="'Desktop View'"
-                  class="size-6 rounded-sm p-0"
+                  class="size-7 rounded-sm p-0"
                   value="100"
                 >
                   <Icon class="size-3.5" name="lucide:monitor" />
                   <span class="sr-only">Desktop View</span>
                 </UiToggleGroupItem>
-                <UiToggleGroupItem v-tippy="'Tablet View'" class="size-6 rounded-sm p-0" value="60">
+                <UiToggleGroupItem v-tippy="'Tablet View'" class="size-7 rounded-sm p-0" value="60">
                   <Icon class="size-3.5" name="lucide:tablet" />
                   <span class="sr-only">Tablet View</span>
                 </UiToggleGroupItem>
-                <UiToggleGroupItem v-tippy="'Mobile View'" value="40" class="size-6 rounded-sm p-0">
+                <UiToggleGroupItem v-tippy="'Mobile View'" value="40" class="size-7 rounded-sm p-0">
                   <Icon class="size-3.5" name="lucide:smartphone" />
                   <span class="sr-only">Mobile View</span>
                 </UiToggleGroupItem>
@@ -69,7 +69,7 @@
             v-tippy="'Full Screen View'"
             target="_blank"
             :href="externalViewLink"
-            class="h-6 rounded-sm"
+            class="h-7 rounded-sm"
             variant="ghost"
           >
             <Icon name="lucide:gallery-vertical" class="size-3.5" />
@@ -78,7 +78,7 @@
           <UiButton
             v-if="codeBlock"
             v-tippy="'Copy Source Code'"
-            class="h-6 rounded-sm"
+            class="h-7 rounded-sm"
             size="icon-sm"
             variant="ghost"
             @click="onCopy"
