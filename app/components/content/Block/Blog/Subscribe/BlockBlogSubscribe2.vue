@@ -1,32 +1,70 @@
 <template>
-  <div>
-    <UiCard class="rounded-none border-t-4 border-t-primary">
+  <Motion
+    as-child
+    initial="initial"
+    in-view="animate"
+    :variants="{
+      initial: { opacity: 0, scale: 0.9, y: 10 },
+      animate: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: { when: 'beforeChildren', delayChildren: stagger(0.2), type: 'keyframes' },
+      },
+    }"
+  >
+    <UiCard class="relative rounded-none shadow-xs">
+      <Motion
+        class="absolute top-0 h-0.5 w-full bg-primary"
+        :variants="{
+          initial: { scaleX: 0 },
+          animate: { scaleX: 1, transition: { duration: 1, ease: 'easeOut' } },
+        }"
+      />
       <UiCardContent>
-        <div
-          class="inline-flex h-14 w-14 items-center justify-center rounded-md border bg-background shadow-xs"
+        <Motion
+          :variants="{
+            initial: { opacity: 0, scale: 0 },
+            animate: {
+              opacity: 1,
+              scale: 1,
+              transition: { type: 'spring', stiffness: 200, damping: 20 },
+            },
+          }"
+          class="inline-flex size-14 items-center justify-center rounded-md bg-linear-to-b from-primary/40 text-primary"
         >
-          <Icon name="lucide:mail" class="h-6 w-6" />
-        </div>
+          <Icon name="lucide:mail" class="size-6" />
+        </Motion>
 
-        <h3 class="mt-8 mb-2 text-2xl font-semibold">Weekly newsletter</h3>
-        <p class="mb-8 text-muted-foreground">
+        <Motion as="h3" :variants="childVariant" class="mt-8 mb-2 text-2xl font-semibold"
+          >Weekly newsletter</Motion
+        >
+        <Motion as="p" :variants="childVariant" class="mb-6 text-muted-foreground">
           No spam. Just the latest releases and tips, interesting articles, and exclusive interviews
           in your inbox every week.
-        </p>
+        </Motion>
         <form>
-          <div class="w-full">
+          <Motion :variants="childVariant" class="w-full">
             <UiVeeInput required placeholder="Enter your email" aria-label="Enter your email" />
-          </div>
-          <p class="my-4 text-sm text-muted-foreground">
+          </Motion>
+          <Motion as="p" :variants="childVariant" class="my-4 text-sm text-muted-foreground">
             Read about our privacy policy <a href="#" class="text-primary">here</a>.
-          </p>
-          <div>
+          </Motion>
+          <Motion :variants="childVariant">
             <UiButton size="lg" class="w-full whitespace-nowrap" type="submit">Subscribe</UiButton>
-          </div>
+          </Motion>
         </form>
       </UiCardContent>
     </UiCard>
-  </div>
+  </Motion>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { stagger } from "motion-v";
+  import type { MotionProps } from "motion-v";
+
+  const childVariant: MotionProps["variants"] = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 200, damping: 20 } },
+  };
+</script>
