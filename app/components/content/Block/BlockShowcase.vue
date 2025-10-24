@@ -104,7 +104,7 @@
                   <UiIframeLazy
                     class="z-20 h-(--container-height) w-full bg-background"
                     :src="externalViewLink"
-                    :class="props.frameClass"
+                    :iframe-class="props.frameClass"
                   />
                 </div>
               </UiSplitterPanel>
@@ -116,7 +116,8 @@
       </UiTabsContent>
       <UiTabsContent value="code" class="**:data-[slot='prose-pre-wrapper']:mt-0">
         <slot mdc-unwrap="p">
-          <div class="flex h-[400px] items-center justify-center text-center font-semibold">
+          <ProseCodeSnippet v-if="codeSnippet" :file="codeSnippet" language="vue" :title="title" />
+          <div v-else class="flex h-[400px] items-center justify-center text-center font-semibold">
             No code snippet provided.
           </div>
         </slot>
@@ -128,7 +129,7 @@
         <slot name="components" mdc-unwrap="p">
           <div v-if="components" class="flex flex-col gap-3">
             <span>These are the components used in this example:</span>
-            <ProsePmX :command="`ui-thing@latest add ${components}`" />
+            <ProsePmX class="!mt-0" :command="`ui-thing@latest add ${components}`" />
           </div>
           <div v-else class="flex h-[400px] items-center justify-center text-center font-semibold">
             No components used.
@@ -151,6 +152,7 @@
       iframeHeight?: string;
       frameClass?: HtmlHTMLAttributes["class"];
       containerClass?: HtmlHTMLAttributes["class"];
+      title?: string;
     }>(),
     {
       blockPath: "",
@@ -198,6 +200,9 @@
       await loadCode();
     }
   });
+
+  // Generate the prose-code-snippet
+  const codeSnippet = computed(() => `/components/content/Block/${props.blockPath}.vue`);
 
   const { copied, copy } = useClipboard({ copiedDuring: 2500, legacy: true });
 
