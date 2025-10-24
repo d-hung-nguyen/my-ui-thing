@@ -3,8 +3,8 @@
     class="flex flex-col justify-between gap-4 rounded-lg border p-4 shadow-md lg:flex-row lg:items-center lg:p-3"
   >
     <div class="flex items-center justify-between">
-      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border">
-        <Icon :name="icon" class="h-6 w-6" />
+      <div class="flex size-10 shrink-0 items-center justify-center rounded-lg border">
+        <Icon :name="icon" />
       </div>
       <UiButton class="shrink-0 lg:hidden" size="icon-sm" variant="ghost">
         <Icon name="lucide:x" class="size-4 text-muted-foreground" />
@@ -14,11 +14,15 @@
       <p class="font-semibold">{{ title }}</p>
       <p class="text-muted-foreground lg:text-sm">{{ description }}</p>
     </div>
-    <UiButton class="ml-auto w-full whitespace-nowrap lg:w-auto" variant="outline" type="submit"
+    <UiButton
+      size="sm"
+      class="ml-auto w-full whitespace-nowrap lg:w-auto"
+      variant="outline"
+      type="submit"
       >Read update</UiButton
     >
-    <UiButton class="hidden shrink-0 lg:block" size="icon" variant="ghost">
-      <Icon name="lucide:x" class="h-5 w-5 text-muted-foreground" />
+    <UiButton class="hidden shrink-0 lg:flex" size="icon-sm" variant="ghost">
+      <Icon name="lucide:x" class="text-muted-foreground" />
     </UiButton>
   </UiContainer>
 </template>
