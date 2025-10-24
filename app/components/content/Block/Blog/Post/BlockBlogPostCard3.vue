@@ -1,31 +1,72 @@
 <template>
-  <div>
-    <NuxtLink :to="link">
-      <img
-        v-if="image"
-        :src="image"
-        :alt="alt"
-        class="mb-5 h-[240px] w-full rounded-lg object-cover shadow"
-      />
-    </NuxtLink>
-    <p v-if="headline" class="mb-2 text-sm font-semibold text-primary">
+  <Motion
+    initial="initial"
+    in-view="animate"
+    :variants="{
+      initial: { opacity: 0 },
+      animate: {
+        opacity: 1,
+        transition: {
+          when: 'beforeChildren',
+          delayChildren: stagger(0.15),
+        },
+      },
+    }"
+  >
+    <Motion v-if="image" as-child class="block" :variants="childVariant">
+      <NuxtLink :to="link">
+        <img :src="image" :alt="alt" class="mb-5 h-[240px] w-full rounded-lg object-cover shadow" />
+      </NuxtLink>
+    </Motion>
+    <Motion
+      v-if="headline"
+      as="p"
+      :variants="childVariant"
+      class="mb-2 text-sm font-semibold text-primary"
+    >
       {{ headline }} <span v-if="date">- {{ date }}</span>
-    </p>
+    </Motion>
     <NuxtLink :to="link">
-      <p class="mb-2 text-xl font-semibold lg:text-2xl">{{ title }}</p>
+      <Motion as="p" :variants="childVariant" class="mb-2 text-xl font-semibold lg:text-2xl">{{
+        title
+      }}</Motion>
     </NuxtLink>
-    <p v-if="description" class="mb-3 line-clamp-2 text-ellipsis text-muted-foreground">
+    <Motion
+      v-if="description"
+      as="p"
+      :variants="childVariant"
+      class="mb-3 line-clamp-2 text-ellipsis text-muted-foreground"
+    >
       {{ description }}
-    </p>
+    </Motion>
     <div class="flex flex-wrap items-center gap-2">
       <template v-for="t in tags" :key="t">
-        <UiBadge class="px-3 py-1 text-sm" variant="outline">{{ t }}</UiBadge>
+        <Motion v-if="headline" as-child :variants="childVariant">
+          <UiBadge class="px-2 py-0.5 text-sm" variant="outline">{{ t }}</UiBadge>
+        </Motion>
       </template>
     </div>
-  </div>
+  </Motion>
 </template>
 
 <script lang="ts" setup>
+  import { stagger } from "motion-v";
+  import type { MotionProps } from "motion-v";
+
+  const childVariant: MotionProps["variants"] = {
+    initial: { opacity: 0, y: 10 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "keyframes",
+        ease: "easeOut",
+        when: "beforeChildren",
+        delayChildren: stagger(0.1),
+      },
+    },
+  };
+
   withDefaults(
     defineProps<{
       image?: string;
@@ -33,8 +74,6 @@
       headline?: string;
       description?: string;
       title?: string;
-      userImage?: string;
-      userName?: string;
       date?: string;
       tags?: string[];
       link?: string;
@@ -48,8 +87,6 @@
       description:
         "How do you create compelling presentations that wow your colleagues and impress your managers?",
       date: "30 Jan 2024",
-      userImage: "https://api.dicebear.com/7.x/lorelei/svg?flip=false",
-      userName: "John Doe",
       readTime: "5 min read",
       tags: () => ["Design", "UX", "UI"],
       link: "#",
