@@ -1,10 +1,3 @@
-import {
-  createSharedComposable,
-  useActiveElement,
-  useDebounceFn,
-  useEventListener,
-} from "@vueuse/core";
-import { onMounted, reactive } from "vue";
 import type { MaybeRef } from "vue";
 
 type KbdKeysSpecificMap = {
