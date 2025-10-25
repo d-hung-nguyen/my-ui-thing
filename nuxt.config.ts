@@ -26,10 +26,11 @@ export default defineNuxtConfig({
         "vue-sonner",
         "reka-ui",
         "@faker-js/faker",
+        "mermaid",
       ],
     },
   },
-  experimental: { payloadExtraction: true },
+  experimental: { payloadExtraction: true, typescriptPlugin: true },
   modules: [
     "@nuxtjs/mdc",
     "@vueuse/nuxt",

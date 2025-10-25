@@ -34,5 +34,6 @@
     "tw`(.*?)`",
     "tw\\('(.*?)'\\)",
     "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
