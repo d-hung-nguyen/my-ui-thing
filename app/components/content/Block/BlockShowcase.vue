@@ -5,7 +5,7 @@
     }"
   >
     <UiTabs v-model="selectedTab">
-      <div class="mb-3 flex items-center justify-between gap-5">
+      <div class="mb-3 flex flex-col justify-between gap-5 gap-y-3 md:flex-row md:items-center">
         <UiTabsList class="relative h-auto border bg-transparent">
           <UiTabsTrigger
             class="relative z-10 h-7 bg-transparent px-2 text-sm data-[state=active]:bg-transparent"
@@ -27,7 +27,9 @@
             class="inset-0 size-full rounded px-0 py-0.5 [&>div]:rounded [&>div]:bg-muted"
           />
         </UiTabsList>
-        <div class="flex h-auto items-center rounded-md border bg-background p-0.5 shadow-xs">
+        <div
+          class="inline-flex h-auto w-fit items-center rounded-md border bg-background p-0.5 shadow-xs"
+        >
           <AnimatePresence>
             <Motion
               v-if="selectedTab === 'preview'"
@@ -76,7 +78,7 @@
             <span class="sr-only">External View</span>
           </UiButton>
           <UiButton
-            v-if="codeBlock"
+            v-if="codeBlock || codeSnippet"
             v-tippy="'Copy Source Code'"
             class="h-7 rounded-sm"
             size="icon-sm"
