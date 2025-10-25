@@ -1,38 +1,101 @@
 <template>
-  <UiContainer class="pb-10">
-    <UiContainer class="py-16 text-center">
-      <slot name="headline">
-        <p v-if="headline" class="font-semibold text-primary">{{ headline }}</p>
-      </slot>
-      <slot name="title">
-        <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">{{ title }}</h2>
-      </slot>
-      <slot name="description">
-        <p class="mx-auto max-w-[800px] text-lg text-muted-foreground lg:text-xl">
-          {{ description }}
-        </p>
-      </slot>
+  <!-- 
+    Contact information cards with icons
+    Features: Three-column info cards, icon badges, staggered animations
+  -->
+  <Motion
+    initial="initial"
+    in-view="animate"
+    :in-view-options="{ once: true }"
+    as-child
+    :variants="{
+      initial: { opacity: 0 },
+      animate: {
+        opacity: 1,
+        transition: {
+          when: 'beforeChildren',
+          delayChildren: stagger(0.1),
+        },
+      },
+    }"
+  >
+    <UiContainer class="pb-10">
+      <UiContainer class="py-16 text-center">
+        <slot name="headline">
+          <Motion
+            v-if="headline"
+            as="p"
+            :variants="childVariant"
+            class="font-semibold text-primary"
+          >
+            {{ headline }}
+          </Motion>
+        </slot>
+        <slot name="title">
+          <Motion
+            as="h2"
+            :variants="childVariant"
+            class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl"
+          >
+            {{ title }}
+          </Motion>
+        </slot>
+        <slot name="description">
+          <Motion
+            as="p"
+            :variants="childVariant"
+            class="mx-auto max-w-[800px] text-lg text-muted-foreground lg:text-xl"
+          >
+            {{ description }}
+          </Motion>
+        </slot>
+      </UiContainer>
+      <section class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <template v-for="c in contactInfo" :key="c.title">
+          <Motion
+            :variants="childVariant"
+            class="group flex flex-col items-center gap-2 rounded-lg border border-border bg-card p-6 transition-shadow hover:shadow-lg"
+          >
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 transition-colors group-hover:bg-primary/30"
+            >
+              <Icon :name="c.icon" class="h-6 w-6 text-primary" />
+            </div>
+            <h3 class="mt-4 text-lg font-medium lg:text-xl">{{ c.title }}</h3>
+            <p class="text-center text-muted-foreground">
+              {{ c.description }}
+            </p>
+            <a
+              :href="c.link"
+              target="_blank"
+              class="text-center font-medium text-primary hover:underline"
+            >
+              {{ c.value }}
+            </a>
+          </Motion>
+        </template>
+      </section>
     </UiContainer>
-    <section class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-      <template v-for="c in contactInfo" :key="c.title">
-        <div class="flex flex-col items-center gap-2">
-          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-            <Icon :name="c.icon" class="h-6 w-6 text-primary" />
-          </div>
-          <h3 class="mt-4 text-lg font-medium lg:text-xl">{{ c.title }}</h3>
-          <p class="text-center text-muted-foreground">
-            {{ c.description }}
-          </p>
-          <a :href="c.link" target="_blank" class="font-medium text-primary">
-            {{ c.value }}
-          </a>
-        </div>
-      </template>
-    </section>
-  </UiContainer>
+  </Motion>
 </template>
 
 <script lang="ts" setup>
+  import { stagger } from "motion-v";
+  import type { MotionProps } from "motion-v";
+
+  const childVariant: MotionProps["variants"] = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      },
+    },
+  };
+
   const contactInfo = [
     {
       title: "Email",
