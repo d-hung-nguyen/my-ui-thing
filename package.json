@@ -139,7 +139,6 @@
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/mdc": "^0.18.0",
-    "@oxc-parser/binding-linux-x64-gnu": "^0.95.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
     "@types/better-sqlite3": "^7.6.13",
@@ -152,9 +151,8 @@
     "eslint": "^9.38.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
-    "nuxt": "4.2.0",
+    "nuxt": "4.1.2",
     "nuxt-gtag": "^4.1.0",
-    "oxc-parser": "^0.95.0",
     "playwright": "^1.56.1",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
@@ -162,10 +160,5 @@
     "typescript": "^5.9.3",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3"
-  },
-  "packageManager": "npm@10.8.2",
-  "engines": {
-    "node": ">=22.20",
-    "npm": "latest"
   }
 }

@@ -30,7 +30,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  experimental: { payloadExtraction: true, typescriptPlugin: true },
+  experimental: { payloadExtraction: true },
   modules: [
     "@nuxtjs/mdc",
     "@vueuse/nuxt",
