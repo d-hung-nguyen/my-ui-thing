@@ -11,7 +11,7 @@
   "scripts": {
     "automd": "npx automd@latest --input **/*.md --watch",
     "build": "NODE_OPTIONS=--max_old_space_size=12000 nuxt build",
-    "clean": "rm -rf .nuxt .data dist .output node_modules yarn.lock package-lock.json && npm cache clean --force && npm i && npm rebuild",
+    "clean": "rm -rf .nuxt .data dist .output node_modules yarn.lock package-lock.json && npm cache clean --force && npm i --force && npm rebuild",
     "dev": "nuxt dev --host",
     "format": "npx prettier --write .",
     "generate": "nuxt generate",
@@ -101,7 +101,7 @@
     "nuxt-og-image": "^5.1.12",
     "nuxt-swiper": "^2.0.1",
     "quill-blot-formatter": "^1.0.5",
-    "reka-ui": "^2.5.1",
+    "reka-ui": "^2.6.0",
     "rough-notation": "^0.5.1",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.3.1",
@@ -139,6 +139,7 @@
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/mdc": "^0.18.0",
+    "@oxc-parser/binding-linux-x64-gnu": "^0.95.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
     "@types/better-sqlite3": "^7.6.13",
@@ -163,9 +164,6 @@
     "vue-router": "^4.6.3"
   },
   "packageManager": "npm@10.8.2",
-  "optionalDependencies": {
-    "@oxc-parser/binding-linux-x64-gnu": "0.95.0"
-  },
   "engines": {
     "node": ">=22.20",
     "npm": "latest"
