@@ -14,9 +14,6 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 # Install runtime dependencies for better-sqlite3 and curl for health checks
 RUN apk add --no-cache sqlite curl
-# Install playwright dependencies
-RUN npx -y playwright install-deps
-RUN npx -y playwright install
 COPY --from=builder /app/.output ./
 ENV PORT=3000
 ENV HOST=0.0.0.0
