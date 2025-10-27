@@ -11,7 +11,7 @@
   "scripts": {
     "automd": "npx automd@latest --input **/*.md --watch",
     "build": "NODE_OPTIONS=--max_old_space_size=12000 nuxt build",
-    "clean": "rm -rf .nuxt .data dist .output node_modules yarn.lock package-lock.json && npm cache clean --force && npm i --force && npm rebuild",
+    "clean": "rm -rf .nuxt .data dist .output node_modules yarn.lock package-lock.json && npm i && npm rebuild",
     "dev": "nuxt dev --host",
     "format": "npx prettier --write .",
     "generate": "nuxt generate",
