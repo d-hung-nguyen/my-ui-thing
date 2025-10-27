@@ -27,6 +27,8 @@ export default defineNuxtConfig({
         "reka-ui",
         "@faker-js/faker",
         "mermaid",
+        "@baybreezy/file-extension-icon",
+        "@iconify/utils",
       ],
     },
   },
