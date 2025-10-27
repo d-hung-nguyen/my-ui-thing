@@ -18,5 +18,8 @@
 
 <script lang="ts" setup>
   definePageMeta({ layout: "home" });
-  defineOgImageScreenshot();
+  defineOgImageComponent("UIThing", {
+    title: "UI Thing - Beautiful UI components for your Nuxt projects",
+    description: "Discover a collection of stunning UI components for your next Nuxt project.",
+  });
 </script>

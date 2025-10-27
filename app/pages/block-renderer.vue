@@ -31,7 +31,6 @@
     twitterDescription: "Copy and paste blocks of code into your project.",
     twitterCard: "summary_large_image",
   });
-  defineOgImageScreenshot();
 
   const dynamicComponent = shallowRef();
 
@@ -56,4 +55,9 @@
 
   onMounted(loadComponent);
   watch(() => route.fullPath, loadComponent);
+
+  defineOgImageComponent("UIThing", {
+    title: trim(startCase((route?.query?.component as string) || "Blocks")),
+    description: "Copy and paste blocks of code into your project.",
+  });
 </script>

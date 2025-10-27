@@ -48,5 +48,8 @@
     ogUrl: `${SITE_URL}${route.path}`,
   });
 
-  defineOgImageScreenshot();
+  defineOgImageComponent("UIThing", {
+    title: title,
+    description: description,
+  });
 </script>
