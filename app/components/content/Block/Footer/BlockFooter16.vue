@@ -1,0 +1,87 @@
+<template>
+  <footer class="border-t bg-muted/30">
+    <UiContainer class="py-12 lg:py-16">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Left - Logo and tagline -->
+        <div>
+          <NuxtLink to="#" class="mb-3 inline-flex items-center gap-3">
+            <img
+              src="/icon.png"
+              fit="contain"
+              alt="Company Logo"
+              title="Company Logo"
+              class="h-8 object-contain"
+            />
+            <span class="text-xl font-semibold">{{ COMPANY_NAME }}</span>
+          </NuxtLink>
+          <p class="text-sm text-muted-foreground">
+            Making the world a better place through technology.
+          </p>
+        </div>
+
+        <!-- Center - Quick Links -->
+        <div class="flex items-center justify-center">
+          <nav class="flex flex-wrap gap-4 text-sm">
+            <NuxtLink
+              v-for="item in ['About', 'Blog', 'Jobs', 'Press', 'Partners']"
+              :key="item"
+              class="text-muted-foreground transition-colors hover:text-primary"
+              to="#"
+            >
+              {{ item }}
+            </NuxtLink>
+          </nav>
+        </div>
+
+        <!-- Right - Newsletter -->
+        <div>
+          <p class="mb-2 text-sm font-semibold">Subscribe to our newsletter</p>
+          <form class="flex gap-2">
+            <input
+              type="email"
+              placeholder="Your email"
+              class="h-8 flex-1 rounded-md border bg-background px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
+            />
+            <UiButton size="sm" type="submit">
+              <Icon name="heroicons:paper-airplane" class="h-4 w-4" />
+            </UiButton>
+          </form>
+        </div>
+      </div>
+
+      <UiDivider class="my-8" />
+
+      <div class="flex flex-col items-center justify-between gap-4 lg:flex-row">
+        <p class="text-sm text-muted-foreground">
+          &copy; {{ new Date().getFullYear() }} {{ COMPANY_NAME }}. All rights reserved.
+        </p>
+
+        <div class="flex items-center gap-6">
+          <NuxtLink
+            to="#"
+            class="text-sm text-muted-foreground transition-colors hover:text-primary"
+          >
+            Privacy
+          </NuxtLink>
+          <NuxtLink
+            to="#"
+            class="text-sm text-muted-foreground transition-colors hover:text-primary"
+          >
+            Terms
+          </NuxtLink>
+          <div class="flex items-center gap-3">
+            <NuxtLink to="#" class="text-muted-foreground transition-colors hover:text-primary">
+              <Icon name="logos:facebook" class="size-5" />
+            </NuxtLink>
+            <NuxtLink to="#" class="text-muted-foreground transition-colors hover:text-primary">
+              <Icon name="logos:twitter" class="size-5" />
+            </NuxtLink>
+            <NuxtLink to="#" class="text-muted-foreground transition-colors hover:text-primary">
+              <Icon name="logos:linkedin-icon" class="size-5" />
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </UiContainer>
+  </footer>
+</template>
