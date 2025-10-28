@@ -1,19 +1,41 @@
 <template>
-  <UiContainer class="py-16 lg:py-24">
-    <p class="text-center font-semibold text-primary">Features</p>
-    <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
-      Beautiful analytics to grow smarter
-    </h2>
-    <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
-      Powerful, self-serve product and growth analytics to help you convert, engage, and retain more
-      users. Trusted by over 4,000 startups.
-    </p>
+  <Motion
+    initial="initial"
+    in-view="animate"
+    :in-view-options="{ once: true }"
+    as-child
+    :variants="{
+      initial: { opacity: 0 },
+      animate: {
+        opacity: 1,
+        transition: {
+          when: 'beforeChildren',
+          delayChildren: stagger(0.1),
+        },
+      },
+    }"
+  >
+    <UiContainer class="py-16 lg:py-24">
+      <Motion :variants="childVariant" :transition="{ duration: 0.5 }">
+        <p class="text-center font-semibold text-primary">Features</p>
+        <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
+          Beautiful analytics to grow smarter
+        </h2>
+        <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
+          Powerful, self-serve product and growth analytics to help you convert, engage, and retain
+          more users. Trusted by over 4,000 startups.
+        </p>
+      </Motion>
 
-    <div
-      class="grid grid-cols-1 gap-y-10 py-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 lg:gap-y-16 lg:py-16"
-    >
-      <template v-for="(f, i) in features" :key="i">
-        <div class="group flex flex-col items-center justify-center">
+      <div
+        class="grid grid-cols-1 gap-y-10 py-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 lg:gap-y-16 lg:py-16"
+      >
+        <Motion
+          v-for="(f, i) in features"
+          :key="i"
+          class="group flex flex-col items-center justify-center"
+          :variants="childVariant"
+        >
           <div class="flex h-12 w-12 items-center justify-center rounded-md border">
             <Icon
               :name="f.icon"
@@ -28,13 +50,28 @@
             class="mt-1 max-w-[400px] text-center text-balance text-muted-foreground lg:mt-2"
             v-html="f.description"
           />
-        </div>
-      </template>
-    </div>
-  </UiContainer>
+        </Motion>
+      </div>
+    </UiContainer>
+  </Motion>
 </template>
 
 <script lang="ts" setup>
+  import { stagger } from "motion-v";
+  import type { MotionProps } from "motion-v";
+
+  const childVariant: MotionProps["variants"] = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      },
+    },
+  };
   const features = [
     {
       icon: "heroicons:chat-bubble-left-right",

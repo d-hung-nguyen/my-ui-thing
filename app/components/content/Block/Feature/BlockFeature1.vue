@@ -1,46 +1,107 @@
 <template>
-  <UiContainer class="py-16 lg:py-24">
-    <p class="text-center font-semibold text-primary">Features</p>
-    <h2 class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl">
-      Beautiful analytics to grow smarter
-    </h2>
-    <p class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl">
-      Powerful, self-serve product and growth analytics to help you convert, engage, and retain more
-      users. Trusted by over 4,000 startups.
-    </p>
+  <Motion
+    initial="initial"
+    in-view="animate"
+    :in-view-options="{ once: true }"
+    as-child
+    :variants="{
+      initial: { opacity: 0 },
+      animate: {
+        opacity: 1,
+        transition: {
+          when: 'beforeChildren',
+          delayChildren: stagger(0.12),
+        },
+      },
+    }"
+  >
+    <UiContainer class="py-16 lg:py-24">
+      <Motion :variants="childVariant">
+        <Motion as="p" :variants="childVariant" class="text-center font-semibold text-primary"
+          >Features</Motion
+        >
+        <Motion
+          as="h2"
+          :variants="childVariant"
+          class="mt-3 mb-4 text-center text-3xl font-semibold lg:mb-5 lg:text-4xl"
+        >
+          Beautiful analytics to grow smarter
+        </Motion>
+        <Motion
+          as="p"
+          :variants="childVariant"
+          class="mx-auto max-w-[760px] text-center text-lg text-muted-foreground lg:text-xl"
+        >
+          Powerful, self-serve product and growth analytics to help you convert, engage, and retain
+          more users. Trusted by over 4,000 startups.
+        </Motion>
+      </Motion>
 
-    <template v-for="(f, i) in features" :key="i">
-      <section
-        class="mt-12 grid grid-cols-1 items-center gap-10 lg:mt-24 lg:h-[520px] lg:grid-cols-2 lg:gap-20"
-      >
-        <div :class="[i % 2 == 0 ? 'lg:order-none' : 'lg:order-1']">
-          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-            <Icon name="heroicons:chat-bubble-left-right" class="h-6 w-6 text-primary" />
-          </div>
-          <h3 class="mb-2 text-2xl font-semibold lg:mb-4 lg:text-3xl" v-html="f.title" />
-          <p class="text-muted-foreground lg:text-lg" v-html="f.description" />
+      <template v-for="(f, i) in features" :key="i">
+        <Motion :variants="childVariant" :transition="{ delay: i * 0.2 }">
+          <section
+            class="mt-12 grid grid-cols-1 items-center gap-10 lg:mt-24 lg:h-[520px] lg:grid-cols-2 lg:gap-20"
+          >
+            <div :class="[i % 2 == 0 ? 'lg:order-0' : 'lg:order-1']">
+              <div
+                class="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"
+              >
+                <Icon name="heroicons:chat-bubble-left-right" class="h-6 w-6 text-primary" />
+              </div>
+              <h3 class="mb-2 text-2xl font-semibold lg:mb-4 lg:text-3xl" v-html="f.title" />
+              <p class="text-muted-foreground lg:text-lg" v-html="f.description" />
 
-          <ul class="mt-8 flex flex-col gap-5 text-muted-foreground">
-            <template v-for="(p, k) in f.points" :key="`Point-${k}`">
-              <li class="flex gap-3 lg:text-lg">
-                <Icon name="heroicons:check-circle" class="h-6 w-6 shrink-0 text-primary" />
-                <span v-html="p.text" />
-              </li>
-            </template>
-          </ul>
-        </div>
+              <Motion
+                as="ul"
+                class="mt-8 flex flex-col gap-5 text-muted-foreground"
+                :initial="{ opacity: 0 }"
+                :visible-once="{ opacity: 1, transition: { staggerChildren: 0.1 } }"
+              >
+                <Motion
+                  v-for="(p, k) in f.points"
+                  :key="`Point-${k}`"
+                  as="li"
+                  class="flex gap-3 lg:text-lg"
+                  :initial="{ opacity: 0, x: -10 }"
+                  :visible-once="{ opacity: 1, x: 0 }"
+                >
+                  <Icon name="heroicons:check-circle" class="h-6 w-6 shrink-0 text-primary" />
+                  <span v-html="p.text" />
+                </Motion>
+              </Motion>
+            </div>
 
-        <img
-          :src="f.imageUrl"
-          :alt="f.title"
-          class="h-[300px] w-full rounded-lg object-cover shadow-xs lg:h-[520px]"
-        />
-      </section>
-    </template>
-  </UiContainer>
+            <Motion
+              as="img"
+              :while-hover="{ scale: 1.03 }"
+              :variants="{
+                initial: { opacity: 0, scale: 1.1 },
+                animate: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+              }"
+              :src="f.imageUrl"
+              :alt="f.title"
+              class="h-[300px] w-full rounded-lg object-cover shadow-xs lg:h-[520px]"
+            />
+          </section>
+        </Motion>
+      </template>
+    </UiContainer>
+  </Motion>
 </template>
 
 <script lang="ts" setup>
+  import { stagger } from "motion-v";
+  import type { MotionProps } from "motion-v";
+
+  const childVariant: MotionProps["variants"] = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { when: "beforeChildren", delayChildren: stagger(0.12) },
+    },
+  };
+
   const features = [
     {
       title: "Share team inboxes",
