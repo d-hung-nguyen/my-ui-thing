@@ -1,9 +1,9 @@
 <template>
   <div class="relative flex h-screen items-center justify-center">
     <div
-      class="absolute inset-0 z-[1] bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] [mask-image:radial-gradient(circle,transparent_25%,var(--color-border)_100%)] bg-[size:100px_100px]"
+      class="absolute inset-0 z-1 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] mask-[radial-gradient(circle_at_center,white,transparent_90%)] bg-size-[100px_100px]"
     />
-    <div class="relative z-[2] w-full max-w-[340px] px-5">
+    <div class="relative z-2 w-full max-w-[340px] px-5">
       <div
         class="mx-auto mb-6 flex size-14 items-center justify-center rounded-lg border bg-background"
       >
