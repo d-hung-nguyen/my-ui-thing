@@ -630,7 +630,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       >
         <Icon name="lucide:chevron-up" class="size-4" :aria-hidden="true" />
       </UiButton>
-      <span class="flex items-center border border-input px-3 text-sm font-medium">{{
+      <span class="border-input flex items-center border px-3 text-sm font-medium">{{
         counter
       }}</span>
       <UiButton
@@ -793,7 +793,7 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div class="mx-auto text-center">
     <div class="inline-flex items-center gap-2 align-top">
       <div
-        class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-input"
+        class="border-input relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border"
         :aria-label="previewUrl ? 'Preview of uploaded image' : 'Default user avatar'"
       >
         <Icon
@@ -820,7 +820,7 @@ To use these examples you will have to copy the code and adjust it for your own 
     <TransitionExpand>
       <div v-if="fileName" class="mt-2">
         <div class="inline-flex gap-2 text-xs">
-          <p class="truncate text-muted-foreground" aria-live="polite">
+          <p class="text-muted-foreground truncate" aria-live="polite">
             {{ fileName }}
           </p>
           <button

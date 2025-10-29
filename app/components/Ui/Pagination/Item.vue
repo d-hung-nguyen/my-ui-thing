@@ -4,7 +4,7 @@
       <UiButton
         :variant
         :size
-        class="data-[selected=true]:border-transparent! data-[selected=true]:bg-primary! data-[selected=true]:text-primary-foreground!"
+        class="data-[selected=true]:bg-primary! data-[selected=true]:text-primary-foreground! data-[selected=true]:border-transparent!"
       >
         {{ value }}
       </UiButton>

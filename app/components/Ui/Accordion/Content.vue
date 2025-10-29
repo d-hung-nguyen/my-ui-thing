@@ -29,6 +29,6 @@
   const forwarded = reactiveOmit(props, "class", "content");
 
   const styles = tv({
-    base: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+    base: "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm",
   });
 </script>

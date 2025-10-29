@@ -5,7 +5,7 @@
         <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           People who care about your growth
         </h1>
-        <p class="text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground text-lg lg:text-xl">
           Powerful, self-serve product and growth analytics to help you convert, engage, and retain
           more.
         </p>
@@ -13,7 +13,7 @@
           <div class="w-full lg:w-[60%]">
             <UiVeeInput required placeholder="Enter your email" aria-label="Enter your email" />
           </div>
-          <p class="my-2 text-sm text-muted-foreground lg:hidden">
+          <p class="text-muted-foreground my-2 text-sm lg:hidden">
             We care about your data in our privacy policy.
           </p>
           <div>
@@ -22,7 +22,7 @@
             >
           </div>
         </form>
-        <p class="mt-3 hidden text-sm text-muted-foreground lg:block">
+        <p class="text-muted-foreground mt-3 hidden text-sm lg:block">
           We care about your data in our privacy policy.
         </p>
 
@@ -30,7 +30,7 @@
           <div class="flex items-center -space-x-1">
             <template v-for="n in 5" :key="n">
               <UiAvatar
-                class="bg-background ring-2 ring-ring/30 transition hover:ring-ring dark:ring-ring/20 dark:hover:ring-ring"
+                class="bg-background ring-ring/30 hover:ring-ring dark:ring-ring/20 dark:hover:ring-ring ring-2 transition"
                 src="https://api.dicebear.com/7.x/lorelei/svg?flip=false"
               />
             </template>
@@ -45,7 +45,7 @@
                 />
               </template>
             </div>
-            <p class="text-sm text-muted-foreground">from 1,000+ customers</p>
+            <p class="text-muted-foreground text-sm">from 1,000+ customers</p>
           </div>
         </div>
       </div>

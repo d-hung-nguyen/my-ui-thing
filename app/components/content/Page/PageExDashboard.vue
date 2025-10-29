@@ -1,6 +1,6 @@
 <template>
   <div class="py-5 max-[1440px]:px-4 min-[1440px]:container">
-    <div class="rounded-md border bg-background shadow">
+    <div class="bg-background rounded-md border shadow">
       <div class="flex flex-col">
         <ExamplesDashboardHeader />
         <div class="flex-1 space-y-4 p-8 pt-6">
@@ -42,11 +42,11 @@
                   <UiCard>
                     <UiCardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
                       <UiCardTitle class="text-sm font-medium"> {{ s.title }} </UiCardTitle>
-                      <Icon :name="s.icon" class="size-4 text-muted-foreground" />
+                      <Icon :name="s.icon" class="text-muted-foreground size-4" />
                     </UiCardHeader>
                     <UiCardContent>
                       <div class="text-2xl font-bold">{{ s.amount }}</div>
-                      <p class="text-xs text-muted-foreground">{{ s.subtext }}</p>
+                      <p class="text-muted-foreground text-xs">{{ s.subtext }}</p>
                     </UiCardContent>
                   </UiCard>
                 </template>
@@ -77,7 +77,7 @@
                             />
                             <div class="ml-4 space-y-1">
                               <p class="text-sm leading-none font-medium">{{ r.name }}</p>
-                              <p class="text-sm text-muted-foreground">{{ r.email }}</p>
+                              <p class="text-muted-foreground text-sm">{{ r.email }}</p>
                             </div>
                             <div class="ml-auto font-medium">{{ r.amount }}</div>
                           </div>

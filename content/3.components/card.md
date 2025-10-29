@@ -49,7 +49,7 @@ npx ui-thing@latest add card
         <template #footer>
           <UiCardFooter class="flex-col gap-4">
             <UiButton class="w-full" effect="ringHover" type="submit">Sign In</UiButton>
-            <UiDivider><span class="text-sm text-muted-foreground">or</span></UiDivider>
+            <UiDivider><span class="text-muted-foreground text-sm">or</span></UiDivider>
             <UiButton variant="outline" class="w-full">
               <Icon name="logos:google-icon" />
               <span>Continue with Google</span>
@@ -99,7 +99,7 @@ npx ui-thing@latest add card
 
           <ul class="mt-7 flex flex-col gap-6 pl-2">
             <li v-for="(item, i) in items" :key="i" class="flex items-start gap-4">
-              <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-primary" />
+              <span class="bg-primary mt-1 h-2.5 w-2.5 shrink-0 rounded-full" />
               <div class="flex flex-col gap-px text-sm">
                 <p class="leading-none font-medium">{{ item.text }}</p>
                 <span class="text-muted-foreground">{{ item.time }}</span>

@@ -6,7 +6,7 @@
         :href="link.href"
         :target="link.external ? '_blank' : '_self'"
         :external="link.external"
-        class="flex items-center gap-2 text-muted-foreground transition-all hover:text-foreground"
+        class="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-all"
       >
         <Icon :name="link.icon" />
         {{ link.label }}</NuxtLink

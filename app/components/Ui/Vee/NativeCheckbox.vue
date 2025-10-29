@@ -72,9 +72,9 @@
   export const nativeCheckboxStyles = tv({
     slots: {
       checkbox:
-        "peer form-checkbox shrink-0 cursor-pointer rounded-[4px] border border-input bg-background shadow-xs transition duration-200 focus:ring-[3px] focus:ring-ring/50 focus:ring-offset-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20",
+        "peer form-checkbox border-input bg-background focus:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 shrink-0 cursor-pointer rounded-[4px] border shadow-xs transition duration-200 focus:ring-[3px] focus:ring-offset-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
       label: "cursor-pointer font-medium",
-      description: "text-pretty text-muted-foreground",
+      description: "text-muted-foreground text-pretty",
       wrapper: "flex items-start gap-3",
       error: "text-destructive",
     },

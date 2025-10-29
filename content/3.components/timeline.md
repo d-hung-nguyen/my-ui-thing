@@ -308,7 +308,7 @@ npx ui-thing@latest add timeline
         <UiTimelineDate>{{ item.date }}</UiTimelineDate>
         <UiTimelineTitle>{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
+          class="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7"
         >
           <Icon
             name="lucide:check"
@@ -384,7 +384,7 @@ npx ui-thing@latest add timeline
         />
         <UiTimelineTitle class="mt-0.5">{{ item.title }}</UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
+          class="bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center border-none group-data-[orientation=vertical]/timeline:-left-7"
         >
           <Icon :name="item.icon" :size="14" />
         </UiTimelineIndicator>
@@ -463,17 +463,17 @@ npx ui-thing@latest add timeline
         />
         <UiTimelineTitle class="mt-0.5">
           {{ item.title }}
-          <span class="text-sm font-normal text-muted-foreground">
+          <span class="text-muted-foreground text-sm font-normal">
             {{ item.action }}
           </span>
         </UiTimelineTitle>
         <UiTimelineIndicator
-          class="flex size-6 items-center justify-center border-none bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7"
+          class="bg-primary/10 group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center border-none group-data-[orientation=vertical]/timeline:-left-7"
         >
           <img :src="item.image" :alt="item.title" class="size-6 rounded-full" />
         </UiTimelineIndicator>
       </UiTimelineHeader>
-      <UiTimelineContent class="mt-2 rounded-lg border px-4 py-3 text-foreground">
+      <UiTimelineContent class="text-foreground mt-2 rounded-lg border px-4 py-3">
         {{ item.description }}
         <UiTimelineDate class="mt-1 mb-0">{{ item.date }}</UiTimelineDate>
       </UiTimelineContent>
@@ -643,7 +643,7 @@ npx ui-thing@latest add timeline
 <template>
   <div class="flex justify-center">
     <div class="space-y-3">
-      <div class="text-xs font-medium text-muted-foreground">Activity</div>
+      <div class="text-muted-foreground text-xs font-medium">Activity</div>
       <UiTimeline>
         <UiTimelineItem
           v-for="item in items"
@@ -651,9 +651,9 @@ npx ui-thing@latest add timeline
           :step="item.id"
           class="!m-0 flex-row items-center gap-3 !py-2.5"
         >
-          <Icon :name="getActionIcon(item.action)" class="size-4 text-muted-foreground/80" />
+          <Icon :name="getActionIcon(item.action)" class="text-muted-foreground/80 size-4" />
           <UiAvatar :src="item.image" :alt="item.user" class="size-6" />
-          <UiTimelineContent class="flex items-center gap-2 text-foreground">
+          <UiTimelineContent class="text-foreground flex items-center gap-2">
             <a class="font-medium hover:underline" href="#">
               {{ item.user }}
             </a>

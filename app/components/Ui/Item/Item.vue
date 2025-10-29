@@ -16,7 +16,7 @@
   import type { HTMLAttributes } from "vue";
 
   export const itemStyles = tv({
-    base: "group/item flex flex-wrap items-center rounded-md border border-transparent text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-accent/50",
+    base: "group/item focus-visible:border-ring focus-visible:ring-ring/50 [a]:hover:bg-accent/50 flex flex-wrap items-center rounded-md border border-transparent text-sm transition-colors duration-100 outline-none focus-visible:ring-[3px] [a]:transition-colors",
 
     variants: {
       variant: {

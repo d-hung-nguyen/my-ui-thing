@@ -52,7 +52,7 @@
   <div>
     <div>
       <h3 class="text-lg font-semibold">Column Reorder</h3>
-      <p class="mb-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mb-2 text-sm">
         You can reorder the columns by dragging and dropping the column header.
       </p>
       <div class="mb-4 flex gap-2">
@@ -82,10 +82,10 @@
 
   :deep(.dataTable) {
     .dtcr-moving-first {
-      @apply border-l border-primary;
+      @apply border-primary border-l;
     }
     .dtcr-moving-last {
-      @apply border-r border-primary;
+      @apply border-primary border-r;
     }
     thead > tr {
       @apply bg-muted/50;

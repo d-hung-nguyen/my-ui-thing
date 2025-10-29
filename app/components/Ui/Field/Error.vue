@@ -33,7 +33,7 @@
   import type { HTMLAttributes } from "vue";
 
   export const fieldErrorStyles = tv({
-    base: ["text-sm font-normal text-destructive"],
+    base: ["text-destructive text-sm font-normal"],
   });
 </script>
 <script lang="ts" setup>

@@ -25,6 +25,6 @@
   >();
   const forwarded = reactiveOmit(props, "class", "fallback");
   const styles = tv({
-    base: "flex size-full items-center justify-center rounded-full bg-muted",
+    base: "bg-muted flex size-full items-center justify-center rounded-full",
   });
 </script>

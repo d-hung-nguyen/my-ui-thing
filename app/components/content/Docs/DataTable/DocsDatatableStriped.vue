@@ -60,7 +60,7 @@
     border-top-width: 0px;
   }
   :deep(table.dataTable tbody tr) {
-    @apply border-none odd:bg-muted/50 hover:bg-transparent odd:hover:bg-muted/50;
+    @apply odd:bg-muted/50 odd:hover:bg-muted/50 border-none hover:bg-transparent;
   }
   :deep(table.dataTable tbody) {
     @apply [&_td:first-child]:rounded-l-lg [&_td:last-child]:rounded-r-lg;

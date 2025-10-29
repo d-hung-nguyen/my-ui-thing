@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
     <div class="grid space-y-1">
-      <h1 class="text-base font-semibold text-foreground">Customize</h1>
-      <p class="text-xs text-muted-foreground">Pick a style and color for your components.</p>
+      <h1 class="text-foreground text-base font-semibold">Customize</h1>
+      <p class="text-muted-foreground text-xs">Pick a style and color for your components.</p>
     </div>
     <div class="space-y-1.5 pt-6">
       <UiLabel for="color" class="text-xs"> Color </UiLabel>
@@ -12,7 +12,7 @@
           :key="index"
           variant="outline"
           class="h-8 justify-start bg-transparent px-3"
-          :class="color === theme ? 'border-2 border-foreground' : ''"
+          :class="color === theme ? 'border-foreground border-2' : ''"
           @click="setTheme(color)"
         >
           <span
@@ -35,7 +35,7 @@
           :key="index"
           variant="outline"
           class="h-8 justify-center px-3"
-          :class="r === radius ? 'border-2 border-foreground' : ''"
+          :class="r === radius ? 'border-foreground border-2' : ''"
           @click="setRadius(r)"
         >
           <span class="text-xs">
@@ -51,7 +51,7 @@
         <UiButton
           class="h-8"
           variant="outline"
-          :class="{ 'border-2 border-foreground': !isDark }"
+          :class="{ 'border-foreground border-2': !isDark }"
           @click="toggleColorMode"
         >
           <Icon name="lucide:sun" class="mr-2 size-4" />
@@ -60,7 +60,7 @@
         <UiButton
           class="h-8"
           variant="outline"
-          :class="{ 'border-2 border-foreground': isDark }"
+          :class="{ 'border-foreground border-2': isDark }"
           @click="toggleColorMode"
         >
           <Icon name="lucide:moon" class="mr-2 size-4" />

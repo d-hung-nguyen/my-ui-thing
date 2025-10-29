@@ -77,7 +77,7 @@
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-lg border border-border bg-background">
+  <div class="border-border bg-background overflow-hidden rounded-lg border">
     <UiDatatable class="nowrap compact hover" :data="programmingLanguages" :options />
   </div>
 </template>

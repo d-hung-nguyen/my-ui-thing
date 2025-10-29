@@ -19,20 +19,20 @@
         /**
          * Add dividers between fields
          */
-        divided: "[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-border",
+        divided: "[&>*:not(:last-child)]:border-border [&>*:not(:last-child)]:border-b",
         /**
          * Add striped background to alternate fields
          */
-        striped: "*:pl-4 [&>*:nth-child(even)]:bg-muted dark:[&>*:nth-child(even)]:bg-muted/50",
+        striped: "[&>*:nth-child(even)]:bg-muted dark:[&>*:nth-child(even)]:bg-muted/50 *:pl-4",
         /**
          * Add border around the group
          */
         bordered:
-          "overflow-hidden rounded-lg border border-border *:pl-4 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-border",
+          "border-border [&>*:not(:last-child)]:border-border overflow-hidden rounded-lg border *:pl-4 [&>*:not(:last-child)]:border-b",
         /**
          * A combination of all variants
          */
-        all: "overflow-hidden rounded-lg border border-border *:pl-4 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-border [&>*:nth-child(even)]:bg-muted dark:[&>*:nth-child(even)]:bg-muted/50",
+        all: "border-border [&>*:not(:last-child)]:border-border [&>*:nth-child(even)]:bg-muted dark:[&>*:nth-child(even)]:bg-muted/50 overflow-hidden rounded-lg border *:pl-4 [&>*:not(:last-child)]:border-b",
       },
     },
     defaultVariants: {

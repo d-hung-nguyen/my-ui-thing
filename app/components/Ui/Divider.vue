@@ -59,7 +59,7 @@
     slots: {
       base: "flex w-full items-center text-center align-middle",
       container: "flex font-medium",
-      border: "flex border-border",
+      border: "border-border flex",
       icon: "h-5 w-5 shrink-0",
       label: "text-sm",
     },

@@ -30,6 +30,6 @@
     }
   );
   const styles = tv({
-    base: "text-sm text-muted-foreground",
+    base: "text-muted-foreground text-sm",
   });
 </script>

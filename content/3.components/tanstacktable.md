@@ -72,7 +72,7 @@ npx ui-thing@latest add tanstacktable
     >
       <template #empty>
         <div class="flex w-full flex-col items-center justify-center gap-5 py-5">
-          <Icon name="lucide:database" class="h-12 w-12 text-muted-foreground" />
+          <Icon name="lucide:database" class="text-muted-foreground h-12 w-12" />
           <span class="mt-2">No data available.</span>
         </div>
       </template>
@@ -374,10 +374,10 @@ npx ui-thing@latest add tanstacktable
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-center text-sm">
       Basic data table made with
       <a
-        class="underline hover:text-foreground"
+        class="hover:text-foreground underline"
         href="https://tanstack.com/table"
         target="_blank"
         rel="noopener noreferrer"
@@ -710,17 +710,17 @@ npx ui-thing@latest add tanstacktable
               <Icon
                 v-if="header.column.getIsSorted() == 'asc'"
                 name="lucide:chevron-up"
-                class="size-4 shrink-0 text-muted-foreground"
+                class="text-muted-foreground size-4 shrink-0"
               />
               <Icon
                 v-else-if="header.column.getIsSorted() == 'desc'"
                 name="lucide:chevron-down"
-                class="size-4 shrink-0 text-muted-foreground"
+                class="text-muted-foreground size-4 shrink-0"
               />
               <Icon
                 v-else-if="header.column.getCanSort()"
                 name="lucide:chevrons-up-down"
-                class="size-4 shrink-0 text-muted-foreground/30"
+                class="text-muted-foreground/30 size-4 shrink-0"
               />
               <div
                 v-if="
@@ -790,10 +790,10 @@ npx ui-thing@latest add tanstacktable
         </template>
       </UiTableBody>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-center text-sm">
       Data table with filters made with
       <a
-        class="underline hover:text-foreground"
+        class="hover:text-foreground underline"
         href="https://tanstack.com/table"
         target="_blank"
         rel="noopener noreferrer"

@@ -120,7 +120,7 @@ If you want to change the way that the items look, you can do so by using the di
           <UiAccordionHeader>
             <UiAccordionTrigger
               :class="[open ? 'bg-muted underline hover:!underline' : 'bg-muted/50 no-underline']"
-              class="mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:bg-muted hover:no-underline"
+              class="hover:bg-muted mb-2 rounded-md px-3 text-left text-sm underline-offset-2 hover:no-underline"
               >{{ i.title }}</UiAccordionTrigger
             >
           </UiAccordionHeader>
@@ -422,7 +422,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiAccordionTrigger>
       </template>
       <template #content="{ item }">
-        <UiAccordionContent class="ps-7 text-muted-foreground">{{
+        <UiAccordionContent class="text-muted-foreground ps-7">{{
           item.content
         }}</UiAccordionContent>
       </template>
@@ -573,7 +573,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiAccordionTrigger>
       </template>
       <template #content="{ item }">
-        <UiAccordionContent class="ps-12 text-muted-foreground">{{
+        <UiAccordionContent class="text-muted-foreground ps-12">{{
           item.content
         }}</UiAccordionContent>
       </template>
@@ -637,7 +637,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="rounded-lg border bg-background px-4 py-1 last:border-b"
+        class="bg-background rounded-lg border px-4 py-1 last:border-b"
       >
         <UiAccordionTrigger class="w-full py-2 text-[15px] leading-6 hover:no-underline">
           {{ item.title }}
@@ -706,7 +706,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="rounded-lg border bg-background px-4 last:border-b"
+        class="bg-background rounded-lg border px-4 last:border-b"
       >
         <UiAccordionTrigger
           :icon="''"
@@ -779,7 +779,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
+        class="bg-background border px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger class="w-full py-2 text-[15px] leading-6 hover:no-underline">
           {{ item.title }}
@@ -848,7 +848,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.value"
-        class="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
+        class="bg-background border px-4 py-1 first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger
           :icon="''"
@@ -954,7 +954,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         v-for="item in items"
         :key="item.id"
         :value="item.id"
-        class="overflow-hidden border bg-background first:rounded-t-lg last:rounded-b-lg last:border-b"
+        class="bg-background overflow-hidden border first:rounded-t-lg last:rounded-b-lg last:border-b"
       >
         <UiAccordionTrigger
           :title="item.title"
@@ -964,7 +964,7 @@ To use these examples you will have to copy the code and adjust it for your own 
           <UiCollapsible
             v-for="collapsible in item.collapsibles"
             :key="collapsible.title"
-            class="space-y-1 border-t border-border bg-accent px-4 py-3"
+            class="border-border bg-accent space-y-1 border-t px-4 py-3"
             :default-open="collapsible.open"
           >
             <UiCollapsibleTrigger
@@ -980,7 +980,7 @@ To use these examples you will have to copy the code and adjust it for your own 
               {{ collapsible.title }}
             </UiCollapsibleTrigger>
             <UiCollapsibleContent
-              class="overflow-hidden ps-6 text-sm text-muted-foreground transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
+              class="text-muted-foreground data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden ps-6 text-sm transition-all"
             >
               {{ collapsible.content }}
             </UiCollapsibleContent>

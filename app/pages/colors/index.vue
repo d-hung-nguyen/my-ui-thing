@@ -10,7 +10,7 @@
       >
         Tailwind Colors in Every Format
       </h1>
-      <p class="max-w-3xl text-base text-balance text-foreground sm:text-lg">
+      <p class="text-foreground max-w-3xl text-base text-balance sm:text-lg">
         The complete Tailwind color palette in HEX, RGB, HSL, CSS variables, and classes. Ready to
         copy and paste into your project.
       </p>

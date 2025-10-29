@@ -79,7 +79,7 @@ npx ui-thing@latest add alert
 <template>
   <div>
     <UiAlert
-      class="border-l-8 border-l-primary"
+      class="border-l-primary border-l-8"
       title="New users"
       description="Over 25K new users joined today!"
       icon="lucide:users"
@@ -358,11 +358,11 @@ To use these examples you will have to copy the code and adjust it for your own 
   <UiAlert
     icon="lucide:circle-alert"
     icon-class="mt-0.5 size-4 shrink-0 text-red-500 opacity-60"
-    class="rounded-lg border border-border px-4 py-3"
+    class="border-border rounded-lg border px-4 py-3"
   >
     <div class="grow space-y-1">
       <p class="text-sm font-medium">Password does not meet requirements:</p>
-      <ul class="list-inside list-disc text-sm text-muted-foreground">
+      <ul class="text-muted-foreground list-inside list-disc text-sm">
         <li>Minimum 8 characters</li>
         <li>Include a special character</li>
       </ul>
@@ -545,7 +545,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:x" class="size-3.5" />
           </UiButton>
         </UiAlertDescription>
-        <p class="mb-3 text-sm text-muted-foreground">
+        <p class="text-muted-foreground mb-3 text-sm">
           It demonstrates that the task or request has been processed.
         </p>
         <UiButton class="text-xs" size="xs">Learn more</UiButton>
@@ -592,7 +592,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:x" class="size-3.5" />
           </UiButton>
         </UiAlertDescription>
-        <p class="mb-3 text-sm text-muted-foreground">
+        <p class="text-muted-foreground mb-3 text-sm">
           We use cookies to improve your experience, and show personalized content.
         </p>
         <div class="flex items-center gap-2">
@@ -647,7 +647,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:x" class="size-3.5" />
           </UiButton>
         </UiAlertDescription>
-        <p class="mb-3 text-sm text-muted-foreground">
+        <p class="text-muted-foreground mb-3 text-sm">
           This update contains several bug fixes and performance improvements.
         </p>
         <div class="flex items-center gap-2">
@@ -697,11 +697,11 @@ To use these examples you will have to copy the code and adjust it for your own 
             <UiAvatarImage src="https://i.pravatar.cc/300" alt="Mary Palmer" />
           </UiAvatar>
         </template>
-        <UiAlertDescription class="mb-1 flex items-start justify-between text-muted-foreground">
+        <UiAlertDescription class="text-muted-foreground mb-1 flex items-start justify-between">
           <div>
-            <a class="font-medium text-foreground hover:underline" href="#"> Mary Palmer </a>
+            <a class="text-foreground font-medium hover:underline" href="#"> Mary Palmer </a>
             mentioned you in
-            <a class="font-medium text-foreground hover:underline" href="#">
+            <a class="text-foreground font-medium hover:underline" href="#">
               project-campaign-02
             </a>
           </div>
@@ -709,7 +709,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:x" class="size-3.5" />
           </UiButton>
         </UiAlertDescription>
-        <p class="mb-3 text-sm text-muted-foreground">2 min ago</p>
+        <p class="text-muted-foreground mb-3 text-sm">2 min ago</p>
         <div class="flex items-center gap-2">
           <UiButton class="text-xs" size="xs">Accept</UiButton>
           <UiButton class="text-xs" size="xs" variant="outline">Decline</UiButton>

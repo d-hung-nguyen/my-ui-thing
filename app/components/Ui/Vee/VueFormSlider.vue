@@ -8,11 +8,11 @@
     >
     <Slider v-bind="{ ...forwarded, ...$attrs }" v-model="model" />
     <TransitionSlide group tag="div">
-      <p v-if="hint && !errorMessage" key="hint" class="mt-1.5 text-sm text-muted-foreground">
+      <p v-if="hint && !errorMessage" key="hint" class="text-muted-foreground mt-1.5 text-sm">
         {{ hint }}
       </p>
 
-      <p v-if="errorMessage" key="errorMessage" class="mt-1.5 text-sm text-destructive">
+      <p v-if="errorMessage" key="errorMessage" class="text-destructive mt-1.5 text-sm">
         {{ errorMessage }}
       </p>
     </TransitionSlide>

@@ -25,6 +25,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);
 
   const styles = tv({
-    base: "flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs",
+    base: "bg-background flex h-9 items-center gap-1 rounded-md border p-1 shadow-xs",
   });
 </script>

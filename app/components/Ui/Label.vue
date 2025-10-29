@@ -2,7 +2,7 @@
   <Label data-slot="label" :class="styles({ class: props.class })" v-bind="forwarded">
     <slot />
     <slot name="hint">
-      <span v-if="hint" data-slot="label-hint" class="text-xs font-normal text-muted-foreground">
+      <span v-if="hint" data-slot="label-hint" class="text-muted-foreground text-xs font-normal">
         {{ hint }}
       </span>
     </slot>

@@ -14,7 +14,7 @@
         <div
           ref="dropzoneRef"
           role="button"
-          class="flex min-h-40 flex-col items-center justify-center rounded-xl border border-dashed border-input p-4 transition-colors hover:bg-accent/50 has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
+          class="border-input hover:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50 flex min-h-40 flex-col items-center justify-center rounded-xl border border-dashed p-4 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:ring-[3px]"
           @click="openFileDialog"
         >
           <input ref="inputRef" hidden aria-label="Upload file" :disabled="Boolean(currentFile)" />
@@ -22,7 +22,7 @@
           <div class="flex flex-col items-center justify-center text-center">
             <Motion
               :variants="dropAreaContainerItem"
-              class="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background"
+              class="bg-background mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border"
               aria-hidden="true"
             >
               <Icon name="lucide:upload" class="size-4 opacity-60" />
@@ -30,7 +30,7 @@
             <Motion as="p" :variants="dropAreaContainerItem" class="mb-1.5 text-sm font-medium"
               >Upload file</Motion
             >
-            <Motion as="p" :variants="dropAreaContainerItem" class="text-xs text-muted-foreground">
+            <Motion as="p" :variants="dropAreaContainerItem" class="text-muted-foreground text-xs">
               Drag & drop or click to browse (max. {{ formatBytes(maxSize) }})
             </Motion>
             <AnimatePresence>
@@ -54,7 +54,7 @@
         key="errors"
         layout="position"
         :variants="fileListItem"
-        class="flex items-center gap-1 text-xs text-destructive"
+        class="text-destructive flex items-center gap-1 text-xs"
         role="alert"
       >
         <Icon name="lucide:circle-alert" class="size-3 shrink-0" />
@@ -81,7 +81,7 @@
           <UiButton
             size="icon"
             variant="ghost"
-            class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
+            class="text-muted-foreground/80 hover:text-foreground -me-2 size-8 hover:bg-transparent"
             aria-label="Remove file"
             @click="removeFile(currentFile.id)"
           >
@@ -96,7 +96,7 @@
         :variants="fileListItem"
         aria-live="polite"
         role="region"
-        class="mt-2 text-center text-xs text-muted-foreground"
+        class="text-muted-foreground mt-2 text-center text-xs"
       >
         Single file uploader w/ max size
       </Motion>

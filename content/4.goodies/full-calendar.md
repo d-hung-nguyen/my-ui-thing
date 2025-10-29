@@ -98,9 +98,9 @@ NOTE: for old browsers, will need to restart watcher after changing a variable
     }
   }
   .fc-button-primary {
-    @apply z-10 focus:shadow-none focus:ring-[3px] focus:ring-ring/50;
+    @apply focus:ring-ring/50 z-10 focus:shadow-none focus:ring-[3px];
     &.fc-button-active {
-      @apply z-10 focus:shadow-none focus:ring-[3px] focus:ring-ring/50;
+      @apply focus:ring-ring/50 z-10 focus:shadow-none focus:ring-[3px];
     }
   }
 }
@@ -157,7 +157,7 @@ NOTE: for old browsers, will need to restart watcher after changing a variable
 }
 /* MultiMonth */
 .fc .fc-multimonth-multicol .fc-daygrid-more-link {
-  @apply border-primary bg-primary text-[10px] leading-4 text-primary-foreground;
+  @apply border-primary bg-primary text-primary-foreground text-[10px] leading-4;
 }
 
 /* Mulimonth popup */

@@ -130,27 +130,27 @@
 
     /* Code and preformatted text styles */
     code {
-      @apply rounded bg-muted px-1 font-mono text-sm font-medium text-foreground;
+      @apply bg-muted text-foreground rounded px-1 font-mono text-sm font-medium;
     }
 
     pre {
-      @apply my-6 rounded-md bg-muted p-4 font-mono text-sm text-foreground;
+      @apply bg-muted text-foreground my-6 rounded-md p-4 font-mono text-sm;
       code {
         @apply bg-none p-0 text-sm text-inherit;
       }
     }
     blockquote {
-      @apply mx-0 my-5 border-l-4 border-border py-2 pl-4;
+      @apply border-border mx-0 my-5 border-l-4 py-2 pl-4;
     }
     hr {
-      @apply my-6 border-0 border-t border-border;
+      @apply border-border my-6 border-0 border-t;
     }
     table {
       @apply m-0 w-full table-fixed border-collapse overflow-hidden;
 
       td,
       th {
-        @apply relative box-border min-w-4 border border-border px-3 py-2 align-top;
+        @apply border-border relative box-border min-w-4 border px-3 py-2 align-top;
 
         > * {
           margin-bottom: 0;
@@ -164,7 +164,7 @@
       }
     }
     mark {
-      @apply rounded bg-sky-400/40 box-decoration-clone p-1 text-accent-foreground dark:bg-sky-500/70 dark:text-white;
+      @apply text-accent-foreground rounded bg-sky-400/40 box-decoration-clone p-1 dark:bg-sky-500/70 dark:text-white;
     }
   }
 </style>

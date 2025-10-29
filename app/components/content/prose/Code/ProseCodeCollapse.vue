@@ -65,18 +65,18 @@
       root: "relative [&_pre]:h-[200px]",
       footer: "absolute inset-x-px bottom-px flex h-20 items-center justify-center rounded-b-md",
       trigger:
-        "group flex items-center gap-2 rounded-md bg-accent py-1.5 ps-1.5 pe-3 text-sm font-medium transition-all duration-200 hover:scale-103 hover:bg-accent hover:text-foreground",
+        "group bg-accent hover:bg-accent hover:text-foreground flex items-center gap-2 rounded-md py-1.5 ps-1.5 pe-3 text-sm font-medium transition-all duration-200 hover:scale-103",
       triggerIcon: "text-muted-foreground transition-transform group-data-[state=open]:rotate-180",
     },
     variants: {
       open: {
         true: {
           root: "[&_pre]:h-auto [&_pre]:max-h-[80vh] [&_pre]:min-h-[200px] [&_pre]:pb-12",
-          trigger: "bg-accent ring-1 ring-muted dark:ring-border",
+          trigger: "bg-accent ring-muted dark:ring-border ring-1",
         },
         false: {
           root: "[&_pre]:overflow-hidden",
-          footer: "bg-gradient-to-t from-code",
+          footer: "from-code bg-gradient-to-t",
         },
       },
     },

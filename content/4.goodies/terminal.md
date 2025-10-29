@@ -24,7 +24,7 @@ This consists of three components
 ```vue [Terminal.vue]
 <template>
   <Primitive :as :as-child :class="styles({ class: props.class })">
-    <div class="flex flex-col gap-y-2 border-b border-border p-4">
+    <div class="border-border flex flex-col gap-y-2 border-b p-4">
       <div class="flex flex-row gap-x-2">
         <div
           v-for="(item, i) in buttonColors"
@@ -42,7 +42,7 @@ This consists of three components
   import type { HTMLAttributes } from "vue";
 
   const styles = tv({
-    base: "z-0 h-full max-h-[400px] w-full max-w-lg rounded-lg border border-border bg-background",
+    base: "border-border bg-background z-0 h-full max-h-[400px] w-full max-w-lg rounded-lg border",
   });
 </script>
 
@@ -224,7 +224,7 @@ This consists of three components
     <UiTerminalTypingAnimation
       text="Success! Project initialization completed."
       :delay="7000"
-      class="mt-4 text-muted-foreground"
+      class="text-muted-foreground mt-4"
     />
 
     <UiTerminalTypingAnimation

@@ -20,5 +20,5 @@
     }
   >();
 
-  const styles = tv({ base: "px-2 py-1.5 pl-9 text-sm font-medium text-muted-foreground" });
+  const styles = tv({ base: "text-muted-foreground px-2 py-1.5 pl-9 text-sm font-medium" });
 </script>

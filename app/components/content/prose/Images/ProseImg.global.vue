@@ -15,10 +15,10 @@
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay
-        class="fixed inset-0 z-50 bg-background/80 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0"
+        class="bg-background/80 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 fixed inset-0 z-50"
       />
       <DialogContent
-        class="fixed top-1/2 left-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2 gap-4 border bg-background p-0 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:rounded-lg"
+        class="bg-background data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed top-1/2 left-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2 gap-4 border p-0 shadow-lg duration-200 sm:rounded-lg"
       >
         <DialogTitle class="sr-only">{{ props.alt || "Image Preview" }}</DialogTitle>
         <DialogDescription class="sr-only">{{ props.alt || "Image Preview" }}</DialogDescription>
@@ -86,7 +86,7 @@
     base: "w-full rounded-md object-cover",
     variants: {
       lifted: {
-        true: "rounded-lg border bg-card text-card-foreground shadow-xs",
+        true: "bg-card text-card-foreground rounded-lg border shadow-xs",
       },
       zoom: {
         true: "cursor-zoom-in",

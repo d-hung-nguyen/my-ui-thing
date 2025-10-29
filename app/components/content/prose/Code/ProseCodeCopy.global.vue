@@ -19,7 +19,7 @@
             :exit="{ opacity: 0, scale: 0.8 }"
             :transition="{ duration: 0.2 }"
           >
-            <Icon name="lucide:clipboard" aria-hidden="true" class="size-4 text-muted-foreground" />
+            <Icon name="lucide:clipboard" aria-hidden="true" class="text-muted-foreground size-4" />
           </Motion>
           <Motion
             v-if="copied"

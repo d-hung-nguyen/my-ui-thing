@@ -15,6 +15,6 @@
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "border bg-muted",
+    base: "bg-muted border",
   });
 </script>

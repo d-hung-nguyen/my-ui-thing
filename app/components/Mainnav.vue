@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-30 border-b bg-background/80 backdrop-blur">
+  <header class="bg-background/80 sticky top-0 z-30 border-b backdrop-blur">
     <div class="flex h-14 w-full items-center justify-between px-6">
       <div class="flex items-center gap-10">
         <div class="flex items-center gap-5">
@@ -16,7 +16,7 @@
           <NuxtLink
             :class="[route.path.startsWith('/getting-started/') ? '!text-primary' : '']"
             to="/getting-started/introduction"
-            class="text-foreground/60 transition-colors hover:text-foreground"
+            class="text-foreground/60 hover:text-foreground transition-colors"
             >Documentation</NuxtLink
           >
           <NuxtLink
@@ -26,13 +26,13 @@
                 : '',
             ]"
             to="/components/accordion"
-            class="text-foreground/60 transition-colors hover:text-foreground"
+            class="text-foreground/60 hover:text-foreground transition-colors"
             >Components</NuxtLink
           >
           <UiDropdownMenu>
             <UiDropdownMenuTrigger>
               <div
-                class="inline-flex items-center gap-1 text-foreground/60 transition-colors hover:text-foreground"
+                class="text-foreground/60 hover:text-foreground inline-flex items-center gap-1 transition-colors"
               >
                 <span>Examples</span>
                 <Icon name="heroicons:chevron-down" class="h-3 w-3" />
@@ -40,14 +40,14 @@
             </UiDropdownMenuTrigger>
             <UiDropdownMenuContent class="min-w-[180px]" align="start" :side-offset="5">
               <UiDropdownMenuItem v-for="l in localProjects" :key="l.name" as-child>
-                <NuxtLink class="cursor-pointer hover:bg-muted" :to="l.link">{{ l.name }}</NuxtLink>
+                <NuxtLink class="hover:bg-muted cursor-pointer" :to="l.link">{{ l.name }}</NuxtLink>
               </UiDropdownMenuItem>
               <template v-for="l in externalProjects" :key="l.name">
                 <UiDropdownMenuItem as-child>
                   <NuxtLink
                     target="_blank"
                     external
-                    class="cursor-pointer hover:bg-muted"
+                    class="hover:bg-muted cursor-pointer"
                     :href="l.link"
                     >{{ l.name }}</NuxtLink
                   >
@@ -58,12 +58,12 @@
           <NuxtLink
             :class="[route.path.startsWith('/colors') ? '!text-primary' : '']"
             to="/colors"
-            class="text-foreground/60 transition-colors hover:text-foreground"
+            class="text-foreground/60 hover:text-foreground transition-colors"
             >Colors</NuxtLink
           >
           <NuxtLink
             to="https://inspira-ui.com/"
-            class="group text-foreground/60 transition-colors hover:text-foreground"
+            class="group text-foreground/60 hover:text-foreground transition-colors"
             >Inspira UI
           </NuxtLink>
         </nav>
@@ -72,7 +72,7 @@
       <div class="flex items-center">
         <UiButton
           size="sm"
-          class="mr-2 hidden min-w-[300px] font-normal text-muted-foreground md:flex"
+          class="text-muted-foreground mr-2 hidden min-w-[300px] font-normal md:flex"
           variant="outline"
           @click="isOpen = true"
         >

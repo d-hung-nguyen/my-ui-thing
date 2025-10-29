@@ -201,7 +201,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -238,7 +238,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -269,13 +269,13 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-for="t in 3"
             :key="t"
             :value="`tab-${t}`"
-            class="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+            class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
             >Tab {{ t }}</UiTabsTrigger
           >
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -314,7 +314,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -346,14 +346,14 @@ To use these examples you will have to copy the code and adjust it for your own 
             :key="t"
             :pill="false"
             :value="`tab-${t}`"
-            class="relative hover:bg-accent hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:hover:bg-accent"
+            class="hover:bg-accent hover:text-foreground data-[state=active]:hover:bg-accent relative data-[state=active]:bg-transparent data-[state=active]:shadow-none"
             >Tab {{ t }}</UiTabsTrigger
           >
           <UiTabsIndicator />
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -381,21 +381,21 @@ To use these examples you will have to copy the code and adjust it for your own 
       <div class="flex justify-center">
         <UiTabsList
           :pill="false"
-          class="relative h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
+          class="bg-background relative h-auto -space-x-px p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in 3"
             :key="t"
             :pill="false"
             :value="`tab-${t}`"
-            class="rounded-none border first:rounded-s data-[state=active]:bg-muted [&:nth-child(3n)]:rounded-e"
+            class="data-[state=active]:bg-muted rounded-none border first:rounded-s [&:nth-child(3n)]:rounded-e"
             >Tab {{ t }}</UiTabsTrigger
           >
           <UiTabsIndicator />
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -422,20 +422,20 @@ To use these examples you will have to copy the code and adjust it for your own 
     <UiTabs default-value="tab-1" class="flex flex-col justify-center">
       <UiTabsList
         :pill="false"
-        class="relative h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px before:bg-border"
+        class="before:bg-border relative h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px"
       >
         <UiTabsTrigger
           v-for="t in 3"
           :key="t"
           :pill="false"
           :value="`tab-${t}`"
-          class="overflow-hidden rounded-b-none border-x border-t border-border bg-muted py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+          class="border-border bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
           >Tab {{ t }}</UiTabsTrigger
         >
       </UiTabsList>
 
       <UiTabsContent v-for="t in 3" :key="t" :value="`tab-${t}`">
-        <p class="p-4 text-center text-sm text-muted-foreground">Content for Tab {{ t }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">Content for Tab {{ t }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -475,7 +475,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="p-4 text-center text-sm text-muted-foreground">{{ t.content }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">{{ t.content }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -528,7 +528,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             v-for="t in tabs"
             :key="t.title"
             :value="t.title"
-            class="flex items-center gap-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+            class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground flex items-center gap-2 rounded-full data-[state=active]:shadow-none"
           >
             <Icon :name="t.icon" class="-ms-0.5 me-1.5 size-4 shrink-0 opacity-60" />
             {{ t.title }}
@@ -536,7 +536,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="p-4 text-center text-sm text-muted-foreground">{{ t.content }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">{{ t.content }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -585,13 +585,13 @@ To use these examples you will have to copy the code and adjust it for your own 
     <UiTabs default-value="Projects">
       <div class="relative mb-3 flex justify-center">
         <UiTabsList
-          class="h-auto -space-x-px bg-background p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
+          class="bg-background h-auto -space-x-px p-0 shadow-xs shadow-black/5 rtl:space-x-reverse"
         >
           <UiTabsTrigger
             v-for="t in tabs"
             :key="t.title"
             :value="t.title"
-            class="relative flex items-center gap-2 overflow-hidden rounded-none border border-border py-2 first:rounded-s last:rounded-e data-[state=active]:bg-muted"
+            class="border-border data-[state=active]:bg-muted relative flex items-center gap-2 overflow-hidden rounded-none border py-2 first:rounded-s last:rounded-e"
           >
             <Icon :name="t.icon" class="-ms-0.5 me-1.5 size-4 shrink-0 opacity-60" />
             {{ t.title }}
@@ -600,7 +600,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         <UiTabsIndicator />
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="p-4 text-center text-sm text-muted-foreground">{{ t.content }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">{{ t.content }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -649,13 +649,13 @@ To use these examples you will have to copy the code and adjust it for your own 
     <UiTabs default-value="Projects">
       <div class="relative flex justify-center">
         <UiTabsList
-          class="relative mb-3 h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px before:bg-border"
+          class="before:bg-border relative mb-3 h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px"
         >
           <UiTabsTrigger
             v-for="t in tabs"
             :key="t.title"
             :value="t.title"
-            class="relative flex items-center gap-2 overflow-hidden rounded-b-none border-x border-t border-border bg-muted py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+            class="border-border bg-muted relative flex items-center gap-2 overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
           >
             <Icon :name="t.icon" class="-ms-0.5 me-1.5 size-4 shrink-0 opacity-60" />
             {{ t.title }}
@@ -663,7 +663,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="p-4 text-center text-sm text-muted-foreground">{{ t.content }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">{{ t.content }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -712,13 +712,13 @@ To use these examples you will have to copy the code and adjust it for your own 
     <UiTabs default-value="Projects">
       <UiScrollArea orientation="horizontal" class="w-full max-w-lg">
         <UiTabsList
-          class="relative mb-3 h-auto gap-2 rounded-none border-b border-border bg-transparent px-0 py-1 text-foreground"
+          class="border-border text-foreground relative mb-3 h-auto gap-2 rounded-none border-b bg-transparent px-0 py-1"
         >
           <UiTabsTrigger
             v-for="t in tabs"
             :key="t.title"
             :value="t.title"
-            class="relative hover:bg-accent hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:hover:bg-accent"
+            class="hover:bg-accent hover:text-foreground data-[state=active]:hover:bg-accent relative data-[state=active]:bg-transparent data-[state=active]:shadow-none"
           >
             <Icon :name="t.icon" class="-ms-0.5 me-1.5 size-4 shrink-0 opacity-60" />
             {{ t.title }}
@@ -727,7 +727,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </UiScrollArea>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="p-4 text-center text-sm text-muted-foreground">{{ t.content }}</p>
+        <p class="text-muted-foreground p-4 text-center text-sm">{{ t.content }}</p>
       </UiTabsContent>
     </UiTabs>
   </div>
@@ -788,20 +788,20 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div class="flex justify-center">
     <UiTabs default-value="Projects" class="items-center">
       <UiTabsList
-        class="flex h-auto justify-center rounded-none border-b border-border bg-transparent p-0"
+        class="border-border flex h-auto justify-center rounded-none border-b bg-transparent p-0"
       >
         <UiTabsTrigger
           v-for="t in tabs"
           :key="t.title"
           :value="t.title"
-          class="relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
+          class="data-[state=active]:after:bg-primary relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           <Icon :name="t.icon" class="mb-1.5 size-4 shrink-0 opacity-60" />
           {{ t.title }}
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
+        <p class="text-muted-foreground mx-auto max-w-sm p-4 text-center text-sm text-pretty">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -854,7 +854,7 @@ To use these examples you will have to copy the code and adjust it for your own 
           :key="t.title"
           :value="t.title"
           :pill="false"
-          class="group flex-1 flex-col p-3 text-xs data-[state=active]:bg-muted data-[state=active]:shadow-none"
+          class="group data-[state=active]:bg-muted flex-1 flex-col p-3 text-xs data-[state=active]:shadow-none"
         >
           <UiBadge
             class="mb-1.5 flex min-w-5 items-center justify-center px-1 transition-opacity group-data-[state=inactive]:opacity-50"
@@ -864,7 +864,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsTrigger>
       </UiTabsList>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto max-w-sm p-4 text-center text-sm text-pretty text-muted-foreground">
+        <p class="text-muted-foreground mx-auto max-w-sm p-4 text-center text-sm text-pretty">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -937,7 +937,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTabsList>
       </div>
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="mx-auto p-4 text-center text-sm text-pretty text-muted-foreground">
+        <p class="text-muted-foreground mx-auto p-4 text-center text-sm text-pretty">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1007,7 +1007,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       </UiTabsList>
       <div class="grow rounded-md border text-start">
         <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-          <p class="px-4 py-3 text-xs text-muted-foreground">
+          <p class="text-muted-foreground px-4 py-3 text-xs">
             {{ t.content }}
           </p>
         </UiTabsContent>
@@ -1063,7 +1063,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
     <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="px-4 py-3 text-xs text-muted-foreground">
+        <p class="text-muted-foreground px-4 py-3 text-xs">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1116,7 +1116,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         :key="t.title"
         :pill="false"
         :value="t.title"
-        class="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
+        class="data-[state=active]:after:bg-primary relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
       >
         {{ t.title }}
       </UiTabsTrigger>
@@ -1124,7 +1124,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
     <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="px-4 py-3 text-xs text-muted-foreground">
+        <p class="text-muted-foreground px-4 py-3 text-xs">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1173,14 +1173,14 @@ To use these examples you will have to copy the code and adjust it for your own 
   <UiTabs default-value="Projects" orientation="vertical" class="mx-auto w-full max-w-lg flex-row">
     <UiTabsList
       :pill="false"
-      class="flex-col gap-1 rounded-none bg-transparent px-1 py-0 text-foreground"
+      class="text-foreground flex-col gap-1 rounded-none bg-transparent px-1 py-0"
     >
       <UiTabsTrigger
         v-for="t in tabs"
         :key="t.title"
         :pill="false"
         :value="t.title"
-        class="relative w-full justify-start after:absolute after:inset-y-0 after:start-0 after:-ms-1 after:w-0.5 hover:bg-accent hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent"
+        class="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative w-full justify-start after:absolute after:inset-y-0 after:start-0 after:-ms-1 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
       >
         <Icon :name="t.icon" class="-ms-0.5 me-1.5 size-4 opacity-60" />
         {{ t.title }}
@@ -1189,7 +1189,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
     <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="px-4 py-3 text-xs text-muted-foreground">
+        <p class="text-muted-foreground px-4 py-3 text-xs">
           {{ t.content }}
         </p>
       </UiTabsContent>
@@ -1241,7 +1241,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         :key="t.title"
         :pill="false"
         :value="t.title"
-        class="w-full justify-start data-[state=active]:bg-muted data-[state=active]:shadow-none"
+        class="data-[state=active]:bg-muted w-full justify-start data-[state=active]:shadow-none"
       >
         {{ t.title }}
       </UiTabsTrigger>
@@ -1249,7 +1249,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 
     <div class="grow rounded-md border text-start">
       <UiTabsContent v-for="t in tabs" :key="t.title" :value="t.title">
-        <p class="px-4 py-3 text-xs text-muted-foreground">
+        <p class="text-muted-foreground px-4 py-3 text-xs">
           {{ t.content }}
         </p>
       </UiTabsContent>

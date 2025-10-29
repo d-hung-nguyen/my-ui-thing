@@ -65,7 +65,7 @@
       >
         <div class="flex items-center justify-between gap-3">
           <slot name="rowsSelected" :table="table">
-            <div v-if="showSelect" class="text-sm whitespace-nowrap text-muted-foreground">
+            <div v-if="showSelect" class="text-muted-foreground text-sm whitespace-nowrap">
               <span>
                 {{ table.getFilteredSelectedRowModel().rows.length }} of {{ " " }}
                 {{ table.getFilteredRowModel().rows.length }} row(s) selected
@@ -74,7 +74,7 @@
           </slot>
           <slot name="rowsPerPage" :table="table">
             <div class="flex items-center space-x-2 whitespace-nowrap">
-              <p class="hidden text-sm font-medium text-foreground md:inline-block">
+              <p class="text-foreground hidden text-sm font-medium md:inline-block">
                 {{ rowsPerPageText }}
               </p>
               <UiSelect v-model="pageSize">
@@ -101,7 +101,7 @@
         <div class="flex items-center justify-between gap-3">
           <slot :table="table" name="page">
             <div
-              class="flex items-center justify-center text-sm font-medium whitespace-nowrap text-foreground"
+              class="text-foreground flex items-center justify-center text-sm font-medium whitespace-nowrap"
             >
               Page {{ table.getState().pagination.pageIndex + 1 }} of
               {{ table.getPageCount() }}

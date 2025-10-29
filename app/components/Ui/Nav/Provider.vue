@@ -46,7 +46,7 @@
   export const navProviderStyles = tv({
     base: [
       "peer/navbar group/navbar @container/nav-provider relative isolate z-10 flex w-full flex-col",
-      "has-data-navbar-inset:min-h-svh has-data-navbar-inset:bg-background dark:has-data-navbar-inset:bg-background",
+      "has-data-navbar-inset:bg-background dark:has-data-navbar-inset:bg-background has-data-navbar-inset:min-h-svh",
     ],
   });
 </script>

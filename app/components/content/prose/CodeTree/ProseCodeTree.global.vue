@@ -6,7 +6,7 @@
           type="button"
           :aria-expanded="item.children?.length ? isExpanded : undefined"
           :aria-label="item.children?.length ? `${item.label} folder` : `${item.label} file`"
-          class="inline-flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          class="hover:bg-muted focus-visible:ring-ring inline-flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
           :class="[
             isSelected || lastSelectedItem?.path === item.path ? 'bg-muted text-primary' : '',
           ]"
@@ -32,7 +32,7 @@
           <Icon
             v-if="item.children?.length"
             name="lucide:chevron-down"
-            class="ml-auto size-4 shrink-0 text-muted-foreground transition-transform"
+            class="text-muted-foreground ml-auto size-4 shrink-0 transition-transform"
             :class="[isExpanded ? 'rotate-0' : '-rotate-90']"
             aria-hidden="true"
           />
@@ -88,7 +88,7 @@
         meta="noFormat"
         class="mt-0 data-[slot=prose-pre-wrapper]:h-full data-[slot=prose-pre-wrapper]:rounded-none data-[slot=prose-pre-wrapper]:border-0 data-[slot=prose-pre-wrapper]:border-t lg:data-[slot=prose-pre-wrapper]:border-t-0 lg:data-[slot=prose-pre-wrapper]:border-l [&_pre]:h-[calc(100%-45px)] [&_pre]:flex-1 [&>*:first-child]:mt-0"
       />
-      <div v-else class="flex h-full items-center justify-center text-sm text-muted-foreground">
+      <div v-else class="text-muted-foreground flex h-full items-center justify-center text-sm">
         Select a file to view its content
       </div>
     </div>

@@ -270,7 +270,7 @@
     @apply text-sm font-medium;
   }
   .vc-weekday {
-    @apply rounded-md text-[0.8rem] font-normal text-muted-foreground;
+    @apply text-muted-foreground rounded-md text-[0.8rem] font-normal;
   }
   .vc-weekdays {
     @apply my-2 font-normal;

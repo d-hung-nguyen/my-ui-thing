@@ -53,7 +53,7 @@ npx ui-thing@latest add tags-input
       <UiLabel :for="id + 'some-other'">Input with inner tags</UiLabel>
       <UiTagsInput
         v-model="tags2"
-        class="h-auto p-1 shadow-xs outline-none focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50"
+        class="focus-within:border-ring focus-within:ring-ring/50 h-auto p-1 shadow-xs outline-none focus-within:ring-[3px]"
       >
         <UiTagsInputItem v-for="tag in tags2" :key="tag" :value="tag" />
 

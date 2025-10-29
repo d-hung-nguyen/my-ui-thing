@@ -33,7 +33,7 @@
     base: "flex w-full items-center gap-5 px-4 py-2",
     variants: {
       hover: {
-        true: "cursor-pointer outline-none hover:bg-muted focus-visible:ring-4 focus-visible:ring-primary/10",
+        true: "hover:bg-muted focus-visible:ring-primary/10 cursor-pointer outline-none focus-visible:ring-4",
       },
     },
   });

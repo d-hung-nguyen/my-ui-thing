@@ -39,7 +39,7 @@ Since we already have styled buttons and inputs, it kinda makes no sense to forc
   <div>
     <div class="w-full">
       <h1 class="text-lg font-semibold">Application</h1>
-      <p class="mt-px text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-px text-sm">
         Below is the information submitted. Click on the values to edit them.
       </p>
 
@@ -52,7 +52,7 @@ Since we already have styled buttons and inputs, it kinda makes no sense to forc
 
             <UiEditable v-slot="{ isEditing }" v-model="d.value">
               <UiEditableArea>
-                <UiEditablePreview as="dd" class="h-8 cursor-pointer text-muted-foreground">
+                <UiEditablePreview as="dd" class="text-muted-foreground h-8 cursor-pointer">
                   <span class="flex size-full items-center">
                     {{ d.value }}
                   </span>

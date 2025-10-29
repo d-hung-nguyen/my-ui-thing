@@ -38,7 +38,7 @@
         exit="initial"
         animate="animate"
         :transition="{ type: 'keyframes' }"
-        class="mt-1.5 text-sm text-muted-foreground"
+        class="text-muted-foreground mt-1.5 text-sm"
       >
         {{ hint }}
       </motion.p>
@@ -50,7 +50,7 @@
         exit="initial"
         animate="animate"
         :transition="{ type: 'keyframes' }"
-        class="mt-1.5 text-sm text-destructive"
+        class="text-destructive mt-1.5 text-sm"
       >
         {{ errorMessage }}
       </motion.p>

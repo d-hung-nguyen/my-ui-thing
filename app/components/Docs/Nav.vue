@@ -3,9 +3,9 @@
     <template v-for="(l, i) in links" :key="i">
       <div v-if="!l.children" class="relative flex items-center gap-4">
         <NuxtLink
-          class="group line-clamp-1 shrink-0 text-base text-ellipsis text-muted-foreground underline-offset-2 hover:underline sm:text-sm"
+          class="group text-muted-foreground line-clamp-1 shrink-0 text-base text-ellipsis underline-offset-2 hover:underline sm:text-sm"
           :class="[
-            'before:absolute before:-left-6 before:-mt-[5px] before:size-4 before:rounded-bl-md before:border-b before:border-l before:border-border dark:before:border-accent',
+            'before:border-border dark:before:border-accent before:absolute before:-left-6 before:-mt-[5px] before:size-4 before:rounded-bl-md before:border-b before:border-l',
           ]"
           exact-active-class="underline underline-offset-2 text-primary"
           :to="l.path"
@@ -28,7 +28,7 @@
           class="flex flex-col gap-4"
         >
           <UiCollapsibleTrigger
-            class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-accent"
+            class="hover:bg-accent flex items-center justify-between rounded-sm px-3 py-2"
             :class="[
               route.path.startsWith(l.path)
                 ? 'bg-accent text-accent-foreground dark:bg-accent/50'
@@ -36,7 +36,7 @@
             ]"
           >
             <div class="flex items-center gap-2.5">
-              <Icon v-if="l.icon" :name="l.icon" class="size-4 text-muted-foreground" />
+              <Icon v-if="l.icon" :name="l.icon" class="text-muted-foreground size-4" />
               <p class="text-[17px] font-medium sm:text-sm">{{ l.title }}</p>
               <UiBadge
                 v-if="l.label"
@@ -47,14 +47,14 @@
             <Icon
               name="lucide:chevron-down"
               :class="[
-                'shrink-0 transform text-muted-foreground transition',
+                'text-muted-foreground shrink-0 transform transition',
                 open ? 'rotate-180' : 'rotate-0',
               ]"
             />
           </UiCollapsibleTrigger>
           <UiCollapsibleContent class="pl-5">
             <div
-              class="relative pt-1 pl-6 before:absolute before:left-0 before:h-[calc(100%-23px)] before:w-px before:bg-border dark:before:bg-accent"
+              class="before:bg-border dark:before:bg-accent relative pt-1 pl-6 before:absolute before:left-0 before:h-[calc(100%-23px)] before:w-px"
             >
               <DocsNav class="gap-4" :links="l.children" />
             </div>

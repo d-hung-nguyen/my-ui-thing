@@ -17,6 +17,6 @@
   const forwarded = useForwardProps(reactiveOmit(props));
 
   const styles = tv({
-    base: "max-h-[300px] w-full overflow-y-auto rounded-md border bg-popover px-3 py-1.5",
+    base: "bg-popover max-h-[300px] w-full overflow-y-auto rounded-md border px-3 py-1.5",
   });
 </script>

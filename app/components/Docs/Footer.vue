@@ -4,14 +4,14 @@
       <NuxtLink
         v-if="prev"
         :to="prev.path"
-        class="flex gap-4 rounded-md border p-5 transition hover:border-primary"
+        class="hover:border-primary flex gap-4 rounded-md border p-5 transition"
       >
         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border">
-          <Icon name="lucide:arrow-left" class="h-5 w-5 text-muted-foreground" />
+          <Icon name="lucide:arrow-left" class="text-muted-foreground h-5 w-5" />
         </div>
         <div class="flex flex-col gap-1">
           <p class="font-semibold lg:text-sm">{{ prev.title }}</p>
-          <p class="line-clamp-2 text-[15px] text-ellipsis text-muted-foreground lg:text-sm">
+          <p class="text-muted-foreground line-clamp-2 text-[15px] text-ellipsis lg:text-sm">
             {{ prev.description }}
           </p>
         </div>
@@ -19,16 +19,16 @@
       <NuxtLink
         v-if="next"
         :to="next.path"
-        class="flex gap-4 rounded-md border p-5 transition hover:border-primary"
+        class="hover:border-primary flex gap-4 rounded-md border p-5 transition"
       >
         <div class="flex flex-col gap-1">
           <p class="font-semibold lg:text-sm">{{ next.title }}</p>
-          <p class="line-clamp-2 text-[15px] text-ellipsis text-muted-foreground lg:text-sm">
+          <p class="text-muted-foreground line-clamp-2 text-[15px] text-ellipsis lg:text-sm">
             {{ next.description }}
           </p>
         </div>
         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border">
-          <Icon name="lucide:arrow-right" class="h-5 w-5 text-muted-foreground" />
+          <Icon name="lucide:arrow-right" class="text-muted-foreground h-5 w-5" />
         </div>
       </NuxtLink>
     </div>

@@ -9,7 +9,6 @@
   "trailingComma": "es5",
   "useTabs": false,
   "vueIndentScriptAndStyle": true,
-  "tailwindFunctions": ["tv", "tw"],
-  "tailwindStylesheet": "./app/assets/css/tailwind.css",
+  "tailwindFunctions": ["tv"],
   "importOrder": ["<BUILTIN_MODULES>", "<THIRD_PARTY_MODULES>", "<TYPES>", "", "^[.]"]
 }

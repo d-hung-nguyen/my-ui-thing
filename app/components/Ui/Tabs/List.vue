@@ -21,7 +21,7 @@
   );
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "inline-flex w-fit items-center justify-center rounded-md p-0.5 text-muted-foreground/70",
+    base: "text-muted-foreground/70 inline-flex w-fit items-center justify-center rounded-md p-0.5",
     variants: {
       pill: {
         true: "bg-muted",

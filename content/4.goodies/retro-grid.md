@@ -54,7 +54,7 @@ Create the component `RetroGrid.vue` in the `components` directory.
   >
     <div class="absolute inset-0 transform-[rotateX(var(--grid-angle))]">
       <div
-        class="inset-[0%_0px] -ml-[200%] h-[300vh] w-[600vw] origin-[100%_0_0] animate-grid bg-[linear-gradient(to_right,var(--light-line)_1px,transparent_0),linear-gradient(to_bottom,var(--light-line)_1px,transparent_0)] bg-size-[var(--cell-size)_var(--cell-size)] bg-repeat dark:bg-[linear-gradient(to_right,var(--dark-line)_1px,transparent_0),linear-gradient(to_bottom,var(--dark-line)_1px,transparent_0)]"
+        class="animate-grid inset-[0%_0px] -ml-[200%] h-[300vh] w-[600vw] origin-[100%_0_0] bg-[linear-gradient(to_right,var(--light-line)_1px,transparent_0),linear-gradient(to_bottom,var(--light-line)_1px,transparent_0)] bg-size-[var(--cell-size)_var(--cell-size)] bg-repeat dark:bg-[linear-gradient(to_right,var(--dark-line)_1px,transparent_0),linear-gradient(to_bottom,var(--dark-line)_1px,transparent_0)]"
       />
     </div>
 
@@ -137,7 +137,7 @@ Create the component `RetroGrid.vue` in the `components` directory.
 ```vue [DocsRetroGrid.vue]
 <template>
   <div
-    class="relative mx-auto flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border bg-background p-20"
+    class="bg-background relative mx-auto flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border p-20"
   >
     <span
       class="pointer-events-none z-10 bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl leading-none font-bold tracking-tighter whitespace-pre-wrap text-transparent"

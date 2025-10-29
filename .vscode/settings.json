@@ -4,7 +4,7 @@
     "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
-    "strings": true,
+    "strings": "on",
     "comments": "on"
   },
   "mdc.enableFormatting": true,
@@ -24,7 +24,7 @@
     "editor.defaultFormatter": "Nuxt.mdc"
   },
   "tailwindCSS.experimental.classRegex": [
-    ["ui:\\s*{([^)]*)\\s*}", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*)[\"'`]"],
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
     [
@@ -35,5 +35,7 @@
     "tw\\('(.*?)'\\)",
     "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "tailwindCSS.classFunctions": ["tw", "clsx", "tw\\.[a-z-]+"]
 }

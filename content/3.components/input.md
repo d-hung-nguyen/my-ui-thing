@@ -154,7 +154,7 @@ Restrict the number of characters that can be entered into the input field.
   <div class="mx-auto max-w-md">
     <div class="flex w-full flex-col gap-3">
       <UiInput :maxlength="5" placeholder="Enter username" />
-      <p class="text-sm text-muted-foreground">No more than 5 characters</p>
+      <p class="text-muted-foreground text-sm">No more than 5 characters</p>
     </div>
   </div>
 </template>
@@ -183,7 +183,7 @@ You don't need to use `/` at the beginning and end of the pattern as the RegExp 
   <div class="mx-auto max-w-md">
     <div class="flex w-full flex-col gap-3">
       <UiInput pattern="[^\s]" placeholder="Enter username" />
-      <p class="text-sm text-muted-foreground">No spaces can be entered</p>
+      <p class="text-muted-foreground text-sm">No spaces can be entered</p>
     </div>
   </div>
 </template>

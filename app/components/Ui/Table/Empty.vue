@@ -22,6 +22,6 @@
   );
 
   const styles = tv({
-    base: "p-4 align-middle text-sm whitespace-nowrap text-foreground",
+    base: "text-foreground p-4 align-middle text-sm whitespace-nowrap",
   });
 </script>

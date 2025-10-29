@@ -13,7 +13,7 @@
   import type { HTMLAttributes } from "vue";
 
   export const sideBarInputStyles = tv({
-    base: "h-8 w-full bg-background shadow-none",
+    base: "bg-background h-8 w-full shadow-none",
   });
 </script>
 <script setup lang="ts">

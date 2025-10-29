@@ -394,7 +394,7 @@ Use the `@init-api` emit method on `<UiCarousel />` component to set the instanc
       <UiCarouselNext />
     </UiCarousel>
 
-    <div class="py-2 text-center text-sm text-muted-foreground">
+    <div class="text-muted-foreground py-2 text-center text-sm">
       Slide {{ current }} of {{ totalCount }}
     </div>
   </div>

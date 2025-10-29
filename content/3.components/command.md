@@ -131,10 +131,10 @@ npx ui-thing@latest add command
 ```vue [DocsCommandShortcut.vue]
 <template>
   <div class="flex flex-col items-center justify-center">
-    <p class="text-sm text-muted-foreground">
+    <p class="text-muted-foreground text-sm">
       Press
       <kbd
-        class="pointer-events-none inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 select-none"
+        class="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none"
       >
         <span class="text-xs">⌘</span>J
       </kbd>
@@ -194,7 +194,7 @@ npx ui-thing@latest add command
 ```vue [DocsCommandPopover.vue]
 <template>
   <div class="flex items-center justify-center space-x-4">
-    <p class="text-sm text-muted-foreground">Status</p>
+    <p class="text-muted-foreground text-sm">Status</p>
     <UiPopover v-model:open="open">
       <UiPopoverTrigger as-child>
         <UiButton variant="outline" size="sm" class="w-[150px] justify-start">
@@ -286,7 +286,7 @@ npx ui-thing@latest add command
       class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center"
     >
       <p class="text-sm leading-none font-medium">
-        <span class="mr-2 rounded-lg bg-primary px-2 py-1 text-xs text-primary-foreground">
+        <span class="bg-primary text-primary-foreground mr-2 rounded-lg px-2 py-1 text-xs">
           {{ labelRef }}
         </span>
         <span class="text-muted-foreground">Create a new project</span>

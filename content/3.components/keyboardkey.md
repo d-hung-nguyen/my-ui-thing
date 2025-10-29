@@ -71,7 +71,7 @@ Use the `KbdGroup` component to group keyboard keys together.
 ```vue [DocsKbdGroup.vue]
 <template>
   <div class="mx-auto flex flex-col items-center gap-4">
-    <p class="text-sm text-muted-foreground">
+    <p class="text-muted-foreground text-sm">
       Use
       <UiKbdGroup>
         <UiKbd>Ctrl + B</UiKbd>

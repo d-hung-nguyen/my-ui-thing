@@ -10,7 +10,7 @@
       }"
     >
       <slot>
-        <div class="h-full w-full rounded-md bg-primary" />
+        <div class="bg-primary h-full w-full rounded-md" />
       </slot>
     </TabsIndicator>
   </ClientOnly>

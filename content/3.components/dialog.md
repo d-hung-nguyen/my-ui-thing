@@ -201,7 +201,7 @@ I just made them work with my setup.
             <UiDialogTitle class="px-6 pt-6">Frequently Asked Questions (FAQ)</UiDialogTitle>
             <UiDialogDescription>
               <div class="p-6">
-                <div class="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+                <div class="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div class="space-y-1">
                     <p>
                       <strong>Account Management</strong>
@@ -352,7 +352,7 @@ I just made them work with my setup.
             <UiDialogTitle class="px-6 pt-6">Frequently Asked Questions (FAQ)</UiDialogTitle>
             <UiDialogDescription>
               <div class="p-6">
-                <div class="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+                <div class="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div class="space-y-1">
                     <p>
                       <strong>Account Management</strong>
@@ -500,13 +500,13 @@ I just made them work with my setup.
       >
         <UiDialogHeader class="contents space-y-0 text-left">
           <UiDialogTitle
-            class="border-b border-border px-6 py-4 text-base"
+            class="border-border border-b px-6 py-4 text-base"
             title="Frequently Asked Questions (FAQ)"
           />
           <div class="overflow-y-auto">
             <UiDialogDescription>
               <div class="px-6 py-4">
-                <div class="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+                <div class="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div class="space-y-1">
                     <p>
                       <strong>Account Management</strong>
@@ -656,7 +656,7 @@ I just made them work with my setup.
             </UiDialogTitle>
             <UiDialogDescription>
               <div class="p-6">
-                <div class="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+                <div class="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div class="space-y-1">
                     <p>
                       <strong>Account Management</strong>
@@ -764,7 +764,7 @@ I just made them work with my setup.
             </UiDialogDescription>
           </UiDialogHeader>
         </div>
-        <UiDialogFooter class="border-t border-border px-6 py-4">
+        <UiDialogFooter class="border-border border-t px-6 py-4">
           <UiDialogClose as-child>
             <UiButton type="button" variant="outline" text="Cancel" />
           </UiDialogClose>
@@ -804,13 +804,13 @@ I just made them work with my setup.
       >
         <UiDialogHeader class="contents space-y-0 text-left">
           <UiDialogTitle
-            class="border-b border-border px-6 py-4 text-base"
+            class="border-border border-b px-6 py-4 text-base"
             title="Terms & Conditions"
           />
           <div ref="contentRef" class="overflow-y-auto">
             <UiDialogDescription>
               <div class="px-6 py-4">
-                <div class="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+                <div class="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div class="space-y-4">
                     <div class="space-y-1">
                       <p>
@@ -907,11 +907,11 @@ I just made them work with my setup.
             </UiDialogDescription>
           </div>
         </UiDialogHeader>
-        <UiDialogFooter class="border-t border-border px-6 py-4 sm:items-center">
+        <UiDialogFooter class="border-border border-t px-6 py-4 sm:items-center">
           <TransitionSlide appear>
             <span
               v-if="!arrivedState.bottom"
-              class="grow text-xs text-muted-foreground max-sm:text-center"
+              class="text-muted-foreground grow text-xs max-sm:text-center"
             >
               Read all terms before accepting.
             </span>
@@ -958,7 +958,7 @@ I just made them work with my setup.
       <UiDialogContent class="sm:max-w-[400px]">
         <div class="mb-2 flex flex-col items-center gap-2">
           <div
-            class="flex size-11 shrink-0 items-center justify-center rounded-full border border-border"
+            class="border-border flex size-11 shrink-0 items-center justify-center rounded-full border"
             aria-hidden="true"
           >
             <svg
@@ -992,7 +992,7 @@ I just made them work with my setup.
           <UiButton type="button" class="w-full"> Subscribe </UiButton>
         </form>
 
-        <p class="text-center text-xs text-muted-foreground">
+        <p class="text-muted-foreground text-center text-xs">
           By subscribing you agree to our
           <a class="underline hover:no-underline" href="#"> Privacy Policy </a>
           .
@@ -1074,7 +1074,7 @@ I just made them work with my setup.
         class="flex flex-col gap-0 p-0 sm:max-w-[400px] [&>button:last-child]:top-3.5"
       >
         <UiDialogHeader class="contents space-y-0 text-left">
-          <UiDialogTitle class="border-b border-border px-6 py-4 text-base">
+          <UiDialogTitle class="border-border border-b px-6 py-4 text-base">
             Help us improve
           </UiDialogTitle>
           <UiDialogDescription class="sr-only">
@@ -1086,7 +1086,7 @@ I just made them work with my setup.
             <div class="space-y-4">
               <div>
                 <fieldset class="space-y-4">
-                  <legend class="text-lg leading-none font-semibold text-foreground">
+                  <legend class="text-foreground text-lg leading-none font-semibold">
                     How hard was it to set up your account?
                   </legend>
                   <UiRadioGroup
@@ -1097,7 +1097,7 @@ I just made them work with my setup.
                       v-for="number in 8"
                       :key="number"
                       :for="`radio-17-r${number}`"
-                      class="relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border border-input text-center text-sm outline-offset-2 transition-colors first:rounded-s-lg last:rounded-e-lg has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 has-[[data-state=checked]]:z-10 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent"
+                      class="border-input has-[:focus-visible]:outline-ring/70 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border text-center text-sm outline-offset-2 transition-colors first:rounded-s-lg last:rounded-e-lg has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 has-[[data-state=checked]]:z-10"
                     >
                       <RadioGroupItem
                         :id="`radio-17-r${number}`"
@@ -1108,7 +1108,7 @@ I just made them work with my setup.
                     </label>
                   </UiRadioGroup>
                 </fieldset>
-                <div class="mt-2 flex justify-between text-xs text-muted-foreground">
+                <div class="text-muted-foreground mt-2 flex justify-between text-xs">
                   <p>Very easy</p>
                   <p>Very difficult</p>
                 </div>
@@ -1154,7 +1154,7 @@ I just made them work with my setup.
       <UiDialogContent class="max-w-[400px]">
         <div class="mb-2 flex flex-col items-center gap-2">
           <div
-            class="flex size-11 shrink-0 items-center justify-center rounded-full border border-border"
+            class="border-border flex size-11 shrink-0 items-center justify-center rounded-full border"
             aria-hidden="true"
           >
             <svg
@@ -1198,7 +1198,7 @@ I just made them work with my setup.
             <TransitionSlide>
               <p
                 v-if="hasGuessed === false"
-                class="text-center text-xs text-muted-foreground"
+                class="text-muted-foreground text-center text-xs"
                 role="alert"
                 aria-live="polite"
               >
@@ -1294,7 +1294,7 @@ I just made them work with my setup.
             >
           </fieldset>
         </form>
-        <p class="text-center text-xs text-muted-foreground">
+        <p class="text-muted-foreground text-center text-xs">
           By signing up you agree to our <a class="underline hover:no-underline" href="#">Terms</a>.
         </p>
       </UiDialogContent>
@@ -1396,7 +1396,7 @@ I just made them work with my setup.
             >
           </fieldset>
         </form>
-        <p class="text-center text-xs text-muted-foreground">
+        <p class="text-muted-foreground text-center text-xs">
           By logging in, you agree to our
           <a class="underline hover:no-underline" href="#">Terms</a>.
         </p>
@@ -1751,7 +1751,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 v-for="plan in plans"
                 :key="plan.id"
                 :for="`radio-${plan.id}`"
-                class="relative flex cursor-pointer flex-col gap-1 rounded-lg border border-input p-4 shadow-xs shadow-black/5 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring/50 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70"
+                class="border-input has-[:focus-visible]:outline-ring/50 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent/70 relative flex cursor-pointer flex-col gap-1 rounded-lg border p-4 shadow-xs shadow-black/5 transition-colors has-[:focus-visible]:outline-3"
               >
                 <UiRadioGroupItem
                   :id="`radio-${plan.id}`"
@@ -1759,16 +1759,16 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                   class="sr-only after:absolute after:inset-0"
                 />
                 <div class="inline-flex items-start justify-between gap-2">
-                  <p class="font-medium text-foreground md:text-sm">{{ plan.name }}</p>
+                  <p class="text-foreground font-medium md:text-sm">{{ plan.name }}</p>
                   <UiBadge v-if="plan.popular">Popular</UiBadge>
                 </div>
-                <p class="text-sm text-muted-foreground">{{ plan.price }}</p>
+                <p class="text-muted-foreground text-sm">{{ plan.price }}</p>
               </label>
             </UiRadioGroup>
 
             <UiVeeInput name="nameOnCard" label="Name on card" required />
             <div class="space-y-2">
-              <legend class="text-sm font-medium text-foreground">Card Details</legend>
+              <legend class="text-foreground text-sm font-medium">Card Details</legend>
               <div class="rounded-lg shadow-xs shadow-black/5">
                 <div class="relative focus-within:z-10">
                   <UiVeeInput
@@ -1819,7 +1819,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
           <UiButton type="button" class="w-full"> Subscribe </UiButton>
         </form>
 
-        <p class="text-center text-xs text-muted-foreground">
+        <p class="text-muted-foreground text-center text-xs">
           Payments are non-refundable. Cancel anytime.
         </p>
       </UiDialogContent>
@@ -1876,7 +1876,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             <div
               v-for="(plan, index) in plans"
               :key="index"
-              class="relative flex w-full items-center gap-4 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent md:gap-2"
+              class="border-input has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent relative flex w-full items-center gap-4 rounded-lg border p-4 shadow-xs shadow-black/5 md:gap-2"
             >
               <UiRadioGroupItem
                 :id="plan.value"
@@ -1897,11 +1897,11 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             <p>
               <strong class="font-medium md:text-sm">Features include:</strong>
             </p>
-            <ul class="flex flex-col gap-3 text-muted-foreground md:text-sm">
+            <ul class="text-muted-foreground flex flex-col gap-3 md:text-sm">
               <li v-for="f in features" :key="f" class="flex gap-2">
                 <Icon
                   name="lucide:circle-check"
-                  class="mt-0.5 size-6 shrink-0 text-primary md:size-4"
+                  class="text-primary mt-0.5 size-6 shrink-0 md:size-4"
                   aria-hidden="true"
                 />
                 {{ f }}
@@ -1967,7 +1967,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
         class="flex flex-col gap-0 overflow-y-visible p-0 sm:max-w-lg [&>button:last-child]:top-3.5"
       >
         <UiDialogHeader class="contents space-y-0 text-left">
-          <UiDialogTitle class="border-b border-border px-6 py-4 text-base">
+          <UiDialogTitle class="border-border border-b px-6 py-4 text-base">
             Edit profile
           </UiDialogTitle>
         </UiDialogHeader>
@@ -1978,7 +1978,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
           <!-- Profile BG -->
           <div class="h-32">
             <div
-              class="relative flex h-full w-full items-center justify-center overflow-hidden bg-muted"
+              class="bg-muted relative flex h-full w-full items-center justify-center overflow-hidden"
             >
               <img
                 v-if="currentImage"
@@ -1991,7 +1991,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
               <div class="absolute inset-0 flex items-center justify-center gap-2">
                 <button
                   type="button"
-                  class="z-50 flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70"
+                  class="focus-visible:outline-ring/70 z-50 flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2"
                   :aria-label="currentImage ? 'Change image' : 'Upload image'"
                   @click="handleBannerClick()"
                 >
@@ -2000,7 +2000,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 <button
                   v-if="currentImage"
                   type="button"
-                  class="z-50 flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70"
+                  class="focus-visible:outline-ring/70 z-50 flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2"
                   aria-label="Remove image"
                   @click="currentImage = defaultBanner"
                 >
@@ -2012,7 +2012,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
           <!-- Avatar -->
           <div class="-mt-10 px-6">
             <div
-              class="relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-muted shadow-xs shadow-black/10"
+              class="border-background bg-muted relative flex size-20 items-center justify-center overflow-hidden rounded-full border-4 shadow-xs shadow-black/10"
             >
               <img
                 v-if="currentAvatarImage"
@@ -2025,7 +2025,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
 
               <button
                 type="button"
-                class="absolute flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70"
+                class="focus-visible:outline-ring/70 absolute flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-offset-2 transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2"
                 aria-label="Change profile picture"
                 @click="handleAvatarClick()"
               >
@@ -2056,7 +2056,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 >
                   <template #icon>
                     <span
-                      class="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center border-r px-3 text-base text-muted-foreground peer-disabled:opacity-50 sm:text-sm"
+                      class="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center border-r px-3 text-base peer-disabled:opacity-50 sm:text-sm"
                     >
                       https://
                     </span>
@@ -2075,7 +2075,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
             </form>
           </div>
         </div>
-        <UiDialogFooter class="border-t border-border px-6 py-4">
+        <UiDialogFooter class="border-border border-t px-6 py-4">
           <UiDialogClose as-child>
             <UiButton type="button" variant="outline"> Cancel </UiButton>
           </UiDialogClose>
@@ -2227,7 +2227,7 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
                 v-for="(_, index) in Array(totalSteps)"
                 :key="index"
                 :class="[
-                  'h-1.5 w-1.5 rounded-full bg-primary',
+                  'bg-primary h-1.5 w-1.5 rounded-full',
                   index + 1 === step ? 'bg-primary' : 'opacity-20',
                 ]"
               />
@@ -2341,10 +2341,10 @@ This implementation requires the use of [Maska](https://beholdr.github.io/maska/
     <UiButton class="w-full" variant="outline" @click="dialog = !dialog">
       <Icon
         name="lucide:search"
-        class="size-4 shrink-0 text-muted-foreground/80"
+        class="text-muted-foreground/80 size-4 shrink-0"
         aria-hidden="true"
       />
-      <span class="font-normal text-muted-foreground/70">Search</span>
+      <span class="text-muted-foreground/70 font-normal">Search</span>
 
       <UiKbd class="ml-auto"> ⌘+Shift+K </UiKbd>
     </UiButton>

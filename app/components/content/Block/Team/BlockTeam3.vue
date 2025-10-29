@@ -2,13 +2,13 @@
   <UiContainer class="pb-10">
     <UiContainer class="py-16 text-center lg:py-24">
       <slot name="headline">
-        <p v-if="headline" class="font-semibold text-primary">{{ headline }}</p>
+        <p v-if="headline" class="text-primary font-semibold">{{ headline }}</p>
       </slot>
       <slot name="title">
         <h2 class="mt-2 mb-4 text-4xl font-bold lg:mt-3 lg:mb-6 lg:text-5xl">{{ title }}</h2>
       </slot>
       <slot name="description">
-        <p class="mx-auto max-w-[768px] text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground mx-auto max-w-[768px] text-lg lg:text-xl">
           {{ description }}
         </p>
       </slot>
@@ -21,12 +21,12 @@
       <template v-for="n in 8" :key="n">
         <div class="flex flex-col">
           <UiAvatar
-            class="mb-5 h-72 w-full rounded-none ring-1 ring-ring/20"
+            class="ring-ring/20 mb-5 h-72 w-full rounded-none ring-1"
             src="https://api.dicebear.com/7.x/lorelei/svg?flip=false"
           />
           <p class="text-lg font-semibold">Jane Doe</p>
           <p class="text-primary">Marketing Manager</p>
-          <p class="mt-2 text-muted-foreground">
+          <p class="text-muted-foreground mt-2">
             Lead engineering teams at Figma, Pitch, and Protocol Labs.
           </p>
         </div>

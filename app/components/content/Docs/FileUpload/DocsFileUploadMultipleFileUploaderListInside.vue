@@ -13,7 +13,7 @@
         <div
           ref="dropzoneRef"
           :data-files="files.length > 0 || undefined"
-          class="flex min-h-56 flex-col items-center rounded-xl border border-dashed border-input p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:border-ring has-[input:focus]:ring-[3px] has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50"
+          class="border-input has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 data-[dragging=true]:bg-accent/50 flex min-h-56 flex-col items-center rounded-xl border border-dashed p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:ring-[3px]"
         >
           <input ref="inputRef" hidden aria-label="Upload files" />
 
@@ -47,7 +47,7 @@
                     :key="file.id"
                     layout="position"
                     :variants="fileListItemChild"
-                    class="flex items-center justify-between gap-2 rounded-lg border bg-background p-2 pe-3"
+                    class="bg-background flex items-center justify-between gap-2 rounded-lg border p-2 pe-3"
                   >
                     <div class="flex items-center gap-3 overflow-hidden">
                       <div
@@ -59,7 +59,7 @@
                         <p class="truncate text-[13px] font-medium">
                           {{ file.file.name }}
                         </p>
-                        <p class="text-xs text-muted-foreground">
+                        <p class="text-muted-foreground text-xs">
                           {{ formatBytes(file.file.size) }}
                         </p>
                       </div>
@@ -68,7 +68,7 @@
                     <UiButton
                       size="icon"
                       variant="ghost"
-                      class="-me-2 size-8 text-muted-foreground/80 hover:bg-transparent hover:text-foreground"
+                      class="text-muted-foreground/80 hover:text-foreground -me-2 size-8 hover:bg-transparent"
                       aria-label="Remove file"
                       @click="removeFile(file.id)"
                     >
@@ -99,7 +99,7 @@
               <Motion
                 layout="position"
                 :variants="emptyItem"
-                class="mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background"
+                class="bg-background mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border"
                 aria-hidden="true"
               >
                 <Icon name="lucide:file" class="size-4 opacity-60" />
@@ -107,7 +107,7 @@
               <Motion as="p" :variants="emptyItem" class="mb-1.5 text-sm font-medium"
                 >Upload files</Motion
               >
-              <Motion as="p" :variants="emptyItem" class="text-xs text-muted-foreground">
+              <Motion as="p" :variants="emptyItem" class="text-muted-foreground text-xs">
                 Max {{ maxFiles }} files ∙ Up to {{ formatBytes(maxSize) }}
               </Motion>
               <Motion :variants="emptyItem">
@@ -124,7 +124,7 @@
       <AnimatePresence>
         <Motion
           v-if="errors.length > 0"
-          class="flex items-center gap-1 text-xs text-destructive"
+          class="text-destructive flex items-center gap-1 text-xs"
           role="alert"
         >
           <Icon name="lucide:circle-alert" class="size-3 shrink-0" />
@@ -136,7 +136,7 @@
         as="p"
         aria-live="polite"
         role="region"
-        class="mt-2 text-center text-xs text-muted-foreground"
+        class="text-muted-foreground mt-2 text-center text-xs"
       >
         Multiple files uploader w/ list inside
       </Motion>

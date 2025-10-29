@@ -67,7 +67,7 @@
   const localModel = defineModel<boolean>("show", { default: true });
 
   const styles = tv({
-    base: "absolute flex items-center justify-center rounded-full font-medium whitespace-nowrap text-foreground ring-[2px] ring-background",
+    base: "text-foreground ring-background absolute flex items-center justify-center rounded-full font-medium whitespace-nowrap ring-[2px]",
     variants: {
       position: {
         "top-right": "top-0 right-0",

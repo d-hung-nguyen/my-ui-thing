@@ -24,7 +24,7 @@
                   localModel = false;
                 "
               >
-                <Icon v-if="nav.icon" :name="nav.icon" class="size-4 text-muted-foreground/80" />
+                <Icon v-if="nav.icon" :name="nav.icon" class="text-muted-foreground/80 size-4" />
                 <span>{{ child.title }}</span>
                 <UiBadge v-if="child.label" class="ml-4 px-2 py-0 text-[10px] dark:bg-lime-500">{{
                   child.label
@@ -40,7 +40,7 @@
               :value="mode.value"
               @select="setTheme($event, mode.value)"
             >
-              <Icon :name="mode.icon" class="size-4 text-muted-foreground/80" />
+              <Icon :name="mode.icon" class="text-muted-foreground/80 size-4" />
               <span>{{ mode.title }}</span>
             </UiCommandItem>
           </UiCommandGroup>

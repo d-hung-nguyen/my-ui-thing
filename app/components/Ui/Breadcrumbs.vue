@@ -26,9 +26,9 @@
                   item.link && !item.disabled && 'underline-offset-2 group-hover:underline',
                   isNotLastItem(i)
                     ? 'text-muted-foreground group-hover:text-foreground'
-                    : 'font-medium text-primary',
+                    : 'text-primary font-medium',
                 ]"
-                class="text-sm text-foreground transition-colors"
+                class="text-foreground text-sm transition-colors"
                 @click="item?.click?.()"
                 >{{ item.label }}</NuxtLink
               >
@@ -41,7 +41,7 @@
           v-if="isNotLastItem(i)"
           data-slot="breadcrumb-separator"
           :name="separator"
-          class="h-3 w-3 text-muted-foreground"
+          class="text-muted-foreground h-3 w-3"
         />
       </slot>
     </template>

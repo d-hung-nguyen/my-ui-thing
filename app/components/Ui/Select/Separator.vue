@@ -19,6 +19,6 @@
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "pointer-events-none -mx-1 my-1 h-px bg-border",
+    base: "bg-border pointer-events-none -mx-1 my-1 h-px",
   });
 </script>

@@ -3,7 +3,7 @@
     <UiDrawerContent class="h-[600px]">
       <template #knob>
         <div
-          class="mx-auto my-5 h-1 w-[60px] shrink-0 cursor-grab rounded-full bg-muted active:cursor-grabbing"
+          class="bg-muted mx-auto my-5 h-1 w-[60px] shrink-0 cursor-grab rounded-full active:cursor-grabbing"
         />
       </template>
       <div>

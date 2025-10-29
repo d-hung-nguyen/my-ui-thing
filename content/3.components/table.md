@@ -103,7 +103,7 @@ npx ui-thing@latest add table
     <div class="grid grid-cols-1 gap-5 md:flex md:items-center md:justify-between">
       <div class="flex flex-col">
         <h1 class="font-semibold">Users</h1>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           A list of all the users in your account including their name, title, email and role.
         </p>
       </div>
@@ -115,10 +115,10 @@ npx ui-thing@latest add table
       <UiTable class="w-full table-auto">
         <UiTableHeader>
           <UiTableRow>
-            <UiTableHead class="pl-0 font-semibold text-foreground">Name</UiTableHead>
-            <UiTableHead class="pl-0 font-semibold text-foreground">Title</UiTableHead>
-            <UiTableHead class="pl-0 font-semibold text-foreground">Email</UiTableHead>
-            <UiTableHead class="pl-0 font-semibold text-foreground">Role</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold">Name</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold">Title</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold">Email</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold">Role</UiTableHead>
             <UiTableHead class="pl-0">
               <span class="sr-only">Actions</span>
             </UiTableHead>
@@ -128,9 +128,9 @@ npx ui-thing@latest add table
           <template v-for="user in users" :key="user.id">
             <UiTableRow>
               <UiTableCell class="pl-0 font-medium">{{ user.name }} </UiTableCell>
-              <UiTableCell class="pl-0 text-muted-foreground">{{ user.title }}</UiTableCell>
-              <UiTableCell class="pl-0 text-muted-foreground">{{ user.email }}</UiTableCell>
-              <UiTableCell class="pl-0 text-muted-foreground">{{ user.role }}</UiTableCell>
+              <UiTableCell class="text-muted-foreground pl-0">{{ user.title }}</UiTableCell>
+              <UiTableCell class="text-muted-foreground pl-0">{{ user.email }}</UiTableCell>
+              <UiTableCell class="text-muted-foreground pl-0">{{ user.role }}</UiTableCell>
               <UiTableCell class="pl-0 text-right">
                 <UiButton size="sm" variant="linkHover2">Edit</UiButton>
               </UiTableCell>
@@ -182,7 +182,7 @@ npx ui-thing@latest add table
     <div class="grid grid-cols-1 gap-5 md:flex md:items-center md:justify-between">
       <div class="flex flex-col">
         <h1 class="font-semibold">Users</h1>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           A list of all the users in your account including their name, title, email and role.
         </p>
       </div>
@@ -195,14 +195,14 @@ npx ui-thing@latest add table
       <UiTable>
         <UiTableHeader>
           <UiTableRow>
-            <UiTableHead class="pl-0 font-semibold text-foreground">Name</UiTableHead>
-            <UiTableHead class="hidden pl-0 font-semibold text-foreground lg:table-cell"
+            <UiTableHead class="text-foreground pl-0 font-semibold">Name</UiTableHead>
+            <UiTableHead class="text-foreground hidden pl-0 font-semibold lg:table-cell"
               >Title</UiTableHead
             >
-            <UiTableHead class="hidden pl-0 font-semibold text-foreground md:table-cell"
+            <UiTableHead class="text-foreground hidden pl-0 font-semibold md:table-cell"
               >Email</UiTableHead
             >
-            <UiTableHead class="pl-0 font-semibold text-foreground">Role</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold">Role</UiTableHead>
             <UiTableHead class="pl-0">
               <span class="sr-only">Actions</span>
             </UiTableHead>
@@ -218,13 +218,13 @@ npx ui-thing@latest add table
                   <p class="text-muted-foreground md:hidden">{{ user.email }}</p>
                 </div>
               </UiTableCell>
-              <UiTableCell class="hidden pl-0 text-muted-foreground lg:table-cell">{{
+              <UiTableCell class="text-muted-foreground hidden pl-0 lg:table-cell">{{
                 user.title
               }}</UiTableCell>
-              <UiTableCell class="hidden pl-0 text-muted-foreground md:table-cell">{{
+              <UiTableCell class="text-muted-foreground hidden pl-0 md:table-cell">{{
                 user.email
               }}</UiTableCell>
-              <UiTableCell class="pl-0 text-muted-foreground">{{ user.role }}</UiTableCell>
+              <UiTableCell class="text-muted-foreground pl-0">{{ user.role }}</UiTableCell>
               <UiTableCell class="pl-0 text-right">
                 <UiButton size="sm" variant="linkHover2">Edit</UiButton>
               </UiTableCell>
@@ -276,7 +276,7 @@ npx ui-thing@latest add table
     <div class="grid grid-cols-1 gap-5 md:flex md:items-center md:justify-between">
       <div class="flex flex-col">
         <h1 class="font-semibold">Users</h1>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           A list of all the users in your account including their name, title, email and role.
         </p>
       </div>
@@ -287,18 +287,18 @@ npx ui-thing@latest add table
 
     <div class="mt-10 [&>div]:max-h-[500px]">
       <UiTable class="">
-        <UiTableHeader class="sticky top-0 z-10 bg-background/90 backdrop-blur-sm">
+        <UiTableHeader class="bg-background/90 sticky top-0 z-10 backdrop-blur-sm">
           <UiTableRow>
-            <UiTableHead class="pl-0 font-semibold text-foreground backdrop-blur">Name</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold backdrop-blur">Name</UiTableHead>
             <UiTableHead
-              class="hidden bg-background/90 pl-0 font-semibold text-foreground backdrop-blur lg:table-cell"
+              class="bg-background/90 text-foreground hidden pl-0 font-semibold backdrop-blur lg:table-cell"
               >Title</UiTableHead
             >
             <UiTableHead
-              class="hidden bg-background/90 pl-0 font-semibold text-foreground backdrop-blur md:table-cell"
+              class="bg-background/90 text-foreground hidden pl-0 font-semibold backdrop-blur md:table-cell"
               >Email</UiTableHead
             >
-            <UiTableHead class="pl-0 font-semibold text-foreground backdrop-blur">Role</UiTableHead>
+            <UiTableHead class="text-foreground pl-0 font-semibold backdrop-blur">Role</UiTableHead>
             <UiTableHead class="pl-0 backdrop-blur">
               <span class="sr-only">Actions</span>
             </UiTableHead>
@@ -314,13 +314,13 @@ npx ui-thing@latest add table
                   <p class="text-muted-foreground md:hidden">{{ user.email }}</p>
                 </div>
               </UiTableCell>
-              <UiTableCell class="hidden pl-0 text-muted-foreground lg:table-cell">{{
+              <UiTableCell class="text-muted-foreground hidden pl-0 lg:table-cell">{{
                 user.title
               }}</UiTableCell>
-              <UiTableCell class="hidden pl-0 text-muted-foreground md:table-cell">{{
+              <UiTableCell class="text-muted-foreground hidden pl-0 md:table-cell">{{
                 user.email
               }}</UiTableCell>
-              <UiTableCell class="pl-0 text-muted-foreground">{{ user.role }}</UiTableCell>
+              <UiTableCell class="text-muted-foreground pl-0">{{ user.role }}</UiTableCell>
               <UiTableCell class="pl-0 text-right">
                 <UiButton size="sm" variant="linkHover2">Edit</UiButton>
               </UiTableCell>
@@ -401,7 +401,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Basic table</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Basic table</p>
   </div>
 </template>
 
@@ -469,7 +469,7 @@ To use these examples you will have to copy the code and adjust it for your own 
               <UiAvatar class="size-8" :src="item.image" :alt="item.name" />
               <div class="leading-none">
                 <div class="font-medium">{{ item.name }}</div>
-                <span class="mt-1 inline-block text-xs text-muted-foreground"
+                <span class="text-muted-foreground mt-1 inline-block text-xs"
                   >@{{ item.username }}</span
                 >
               </div>
@@ -482,7 +482,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableBody>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Table with images</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Table with images</p>
   </div>
 </template>
 
@@ -561,7 +561,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Table without horizontal dividers</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Table without horizontal dividers</p>
   </div>
 </template>
 
@@ -627,7 +627,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         <UiTableRow
           v-for="item in data"
           :key="item.id"
-          class="border-none odd:bg-muted/50 hover:bg-transparent odd:hover:bg-muted/50"
+          class="odd:bg-muted/50 odd:hover:bg-muted/50 border-none hover:bg-transparent"
         >
           <UiTableCell class="py-2.5 font-medium">{{ item.name }}</UiTableCell>
           <UiTableCell class="py-2.5">{{ item.email }}</UiTableCell>
@@ -644,7 +644,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Striped table</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Striped table</p>
   </div>
 </template>
 
@@ -725,7 +725,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Table with vertical lines</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Table with vertical lines</p>
   </div>
 </template>
 
@@ -776,7 +776,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsTableDense.vue]
 <template>
   <div>
-    <div class="overflow-hidden rounded-lg border border-border bg-background">
+    <div class="border-border bg-background overflow-hidden rounded-lg border">
       <UiTable>
         <UiTableHeader>
           <UiTableRow class="bg-muted/50">
@@ -799,7 +799,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableBody>
       </UiTable>
     </div>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Dense table</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Dense table</p>
   </div>
 </template>
 
@@ -927,7 +927,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableRow>
       </UiTableFooter>
     </UiTable>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Table with row selection</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Table with row selection</p>
   </div>
 </template>
 
@@ -978,7 +978,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsTableCardTable.vue]
 <template>
   <div>
-    <div class="overflow-hidden rounded-lg border border-border bg-background">
+    <div class="border-border bg-background overflow-hidden rounded-lg border">
       <UiTable>
         <UiTableHeader>
           <UiTableRow class="hover:bg-transparent">
@@ -1016,7 +1016,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableFooter>
       </UiTable>
     </div>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Table with row selection</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Table with row selection</p>
   </div>
 </template>
 
@@ -1067,7 +1067,7 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsTableVertical.vue]
 <template>
   <div class="mx-auto max-w-lg">
-    <div class="overflow-hidden rounded-lg border border-border bg-background">
+    <div class="border-border bg-background overflow-hidden rounded-lg border">
       <UiTable>
         <UiTableBody>
           <UiTableRow class="*:border-border hover:bg-transparent [&>:not(:last-child)]:border-r">
@@ -1093,7 +1093,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableBody>
       </UiTable>
     </div>
-    <p class="mt-4 text-center text-sm text-muted-foreground">Vertical table</p>
+    <p class="text-muted-foreground mt-4 text-center text-sm">Vertical table</p>
   </div>
 </template>
 ```
@@ -1117,9 +1117,9 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div>
     <div class="[&>div]:max-h-96">
       <UiTable
-        class="border-separate border-spacing-0 [&_td]:border-border [&_tfoot_td]:border-t [&_th]:border-b [&_th]:border-border [&_tr]:border-none [&_tr:not(:last-child)_td]:border-b"
+        class="[&_td]:border-border [&_th]:border-border border-separate border-spacing-0 [&_tfoot_td]:border-t [&_th]:border-b [&_tr]:border-none [&_tr:not(:last-child)_td]:border-b"
       >
-        <UiTableHeader class="sticky top-0 z-10 bg-background/90 backdrop-blur-sm">
+        <UiTableHeader class="bg-background/90 sticky top-0 z-10 backdrop-blur-sm">
           <UiTableRow class="hover:bg-transparent">
             <UiTableHead>Name</UiTableHead>
             <UiTableHead>Email</UiTableHead>
@@ -1145,7 +1145,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiTableFooter>
       </UiTable>
     </div>
-    <p class="mt-8 text-center text-sm text-muted-foreground">Table with sticky header</p>
+    <p class="text-muted-foreground mt-8 text-center text-sm">Table with sticky header</p>
   </div>
 </template>
 
@@ -1198,14 +1198,14 @@ To use these examples you will have to copy the code and adjust it for your own 
   <UiTable>
     <UiTableHeader>
       <UiTableRow
-        class="border-y-0 *:border-border hover:bg-transparent [&>:not(:last-child)]:border-r"
+        class="*:border-border border-y-0 hover:bg-transparent [&>:not(:last-child)]:border-r"
       >
         <UiTableCell />
-        <UiTableHead class="border-b border-border text-center" colspan="5">
+        <UiTableHead class="border-border border-b text-center" colspan="5">
           <Icon name="lucide:monitor" class="inline-flex size-4" aria-hidden="true" />
           <span class="sr-only">Desktop browsers</span>
         </UiTableHead>
-        <UiTableHead class="border-b border-border text-center" colspan="5">
+        <UiTableHead class="border-border border-b text-center" colspan="5">
           <Icon name="lucide:smartphone" class="inline-flex size-4" aria-hidden="true" />
           <span class="sr-only">Mobile browsers</span>
         </UiTableHead>
@@ -1218,14 +1218,14 @@ To use these examples you will have to copy the code and adjust it for your own 
         <UiTableHead
           v-for="browser in items?.[0]?.desktop"
           :key="browser.name"
-          class="h-auto rotate-180 py-3 text-foreground [writing-mode:vertical-lr]"
+          class="text-foreground h-auto rotate-180 py-3 [writing-mode:vertical-lr]"
         >
           {{ browser.name }}
         </UiTableHead>
         <UiTableHead
           v-for="browser in items?.[0]?.mobile"
           :key="browser.name"
-          class="h-auto rotate-180 py-3 text-foreground [writing-mode:vertical-lr]"
+          class="text-foreground h-auto rotate-180 py-3 [writing-mode:vertical-lr]"
         >
           {{ browser.name }}
         </UiTableHead>
@@ -1237,7 +1237,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         :key="item.feature"
         class="*:border-border [&>:not(:last-child)]:border-r"
       >
-        <UiTableHead class="font-medium whitespace-nowrap text-foreground">{{
+        <UiTableHead class="text-foreground font-medium whitespace-nowrap">{{
           item.feature
         }}</UiTableHead>
         <UiTableCell
@@ -1254,12 +1254,12 @@ To use these examples you will have to copy the code and adjust it for your own 
           <Icon
             v-else
             name="lucide:x"
-            class="inline-flex size-4 text-destructive"
+            class="text-destructive inline-flex size-4"
             aria-hidden="true"
           />
 
           <span class="sr-only">{{ browser.supported ? "Supported" : "Not supported" }}</span>
-          <div class="text-xs font-medium text-muted-foreground">{{ browser.version }}</div>
+          <div class="text-muted-foreground text-xs font-medium">{{ browser.version }}</div>
         </UiTableCell>
       </UiTableRow>
     </UiTableBody>

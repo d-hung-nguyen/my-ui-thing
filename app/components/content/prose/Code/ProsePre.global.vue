@@ -23,7 +23,7 @@
     <ProseMermaid v-if="isMermaid" :code="code" @mermaid-error="onMermaidError">
       <slot />
     </ProseMermaid>
-    <pre v-else :class="[$attrs?.class, 'shadow-xs ring-1 ring-border/60']"><slot /></pre>
+    <pre v-else :class="[$attrs?.class, 'ring-border/60 shadow-xs ring-1']"><slot /></pre>
   </div>
 </template>
 
@@ -155,7 +155,7 @@
   const styles = tv({
     slots: {
       wrapper: [
-        "relative mt-3 rounded-lg border bg-muted/60 p-1.5 dark:bg-muted/10",
+        "bg-muted/60 dark:bg-muted/10 relative mt-3 rounded-lg border p-1.5",
         hasLinesInMeta.value && "show-line-number",
       ],
       fileNameWrapper: "not-prose flex items-center gap-2 p-2 pb-4",

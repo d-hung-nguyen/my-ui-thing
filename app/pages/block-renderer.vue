@@ -2,7 +2,7 @@
   <ClientOnly>
     <Motion v-if="dynamicComponent" :animate="{ opacity: 1 }" :initial="{ opacity: 0 }">
       <component :is="dynamicComponent" :class="[route?.query?.containerClass]" class="size-full" />
-      <div class="fixed right-5 bottom-5 z-20 rounded-md border bg-background">
+      <div class="bg-background fixed right-5 bottom-5 z-20 rounded-md border">
         <ThemePopover />
       </div>
     </Motion>

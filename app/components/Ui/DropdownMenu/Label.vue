@@ -25,7 +25,7 @@
   >();
   const forwarded = reactiveOmit(props, "class", "inset", "label");
   const styles = tv({
-    base: "inline-block w-full px-2 py-1.5 text-sm font-semibold text-foreground",
+    base: "text-foreground inline-block w-full px-2 py-1.5 text-sm font-semibold",
     variants: {
       inset: { true: "pl-8" },
     },

@@ -42,7 +42,7 @@ In order to make the editor match the design of this website (and the whole shad
 
 .ql-toolbar {
   &.ql-snow {
-    @apply rounded-t-md border-border font-sans;
+    @apply border-border rounded-t-md font-sans;
   }
   &.ql-snow {
     .ql-stroke {
@@ -52,7 +52,7 @@ In order to make the editor match the design of this website (and the whole shad
       @apply fill-muted-foreground;
     }
     button {
-      @apply mx-0.5 rounded hover:bg-muted hover:text-foreground;
+      @apply hover:bg-muted hover:text-foreground mx-0.5 rounded;
       &:hover {
         .ql-fill {
           @apply fill-foreground;
@@ -81,7 +81,7 @@ In order to make the editor match the design of this website (and the whole shad
         @apply text-muted-foreground;
       }
       button {
-        @apply mx-0.5 rounded hover:bg-muted hover:text-foreground;
+        @apply hover:bg-muted hover:text-foreground mx-0.5 rounded;
         &:hover {
           .ql-fill {
             @apply fill-foreground;
@@ -109,9 +109,9 @@ In order to make the editor match the design of this website (and the whole shad
       .ql-picker {
         @apply rounded;
         .ql-picker-options {
-          @apply mt-1 rounded border-border bg-card p-1;
+          @apply border-border bg-card mt-1 rounded p-1;
           .ql-picker-item {
-            @apply rounded hover:bg-muted hover:text-foreground;
+            @apply hover:bg-muted hover:text-foreground rounded;
             &.ql-selected {
               @apply bg-primary text-primary-foreground;
             }
@@ -129,7 +129,7 @@ In order to make the editor match the design of this website (and the whole shad
           }
         }
         .ql-picker-options {
-          @apply mt-1 rounded border-border bg-card p-1;
+          @apply border-border bg-card mt-1 rounded p-1;
           .ql-picker-item {
             &.ql-selected {
               @apply bg-primary text-primary-foreground;
@@ -141,9 +141,9 @@ In order to make the editor match the design of this website (and the whole shad
         }
       }
       .ql-picker-label {
-        @apply hover:rounded hover:bg-muted hover:text-foreground;
+        @apply hover:bg-muted hover:text-foreground hover:rounded;
         &.ql-active {
-          @apply rounded bg-primary text-primary-foreground;
+          @apply bg-primary text-primary-foreground rounded;
           .ql-stroke {
             @apply stroke-primary-foreground;
           }
@@ -154,7 +154,7 @@ In order to make the editor match the design of this website (and the whole shad
       }
       .ql-expanded {
         .ql-picker-label {
-          @apply rounded border-border;
+          @apply border-border rounded;
         }
       }
     }
@@ -162,12 +162,12 @@ In order to make the editor match the design of this website (and the whole shad
 }
 
 .ql-container {
-  @apply min-h-[150px] bg-transparent font-sans text-sm focus-within:border-ring! focus-within:ring-[3px] focus-within:ring-ring/50 dark:bg-input/30;
+  @apply focus-within:border-ring! focus-within:ring-ring/50 dark:bg-input/30 min-h-[150px] bg-transparent font-sans text-sm focus-within:ring-[3px];
   &.ql-snow {
     a {
       @apply text-sky-500 hover:text-sky-500;
     }
-    @apply rounded-b-md border-border;
+    @apply border-border rounded-b-md;
   }
   .ql-editor {
     @apply min-h-[150px];
@@ -181,9 +181,9 @@ In order to make the editor match the design of this website (and the whole shad
     }
   }
   .ql-tooltip {
-    @apply z-[9999] rounded border-border bg-card px-4 py-2 text-sm text-card-foreground shadow before:cursor-pointer before:font-medium;
+    @apply border-border bg-card text-card-foreground z-[9999] rounded px-4 py-2 text-sm shadow before:cursor-pointer before:font-medium;
     input[type="text"] {
-      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:ring-1 focus:ring-ring focus:outline-none;
+      @apply border-border bg-muted/30 text-foreground focus:ring-ring h-8 w-[200px] rounded p-2 text-sm focus:ring-1 focus:outline-none;
     }
     .ql-preview {
       @apply text-sm leading-[26px] underline underline-offset-2;
@@ -197,9 +197,9 @@ In order to make the editor match the design of this website (and the whole shad
 .ql-container.ql-bubble {
   @apply rounded-md border;
   .ql-tooltip {
-    @apply z-[9999] rounded-lg border border-border bg-card px-4 py-2 text-sm text-card-foreground shadow before:cursor-pointer before:font-medium;
+    @apply border-border bg-card text-card-foreground z-[9999] rounded-lg border px-4 py-2 text-sm shadow before:cursor-pointer before:font-medium;
     input[type="text"] {
-      @apply h-8 w-[200px] rounded border-border bg-muted/30 p-2 text-sm text-foreground focus:ring-1 focus:ring-ring focus:outline-none;
+      @apply border-border bg-muted/30 text-foreground focus:ring-ring h-8 w-[200px] rounded p-2 text-sm focus:ring-1 focus:outline-none;
     }
     .ql-preview {
       @apply text-sm leading-[26px] underline underline-offset-2;
@@ -219,7 +219,7 @@ In order to make the editor match the design of this website (and the whole shad
       }
 
       button {
-        @apply mx-0.5 rounded hover:bg-muted hover:text-foreground;
+        @apply hover:bg-muted hover:text-foreground mx-0.5 rounded;
         &:hover {
           .ql-fill {
             @apply fill-foreground;
@@ -248,7 +248,7 @@ In order to make the editor match the design of this website (and the whole shad
           @apply text-muted-foreground;
         }
         button {
-          @apply mx-0.5 rounded hover:bg-muted hover:text-foreground;
+          @apply hover:bg-muted hover:text-foreground mx-0.5 rounded;
           &:hover {
             .ql-fill {
               @apply fill-foreground;
@@ -276,9 +276,9 @@ In order to make the editor match the design of this website (and the whole shad
         .ql-picker {
           @apply rounded;
           .ql-picker-options {
-            @apply mt-1 rounded border border-border bg-card p-1;
+            @apply border-border bg-card mt-1 rounded border p-1;
             .ql-picker-item {
-              @apply rounded px-1 hover:bg-muted hover:text-foreground;
+              @apply hover:bg-muted hover:text-foreground rounded px-1;
               &.ql-selected {
                 @apply bg-primary text-primary-foreground;
               }
@@ -296,7 +296,7 @@ In order to make the editor match the design of this website (and the whole shad
             }
           }
           .ql-picker-options {
-            @apply mt-1 rounded border border-border bg-card p-1;
+            @apply border-border bg-card mt-1 rounded border p-1;
             .ql-picker-item {
               &.ql-selected {
                 @apply bg-primary text-primary-foreground;
@@ -308,9 +308,9 @@ In order to make the editor match the design of this website (and the whole shad
           }
         }
         .ql-picker-label {
-          @apply hover:rounded hover:bg-muted hover:text-foreground;
+          @apply hover:bg-muted hover:text-foreground hover:rounded;
           &.ql-active {
-            @apply rounded bg-primary text-primary-foreground;
+            @apply bg-primary text-primary-foreground rounded;
             .ql-stroke {
               @apply stroke-primary-foreground;
             }
@@ -321,7 +321,7 @@ In order to make the editor match the design of this website (and the whole shad
         }
         .ql-expanded {
           .ql-picker-label {
-            @apply rounded border-border;
+            @apply border-border rounded;
           }
         }
       }

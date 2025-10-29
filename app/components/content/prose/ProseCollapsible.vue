@@ -1,7 +1,7 @@
 <template>
   <UiCollapsible v-slot="{ open }" :default-open="defaultOpen" class="my-4">
     <UiCollapsibleTrigger
-      class="group relative inline-flex items-center gap-1.5 rounded-xs text-sm text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      class="group text-muted-foreground hover:text-foreground focus-visible:ring-primary relative inline-flex items-center gap-1.5 rounded-xs text-sm transition-colors focus:outline-none focus-visible:ring-2"
       :class="triggerClass"
     >
       <ProseSmartIcon v-if="open ? openIcon : closeIcon" :name="open ? openIcon! : closeIcon!" />

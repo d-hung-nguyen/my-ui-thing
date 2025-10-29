@@ -17,6 +17,6 @@
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "absolute bg-primary data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
+    base: "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
   });
 </script>

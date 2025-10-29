@@ -129,7 +129,7 @@ Restrict the number of characters that can be entered into the textarea.
 <template>
   <div class="mx-auto flex max-w-xs flex-col gap-3">
     <UiTextarea :maxlength="5" placeholder="Quick chat..." />
-    <p class="text-sm text-muted-foreground">No more than 5 letters</p>
+    <p class="text-muted-foreground text-sm">No more than 5 letters</p>
   </div>
 </template>
 ```
@@ -156,7 +156,7 @@ You don't need to use `/` at the beginning and end of the pattern as the RegExp 
 <template>
   <div class="mx-auto flex max-w-xs flex-col gap-3">
     <UiTextarea pattern="^[a-z\s]" placeholder="Say something" />
-    <p class="text-sm text-muted-foreground">Only lower case letters</p>
+    <p class="text-muted-foreground text-sm">Only lower case letters</p>
   </div>
 </template>
 ```

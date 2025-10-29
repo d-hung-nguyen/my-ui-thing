@@ -1,10 +1,10 @@
 <template>
   <Callout v-if="error" variant="error" title="Mermaid Chart Error" :description="error" />
-  <div v-else class="rounded-lg p-4 text-card-foreground not-first:mt-5 not-last:mb-5">
+  <div v-else class="text-card-foreground rounded-lg p-4 not-first:mt-5 not-last:mb-5">
     <div v-if="loading" class="flex items-center justify-center">
       <div class="flex flex-col items-center gap-2 p-4">
         <Icon name="lucide:loader-circle" class="size-6! animate-spin" />
-        <span class="text-sm text-muted-foreground">Rendering Chart</span>
+        <span class="text-muted-foreground text-sm">Rendering Chart</span>
       </div>
     </div>
     <div

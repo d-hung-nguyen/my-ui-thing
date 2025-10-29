@@ -28,5 +28,5 @@
 
   const props = defineProps<Props>();
 
-  const styles = tv({ base: "text-sm text-muted-foreground" });
+  const styles = tv({ base: "text-muted-foreground text-sm" });
 </script>

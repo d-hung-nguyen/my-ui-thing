@@ -14,7 +14,7 @@
   import type { HTMLAttributes } from "vue";
 
   const styles = tv({
-    base: "animate-pulse rounded-md bg-muted",
+    base: "bg-muted animate-pulse rounded-md",
     variants: {
       loading: { true: "cursor-wait", false: "cursor-default" },
     },

@@ -16,7 +16,7 @@
   import type { HTMLAttributes } from "vue";
 
   export const fieldStyles = tv({
-    base: "group/field flex w-full gap-3 data-[invalid=true]:text-destructive",
+    base: "group/field data-[invalid=true]:text-destructive flex w-full gap-3",
     variants: {
       orientation: {
         vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],

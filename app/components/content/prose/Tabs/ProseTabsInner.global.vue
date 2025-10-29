@@ -65,12 +65,12 @@
             v-for="(slot, i) in defaultSlots"
             :key="slot.key"
             :value="i"
-            class="relative z-20 flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap text-muted-foreground transition-all duration-75 hover:text-foreground focus-visible:outline-none data-[active]:text-foreground"
+            class="text-muted-foreground hover:text-foreground data-[active]:text-foreground relative z-20 flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all duration-75 focus-visible:outline-none"
           >
             <ProseSmartIcon v-if="icon(slot)" :name="icon(slot)!" :size="14" class="shrink-0" />
             <span class="truncate">{{ label(slot) }}</span>
           </TabsTrigger>
-          <UiTabsIndicator class="inset-0 size-full px-0 py-1 [&>div]:bg-muted" />
+          <UiTabsIndicator class="[&>div]:bg-muted inset-0 size-full px-0 py-1" />
         </TabsList>
       </UiScrollArea>
 

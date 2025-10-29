@@ -11,7 +11,7 @@
         <h1 class="mt-7 mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           People who care about your growth
         </h1>
-        <p class="text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground text-lg lg:text-xl">
           Powerful, self-serve product and growth analytics to help you convert, engage, and retain
           more.
         </p>
@@ -19,7 +19,7 @@
           <UiButton size="lg" variant="outline"> <Icon name="lucide:play-circle" /> Demo </UiButton>
           <UiButton size="lg">Sign up</UiButton>
         </div>
-        <p class="mt-5 text-sm text-muted-foreground">
+        <p class="text-muted-foreground mt-5 text-sm">
           We care about your data in our privacy policy.
         </p>
       </div>

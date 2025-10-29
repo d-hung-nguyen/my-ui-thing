@@ -47,15 +47,15 @@
     slots: {
       base: "flex flex-col gap-2 py-4",
       name: "flex flex-wrap items-center gap-2",
-      nameText: "font-semibold text-foreground",
+      nameText: "text-foreground font-semibold",
       typeBadge: "rounded-md px-1.5 py-0.5 text-[11px]",
       requiredBadge:
         "rounded-md border-red-500/50 !bg-red-500/10 px-1.5 py-0.5 text-[11px] text-red-500",
-      description: "max-w-none text-[15px] text-muted-foreground",
+      description: "text-muted-foreground max-w-none text-[15px]",
       defaultValue: "flex items-center gap-2 text-sm",
-      defaultLabel: "font-medium text-muted-foreground",
+      defaultLabel: "text-muted-foreground font-medium",
       defaultCode:
-        "rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-[11px] text-foreground",
+        "bg-muted text-foreground rounded-md px-1.5 py-0.5 font-mono text-xs text-[11px]",
     },
   });
 

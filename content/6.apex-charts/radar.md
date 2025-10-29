@@ -28,7 +28,7 @@ description: Radar charts are used to display multivariate data in a two-dimensi
         <div class="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <Icon name="lucide:trending-up" class="size-4" />
         </div>
-        <div class="leading-none text-muted-foreground">January - June 2024</div>
+        <div class="text-muted-foreground leading-none">January - June 2024</div>
       </UiCardFooter>
     </UiCard>
   </div>
@@ -88,7 +88,7 @@ description: Radar charts are used to display multivariate data in a two-dimensi
         <div class="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <Icon name="lucide:trending-up" class="size-4" />
         </div>
-        <div class="leading-none text-muted-foreground">January - June 2024</div>
+        <div class="text-muted-foreground leading-none">January - June 2024</div>
       </UiCardFooter>
     </UiCard>
   </div>
@@ -158,7 +158,7 @@ description: Radar charts are used to display multivariate data in a two-dimensi
         <div class="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <Icon name="lucide:trending-up" class="size-4" />
         </div>
-        <div class="leading-none text-muted-foreground">January - June 2024</div>
+        <div class="text-muted-foreground leading-none">January - June 2024</div>
       </UiCardFooter>
     </UiCard>
   </div>
@@ -235,7 +235,7 @@ description: Radar charts are used to display multivariate data in a two-dimensi
         <div class="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <Icon name="lucide:trending-up" class="size-4" />
         </div>
-        <div class="leading-none text-muted-foreground">January - June 2024</div>
+        <div class="text-muted-foreground leading-none">January - June 2024</div>
       </UiCardFooter>
     </UiCard>
   </div>
@@ -304,7 +304,7 @@ description: Radar charts are used to display multivariate data in a two-dimensi
         <div class="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <Icon name="lucide:trending-up" class="size-4" />
         </div>
-        <div class="leading-none text-muted-foreground">January - June 2024</div>
+        <div class="text-muted-foreground leading-none">January - June 2024</div>
       </UiCardFooter>
     </UiCard>
   </div>

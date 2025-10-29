@@ -74,11 +74,11 @@
     },
     variants: {
       intent: {
-        default: { child: "border-b bg-background px-6" },
+        default: { child: "bg-background border-b px-6" },
         float: {
           wrapper: "md:px-22 md:pt-10",
           child:
-            "*:data-[navbar=content]:max-w-7xl *:data-[navbar=content]:rounded-xl *:data-[navbar=content]:border *:data-[navbar=content]:bg-background *:data-[navbar=content]:px-4 *:data-[navbar=content]:shadow-xs",
+            "*:data-[navbar=content]:bg-background *:data-[navbar=content]:max-w-7xl *:data-[navbar=content]:rounded-xl *:data-[navbar=content]:border *:data-[navbar=content]:px-4 *:data-[navbar=content]:shadow-xs",
         },
         inset: { child: "px-6" },
       },

@@ -18,6 +18,6 @@
     }
   >();
   const styles = tv({
-    base: "ml-auto text-xs tracking-widest text-muted-foreground",
+    base: "text-muted-foreground ml-auto text-xs tracking-widest",
   });
 </script>

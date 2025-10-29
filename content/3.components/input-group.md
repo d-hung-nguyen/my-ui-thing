@@ -83,7 +83,7 @@ npx ui-thing@latest add input-group
       <UiInputGroupInput placeholder="@uithing" />
       <UiInputGroupAddon align="inline-end">
         <div
-          class="flex size-4 items-center justify-center rounded-full bg-primary text-primary-foreground"
+          class="bg-primary text-primary-foreground flex size-4 items-center justify-center rounded-full"
         >
           <Icon name="lucide:check" class="size-3" />
         </div>
@@ -186,7 +186,7 @@ npx ui-thing@latest add input-group
     <UiInputGroup>
       <UiInputGroupTextarea placeholder="Enter your message" />
       <UiInputGroupAddon align="block-end">
-        <UiInputGroupText class="text-xs text-muted-foreground">
+        <UiInputGroupText class="text-muted-foreground text-xs">
           120 characters left
         </UiInputGroupText>
       </UiInputGroupAddon>
@@ -240,7 +240,7 @@ npx ui-thing@latest add input-group
           <p>You should not enter any sensitive information on this site.</p>
         </UiPopoverContent>
       </UiPopover>
-      <UiInputGroupAddon class="pl-1.5 text-muted-foreground"> https:// </UiInputGroupAddon>
+      <UiInputGroupAddon class="text-muted-foreground pl-1.5"> https:// </UiInputGroupAddon>
       <UiInputGroupInput id="input-secure-19" />
       <UiInputGroupAddon align="inline-end">
         <UiInputGroupButton size="icon-xs" @click="isFavorite = !isFavorite">

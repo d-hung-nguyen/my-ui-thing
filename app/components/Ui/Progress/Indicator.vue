@@ -21,6 +21,6 @@
   >();
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "h-full w-full flex-1 rounded-full bg-primary transition-all",
+    base: "bg-primary h-full w-full flex-1 rounded-full transition-all",
   });
 </script>

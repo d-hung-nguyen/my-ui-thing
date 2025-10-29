@@ -86,7 +86,7 @@ Checkboxes can be tricky to implement with validation libraries. Luckily, Vee-Va
 <template>
   <form class="mx-auto max-w-md" @submit="onSubmit">
     <p class="font-semibold">Terms of Service</p>
-    <p class="mt-2 mb-4 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-2 mb-4 text-sm">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit, perspiciatis sunt, quae
       architecto, dicta nobis corrupti commodi tempora asperiores eligendi id dolore dolores.
       Dolores quaerat architecto in sapiente expedita cum?
@@ -141,7 +141,7 @@ We can use the `v-model` prop to set the default value of the VeeCheckbox.
   <div class="flex items-center justify-center">
     <form class="mx-auto max-w-md">
       <p class="font-semibold">On by default</p>
-      <p class="mt-2 mb-4 text-sm text-muted-foreground">This checkbox will be true by default.</p>
+      <p class="text-muted-foreground mt-2 mb-4 text-sm">This checkbox will be true by default.</p>
       <fieldset class="space-y-5">
         <UiVeeCheckbox v-model="someVariable" name="terms" label="I will be on by default" />
       </fieldset>
@@ -228,12 +228,12 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div class="flex items-center justify-center">
     <UiVeeCheckbox
       id="checkbox-06"
-      class="peer [&_[data-state=checked]]:border-emerald-500 [&_[data-state=checked]]:bg-emerald-500 [&_button]:rounded-full [&_button]:border-border [&_button_span]:rounded-full"
+      class="peer [&_button]:border-border [&_[data-state=checked]]:border-emerald-500 [&_[data-state=checked]]:bg-emerald-500 [&_button]:rounded-full [&_button_span]:rounded-full"
       :model-value="true"
     />
     <UiLabel
       for="checkbox-06"
-      class="relative peer-has-[button[data-state=checked]]:text-muted-foreground peer-has-[button[data-state=checked]]:line-through after:absolute after:top-1/2 after:left-0 after:h-px after:w-full after:origin-bottom after:-translate-y-1/2 after:scale-x-0 after:bg-muted-foreground after:transition-transform after:ease-in-out peer-has-[button[data-state=checked]]:after:scale-x-100"
+      class="peer-has-[button[data-state=checked]]:text-muted-foreground after:bg-muted-foreground relative peer-has-[button[data-state=checked]]:line-through after:absolute after:top-1/2 after:left-0 after:h-px after:w-full after:origin-bottom after:-translate-y-1/2 after:scale-x-0 after:transition-transform after:ease-in-out peer-has-[button[data-state=checked]]:after:scale-x-100"
     >
       Fancy todo item
     </UiLabel>
@@ -348,7 +348,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <template #label>
         <UiLabel for="checkbox-10" class="justify-start gap-2">
           Label
-          <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
+          <span class="text-muted-foreground text-xs leading-[inherit] font-normal">
             (Sublabel)
           </span>
         </UiLabel>
@@ -382,7 +382,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         label="Checkbox with expansion"
         aria-controls="checkbox-input-11"
       />
-      <p class="ml-[30px] text-xs text-muted-foreground">
+      <p class="text-muted-foreground ml-[30px] text-xs">
         Check the <span class="font-semibold">Checkbox</span> to expand the input field.
       </p>
     </div>
@@ -426,11 +426,11 @@ To use these examples you will have to copy the code and adjust it for your own 
     <div class="grid grow gap-2">
       <UiLabel for="checkbox-12" class="justify-start gap-2">
         Label
-        <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
+        <span class="text-muted-foreground text-xs leading-[inherit] font-normal">
           (Sublabel)
         </span>
       </UiLabel>
-      <p id="checkbox-12-description" class="text-xs text-muted-foreground">
+      <p id="checkbox-12-description" class="text-muted-foreground text-xs">
         You can use this checkbox with a label and a description.
       </p>
     </div>
@@ -456,16 +456,16 @@ To use these examples you will have to copy the code and adjust it for your own 
 ```vue [DocsVeeCheckboxRightAlignedSublabelBorder.vue]
 <template>
   <div
-    class="relative mx-auto flex w-full max-w-sm items-start gap-2 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[div_button[data-state=checked]]:border-ring"
+    class="border-input has-[div_button[data-state=checked]]:border-ring relative mx-auto flex w-full max-w-sm items-start gap-2 rounded-lg border p-4 shadow-xs shadow-black/5"
   >
     <div class="grid grow gap-2">
       <UiLabel for="checkbox-13" class="justify-start gap-2">
         Label
-        <span class="text-xs leading-[inherit] font-normal text-muted-foreground">
+        <span class="text-muted-foreground text-xs leading-[inherit] font-normal">
           (Sublabel)
         </span>
       </UiLabel>
-      <p id="checkbox-13-description" class="text-xs text-muted-foreground">
+      <p id="checkbox-13-description" class="text-muted-foreground text-xs">
         A short description goes here.
       </p>
     </div>
@@ -495,7 +495,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <div
         v-for="item in items"
         :key="item.id"
-        class="relative flex cursor-pointer flex-col gap-4 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-[[data-state=checked]]:border-ring"
+        class="border-input has-[[data-state=checked]]:border-ring relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs shadow-black/5"
       >
         <div class="flex justify-between gap-2">
           <UiVeeCheckbox
@@ -546,12 +546,12 @@ To use these examples you will have to copy the code and adjust it for your own 
 <template>
   <div class="flex justify-center">
     <fieldset class="space-y-4">
-      <legend class="text-sm leading-none font-medium text-foreground">Days of the week</legend>
+      <legend class="text-foreground text-sm leading-none font-medium">Days of the week</legend>
       <div class="flex gap-1.5">
         <label
           v-for="item in items"
           :key="item.id"
-          class="relative flex size-9 cursor-pointer flex-col items-center justify-center gap-3 rounded-full border border-input text-center shadow-xs shadow-black/5 outline-offset-2 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ring/70 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary has-[[data-state=checked]]:text-primary-foreground"
+          class="border-input has-[:focus-visible]:outline-ring/70 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary has-[[data-state=checked]]:text-primary-foreground relative flex size-9 cursor-pointer flex-col items-center justify-center gap-3 rounded-full border text-center shadow-xs shadow-black/5 outline-offset-2 transition-colors has-[:focus-visible]:outline-2 has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50"
         >
           <UiVeeCheckbox
             :id="item.id"

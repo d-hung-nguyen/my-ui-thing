@@ -484,7 +484,7 @@ For this, you will actually need to add some custom classes for things to look h
         <UiAvatar :src="cellData.image" :alt="cellData.name" />
         <div>
           <div class="font-medium">{{ cellData.name }}</div>
-          <span class="text-xs text-muted-foreground">@{{ cellData.username }}</span>
+          <span class="text-muted-foreground text-xs">@{{ cellData.username }}</span>
         </div>
       </div>
     </template>
@@ -646,7 +646,7 @@ For this, you will actually need to add some custom classes for things to look h
     border-top-width: 0px;
   }
   :deep(table.dataTable tbody tr) {
-    @apply border-none odd:bg-muted/50 hover:bg-transparent odd:hover:bg-muted/50;
+    @apply odd:bg-muted/50 odd:hover:bg-muted/50 border-none hover:bg-transparent;
   }
   :deep(table.dataTable tbody) {
     @apply [&_td:first-child]:rounded-l-lg [&_td:last-child]:rounded-r-lg;
@@ -829,7 +829,7 @@ For this, you will actually need to add some custom classes for things to look h
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-lg border border-border bg-background">
+  <div class="border-border bg-background overflow-hidden rounded-lg border">
     <UiDatatable class="nowrap compact hover" :data="programmingLanguages" :options />
   </div>
 </template>
@@ -988,7 +988,7 @@ For this, you will actually need to add some custom classes for things to look h
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-lg border border-border bg-background">
+  <div class="border-border bg-background overflow-hidden rounded-lg border">
     <UiDatatable v-if="options" :data="data" :options />
     <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
       <p>Total</p>
@@ -1070,7 +1070,7 @@ For this, you will actually need to add some custom classes for things to look h
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-lg border border-border bg-background">
+  <div class="border-border bg-background overflow-hidden rounded-lg border">
     <UiDatatable v-if="options" :data="data" :options />
     <div class="flex items-center justify-between border-t px-6 py-6 text-sm">
       <p>Total</p>
@@ -1181,7 +1181,7 @@ For this, you will actually need to add some custom classes for things to look h
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-lg border border-border bg-background">
+  <div class="border-border bg-background overflow-hidden rounded-lg border">
     <UiDatatable v-if="options" :data="data" :options>
       <template #status="{ cellData }">
         <UiBadge :variant="cellData.status == 'Inactive' ? 'outline' : 'default'">{{
@@ -1561,7 +1561,7 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
   <div>
     <div>
       <h3 class="text-lg font-semibold">Column Reorder</h3>
-      <p class="mb-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mb-2 text-sm">
         You can reorder the columns by dragging and dropping the column header.
       </p>
       <div class="mb-4 flex gap-2">
@@ -1591,10 +1591,10 @@ import "datatables.net-colreorder-dt/css/colReorder.dataTables.css";
 
   :deep(.dataTable) {
     .dtcr-moving-first {
-      @apply border-l border-primary;
+      @apply border-primary border-l;
     }
     .dtcr-moving-last {
-      @apply border-r border-primary;
+      @apply border-primary border-r;
     }
     thead > tr {
       @apply bg-muted/50;

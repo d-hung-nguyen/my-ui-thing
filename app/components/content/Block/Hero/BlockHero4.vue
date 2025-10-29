@@ -23,7 +23,7 @@
         <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           Customer service software for customer-first teams
         </h1>
-        <p class="max-w-[560px] text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground max-w-[560px] text-lg lg:text-xl">
           The best customer service software for customer-first teams. Industry-leading email and
           live chat support.
         </p>
@@ -31,7 +31,7 @@
           <UiButton size="lg" variant="outline"> <Icon name="lucide:play-circle" /> Demo </UiButton>
           <UiButton size="lg">Sign up</UiButton>
         </div>
-        <p class="mt-5 text-sm text-muted-foreground">
+        <p class="text-muted-foreground mt-5 text-sm">
           We care about your data in our privacy policy.
         </p>
       </div>

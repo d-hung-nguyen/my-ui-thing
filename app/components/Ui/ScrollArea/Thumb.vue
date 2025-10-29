@@ -27,7 +27,7 @@
   );
   const forwarded = reactiveOmit(props, "class");
   const styles = tv({
-    base: "relative flex-1 rounded-full bg-border",
+    base: "bg-border relative flex-1 rounded-full",
     variants: {
       orientation: {
         vertical: "flex-1",

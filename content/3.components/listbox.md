@@ -109,7 +109,7 @@ npx ui-thing@latest add listbox
                   <UiAvatar class="size-8" :src="p.avatar" />
                   <div class="text-sm">
                     <p class="font-medium">{{ p.name }}</p>
-                    <p class="text-xs text-muted-foreground">{{ p.email }}</p>
+                    <p class="text-muted-foreground text-xs">{{ p.email }}</p>
                   </div>
                 </div>
               </UiListboxItem>
@@ -250,7 +250,7 @@ npx ui-thing@latest add listbox
                   <UiAvatar class="size-8" :src="p.avatar" />
                   <div class="text-sm">
                     <p class="font-medium">{{ p.name }}</p>
-                    <p class="text-xs text-muted-foreground">{{ p.email }}</p>
+                    <p class="text-muted-foreground text-xs">{{ p.email }}</p>
                   </div>
                 </div>
               </UiListboxItem>
@@ -382,7 +382,7 @@ npx ui-thing@latest add listbox
         <UiListboxContent class="bg-background p-1">
           <template v-for="(group, index) in groups" :key="index">
             <UiListboxGroup>
-              <UiListboxGroupLabel class="px-2 py-1.5 text-xs font-medium text-muted-foreground">{{
+              <UiListboxGroupLabel class="text-muted-foreground px-2 py-1.5 text-xs font-medium">{{
                 group.title
               }}</UiListboxGroupLabel>
               <UiListboxItem v-for="(item, k) in group.items" :key="k" :value="item.id">

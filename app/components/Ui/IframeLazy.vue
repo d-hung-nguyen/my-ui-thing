@@ -1,7 +1,7 @@
 <template>
   <div ref="root" :class="styles().wrapper({ class: props.class })">
     <div v-if="!visible && placeholder" class="size-full">
-      <slot name="placeholder"> <div class="size-full bg-muted" /> </slot>
+      <slot name="placeholder"> <div class="bg-muted size-full" /> </slot>
     </div>
 
     <iframe

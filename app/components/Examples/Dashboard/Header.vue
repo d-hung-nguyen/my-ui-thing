@@ -8,22 +8,22 @@
       </UiButton>
 
       <nav class="mx-6 flex items-center space-x-4 lg:space-x-6">
-        <NuxtLink to="#" class="text-sm font-medium transition-colors hover:text-primary"
+        <NuxtLink to="#" class="hover:text-primary text-sm font-medium transition-colors"
           >Overview</NuxtLink
         >
         <NuxtLink
           to="#"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          class="text-muted-foreground hover:text-primary text-sm font-medium transition-colors"
           >Customers</NuxtLink
         >
         <NuxtLink
           to="#"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          class="text-muted-foreground hover:text-primary text-sm font-medium transition-colors"
           >Products</NuxtLink
         >
         <NuxtLink
           to="#"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          class="text-muted-foreground hover:text-primary text-sm font-medium transition-colors"
           >Settings</NuxtLink
         >
       </nav>
@@ -45,7 +45,7 @@
             <UiDropdownMenuLabel class="font-normal">
               <div class="flex flex-col space-y-1">
                 <p class="text-sm leading-none font-medium">shadcn</p>
-                <p class="text-xs leading-none text-muted-foreground">m@example.com</p>
+                <p class="text-muted-foreground text-xs leading-none">m@example.com</p>
               </div>
             </UiDropdownMenuLabel>
             <UiDropdownMenuSeparator />

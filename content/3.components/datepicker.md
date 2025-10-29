@@ -85,7 +85,7 @@ vcalendar: {
       <template #header-title="{ title }">
         <div class="flex items-center gap-2">
           <p>{{ title }}</p>
-          <Icon class="size-4 text-muted-foreground" name="lucide:chevron-down" />
+          <Icon class="text-muted-foreground size-4" name="lucide:chevron-down" />
         </div>
       </template>
     </UiDatepicker>
@@ -222,7 +222,7 @@ Here the user can set an appointment between 9 AM and 5 PM, with a 30-minute int
 ```vue [DocsDatepickerTimeRules.vue]
 <template>
   <div class="flex w-full flex-col items-center justify-center gap-5">
-    <p class="text-sm text-muted-foreground">Select your appointment date & time</p>
+    <p class="text-muted-foreground text-sm">Select your appointment date & time</p>
     <p class="text-sm font-semibold">
       Selected:
       <span class="text-emerald-500">{{

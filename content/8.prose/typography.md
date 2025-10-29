@@ -314,7 +314,7 @@ There are several ways to style your components:
 ```vue
 <template>
   <button
-    class="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:opacity-50"
+    class="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring rounded-lg px-4 py-2 font-semibold shadow-sm transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
   >
     Click me
   </button>
@@ -335,7 +335,7 @@ There are several ways to style your components:
       variant: {
         primary: "bg-primary text-primary-foreground hover:bg-primary/90",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
-        outline: "border-2 border-primary text-primary hover:bg-primary/10",
+        outline: "border-primary text-primary hover:bg-primary/10 border-2",
       },
       size: {
         sm: "px-3 py-1.5 text-sm",

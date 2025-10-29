@@ -182,7 +182,7 @@
       // Modern
       {
         type: "modern",
-        class: { base: "border bg-background", icon: "text-muted-foreground" },
+        class: { base: "bg-background border", icon: "text-muted-foreground" },
       },
     ],
     defaultVariants: {

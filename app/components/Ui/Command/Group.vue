@@ -10,7 +10,7 @@
     <ListboxGroupLabel
       v-if="heading"
       cmdk-group-heading
-      class="px-2 py-1.5 text-xs font-medium text-muted-foreground"
+      class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
     >
       {{ heading }}
     </ListboxGroupLabel>
@@ -35,7 +35,7 @@
   >();
 
   const styles = tv({
-    base: "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
+    base: "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
   });
 
   const forwarded = reactiveOmit(props, "class");

@@ -3,12 +3,12 @@
     <template v-for="(l, i) in links" :key="i">
       <NuxtLink
         v-if="!l.children"
-        class="line-clamp-1 text-muted-foreground transition-all hover:text-foreground"
+        class="text-muted-foreground hover:text-foreground line-clamp-1 transition-all"
         :title="l.text"
         :style="{ marginLeft: `${l.depth > 2 ? l.depth * 2 : 0}%` }"
         :class="[
           activeId === l.id &&
-            '!text-foreground underline decoration-muted-foreground underline-offset-2',
+            '!text-foreground decoration-muted-foreground underline underline-offset-2',
         ]"
         :to="`#${l.id}`"
         @click="setActive(l.id)"
@@ -16,11 +16,11 @@
       >
       <div v-else class="flex flex-col gap-2 text-sm">
         <NuxtLink
-          class="line-clamp-1 text-muted-foreground transition-all hover:text-foreground"
+          class="text-muted-foreground hover:text-foreground line-clamp-1 transition-all"
           :title="l.text"
           :class="[
             activeId === l.id &&
-              '!text-foreground underline decoration-muted-foreground underline-offset-2',
+              '!text-foreground decoration-muted-foreground underline underline-offset-2',
           ]"
           :to="`#${l.id}`"
           @click="setActive(l.id)"

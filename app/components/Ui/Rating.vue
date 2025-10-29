@@ -43,7 +43,7 @@
     slots: {
       rating: "inline-flex items-center",
       star: "",
-      value: "w-5 text-muted-foreground",
+      value: "text-muted-foreground w-5",
     },
     variants: {
       size: {

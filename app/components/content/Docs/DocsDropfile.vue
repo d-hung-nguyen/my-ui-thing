@@ -11,7 +11,7 @@
           <Icon name="heroicons:document" class="mr-3 h-5 w-5 opacity-60" />
           <p class="w-[80%] truncate text-sm">{{ file.name }}</p>
           <p
-            class="ml-auto text-xs whitespace-nowrap text-muted-foreground/60 transition group-hover:hidden"
+            class="text-muted-foreground/60 ml-auto text-xs whitespace-nowrap transition group-hover:hidden"
           >
             {{ formatFileSize(file.size) }}
           </p>

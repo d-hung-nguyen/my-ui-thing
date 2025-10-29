@@ -160,7 +160,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:chevron-left" class="size-4" />
           </UiButton>
         </UiPaginationPrev>
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page1 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -180,7 +180,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             <Icon name="lucide:chevron-left" class="size-4" />
           </UiButton>
         </UiPaginationPrev>
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page2 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -222,7 +222,7 @@ To use these examples you will have to copy the code and adjust it for your own 
   <div class="mx-auto flex w-full max-w-md flex-col items-center gap-10">
     <UiPagination v-model:page="page1" :total :items-per-page>
       <UiPaginationList class="w-full justify-between">
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page1 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -242,7 +242,7 @@ To use these examples you will have to copy the code and adjust it for your own 
     </UiPagination>
     <UiPagination v-model:page="page1" :total :items-per-page class="mx-auto w-full max-w-md">
       <UiPaginationList class="w-full justify-between">
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page1 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -276,7 +276,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             </UiButton>
           </UiPaginationNext>
         </div>
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page2 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -298,7 +298,7 @@ To use these examples you will have to copy the code and adjust it for your own 
             </UiButton>
           </UiPaginationNext>
         </div>
-        <div class="text-sm text-muted-foreground">
+        <div class="text-muted-foreground text-sm">
           Page <span class="text-foreground">{{ page2 }}</span> of
           <span class="text-foreground">{{ itemsPerPage }}</span>
         </div>
@@ -338,7 +338,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         <template v-for="(page, index) in items" :key="index">
           <UiPaginationItem v-if="page.type === 'page'" as-child v-bind="page">
             <UiButton
-              class="size-9 rounded-none border-0 shadow-none data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground dark:bg-transparent dark:data-[selected=true]:bg-primary dark:data-[selected=true]:text-primary-foreground"
+              class="data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground dark:data-[selected=true]:bg-primary dark:data-[selected=true]:text-primary-foreground size-9 rounded-none border-0 shadow-none dark:bg-transparent"
               variant="outline"
               size="icon-sm"
               >{{ page.value }}</UiButton
@@ -390,7 +390,7 @@ To use these examples you will have to copy the code and adjust it for your own 
         </UiSelectContent>
       </UiSelect>
     </div>
-    <div class="grow text-right text-sm whitespace-nowrap text-muted-foreground">
+    <div class="text-muted-foreground grow text-right text-sm whitespace-nowrap">
       <span class="text-foreground">{{ page1 }}</span> of
       <span class="text-foreground">{{ pageTotal }}</span>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <Primitive :as :as-child :class="styles({ class: props.class })">
-    <div class="flex flex-col gap-y-2 border-b border-border p-4">
+    <div class="border-border flex flex-col gap-y-2 border-b p-4">
       <div class="flex flex-row gap-x-2">
         <div
           v-for="(item, i) in buttonColors"
@@ -18,7 +18,7 @@
   import type { HTMLAttributes } from "vue";
 
   const styles = tv({
-    base: "z-0 h-full max-h-[400px] w-full max-w-lg rounded-lg border border-border bg-background",
+    base: "border-border bg-background z-0 h-full max-h-[400px] w-full max-w-lg rounded-lg border",
   });
 </script>
 

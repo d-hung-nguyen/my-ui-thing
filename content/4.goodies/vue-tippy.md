@@ -79,7 +79,7 @@ Create a new CSS file and add the following code to it.
 
 [data-tippy-root] {
   .tippy-box {
-    @apply rounded-md bg-popover px-2 py-1 text-popover-foreground shadow ring-1 ring-border;
+    @apply bg-popover text-popover-foreground ring-border rounded-md px-2 py-1 shadow ring-1;
     .tippy-content {
       @apply text-[13px];
     }
@@ -179,7 +179,7 @@ You can visit the [Component Docs](https://vue-tippy.netlify.app/flavor/componen
             Learn how to build a comprehensive design system using Tailwind CSS, including component
             architecture, and theme customization.
           </p>
-          <div class="flex items-center gap-2 pt-1 text-xs text-muted-foreground">
+          <div class="text-muted-foreground flex items-center gap-2 pt-1 text-xs">
             8 min read <span>•</span> Updated 2 days ago
           </div>
         </div>
@@ -487,7 +487,7 @@ To use these examples you will have to copy the code and adjust it for your own 
       <template #content>
         <div class="space-y-1 px-2 py-2">
           <p class="text-[13px] font-medium">Tooltip with title</p>
-          <p class="text-xs text-muted-foreground">
+          <p class="text-muted-foreground text-xs">
             Tooltips are made to be highly customizable, with features like dynamic placement, rich
             content, and a robust API. You can even use them as a full-featured dropdown menu by
             setting the <code>trigger</code> prop to <code>click</code>.
@@ -523,7 +523,7 @@ To use these examples you will have to copy the code and adjust it for your own 
           <Icon name="lucide:globe" class="mt-1 size-4 shrink-0 opacity-60" aria-hidden="true" />
           <div class="space-y-1">
             <p class="text-[13px] font-medium">Tooltip with title and icon</p>
-            <p class="text-xs text-muted-foreground">
+            <p class="text-muted-foreground text-xs">
               Tooltips are made to be highly customizable, with features like dynamic placement,
               rich content, and a robust API.
             </p>
@@ -565,7 +565,7 @@ To use these examples you will have to copy the code and adjust it for your own 
           />
           <div class="space-y-1">
             <p class="text-[13px] font-medium">Tooltip with title and icon</p>
-            <p class="text-xs text-muted-foreground">
+            <p class="text-muted-foreground text-xs">
               Tooltips are made to be highly customizable, with features like dynamic placement,
               rich content, and a robust API.
             </p>

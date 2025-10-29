@@ -24,16 +24,16 @@
     />
     <Icon v-else name="lucide:clipboard" class="group-hover:opacity-100" />
     <div
-      class="w-full flex-1 rounded-md border-input bg-(--bg) after:rounded-lg after:border-input md:rounded-lg"
+      class="border-input after:border-input w-full flex-1 rounded-md bg-(--bg) after:rounded-lg md:rounded-lg"
     />
     <div class="flex w-full flex-col items-center justify-center gap-1">
       <span
-        class="font-mono text-xs text-muted-foreground tabular-nums transition-colors group-hover:text-foreground group-data-[last-copied=true]:text-primary sm:hidden xl:flex"
+        class="text-muted-foreground group-hover:text-foreground group-data-[last-copied=true]:text-primary font-mono text-xs tabular-nums transition-colors sm:hidden xl:flex"
       >
         {{ color.className }}
       </span>
       <span
-        class="hidden font-mono text-xs text-muted-foreground tabular-nums transition-colors group-hover:text-foreground group-data-[last-copied=true]:text-primary sm:flex xl:hidden"
+        class="text-muted-foreground group-hover:text-foreground group-data-[last-copied=true]:text-primary hidden font-mono text-xs tabular-nums transition-colors sm:flex xl:hidden"
       >
         {{ color.scale }}
       </span>

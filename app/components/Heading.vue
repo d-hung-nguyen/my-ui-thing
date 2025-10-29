@@ -6,14 +6,14 @@
       </h3>
     </slot>
     <slot name="subtext">
-      <p class="mt-1 text-muted-foreground">{{ subtext }}</p>
+      <p class="text-muted-foreground mt-1">{{ subtext }}</p>
     </slot>
 
     <slot name="actions">
       <div class="flex flex-wrap items-center gap-2">
         <a
           v-if="radixLink"
-          class="mt-5 inline-flex items-center gap-1 rounded-md bg-muted p-1 px-2 text-xs font-medium"
+          class="bg-muted mt-5 inline-flex items-center gap-1 rounded-md p-1 px-2 text-xs font-medium"
           target="_blank"
           :href="radixLink"
           ><Icon name="simple-icons:radixui" size="12" /> Radix Vue</a

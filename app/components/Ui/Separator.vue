@@ -28,7 +28,7 @@
   const forwarded = useForwardProps(reactiveOmit(props, "class"));
 
   const styles = tv({
-    base: "shrink-0 bg-border",
+    base: "bg-border shrink-0",
     variants: {
       orientation: {
         horizontal: "h-px w-full",

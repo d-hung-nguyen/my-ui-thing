@@ -32,7 +32,7 @@ description: Funnel charts are ideal for visualizing progressive stages in a lin
           <div class="flex items-center gap-2 leading-none font-medium">
             Looking for a way to improve your sales funnel?
           </div>
-          <div class="flex items-center gap-2 leading-none text-muted-foreground">
+          <div class="text-muted-foreground flex items-center gap-2 leading-none">
             <span>Check out our</span>
             <NuxtLink
               target="_blank"
@@ -126,7 +126,7 @@ description: Funnel charts are ideal for visualizing progressive stages in a lin
           <div class="flex items-center gap-2 leading-none font-medium">
             Want to learn more about funnel charts?
           </div>
-          <div class="flex items-center gap-2 leading-none text-muted-foreground">
+          <div class="text-muted-foreground flex items-center gap-2 leading-none">
             <span>Check out</span>
             <NuxtLink
               target="_blank"

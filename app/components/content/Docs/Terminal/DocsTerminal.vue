@@ -14,7 +14,7 @@
     <UiTerminalTypingAnimation
       text="Success! Project initialization completed."
       :delay="7000"
-      class="mt-4 text-muted-foreground"
+      class="text-muted-foreground mt-4"
     />
 
     <UiTerminalTypingAnimation

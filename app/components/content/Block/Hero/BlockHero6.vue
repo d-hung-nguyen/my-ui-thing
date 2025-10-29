@@ -21,7 +21,7 @@
           Super simplified <br />
           customer service
         </h1>
-        <p class="text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground text-lg lg:text-xl">
           Powerful, self-serve product and growth analytics to help you convert, engage, and retain
           more.
         </p>
@@ -29,7 +29,7 @@
           <div class="flex items-center -space-x-1">
             <template v-for="n in 5" :key="n">
               <UiAvatar
-                class="bg-background ring-2 ring-ring/30 transition hover:ring-ring dark:ring-ring/20 dark:hover:ring-ring"
+                class="bg-background ring-ring/30 hover:ring-ring dark:ring-ring/20 dark:hover:ring-ring ring-2 transition"
                 src="https://api.dicebear.com/7.x/lorelei/svg?flip=false"
               />
             </template>
@@ -44,14 +44,14 @@
                 />
               </template>
             </div>
-            <p class="text-sm text-muted-foreground">from 1,000+ customers</p>
+            <p class="text-muted-foreground text-sm">from 1,000+ customers</p>
           </div>
         </div>
       </div>
     </div>
     <div class="flex shrink-0 items-center justify-center md:w-1/2 lg:h-full">
       <div
-        class="w-full rounded-md bg-muted/50 px-4 py-10 ring-1 ring-muted/30 md:px-10 lg:w-[440px] lg:px-10 dark:bg-muted/5"
+        class="bg-muted/50 ring-muted/30 dark:bg-muted/5 w-full rounded-md px-4 py-10 ring-1 md:px-10 lg:w-[440px] lg:px-10"
       >
         <img
           src="/icon.png"
@@ -61,7 +61,7 @@
           class="mx-auto h-11 object-contain"
         />
         <h2 class="text-center text-2xl font-semibold lg:mt-6 lg:text-3xl">Create an account</h2>
-        <p class="mt-3 text-center text-muted-foreground">Get started with {{ COMPANY_NAME }}</p>
+        <p class="text-muted-foreground mt-3 text-center">Get started with {{ COMPANY_NAME }}</p>
 
         <form class="mt-8" @submit="submit">
           <fieldset :disabled="isSubmitting" class="grid gap-5">
@@ -92,9 +92,9 @@
             </div>
           </fieldset>
         </form>
-        <p class="mt-8 text-center text-sm text-muted-foreground">
+        <p class="text-muted-foreground mt-8 text-center text-sm">
           Already have an account?
-          <NuxtLink to="#" class="font-semibold text-primary underline-offset-2 hover:underline"
+          <NuxtLink to="#" class="text-primary font-semibold underline-offset-2 hover:underline"
             >Log in</NuxtLink
           >
         </p>

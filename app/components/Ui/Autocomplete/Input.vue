@@ -25,6 +25,6 @@
   const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emits);
 
   const styles = tv({
-    base: "size-full min-w-0 grow rounded bg-transparent selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm",
+    base: "selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground size-full min-w-0 grow rounded bg-transparent focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm",
   });
 </script>

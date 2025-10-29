@@ -39,7 +39,7 @@ npx ui-thing@latest add autocomplete
       <UiAutocompleteAnchor>
         <UiAutocompleteInput placeholder="Select an item" />
         <UiAutocompleteTrigger>
-          <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
+          <Icon name="lucide:chevron-down" class="text-muted-foreground size-4" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
@@ -109,7 +109,7 @@ npx ui-thing@latest add autocomplete
       <UiAutocompleteAnchor>
         <UiAutocompleteInput :display-value="displaySelected" placeholder="Select a car..." />
         <UiAutocompleteTrigger>
-          <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
+          <Icon name="lucide:chevron-down" class="text-muted-foreground size-4" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
@@ -170,7 +170,7 @@ npx ui-thing@latest add autocomplete
       <UiAutocompleteAnchor>
         <UiAutocompleteInput :display-value="displaySelected" placeholder="Select people..." />
         <UiAutocompleteTrigger>
-          <Icon name="lucide:chevron-down" class="size-4 text-muted-foreground" />
+          <Icon name="lucide:chevron-down" class="text-muted-foreground size-4" />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>
 
@@ -238,11 +238,11 @@ This example shows how you can search for a value and make a call to your API fo
           placeholder="Search for user..."
         />
         <UiAutocompleteTrigger :disabled="loading">
-          <Icon v-if="!loading" name="lucide:chevron-down" class="size-4 text-muted-foreground" />
+          <Icon v-if="!loading" name="lucide:chevron-down" class="text-muted-foreground size-4" />
           <Icon
             v-else
             name="lucide:loader-circle"
-            class="size-4 animate-spin text-muted-foreground"
+            class="text-muted-foreground size-4 animate-spin"
           />
         </UiAutocompleteTrigger>
       </UiAutocompleteAnchor>

@@ -2,7 +2,7 @@
   <div v-if="editor">
     <EditorContent :editor="editor" />
     <div
-      class="flex flex-wrap items-center gap-1 rounded-br-md rounded-bl-md border border-input bg-transparent p-1"
+      class="border-input flex flex-wrap items-center gap-1 rounded-br-md rounded-bl-md border bg-transparent p-1"
     >
       <UiButton
         size="sm"

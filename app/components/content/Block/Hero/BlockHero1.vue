@@ -8,7 +8,7 @@
         <h1 class="mt-7 mb-4 text-4xl font-bold md:text-5xl lg:mt-5 lg:mb-6 xl:text-6xl">
           People who care about your growth
         </h1>
-        <p class="text-lg text-muted-foreground lg:text-xl">
+        <p class="text-muted-foreground text-lg lg:text-xl">
           Powerful, self-serve product and growth analytics to help you convert, engage, and retain
           more.
         </p>
@@ -16,7 +16,7 @@
           <div class="w-full lg:w-[70%]">
             <UiVeeInput required placeholder="Enter your email" aria-label="Enter your email" />
           </div>
-          <p class="my-2 text-left text-sm text-muted-foreground md:hidden">
+          <p class="text-muted-foreground my-2 text-left text-sm md:hidden">
             We care about your data in our privacy policy.
           </p>
           <div>
@@ -25,7 +25,7 @@
             >
           </div>
         </form>
-        <p class="mt-3 hidden text-sm text-muted-foreground md:block">
+        <p class="text-muted-foreground mt-3 hidden text-sm md:block">
           We care about your data in our privacy policy.
         </p>
       </div>

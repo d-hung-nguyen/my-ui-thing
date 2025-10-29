@@ -12,7 +12,7 @@
    * Styles for the heading component
    */
   export const headingStyles = tv({
-    base: "font-sans text-foreground",
+    base: "text-foreground font-sans",
     variants: {
       level: {
         1: "text-xl font-semibold sm:text-2xl",

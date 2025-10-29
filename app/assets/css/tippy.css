@@ -2,7 +2,7 @@
 
 [data-tippy-root] {
   .tippy-box {
-    @apply rounded-md bg-popover px-2 py-1 text-popover-foreground shadow ring-1 ring-border;
+    @apply bg-popover text-popover-foreground ring-border rounded-md px-2 py-1 shadow ring-1;
     .tippy-content {
       @apply text-[13px];
     }

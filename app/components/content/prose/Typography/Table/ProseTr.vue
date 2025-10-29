@@ -15,7 +15,7 @@
   };
 
   export const proseTrStyles = tv({
-    base: "m-0 p-0 even:bg-muted/70 dark:even:bg-muted/50 [&:not(:has(th)):hover]:bg-muted dark:[&:not(:has(th)):hover]:bg-muted/50",
+    base: "even:bg-muted/70 dark:even:bg-muted/50 [&:not(:has(th)):hover]:bg-muted dark:[&:not(:has(th)):hover]:bg-muted/50 m-0 p-0",
   });
 </script>
 
