@@ -15,6 +15,7 @@ export default defineContentConfig({
         navigation: z
           .object({
             title: z.string().optional(),
+            icon: z.string().optional(),
           })
           .optional(),
         links: z

@@ -13,59 +13,76 @@
           <NuxtLink to="/" class="text-lg font-bold">UI Thing</NuxtLink>
         </div>
         <nav class="hidden items-center space-x-6 text-sm font-medium lg:flex">
-          <NuxtLink
-            :class="[route.path.startsWith('/getting-started/') ? '!text-primary' : '']"
-            to="/getting-started/introduction"
-            class="text-foreground/60 hover:text-foreground transition-colors"
-            >Documentation</NuxtLink
-          >
-          <NuxtLink
-            :class="[
-              route.path.startsWith('/components/') || route.path.includes('/forms/')
-                ? '!text-primary'
-                : '',
-            ]"
-            to="/components/accordion"
-            class="text-foreground/60 hover:text-foreground transition-colors"
-            >Components</NuxtLink
-          >
           <UiDropdownMenu>
             <UiDropdownMenuTrigger>
               <div
+                :class="[isDocsActive ? 'text-primary!' : '']"
                 class="text-foreground/60 hover:text-foreground inline-flex items-center gap-1 transition-colors"
               >
-                <span>Examples</span>
+                <span>Docs</span>
                 <Icon name="heroicons:chevron-down" class="h-3 w-3" />
               </div>
             </UiDropdownMenuTrigger>
-            <UiDropdownMenuContent class="min-w-[180px]" align="start" :side-offset="5">
-              <UiDropdownMenuItem v-for="l in localProjects" :key="l.name" as-child>
-                <NuxtLink class="hover:bg-muted cursor-pointer" :to="l.link">{{ l.name }}</NuxtLink>
+            <UiDropdownMenuContent class="min-w-[200px]" align="start" :side-offset="5">
+              <UiDropdownMenuLabel>Documentation</UiDropdownMenuLabel>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/getting-started/introduction">
+                  Getting Started
+                </NuxtLink>
               </UiDropdownMenuItem>
-              <template v-for="l in externalProjects" :key="l.name">
-                <UiDropdownMenuItem as-child>
-                  <NuxtLink
-                    target="_blank"
-                    external
-                    class="hover:bg-muted cursor-pointer"
-                    :href="l.link"
-                    >{{ l.name }}</NuxtLink
-                  >
-                </UiDropdownMenuItem>
-              </template>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/components/accordion">
+                  Components
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/forms"> Forms </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/goodies/border-beam">
+                  Goodies
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/apex-charts">
+                  Apex Charts
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/blocks/app-empty-state">
+                  Blocks
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/prose/callout">
+                  Prose
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuSeparator />
+              <UiDropdownMenuLabel>Examples</UiDropdownMenuLabel>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/examples/cards">
+                  Cards
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/examples/dashboard">
+                  Dashboard
+                </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem as-child>
+                <NuxtLink class="hover:bg-muted cursor-pointer" to="/examples/schema-visualizer">
+                  Schema Visualizer
+                </NuxtLink>
+              </UiDropdownMenuItem>
             </UiDropdownMenuContent>
           </UiDropdownMenu>
           <NuxtLink
-            :class="[route.path.startsWith('/colors') ? '!text-primary' : '']"
-            to="/colors"
+            :class="[route.path.startsWith('/design') ? 'text-primary!' : '']"
+            to="/design"
             class="text-foreground/60 hover:text-foreground transition-colors"
-            >Colors</NuxtLink
+            >Design</NuxtLink
           >
-          <NuxtLink
-            to="https://inspira-ui.com/"
-            class="group text-foreground/60 hover:text-foreground transition-colors"
-            >Inspira UI
-          </NuxtLink>
         </nav>
       </div>
 
@@ -147,6 +164,20 @@
     return modes.find((m) => m.value === colorMode?.preference)?.icon;
   });
 
+  // Check if any docs path is active
+  const isDocsActive = computed(() => {
+    return (
+      route.path.startsWith("/getting-started/") ||
+      route.path.startsWith("/components/") ||
+      route.path.startsWith("/forms/") ||
+      route.path.startsWith("/goodies/") ||
+      route.path.startsWith("/apex-charts/") ||
+      route.path.startsWith("/blocks/") ||
+      route.path.startsWith("/prose/") ||
+      route.path.startsWith("/examples/")
+    );
+  });
+
   const isOpen = ref(false);
 
   const metaSymbol = computed(() => useKbd().getKbdKey("meta"));
@@ -156,15 +187,4 @@
       isOpen.value = !isOpen.value;
     },
   });
-
-  const externalProjects = [
-    { name: "Settings Dashboard", link: "https://settings-dash.behonbaker.com/" },
-    { name: "ETag Topup UI", link: "https://etag-ui.behonbaker.com/" },
-    { name: "UI Todo", link: "https://ui-todo.behonbaker.com/" },
-  ];
-  const localProjects = [
-    { name: "Cards", link: "/examples/cards" },
-    { name: "Dashboard", link: "/examples/dashboard" },
-    { name: "Schema Visualizer", link: "/examples/schema-visualizer" },
-  ];
 </script>
